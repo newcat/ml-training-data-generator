@@ -1134,6 +1134,11 @@ babel-plugin-component@^1.1.1:
   dependencies:
     "@babel/helper-module-imports" "7.0.0-beta.35"
 
+baklavajs@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/baklavajs/-/baklavajs-0.4.4.tgz#867197499c6806c3c0493db2fc6594997f546fe8"
+  integrity sha512-G635WLWIEJs59NdaVS+KU95/WY9vb9Z6hcFPNukPn/4rl9OEhPR9Xl1lAR8hecK5XqLactko/1/JjcjSbUy/sw==
+
 balanced-match@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"

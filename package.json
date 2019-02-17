@@ -9,6 +9,7 @@
         "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
     },
     "dependencies": {
+        "baklavajs": "^0.4.4",
         "source-map-support": "^0.5.9"
     },
     "devDependencies": {
@@ -24,5 +25,8 @@
         "vue": "^2.5.22",
         "vue-property-decorator": "^7.3.0",
         "webpack": "^4.26.0"
+    },
+    "electronWebpack": {
+        "whiteListedModules": [ "baklavajs" ]
     }
 }
