@@ -11,9 +11,13 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { Editor } from "baklavajs";
 
-import random from "random";
-//import { Storage } from "electron-json-storage";
+import { remote } from "electron";
+const dialog = remote.dialog;
+const app = remote.app;
+import fs from "fs";
 
+
+import random from "random";
 
 import UniformNode from "./UniformNode";
 import NormalNode from "./NormalNode";
@@ -21,7 +25,7 @@ import ExponentialNode from "./ExponentialNode";
 import OutputNode from "./OutputNode";
 
 @Component
-export default class  extends Vue {
+export default class extends Vue {
 
     editor = new Editor();
 
@@ -39,11 +43,41 @@ export default class  extends Vue {
     }
 
     save() {
-        console.log(JSON.stringify(this.editor.save()));
+        const projectData = JSON.stringify(this.editor.save());
+        const options = {
+            defaultPath: app.getPath('documents') + '/ml-training-data-project.json'
+        };
+        dialog.showSaveDialog(options, (filePath) => {
+            if (filePath === undefined) {
+                console.log("An error occurred when trying to save the file!");
+            }
+
+            fs.writeFile(filePath, projectData, (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    alert("Your project has been successfully saved!");
+                }
+            });
+        });
     }
 
     load() {
-
+        dialog.showOpenDialog({ properties: ['openFile'] }, (filePaths) => {
+            if(filePaths === undefined || filePaths.length !== 1) {
+                console.log("Error: An error occurred when trying to select a file!");
+                return;
+            }
+            
+            fs.readFile(filePaths[0], (err, data) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(JSON.parse(data.toString()));
+                    this.editor.load(JSON.parse(data.toString()));
+                }
+            });
+        });
     }
 
 }
