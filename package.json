@@ -10,6 +10,8 @@
     },
     "dependencies": {
         "baklavajs": "^0.4.4",
+        "electron-json-storage": "^4.1.6",
+        "random": "^2.0.13",
         "source-map-support": "^0.5.9"
     },
     "devDependencies": {
@@ -27,6 +29,8 @@
         "webpack": "^4.26.0"
     },
     "electronWebpack": {
-        "whiteListedModules": [ "baklavajs" ]
+        "whiteListedModules": [
+            "baklavajs"
+        ]
     }
 }
