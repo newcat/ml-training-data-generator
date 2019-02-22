@@ -4,6 +4,7 @@
         <button @click="calculate">Calculate</button>
         <button @click="save">Save</button>
         <button @click="load">Load</button>
+        <button @click="test">Test</button>
     </div>
 </template>
 
@@ -18,6 +19,7 @@ import fs from "fs";
 
 
 import random from "random";
+import seedrandom from "seedrandom";
 
 import UniformNode from "./UniformNode";
 import NormalNode from "./NormalNode";
@@ -77,6 +79,19 @@ export default class extends Vue {
                 }
             });
         });
+    }
+
+    test() {
+        const rng = random.clone();
+        rng.use(seedrandom("test"));
+
+        const ug = rng.uniform(0, 10);
+        
+        let a = [];
+        for (let i = 0; i < 10; i++) {
+            a.push(Math.round(ug()));
+        }
+        console.log(a);
     }
 
 }

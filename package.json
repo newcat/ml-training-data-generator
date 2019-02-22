@@ -12,6 +12,7 @@
         "baklavajs": "^0.4.4",
         "electron-json-storage": "^4.1.6",
         "random": "^2.0.13",
+        "seedrandom": "^2.4.4",
         "source-map-support": "^0.5.9"
     },
     "devDependencies": {
