@@ -1,17 +1,17 @@
 import { Node, Options } from "baklavajs";
 import random from "random";
 
-export default class UniformNode extends Node {
+export default class NormalNode extends Node {
 
-    public type = "UniformNode";
+    public type = "NormalNode";
     public name = this.type;
 
     constructor() {
         super();
         this.addOutputInterface("Output", "number");
-        this.addOption("Seed ", Options.InputOption);
-        this.addOption("Mu", Options.NumberOption);
-        this.addOption("Sigma", Options.NumberOption);
+        this.addOption("Seed", Options.InputOption, "thisisanexampleseed");
+        this.addOption("Mu", Options.NumberOption, 0);
+        this.addOption("Sigma", Options.NumberOption, 1);
         this.addOption("Discrete", Options.CheckboxOption, false);
     }
 
@@ -20,11 +20,13 @@ export default class UniformNode extends Node {
         const mu = this.getOptionValue("Mu");
         const sigma = this.getOptionValue("Sigma");
         const isDiscrete = this.getOptionValue("Discrete");
-        let rand = random.normal(mu, sigma);;
+        const normal = random.normal(mu, sigma);;
+        let rand = normal();
         if (isDiscrete) {
             rand = Math.round(rand);
-        } 
+        }
         this.getInterface("Output").value = rand;
+        console.log("Normal random with mu="+mu+" and sigma="+sigma+" is "+rand);
     }
 
 }

@@ -33,13 +33,11 @@ export default class extends Vue {
         this.editor.registerNodeType("UniformNode", UniformNode, "Random");
         this.editor.registerNodeType("NormalNode", NormalNode, "Random");
         this.editor.registerNodeType("ExponentialNode", ExponentialNode, "Random");
-        this.editor.registerNodeType("OuputNode", OutputNode, "Output");
+        this.editor.registerNodeType("OutputNode", OutputNode, "Output");
     }
   
     calculate() {
         this.editor.calculate();
-        const x = random.exponential(125.54);
-        console.log(x());
     }
 
     save() {
@@ -49,7 +47,8 @@ export default class extends Vue {
         };
         dialog.showSaveDialog(options, (filePath) => {
             if (filePath === undefined) {
-                console.log("An error occurred when trying to save the file!");
+                console.log("No file path been chosen!");
+                return;
             }
 
             fs.writeFile(filePath, projectData, (err) => {
@@ -65,7 +64,7 @@ export default class extends Vue {
     load() {
         dialog.showOpenDialog({ properties: ['openFile'] }, (filePaths) => {
             if(filePaths === undefined || filePaths.length !== 1) {
-                console.log("Error: An error occurred when trying to select a file!");
+                console.log("No file path has been chosen! Please select exactly one file to open.");
                 return;
             }
             

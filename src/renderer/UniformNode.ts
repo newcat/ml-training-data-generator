@@ -9,9 +9,9 @@ export default class UniformNode extends Node {
     constructor() {
         super();
         this.addOutputInterface("Output", "number");
-        this.addOption("Seed", Options.InputOption);
-        this.addOption("Min", Options.NumberOption);
-        this.addOption("Max", Options.NumberOption);
+        this.addOption("Seed", Options.InputOption, "seed");
+        this.addOption("Min", Options.NumberOption, 0);
+        this.addOption("Max", Options.NumberOption, 0);
         this.addOption("Discrete", Options.CheckboxOption, false);
     }
 
@@ -20,12 +20,15 @@ export default class UniformNode extends Node {
         const min = this.getOptionValue("Min");
         const max = this.getOptionValue("Max");
         const isDiscrete = this.getOptionValue("Discrete");
-        let rand = 0;
+        let uniform;
         if (isDiscrete) {
-            rand = random.uniformInt(Math.floor(min), Math.floor(max));
+            uniform = random.uniformInt(Math.floor(min), Math.floor(max));
         } else {
-            rand = random.uniformInt(min, max);
+            uniform = random.uniform(min, max);
         }
+        const rand = uniform();
         this.getInterface("Output").value = rand;
+        console.log(rand);
+        console.log("Uniform random with min="+min+" and max="+max+" is "+rand);
     }
 }

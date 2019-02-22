@@ -8,15 +8,15 @@ export default class OutputNode extends Node {
     public constructor() {
         super();
         this.addInputInterface("Input", "number");
-        this.addOption("Label", Options.InputOption);
+        this.addOption("Label", Options.InputOption, "Label");
         this.addOption("Value", Options.TextOption);
     }
 
     public calculate() {
-        console.log("Calculate Output");
-        // const label = this.getOptionValue("Label");
-        console.log(this.getInterface("Input").value);
-        this.setOptionValue("Value", this.getInterface("Input").value);
+        const label = this.getOptionValue("Label");
+        const value = this.getInterface("Input").value;
+        this.setOptionValue("Value", new String(value));
+        console.log("Calculated Output:"+new String(value));
     }
 
 }

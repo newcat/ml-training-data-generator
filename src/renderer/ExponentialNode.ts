@@ -9,8 +9,8 @@ export default class ExponentialNode extends Node {
     constructor() {
         super();
         this.addOutputInterface("Output", "number");
-        this.addOption("Seed ", Options.InputOption);
-        this.addOption("Lambda", Options.NumberOption);
+        this.addOption("Seed", Options.InputOption, "seed");
+        this.addOption("Lambda", Options.NumberOption, 1);
         this.addOption("Discrete", Options.CheckboxOption, false);
     }
 
@@ -18,11 +18,13 @@ export default class ExponentialNode extends Node {
         const seed = this.getOptionValue("Seed");
         const lambda = this.getOptionValue("Lambda");
         const isDiscrete = this.getOptionValue("Discrete");
-        let rand = random.exponential(lambda);
+        const exponential = random.exponential(lambda);
+        let rand = exponential();
         if (isDiscrete) {
             rand = Math.round(rand);
         } 
         this.getInterface("Output").value = rand;
+        console.log("Exponential random with lambda="+lambda+" is "+rand);
     }
 
 }
