@@ -37,7 +37,7 @@ export default class extends Vue {
     }
   
     calculate() {
-        //this.editor.calculate();
+        this.editor.calculate();
         const x = random.exponential(125.54);
         console.log(x());
     }
