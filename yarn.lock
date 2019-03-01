@@ -1154,10 +1154,10 @@ babel-runtime@^6.26.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
 
-baklavajs@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/baklavajs/-/baklavajs-0.5.0.tgz#dd7e0703d57b513232927e30fb50cf43ad1296dc"
-  integrity sha512-iuhbleBOT/cGaW5PWl5vihNQEsu7zduswiXbRZjenY6uEmwzdNkb5xst6G+Kb3hR/euYCVp0x7BSx1WkSndMVg==
+baklavajs@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/baklavajs/-/baklavajs-0.5.1.tgz#18db7a5908b9a50682f16aca617ee83825bf65e6"
+  integrity sha512-MZNluPVoj0H3OmX+1wi/Sk/rtQ0frlw02+VYGL41rvnXM5gTueuh+bgN36kC4vgUCZafWW1kvg+dAHxsbPi3xQ==
 
 balanced-match@^0.4.2:
   version "0.4.2"

@@ -10,11 +10,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Editor } from "baklavajs";
+import { Editor, NodeConstructor } from "baklavajs";
 
 import { remote } from "electron";
-const dialog = remote.dialog;
-const app = remote.app;
+const { dialog, app } = remote;
 import fs from "fs";
 
 // @ts-ignore
@@ -25,6 +24,8 @@ import UniformNode from "./nodes/random/UniformNode";
 import NormalNode from "./nodes/random/NormalNode";
 import ExponentialNode from "./nodes/random/ExponentialNode";
 import OutputNode from "./nodes/OutputNode";
+import { BooleanValueNode, NumberValueNode, StringValueNode } from "./nodes/ValueNodes";
+import * as ValueNodes from "./nodes/ValueNodes";
 
 @Component
 export default class extends Vue {
@@ -32,14 +33,30 @@ export default class extends Vue {
     editor = new Editor();
 
     mounted() {
+        for (const x in ValueNodes) {
+            this.editor.registerNodeType(x, (ValueNodes as Record<string, NodeConstructor>)[x], "Value");
+        }
         this.editor.registerNodeType("UniformNode", UniformNode, "Random");
         this.editor.registerNodeType("NormalNode", NormalNode, "Random");
         this.editor.registerNodeType("ExponentialNode", ExponentialNode, "Random");
         this.editor.registerNodeType("OutputNode", OutputNode);
-        this.editor.nodeInterfaceTypes.addType("number", "cyan");
+        this.editor.nodeInterfaceTypes
+            .addType("number", "cyan")
+            .addType("string", "white")
+            .addType("boolean", "lightgreen")
+            .addConversion("number", "string", String)
+            .addConversion("number", "boolean", (v) => !!v)
+            .addConversion("string", "number", parseFloat)
+            .addConversion("boolean", "number", (v) => v ? 1 : 0)
+            .addConversion("boolean", "string", String);
     }
   
     calculate() {
+        this.editor.nodes.forEach((n: any) => {
+            if (n.prepare) {
+                n.prepare();
+            }
+        });
         this.editor.calculate();
     }
 

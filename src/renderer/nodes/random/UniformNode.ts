@@ -7,25 +7,23 @@ export default class UniformNode extends Node {
 
     public type = "UniformNode";
     public name = this.type;
-    private initialized: boolean = false;
     private generator: any = null;
 
     constructor() {
         super();
         this.addOutputInterface("Output", "number");
-        this.addOption("Seed", Options.InputOption);
-        this.addOption("Min", Options.NumberOption, 0);
-        this.addOption("Max", Options.NumberOption, 10);
-        this.addOption("Discrete", Options.CheckboxOption, true);
-        console.log(this.initialized);
+        this.addInputInterface("Seed", "string", Options.InputOption, "");
+        this.addInputInterface("Min", "number", Options.NumberOption, 0);
+        this.addInputInterface("Max", "number", Options.NumberOption, 10);
+        this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
     }
 
-    private prepare() {
+    public prepare() {
         // read option values
-        const seed = this.getOptionValue("Seed");
-        const min = this.getOptionValue("Min");
-        const max = this.getOptionValue("Max");
-        const isDiscrete = this.getOptionValue("Discrete");
+        const seed = this.getInterface("Seed").value;
+        const min = this.getInterface("Min").value;
+        const max = this.getInterface("Max").value;
+        const isDiscrete = this.getInterface("Discrete").value;
 
         // create new independent random number generator
         const myRandom = random.clone();
@@ -37,14 +35,9 @@ export default class UniformNode extends Node {
         } else {
             this.generator = myRandom.uniform(min, max);
         }
-
-        this.initialized = true;
     }
 
     public calculate() {
-        if (!this.initialized) {
-            this.prepare();
-        }
         this.getInterface("Output").value = this.generator();
     }
 

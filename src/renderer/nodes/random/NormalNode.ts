@@ -7,38 +7,31 @@ export default class NormalNode extends Node {
 
     public type = "NormalNode";
     public name = this.type;
-
-    private initialized: boolean = false;
     private generator: any = null;
 
     constructor() {
         super();
         this.addOutputInterface("Output", "number");
-        this.addOption("Seed", Options.InputOption);
-        this.addOption("Mu", Options.NumberOption, 0);
-        this.addOption("Sigma", Options.NumberOption, 10);
-        this.addOption("Discrete", Options.CheckboxOption, true);
+        this.addInputInterface("Seed", "string", Options.InputOption, "");
+        this.addInputInterface("Mu", "number", Options.NumberOption, 0);
+        this.addInputInterface("Sigma", "number", Options.NumberOption, 10);
+        this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
     }
 
-    private prepare() {
+    public prepare() {
         // read option values
-        const seed = this.getOptionValue("Seed");
-        const mu = this.getOptionValue("Mu");
-        const sigma = this.getOptionValue("Sigma");
+        const seed = this.getInterface("Seed").value;
+        const mu = this.getInterface("Mu").value;
+        const sigma = this.getInterface("Sigma").value;
 
         // create new independent random number generator
         const myRandom = random.clone();
         myRandom.use(seedrandom(seed));
         this.generator = myRandom.normal(mu, sigma);
-
-        this.initialized = true;
     }
 
     public calculate() {
-        if (!this.initialized) {
-            this.prepare();
-        }
-        const isDiscrete = this.getOptionValue("Discrete");
+        const isDiscrete = this.getInterface("Discrete").value;
         this.getInterface("Output").value = isDiscrete ? Math.round(this.generator()) : this.generator();
     }
 

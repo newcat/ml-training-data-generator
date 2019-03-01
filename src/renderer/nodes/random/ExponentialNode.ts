@@ -7,36 +7,29 @@ export default class ExponentialNode extends Node {
 
     public type = "ExponentialNode";
     public name = this.type;
-
-    private initialized: boolean = false;
     private generator: any = null;
 
     constructor() {
         super();
         this.addOutputInterface("Output", "number");
-        this.addOption("Seed", Options.InputOption);
-        this.addOption("Lambda", Options.NumberOption, 10);
-        this.addOption("Discrete", Options.CheckboxOption, true);
+        this.addInputInterface("Seed", "string", Options.InputOption, "");
+        this.addInputInterface("Lambda", "number", Options.NumberOption, 10);
+        this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
     }
 
-    private prepare() {
+    public prepare() {
         // read option values
-        const seed = this.getOptionValue("Seed");
-        const lambda = this.getOptionValue("Lambda");
+        const seed = this.getInterface("Seed").value;
+        const lambda = this.getInterface("Lambda").value;
 
         // create new independent random number generator
         const myRandom = random.clone();
         myRandom.use(seedrandom(seed));
         this.generator = myRandom.exponential(lambda);
-
-        this.initialized = true;
     }
 
     public calculate() {
-        if (!this.initialized) {
-            this.prepare();
-        }
-        const isDiscrete = this.getOptionValue("Discrete");
+        const isDiscrete = this.getInterface("Discrete").value;
         this.getInterface("Output").value = isDiscrete ? Math.round(this.generator()) : this.generator();
     }
 

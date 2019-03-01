@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "@types/seedrandom": "^2.4.27",
-        "baklavajs": "^0.5.0",
+        "baklavajs": "^0.5.1",
         "electron-json-storage": "^4.1.6",
         "random": "^2.0.13",
         "seedrandom": "^2.4.4",
