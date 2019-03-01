@@ -1,4 +1,5 @@
 import { Node, Options } from "baklavajs";
+// @ts-ignore
 import random from "random";
 import seedrandom from "seedrandom";
 
@@ -6,13 +7,13 @@ export default class UniformNode extends Node {
 
     public type = "UniformNode";
     public name = this.type;
-    private initialized: boolean = false; 
-    private generator: any = null;   
+    private initialized: boolean = false;
+    private generator: any = null;
 
     constructor() {
         super();
         this.addOutputInterface("Output", "number");
-        this.addOption("Seed", Options.InputOption, "seed");
+        this.addOption("Seed", Options.InputOption);
         this.addOption("Min", Options.NumberOption, 0);
         this.addOption("Max", Options.NumberOption, 10);
         this.addOption("Discrete", Options.CheckboxOption, true);
@@ -45,5 +46,6 @@ export default class UniformNode extends Node {
             this.prepare();
         }
         this.getInterface("Output").value = this.generator();
-     }
+    }
+
 }

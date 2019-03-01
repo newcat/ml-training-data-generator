@@ -7,7 +7,9 @@
     "rules": {
         "comment-format": false,
         "trailing-comma": false,
-        "quotemark": false
+        "quotemark": false,
+        "no-console": false,
+        "member-ordering": false
     },
     "rulesDirectory": []
 }

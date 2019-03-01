@@ -1,32 +1,35 @@
 import { Node, Options } from "baklavajs";
+// @ts-ignore
 import random from "random";
 import seedrandom from "seedrandom";
 
-export default class ExponentialNode extends Node {
+export default class NormalNode extends Node {
 
-    public type = "ExponentialNode";
+    public type = "NormalNode";
     public name = this.type;
-    
-    private initialized: boolean = false; 
-    private generator: any = null; 
+
+    private initialized: boolean = false;
+    private generator: any = null;
 
     constructor() {
         super();
         this.addOutputInterface("Output", "number");
-        this.addOption("Seed", Options.InputOption, "seed");
-        this.addOption("Lambda", Options.NumberOption, 10);
+        this.addOption("Seed", Options.InputOption);
+        this.addOption("Mu", Options.NumberOption, 0);
+        this.addOption("Sigma", Options.NumberOption, 10);
         this.addOption("Discrete", Options.CheckboxOption, true);
     }
 
     private prepare() {
         // read option values
         const seed = this.getOptionValue("Seed");
-        const lambda = this.getOptionValue("Lambda");
+        const mu = this.getOptionValue("Mu");
+        const sigma = this.getOptionValue("Sigma");
 
         // create new independent random number generator
         const myRandom = random.clone();
         myRandom.use(seedrandom(seed));
-        this.generator = myRandom.exponential(lambda);
+        this.generator = myRandom.normal(mu, sigma);
 
         this.initialized = true;
     }

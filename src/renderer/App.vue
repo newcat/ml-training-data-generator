@@ -17,14 +17,14 @@ const dialog = remote.dialog;
 const app = remote.app;
 import fs from "fs";
 
-
+// @ts-ignore
 import random from "random";
 import seedrandom from "seedrandom";
 
-import UniformNode from "./UniformNode";
-import NormalNode from "./NormalNode";
-import ExponentialNode from "./ExponentialNode";
-import OutputNode from "./OutputNode";
+import UniformNode from "./nodes/random/UniformNode";
+import NormalNode from "./nodes/random/NormalNode";
+import ExponentialNode from "./nodes/random/ExponentialNode";
+import OutputNode from "./nodes/OutputNode";
 
 @Component
 export default class extends Vue {
@@ -35,7 +35,8 @@ export default class extends Vue {
         this.editor.registerNodeType("UniformNode", UniformNode, "Random");
         this.editor.registerNodeType("NormalNode", NormalNode, "Random");
         this.editor.registerNodeType("ExponentialNode", ExponentialNode, "Random");
-        this.editor.registerNodeType("OutputNode", OutputNode, "Output");
+        this.editor.registerNodeType("OutputNode", OutputNode);
+        this.editor.nodeInterfaceTypes.addType("number", "cyan");
     }
   
     calculate() {

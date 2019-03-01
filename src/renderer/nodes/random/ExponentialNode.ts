@@ -1,10 +1,11 @@
 import { Node, Options } from "baklavajs";
+// @ts-ignore
 import random from "random";
 import seedrandom from "seedrandom";
 
-export default class NormalNode extends Node {
+export default class ExponentialNode extends Node {
 
-    public type = "NormalNode";
+    public type = "ExponentialNode";
     public name = this.type;
 
     private initialized: boolean = false;
@@ -13,22 +14,20 @@ export default class NormalNode extends Node {
     constructor() {
         super();
         this.addOutputInterface("Output", "number");
-        this.addOption("Seed", Options.InputOption, "seed");
-        this.addOption("Mu", Options.NumberOption, 0);
-        this.addOption("Sigma", Options.NumberOption, 10);
+        this.addOption("Seed", Options.InputOption);
+        this.addOption("Lambda", Options.NumberOption, 10);
         this.addOption("Discrete", Options.CheckboxOption, true);
     }
 
     private prepare() {
         // read option values
         const seed = this.getOptionValue("Seed");
-        const mu = this.getOptionValue("Mu");
-        const sigma = this.getOptionValue("Sigma");
+        const lambda = this.getOptionValue("Lambda");
 
         // create new independent random number generator
         const myRandom = random.clone();
         myRandom.use(seedrandom(seed));
-        this.generator = myRandom.normal(mu, sigma);
+        this.generator = myRandom.exponential(lambda);
 
         this.initialized = true;
     }
@@ -40,6 +39,5 @@ export default class NormalNode extends Node {
         const isDiscrete = this.getOptionValue("Discrete");
         this.getInterface("Output").value = isDiscrete ? Math.round(this.generator()) : this.generator();
     }
-    
 
 }
