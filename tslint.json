@@ -1,5 +1,5 @@
 {
-    "defaultSeverity": "error",
+    "defaultSeverity": "warning",
     "extends": [
         "tslint:recommended"
     ],
@@ -9,7 +9,9 @@
         "trailing-comma": false,
         "quotemark": false,
         "no-console": false,
-        "member-ordering": false
+        "member-ordering": false,
+        "ordered-imports": false,
+        "member-access": false
     },
     "rulesDirectory": []
 }

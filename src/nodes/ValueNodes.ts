@@ -2,7 +2,7 @@ import { Node, NodeBuilder, Options } from "baklavajs";
 
 const calc = (n: Node) => {
     n.getInterface("Output").value = n.getOptionValue("Value");
-}
+};
 
 export const BooleanValueNode = new NodeBuilder("BooleanValueNode")
     .addOption("Value", Options.CheckboxOption, false)
