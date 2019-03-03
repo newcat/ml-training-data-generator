@@ -4,17 +4,12 @@
         <button @click="calculate">Calculate</button>
         <button @click="save">Save</button>
         <button @click="load">Load</button>
-        <button @click="test">Test</button>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { Editor, NodeConstructor } from "baklavajs";
-
-import { remote } from "electron";
-const { dialog, app } = remote;
-import fs from "fs";
 
 // @ts-ignore
 import random from "random";
@@ -33,9 +28,9 @@ export default class extends Vue {
     editor = new Editor();
 
     mounted() {
-        for (const x in ValueNodes) {
+        Object.keys(ValueNodes).forEach((x) => {
             this.editor.registerNodeType(x, (ValueNodes as Record<string, NodeConstructor>)[x], "Value");
-        }
+        });
         this.editor.registerNodeType("UniformNode", UniformNode, "Random");
         this.editor.registerNodeType("NormalNode", NormalNode, "Random");
         this.editor.registerNodeType("ExponentialNode", ExponentialNode, "Random");
@@ -50,7 +45,7 @@ export default class extends Vue {
             .addConversion("boolean", "number", (v) => v ? 1 : 0)
             .addConversion("boolean", "string", String);
     }
-  
+
     calculate() {
         this.editor.nodes.forEach((n: any) => {
             if (n.prepare) {
@@ -61,7 +56,8 @@ export default class extends Vue {
     }
 
     save() {
-        const projectData = JSON.stringify(this.editor.save());
+        // TODO
+        /*const projectData = JSON.stringify(this.editor.save());
         const options = {
             defaultPath: app.getPath('documents') + '/ml-training-data-project.json'
         };
@@ -78,16 +74,17 @@ export default class extends Vue {
                     alert("Your project has been successfully saved!");
                 }
             });
-        });
+        });*/
     }
 
     load() {
-        dialog.showOpenDialog({ properties: ['openFile'] }, (filePaths) => {
+        // TODO
+        /*dialog.showOpenDialog({ properties: ['openFile'] }, (filePaths) => {
             if(filePaths === undefined || filePaths.length !== 1) {
                 console.log("No file path has been chosen! Please select exactly one file to open.");
                 return;
             }
-            
+
             fs.readFile(filePaths[0], (err, data) => {
                 if (err) {
                     console.log(err);
@@ -96,20 +93,7 @@ export default class extends Vue {
                     this.editor.load(JSON.parse(data.toString()));
                 }
             });
-        });
-    }
-
-    test() {
-        const rng = random.clone();
-        rng.use(seedrandom("test"));
-
-        const ug = rng.uniform(0, 10);
-        
-        let a = [];
-        for (let i = 0; i < 10; i++) {
-            a.push(Math.round(ug()));
-        }
-        console.log(a);
+        });*/
     }
 
 }

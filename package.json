@@ -1,27 +1,22 @@
 {
-    "name": "electron-webpack-quick-start",
+    "name": "ml-training-data-generator",
     "version": "0.0.0",
-    "license": "MIT",
+    "license": "GPL-3.0-only",
     "scripts": {
-        "dev": "electron-webpack dev",
-        "compile": "electron-webpack",
-        "dist": "yarn compile && electron-builder",
-        "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build"
     },
     "dependencies": {
         "@types/seedrandom": "^2.4.27",
+        "@vue/cli-plugin-typescript": "^3.4.1",
+        "@vue/cli-service": "^3.4.1",
         "baklavajs": "^0.5.1",
-        "electron-json-storage": "^4.1.6",
         "random": "^2.0.13",
         "seedrandom": "^2.4.4",
-        "source-map-support": "^0.5.9"
+        "vue-class-component": "^7.0.1",
+        "vue-template-compiler": "^2.6.8"
     },
     "devDependencies": {
-        "electron": "3.0.10",
-        "electron-builder": "^20.36.2",
-        "electron-webpack": "^2.6.1",
-        "electron-webpack-ts": "^3.1.0",
-        "electron-webpack-vue": "^2.2.2",
         "node-sass": "^4.11.0",
         "sass-loader": "^7.1.0",
         "tslint": "^5.12.1",
@@ -29,10 +24,5 @@
         "vue": "^2.5.22",
         "vue-property-decorator": "^7.3.0",
         "webpack": "^4.26.0"
-    },
-    "electronWebpack": {
-        "whiteListedModules": [
-            "baklavajs"
-        ]
     }
 }
