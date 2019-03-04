@@ -13,10 +13,8 @@ export default class OutputNode extends Node {
     }
 
     public calculate() {
-        const label = this.getOptionValue("Label");
         const value = this.getInterface("Input").value;
-        this.setOptionValue("Value", String(value));
-        console.log("Calculated Output:" + String(value));
+        (this.state as Record<string, any>).result = value;
     }
 
 }
