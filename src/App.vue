@@ -9,50 +9,21 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Editor, NodeConstructor } from "baklavajs";
 
-// @ts-ignore
-import random from "random";
-import seedrandom from "seedrandom";
-
-import UniformNode from "./nodes/random/UniformNode";
-import NormalNode from "./nodes/random/NormalNode";
-import ExponentialNode from "./nodes/random/ExponentialNode";
-import OutputNode from "./nodes/OutputNode";
-import { BooleanValueNode, NumberValueNode, StringValueNode } from "./nodes/ValueNodes";
-import * as ValueNodes from "./nodes/ValueNodes";
+import createEditor from "@/createEditor";
+import { Calculator } from '@/calculator';
 
 @Component
 export default class extends Vue {
 
-    editor = new Editor();
+    editor = createEditor();
 
-    mounted() {
-        Object.keys(ValueNodes).forEach((x) => {
-            this.editor.registerNodeType(x, (ValueNodes as Record<string, NodeConstructor>)[x], "Value");
-        });
-        this.editor.registerNodeType("UniformNode", UniformNode, "Random");
-        this.editor.registerNodeType("NormalNode", NormalNode, "Random");
-        this.editor.registerNodeType("ExponentialNode", ExponentialNode, "Random");
-        this.editor.registerNodeType("OutputNode", OutputNode);
-        this.editor.nodeInterfaceTypes
-            .addType("number", "cyan")
-            .addType("string", "white")
-            .addType("boolean", "lightgreen")
-            .addConversion("number", "string", String)
-            .addConversion("number", "boolean", (v) => !!v)
-            .addConversion("string", "number", parseFloat)
-            .addConversion("boolean", "number", (v) => v ? 1 : 0)
-            .addConversion("boolean", "string", String);
-    }
-
-    calculate() {
-        this.editor.nodes.forEach((n: any) => {
-            if (n.prepare) {
-                n.prepare();
-            }
-        });
-        this.editor.calculate();
+    async calculate() {
+        const c = new Calculator(this.editor);
+        console.log("Start");
+        const results = await c.runBatch(10);
+        console.log("Finish");
+        console.log(results);
     }
 
     save() {

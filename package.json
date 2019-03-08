@@ -10,11 +10,12 @@
         "@types/seedrandom": "^2.4.27",
         "@vue/cli-plugin-typescript": "^3.4.1",
         "@vue/cli-service": "^3.4.1",
-        "baklavajs": "^0.5.1",
+        "baklavajs": "^0.6.2",
         "random": "^2.0.13",
         "seedrandom": "^2.4.4",
         "vue-class-component": "^7.0.1",
-        "vue-template-compiler": "^2.6.8"
+        "vue-template-compiler": "^2.6.8",
+        "worker-loader": "^2.0.0"
     },
     "devDependencies": {
         "node-sass": "^4.11.0",
