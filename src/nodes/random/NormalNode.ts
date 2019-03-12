@@ -2,6 +2,7 @@ import { Node, Options } from "baklavajs";
 // @ts-ignore
 import random from "random";
 import seedrandom from "seedrandom";
+import { IPreparationData } from "@/types";
 
 export default class NormalNode extends Node {
 
@@ -18,7 +19,7 @@ export default class NormalNode extends Node {
         this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
     }
 
-    public prepare() {
+    public prepare(data: IPreparationData) {
         // read option values
         const seed = this.getInterface("Seed").value;
         const mu = this.getInterface("Mu").value;
@@ -26,11 +27,12 @@ export default class NormalNode extends Node {
 
         // create new independent random number generator
         const myRandom = random.clone();
-        myRandom.use(seedrandom(seed));
+        myRandom.use(seed ? seedrandom(seed + data.seed) : seedrandom());
         this.generator = myRandom.normal(mu, sigma);
     }
 
-    public calculate() {
+    public calculate(index?: number) {
+        // TODO: Use index here
         const isDiscrete = this.getInterface("Discrete").value;
         this.getInterface("Output").value = isDiscrete ? Math.round(this.generator()) : this.generator();
     }

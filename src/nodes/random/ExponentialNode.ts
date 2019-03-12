@@ -2,6 +2,7 @@ import { Node, Options } from "baklavajs";
 // @ts-ignore
 import random from "random";
 import seedrandom from "seedrandom";
+import { IPreparationData } from "@/types";
 
 export default class ExponentialNode extends Node {
 
@@ -17,18 +18,19 @@ export default class ExponentialNode extends Node {
         this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
     }
 
-    public prepare() {
+    public prepare(data: IPreparationData) {
         // read option values
         const seed = this.getInterface("Seed").value;
         const lambda = this.getInterface("Lambda").value;
 
         // create new independent random number generator
         const myRandom = random.clone();
-        myRandom.use(seedrandom(seed));
+        myRandom.use(seed ? seedrandom(seed + data.seed) : seedrandom());
         this.generator = myRandom.exponential(lambda);
     }
 
-    public calculate() {
+    public calculate(index?: number) {
+        // TODO: Use index here
         const isDiscrete = this.getInterface("Discrete").value;
         this.getInterface("Output").value = isDiscrete ? Math.round(this.generator()) : this.generator();
     }
