@@ -1,5 +1,10 @@
 export interface ICalculationWorkerMessage {
     editorState: string;
     seed: string;
-    batchSize: number;
+    startIndex: number;
+    endIndex: number;
+}
+
+export interface IPreparationData {
+    seed: string;
 }

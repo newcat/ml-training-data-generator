@@ -2,6 +2,7 @@ import { Node, Options } from "baklavajs";
 // @ts-ignore
 import random from "random";
 import seedrandom from "seedrandom";
+import { IPreparationData } from "@/types";
 
 export default class UniformNode extends Node {
 
@@ -18,7 +19,7 @@ export default class UniformNode extends Node {
         this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
     }
 
-    public prepare() {
+    public prepare(data: IPreparationData) {
         // read option values
         const seed = this.getInterface("Seed").value;
         const min = this.getInterface("Min").value;
@@ -27,7 +28,7 @@ export default class UniformNode extends Node {
 
         // create new independent random number generator
         const myRandom = random.clone();
-        myRandom.use(seedrandom(seed));
+        myRandom.use(seed ? seedrandom(seed + data.seed) : seedrandom());
 
         // create configured generator with uniform distribution
         if (isDiscrete) {
@@ -37,7 +38,8 @@ export default class UniformNode extends Node {
         }
     }
 
-    public calculate() {
+    public calculate(index?: number) {
+        // TODO: Use index here
         this.getInterface("Output").value = this.generator();
     }
 

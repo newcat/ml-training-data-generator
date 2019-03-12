@@ -22,6 +22,6 @@ export const StringValueNode = new NodeBuilder("StringValueNode")
     .onCalculate(calc)
     .build();
 
-export const IndexValueNode = new NodeBuilder("IndexValue")
+export const IndexValueNode = new NodeBuilder("IndexValueNode")
     .addOutputInterface("Index", "number")
     .build();

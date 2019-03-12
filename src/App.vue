@@ -4,6 +4,7 @@
         <button @click="calculate">Calculate</button>
         <button @click="save">Save</button>
         <button @click="load">Load</button>
+        <input ref="fileinput" type="file" accept="application/json" style="display: none;" @change="loadFile">
     </div>
 </template>
 
@@ -17,54 +18,40 @@ import { Calculator } from '@/calculator';
 export default class extends Vue {
 
     editor = createEditor();
+    c = new Calculator(this.editor);
+
+    mounted() {
+        this.c.setWorkerCount(4);
+    }
 
     async calculate() {
-        const c = new Calculator(this.editor);
         console.log("Start");
-        const results = await c.runBatch(10);
+        const results = await this.c.runBatch(10);
         console.log("Finish");
         console.log(results);
     }
 
     save() {
-        // TODO
-        /*const projectData = JSON.stringify(this.editor.save());
-        const options = {
-            defaultPath: app.getPath('documents') + '/ml-training-data-project.json'
-        };
-        dialog.showSaveDialog(options, (filePath) => {
-            if (filePath === undefined) {
-                console.log("No file path been chosen!");
-                return;
-            }
-
-            fs.writeFile(filePath, projectData, (err) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    alert("Your project has been successfully saved!");
-                }
-            });
-        });*/
+        const s = JSON.stringify(this.editor.save());
+        const blob = new Blob([s], { type: "application/json" });
+        const a = document.createElement("a");
+        a.download = "project.json";
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
     }
 
     load() {
-        // TODO
-        /*dialog.showOpenDialog({ properties: ['openFile'] }, (filePaths) => {
-            if(filePaths === undefined || filePaths.length !== 1) {
-                console.log("No file path has been chosen! Please select exactly one file to open.");
-                return;
-            }
+        const inp = this.$refs.fileinput as HTMLInputElement;
+        inp.click();
+    }
 
-            fs.readFile(filePaths[0], (err, data) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(JSON.parse(data.toString()));
-                    this.editor.load(JSON.parse(data.toString()));
-                }
-            });
-        });*/
+    loadFile(event: any) {
+        const file = event.target.files[0] as File;
+        const reader = new FileReader();
+        reader.onload = async (readerEvent) => {
+            this.editor.load(JSON.parse((readerEvent.target as any).result));
+        };
+        reader.readAsText(file);
     }
 
 }
