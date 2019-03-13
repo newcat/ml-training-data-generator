@@ -8,7 +8,11 @@ export default class ExponentialNode extends Node {
 
     public type = "ExponentialNode";
     public name = this.type;
+
     private generator: any = null;
+    private seed = "";
+    private randomInstance: any = null;
+    private lambda = 0;
 
     constructor() {
         super();
@@ -20,17 +24,21 @@ export default class ExponentialNode extends Node {
 
     public prepare(data: IPreparationData) {
         // read option values
-        const seed = this.getInterface("Seed").value;
-        const lambda = this.getInterface("Lambda").value;
+        this.seed = this.getInterface("Seed").value;
+        this.lambda = this.getInterface("Lambda").value;
 
         // create new independent random number generator
-        const myRandom = random.clone();
-        myRandom.use(seed ? seedrandom(seed + data.seed) : seedrandom());
-        this.generator = myRandom.exponential(lambda);
+        this.randomInstance = random.clone();
+        this.randomInstance.use(this.seed ? seedrandom(this.seed + data.seed) : seedrandom());
+        this.generator = this.randomInstance.exponential(this.lambda);
     }
 
     public calculate(index?: number) {
-        // TODO: Use index here
+        if (this.seed) {
+            this.randomInstance.use(seedrandom(this.seed + index));
+            this.generator = this.randomInstance.exponential(this.lambda);
+        }
+
         const isDiscrete = this.getInterface("Discrete").value;
         this.getInterface("Output").value = isDiscrete ? Math.round(this.generator()) : this.generator();
     }

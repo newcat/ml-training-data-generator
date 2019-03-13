@@ -8,7 +8,12 @@ export default class NormalNode extends Node {
 
     public type = "NormalNode";
     public name = this.type;
+
+    private randomInstance: any = null;
     private generator: any = null;
+    private seed = "";
+    private sigma = 0;
+    private mu = 0;
 
     constructor() {
         super();
@@ -21,18 +26,22 @@ export default class NormalNode extends Node {
 
     public prepare(data: IPreparationData) {
         // read option values
-        const seed = this.getInterface("Seed").value;
-        const mu = this.getInterface("Mu").value;
-        const sigma = this.getInterface("Sigma").value;
+        this.seed = this.getInterface("Seed").value;
+        this.mu = this.getInterface("Mu").value;
+        this.sigma = this.getInterface("Sigma").value;
 
         // create new independent random number generator
-        const myRandom = random.clone();
-        myRandom.use(seed ? seedrandom(seed + data.seed) : seedrandom());
-        this.generator = myRandom.normal(mu, sigma);
+        this.randomInstance = random.clone();
+        this.randomInstance.use(seedrandom());
+        this.generator = this.randomInstance.normal(this.mu, this.sigma);
     }
 
     public calculate(index?: number) {
-        // TODO: Use index here
+        if (this.seed) {
+            this.randomInstance.use(seedrandom(this.seed + index));
+            this.generator = this.randomInstance.normal(this.mu, this.sigma);
+        }
+
         const isDiscrete = this.getInterface("Discrete").value;
         this.getInterface("Output").value = isDiscrete ? Math.round(this.generator()) : this.generator();
     }
