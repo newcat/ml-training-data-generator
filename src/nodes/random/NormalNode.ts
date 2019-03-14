@@ -2,12 +2,18 @@ import { Node, Options } from "baklavajs";
 // @ts-ignore
 import random from "random";
 import seedrandom from "seedrandom";
+import { IPreparationData } from "@/types";
 
 export default class NormalNode extends Node {
 
     public type = "NormalNode";
     public name = this.type;
+
+    private randomInstance: any = null;
     private generator: any = null;
+    private seed = "";
+    private sigma = 0;
+    private mu = 0;
 
     constructor() {
         super();
@@ -18,19 +24,24 @@ export default class NormalNode extends Node {
         this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
     }
 
-    public prepare() {
+    public prepare(data: IPreparationData) {
         // read option values
-        const seed = this.getInterface("Seed").value;
-        const mu = this.getInterface("Mu").value;
-        const sigma = this.getInterface("Sigma").value;
+        this.seed = this.getInterface("Seed").value;
+        this.mu = this.getInterface("Mu").value;
+        this.sigma = this.getInterface("Sigma").value;
 
         // create new independent random number generator
-        const myRandom = random.clone();
-        myRandom.use(seedrandom(seed));
-        this.generator = myRandom.normal(mu, sigma);
+        this.randomInstance = random.clone();
+        this.randomInstance.use(seedrandom());
+        this.generator = this.randomInstance.normal(this.mu, this.sigma);
     }
 
-    public calculate() {
+    public calculate(index?: number) {
+        if (this.seed) {
+            this.randomInstance.use(seedrandom(this.seed + index));
+            this.generator = this.randomInstance.normal(this.mu, this.sigma);
+        }
+
         const isDiscrete = this.getInterface("Discrete").value;
         this.getInterface("Output").value = isDiscrete ? Math.round(this.generator()) : this.generator();
     }
