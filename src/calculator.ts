@@ -67,7 +67,6 @@ export class Calculator {
             (w, i) => new Promise((res) => {
                 w.onmessage = (msg) => {
                     w.onmessage = null;
-                    console.log(msg.data);
                     res(msg.data);
                 };
                 w.postMessage({

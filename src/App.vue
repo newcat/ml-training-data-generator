@@ -56,3 +56,10 @@ export default class extends Vue {
 
 }
 </script>
+
+<style>
+.ace_tooltip {
+    left: 10px !important;
+}
+</style>
+

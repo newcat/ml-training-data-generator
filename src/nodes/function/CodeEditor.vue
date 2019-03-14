@@ -23,7 +23,6 @@ export default class CodeEditor extends Vue {
     value!: string;
 
     editorInit() {
-        console.log("ASDF");
         require('brace/ext/language_tools');
         require('brace/mode/javascript');
         require('brace/theme/chrome');

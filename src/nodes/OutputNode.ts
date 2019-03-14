@@ -7,7 +7,7 @@ export default class OutputNode extends Node {
 
     public constructor() {
         super();
-        this.addInputInterface("Input", "number");
+        this.addInputInterface("Input", "any");
         this.addOption("Label", Options.InputOption);
         this.addOption("Value", Options.TextOption);
     }

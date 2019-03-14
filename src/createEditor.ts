@@ -21,9 +21,9 @@ export default function createEditor(): Editor {
     editor.registerNodeType("OutputNode", OutputNode);
     editor.nodeInterfaceTypes
         .addType("number", "cyan")
-        .addType("string", "white")
+        .addType("string", "crimson")
         .addType("boolean", "lightgreen")
-        .addType("any", "black")
+        .addType("any", "white")
         .addConversion("number", "string", String)
         .addConversion("number", "boolean", (v) => !!v)
         .addConversion("number", "any", (v) => v)

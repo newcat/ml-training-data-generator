@@ -6,6 +6,10 @@ interface IExtendedInterfaceState extends IInterfaceState {
     isInput: boolean;
 }
 
+const defaultValue = `return {
+    output: this.input
+};`;
+
 export default class FunctionNode extends Node {
 
     public type = "FunctionNode";
@@ -16,7 +20,9 @@ export default class FunctionNode extends Node {
 
     constructor() {
         super();
-        this.addOption("Edit Function", Options.ButtonOption, "a = b + c", FunctionSidebarOption);
+        this.addOption("Edit Function", Options.ButtonOption, defaultValue, FunctionSidebarOption);
+        this.addInput("input");
+        this.addOutput("output");
     }
 
     addInput(name: string) {

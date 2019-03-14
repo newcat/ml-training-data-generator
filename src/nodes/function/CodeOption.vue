@@ -63,4 +63,3 @@ export default class CodeOption extends Vue {
 
 }
 </script>
-
