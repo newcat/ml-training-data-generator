@@ -1,18 +1,13 @@
 import { Node, Options } from "baklavajs";
-// @ts-ignore
-import random from "random";
-import seedrandom from "seedrandom";
 import { IPreparationData } from "@/types";
+import RandomHelper from './randomHelper';
 
 export default class ExponentialNode extends Node {
 
     public type = "ExponentialNode";
     public name = this.type;
 
-    private generator: any = null;
-    private seed = "";
-    private randomInstance: any = null;
-    private lambda = 0;
+    private rng: RandomHelper|null = null;
 
     constructor() {
         super();
@@ -24,23 +19,16 @@ export default class ExponentialNode extends Node {
 
     public prepare(data: IPreparationData) {
         // read option values
-        this.seed = this.getInterface("Seed").value;
-        this.lambda = this.getInterface("Lambda").value;
-
-        // create new independent random number generator
-        this.randomInstance = random.clone();
-        this.randomInstance.use(this.seed ? seedrandom(this.seed + data.seed) : seedrandom());
-        this.generator = this.randomInstance.exponential(this.lambda);
+        const seed = this.getInterface("Seed").value;
+        const discrete = this.getInterface("Discrete").value;
+        this.rng = new RandomHelper(seed, discrete);
     }
 
     public calculate(index?: number) {
-        if (this.seed) {
-            this.randomInstance.use(seedrandom(this.seed + index));
-            this.generator = this.randomInstance.exponential(this.lambda);
-        }
-
-        const isDiscrete = this.getInterface("Discrete").value;
-        this.getInterface("Output").value = isDiscrete ? Math.round(this.generator()) : this.generator();
+        const lambda = this.getInterface("Lambda").value;
+        const u = this.rng!.uniform(index, { fixed: 8, min: 0, max: 1 });
+        // https://stackoverflow.com/questions/2106503/pseudorandom-number-generator-exponential-distribution
+        this.getInterface("Output").value = Math.log(1 - u) / (-lambda);
     }
 
 }
