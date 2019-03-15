@@ -3,6 +3,7 @@ import { Editor, NodeConstructor } from "baklavajs";
 import UniformNode from "./nodes/random/UniformNode";
 import NormalNode from "./nodes/random/NormalNode";
 import ExponentialNode from "./nodes/random/ExponentialNode";
+import PercentageNode from "./nodes/random/PercentageNode";
 import BooleanNode from "./nodes/BooleanNode";
 import MathNode from "./nodes/MathNode";
 import OutputNode from "./nodes/OutputNode";
@@ -20,6 +21,7 @@ export default function createEditor(): Editor {
     editor.registerNodeType("UniformNode", UniformNode, "Random");
     editor.registerNodeType("NormalNode", NormalNode, "Random");
     editor.registerNodeType("ExponentialNode", ExponentialNode, "Random");
+    editor.registerNodeType("PercentageNode", PercentageNode, "Random");
     editor.registerNodeType("FunctionNode", FunctionNode);
     editor.registerNodeType("BooleanNode", BooleanNode);
     editor.registerNodeType("MathNode", MathNode);

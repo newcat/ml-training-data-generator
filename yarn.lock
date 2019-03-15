@@ -33,6 +33,11 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
+"@types/chance@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/chance/-/chance-1.0.1.tgz#c10703020369602c40dd9428cc6e1437027116df"
+  integrity sha512-jtV6Bv/j+xk4gcXeLlESwNc/m/I/dIZA0xrt29g0uKcjyPob8iisj/5z0ARE+Ldfx4MxjNFNECG0z++J7zJgqg==
+
 "@types/q@^1.5.1":
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.1.tgz#48fd98c1561fe718b61733daed46ff115b496e18"
@@ -772,14 +777,6 @@ babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-runtime@^6.26.0:
-  version "6.26.0"
-  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
-  integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
-  dependencies:
-    core-js "^2.4.0"
-    regenerator-runtime "^0.11.0"
-
 baklavajs@^0.6.4:
   version "0.6.4"
   resolved "https://registry.yarnpkg.com/baklavajs/-/baklavajs-0.6.4.tgz#1a39f8e8f530a774456cf9e4c86772266d764916"
@@ -1206,6 +1203,11 @@ chalk@^2.0.1, chalk@^2.3.0, chalk@^2.4.1, chalk@^2.4.2:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
+chance@^1.0.18:
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/chance/-/chance-1.0.18.tgz#79788fe6fca4c338bf404321c347eecc80f969ee"
+  integrity sha512-g9YLQVHVZS/3F+zIicfB58vjcxopvYQRp7xHzvyDFDhXH1aRZI/JhwSAO0X5qYiQluoGnaNAU6wByD2KTxJN1A==
+
 check-types@^7.3.0:
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/check-types/-/check-types-7.4.0.tgz#0378ec1b9616ec71f774931a3c6516fad8c152f4"
@@ -1521,11 +1523,6 @@ copy-webpack-plugin@^4.6.0:
     minimatch "^3.0.4"
     p-limit "^1.0.0"
     serialize-javascript "^1.4.0"
-
-core-js@^2.4.0:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
-  integrity sha512-klh/kDpwX8hryYL14M9w/xei6vrv6sE8gTHDG7/T/+SEovB/G4ejwcfE/CBzO6Edsu+OETZMZ3wcX/EjUkrl5A==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -4552,16 +4549,6 @@ osenv@0, osenv@^0.1.4:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
-ow-lite@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/ow-lite/-/ow-lite-0.0.2.tgz#df9f500e6740b6590a1e9a965730d49a8eb597d1"
-  integrity sha1-359QDmdAtlkKHpqWVzDUmo61l9E=
-
-ow@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/ow/-/ow-0.4.0.tgz#119a846d23738ce11677331fef8a3fbe019eb05b"
-  integrity sha512-kJNzxUgVd6EF5LoGs+s2/etJPwjfRDLXPTCfEgV8At77sRrV+PSFA8lcoW2HF15Qd455mIR2Stee/2MzDiFBDA==
-
 p-defer@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/p-defer/-/p-defer-1.0.0.tgz#9f6eb182f6c9aa8cd743004a7d4f96b196b0fb0c"
@@ -5278,16 +5265,6 @@ querystringify@^2.0.0:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.0.tgz#7ded8dfbf7879dcc60d0a644ac6754b283ad17ef"
   integrity sha512-sluvZZ1YiTLD5jsqZcDmFyV2EwToyXZBfpoVOmktMmW+VEnhgakFHnasVph65fOjGPTWN0Nw3+XQaSeMayr0kg==
 
-random@^2.0.13:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/random/-/random-2.1.1.tgz#1229fa4a752fd9bb7a605de0d70147f8ed36cb30"
-  integrity sha512-8HQriGPwjc8R+7hPOI9ZphAEEWmIt/RmuqXZ682ww9kjK5HRGXcN7hgWUxZ9AabgjZm5wIa6EwapTI1sg11XXg==
-  dependencies:
-    babel-runtime "^6.26.0"
-    ow "^0.4.0"
-    ow-lite "^0.0.2"
-    seedrandom "^2.4.4"
-
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
@@ -5397,11 +5374,6 @@ regenerate@^1.2.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
   integrity sha512-1G6jJVDWrt0rK99kBjvEtziZNCICAuvIPkSiUFIQxVP06RCVpq3dmDo2oi6ABpYaDYaTRr67BEhL8r1wgEZZKg==
-
-regenerator-runtime@^0.11.0:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
-  integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
 
 regex-not@^1.0.0, regex-not@^1.0.2:
   version "1.0.2"
@@ -5669,11 +5641,6 @@ scss-tokenizer@^0.2.3:
   dependencies:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
-
-seedrandom@^2.4.4:
-  version "2.4.4"
-  resolved "https://registry.yarnpkg.com/seedrandom/-/seedrandom-2.4.4.tgz#b25ea98632c73e45f58b77cfaa931678df01f9ba"
-  integrity sha512-9A+PDmgm+2du77B5i0Ip2cxOqqHjgNxnBgglxLcX78A2D6c2rTo61z4jnVABpF4cKeDMDG+cmXXvdnqse2VqMA==
 
 select-hose@^2.0.0:
   version "2.0.0"
