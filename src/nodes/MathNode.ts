@@ -12,8 +12,8 @@ export default class MathNode extends Node {
 
     constructor() {
         super();
-        this.addInputInterface("Value 1", "number", Options.NumberOption);
-        this.addInputInterface("Value 2", "number", Options.NumberOption);
+        this.addInputInterface("Value 1", "number", Options.NumberOption, 0);
+        this.addInputInterface("Value 2", "number", Options.NumberOption, 0);
         this.addOption("Operation", Options.SelectOption, {
             selected: "Add",
             items: operations
