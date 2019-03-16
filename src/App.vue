@@ -13,6 +13,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 import createEditor from "@/createEditor";
 import { Calculator } from '@/calculator';
+import CustomNode from '@/nodes/random/CustomNode';
 
 @Component
 export default class extends Vue {
@@ -22,6 +23,7 @@ export default class extends Vue {
 
     mounted() {
         this.c.setWorkerCount(4);
+        this.editor.addNode("CustomNode");
     }
 
     async calculate() {

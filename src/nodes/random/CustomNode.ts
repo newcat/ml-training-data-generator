@@ -1,7 +1,8 @@
 import { Node, Options } from "baklavajs";
+import CustomSidebarOption from "./CustomSidebarOption.vue";
 import RandomHelper from './randomHelper';
 
-export default class ExponentialNode extends Node {
+export default class CustomNode extends Node {
 
     public type = "ExponentialNode";
     public name = this.type;
@@ -12,8 +13,8 @@ export default class ExponentialNode extends Node {
         super();
         this.addOutputInterface("Output", "number");
         this.addInputInterface("Seed", "string", Options.InputOption, "");
-        this.addInputInterface("Lambda", "number", Options.NumberOption, 10);
         this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
+        this.addOption("Custom Distribution", Options.ButtonOption, { hure: "nutte" }, CustomSidebarOption);
     }
 
     public prepare() {
@@ -24,10 +25,7 @@ export default class ExponentialNode extends Node {
     }
 
     public calculate(index?: number) {
-        const lambda = this.getInterface("Lambda").value;
-        const u = this.rng!.uniform(index, { fixed: 8, min: 0, max: 1 });
-        // https://stackoverflow.com/questions/2106503/pseudorandom-number-generator-exponential-distribution
-        this.getInterface("Output").value = Math.log(1 - u) / (-lambda);
+        this.getInterface("Output").value = index;
     }
 
 }
