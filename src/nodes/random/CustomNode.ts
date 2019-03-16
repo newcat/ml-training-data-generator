@@ -4,7 +4,7 @@ import RandomHelper from './randomHelper';
 
 export default class CustomNode extends Node {
 
-    public type = "ExponentialNode";
+    public type = "CustomNode";
     public name = this.type;
 
     private rng: RandomHelper|null = null;
