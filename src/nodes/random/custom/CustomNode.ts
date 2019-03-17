@@ -1,6 +1,6 @@
 import { Node, Options } from "baklavajs";
-import CustomSidebarOption from "./CustomSidebarOption.vue";
-import RandomHelper from './randomHelper';
+import CustomSidebarOption from "./CustomOption.vue";
+import RandomHelper from '../randomHelper';
 
 export default class CustomNode extends Node {
 

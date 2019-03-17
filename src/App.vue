@@ -13,7 +13,6 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 import createEditor from "@/createEditor";
 import { Calculator } from '@/calculator';
-import CustomNode from '@/nodes/random/CustomNode';
 
 @Component
 export default class extends Vue {
