@@ -38,6 +38,7 @@ export class Calculator {
 
     public async runBatch(batchSize: number) {
         this.stream = new StreamSaver();
+        await this.stream.initialize("data.csv");
 
         const workerCount = this.workers.length;
         if (workerCount <= 0) {
@@ -92,6 +93,7 @@ export class Calculator {
 
     private async handleWorkerMessage(worker: Worker, msg: MessageEvent) {
         const d = msg.data;
+        console.log(d);
 
         if (d.type === "data") {
             await this.onData(d.data);
