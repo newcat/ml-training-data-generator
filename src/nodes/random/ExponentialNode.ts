@@ -1,5 +1,4 @@
 import { Node, Options } from "baklavajs";
-import { IPreparationData } from "@/types";
 import RandomHelper from './randomHelper';
 
 export default class ExponentialNode extends Node {
@@ -17,7 +16,7 @@ export default class ExponentialNode extends Node {
         this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
     }
 
-    public prepare(data: IPreparationData) {
+    public prepare() {
         // read option values
         const seed = this.getInterface("Seed").value;
         const discrete = this.getInterface("Discrete").value;

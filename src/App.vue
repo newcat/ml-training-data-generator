@@ -26,9 +26,8 @@ export default class extends Vue {
 
     async calculate() {
         console.log("Start");
-        const results = await this.c.runBatch(10);
+        const results = await this.c.runBatch(10000);
         console.log("Finish");
-        console.log(results);
     }
 
     save() {

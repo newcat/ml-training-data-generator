@@ -17,7 +17,7 @@ class StringListOption extends Vue {
             attrs: { rows: "6" },
             domProps: { value: this.value },
             on: {
-                input: ($event: any) => { this.value = $event.target.value; }
+                input: ($event: any) => { this.$emit("input", $event.target.value); }
             }
         });
     }

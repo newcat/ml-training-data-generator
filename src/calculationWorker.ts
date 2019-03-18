@@ -1,11 +1,11 @@
 import { Editor, Node } from "baklavajs";
 import createEditor from "./createEditor";
-import { ICalculationWorkerMessage, IPreparationData } from "./types";
+import { ICalculationWorkerMessage } from "./types";
 
 const ctx: Worker = self as any;
 
 interface IPreparableNode extends Node {
-    prepare?(data: IPreparationData): void;
+    prepare?(): void;
 }
 
 const editor = createEditor();
@@ -22,7 +22,7 @@ async function runBatch(data: ICalculationWorkerMessage, e: Editor) {
     // prepare every node
     e.nodes.forEach((n: IPreparableNode) => {
         if (n.prepare) {
-            n.prepare({ seed: data.seed });
+            n.prepare();
         }
     });
 
