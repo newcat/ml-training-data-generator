@@ -2,9 +2,14 @@ const requests = new Map<string, [ReadableStream, any]>();
 
 self.addEventListener("activate", () => {
     console.log("SW activated");
+    (self as any).skipWaiting();
 });
 
 self.addEventListener("message", (event: any) => {
+    if (!(self as any).registration) {
+        console.log("Not in a SW");
+        return;
+    }
 
     // We send a heartbeat every x secound to keep the
     // service worker alive
@@ -13,8 +18,6 @@ self.addEventListener("message", (event: any) => {
     }
 
     // Create a unique link that can be used to do fetch on it
-    console.log(event);
-    console.log(self);
     const url = (self as any).registration.scope + 'intercept-me-nr' + Math.random();
     const port = event.ports[0];
 

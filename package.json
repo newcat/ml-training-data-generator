@@ -14,7 +14,6 @@
         "baklavajs": "^0.6.4",
         "bootstrap": "^4.3.1",
         "chance": "^1.0.18",
-        "streamsaver": "^1.2.0",
         "vue-class-component": "^7.0.1",
         "vue-template-compiler": "^2.6.8",
         "vue2-ace-editor": "^0.0.13",

@@ -6065,11 +6065,6 @@ stream-shift@^1.0.0:
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
   integrity sha1-1cdSgl5TZ+eG944Y5EXqIjoVWVI=
 
-streamsaver@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/streamsaver/-/streamsaver-1.2.0.tgz#41374870ada00cdc21562b041cd49b7bbf8c0887"
-  integrity sha512-/o105nf7fmqv/vRBTQehfnKB1buNgQbhOGN8O5Tv27yYjcILhXpm5eGIm0rIPcr6KR0ppXbg9BAxwfSo+IHSow==
-
 string-width@^1.0.1, string-width@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-1.0.2.tgz#118bdf5b8cdc51a2a7e70d211e07e2b0b9b107d3"

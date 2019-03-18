@@ -1,28 +1,39 @@
-// @ts-ignore
-import { createWriteStream, supported } from "streamsaver";
-
 export default class StreamSaver {
 
-    private writer: WritableStreamDefaultWriter;
-    private textEncoder: TextEncoder;
+    private textEncoder = new TextEncoder();
+    private channel!: MessageChannel;
+    private stream!: TransformStream;
+    private writer!: WritableStreamDefaultWriter;
 
-    constructor() {
-        if (!supported) {
-            throw new Error("StreamSaving not supported in your browser");
+    public async initialize(filename: string) {
+
+        const sw = navigator.serviceWorker.controller;
+        if (!sw) {
+            throw new Error("Could not find service worker");
         }
-        const ws = createWriteStream();
-        this.writer = ws.getWriter();
-        this.textEncoder = new TextEncoder();
+
+        this.channel = new MessageChannel();
+        this.stream = new TransformStream();
+        this.writer = this.stream.writable.getWriter();
+
+        let pr;
+        const p = new Promise((res) => { pr = res; });
+
+        sw.postMessage({
+            filename,
+            channel: this.channel.port2,
+            stream: this.stream.readable
+        // @ts-ignore
+        }, [ this.channel.port2, this.stream.readable ]);
+
     }
 
     public write(data: string) {
         const b = this.textEncoder.encode(data);
-        return this.writer.write(b);
     }
 
     public async close() {
-        await this.writer.ready;
-        await this.writer.close();
+        // TODO
     }
 
 }
