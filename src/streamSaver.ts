@@ -3,12 +3,13 @@ let counter = 0;
 export default class StreamSaver {
 
     private textEncoder = new TextEncoder();
-    private id = counter++;
+    private id = (counter++).toString();
     private swc: ServiceWorker|null = null;
 
     public async initialize(filename: string) {
 
         this.swc = navigator.serviceWorker.controller;
+        console.log(navigator.serviceWorker);
         if (!this.swc) {
             throw new Error("Could not find service worker");
         }

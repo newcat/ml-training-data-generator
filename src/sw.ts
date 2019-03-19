@@ -1,6 +1,6 @@
 interface IRequestInformation {
     filename: string;
-    stream: ReadableStream;
+    stream?: ReadableStream;
     controller?: ReadableStreamDefaultController;
 }
 
@@ -23,7 +23,7 @@ ctx.addEventListener("message", (event: MessageEvent) => {
 
     switch (event.data.type) {
         case "init":
-            init(id, event.data.filename);
+            init(id, event.data.filename, event.source);
         case "data":
             handleData(id, event.data.data);
         case "end":
@@ -54,12 +54,14 @@ ctx.addEventListener("fetch", (event: any) => {
 
 });
 
-function init(id: string, filename: string) {
+function init(id: string, filename: string, client: any) {
+
+    requests.set(id, { filename });
 
     const rs = new ReadableStream({
         start(controller) {
             requests.get(id)!.controller = controller;
-            ctx.postMessage({ type: "initialized", id });
+            client.postMessage({ type: "initialized", id });
         },
         cancel() {
             console.log('user aborted');
@@ -67,7 +69,7 @@ function init(id: string, filename: string) {
         }
     });
 
-    requests.set(id, { filename, stream: rs });
+    requests.get(id)!.stream = rs;
 
 }
 

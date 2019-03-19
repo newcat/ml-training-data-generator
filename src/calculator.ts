@@ -25,7 +25,7 @@ export class Calculator {
             for (let i = 0; i < workersToSpawn; i++) {
                 const w = new Worker();
                 w.addEventListener("message", (ev) => this.handleWorkerMessage(w, ev));
-                this.workers.push(new Worker());
+                this.workers.push(w);
             }
         } else if (workerCount < this.workers.length) {
             const workersToTerminate = this.workers.length - workerCount;
@@ -94,13 +94,11 @@ export class Calculator {
     private async handleWorkerMessage(worker: Worker, msg: MessageEvent) {
         const d = msg.data;
         console.log(d);
-
-        if (d.type === "data") {
-            await this.onData(d.data);
-        }
+        await this.onData(msg.data);
     }
 
     private async onData(data: Array<Record<string, any>>) {
+        console.log(data);
         if (!this.stream) {
             throw new Error("Stream not opened");
         }

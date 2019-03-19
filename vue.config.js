@@ -3,5 +3,8 @@ module.exports = {
         entry: {
             sw: "./src/sw.ts"
         }
+    },
+    devServer: {
+        hot: false
     }
 }
