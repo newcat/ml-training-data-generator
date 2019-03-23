@@ -22,6 +22,7 @@ export default class extends Vue {
 
     mounted() {
         this.c.setWorkerCount(4);
+        this.editor.addNode("CustomNode");
     }
 
     async calculate() {

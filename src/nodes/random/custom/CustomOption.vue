@@ -1,14 +1,19 @@
 <template>
 <div>
     <h3>Custom Distribution</h3>
-    <p> Value: {{ value.points }} </p>
-    <p> Seed: {{ seed }} </p>
-    <p> Discrete: {{ discrete }} </p>
-        <custom-random
-            ref = "customRandom"
-            :loadedPoints = value.points
-            @pointsUpdated = "updatePoints"
-        ></custom-random>
+    <select v-model="value.mode">
+        <option>curveMonotone</option>
+        <option>curveLinear</option>
+        <option>curveStep</option>
+    </select>
+    <custom-random
+        ref = "customRandom"
+        :loadedPoints = value.points
+        :min = min
+        :max = max
+        :mode = value.mode
+        @pointsUpdated = "updatePoints"
+    ></custom-random>
 </div>
 </template>
 
@@ -28,7 +33,6 @@ if (typeof(WorkerGlobalScope) === 'undefined' || !(self instanceof WorkerGlobalS
     components
 })
 export default class CustomOption extends Vue {
-
     @Prop()
     node!: CustomNode;
 
@@ -36,7 +40,6 @@ export default class CustomOption extends Vue {
     value!: any;
 
     width: number = 800;
-    mode: string = "linearCurve";
 
     canvas!: HTMLCanvasElement;
     context!: CanvasRenderingContext2D|null;
@@ -47,6 +50,14 @@ export default class CustomOption extends Vue {
 
     get discrete() {
         return this.node.getInterface("Discrete").value;
+    }
+
+    get min() {
+        return this.node.getInterface("Min").value;
+    }
+
+    get max() {
+        return this.node.getInterface("Max").value;
     }
 
     generateRandom() {

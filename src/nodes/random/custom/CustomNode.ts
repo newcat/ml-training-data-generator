@@ -2,7 +2,10 @@ import { Node, Options } from "baklavajs";
 import CustomOption from "./CustomOption.vue";
 import RandomHelper from "../randomHelper";
 import RandomSampler from "./randomSampler";
+import Curve from "./curve";
 import CurveMonotone from "./curveMonotone";
+import CurveLinear from "./curveLinear";
+import CurveStep from "./curveStep";
 
 export default class CustomNode extends Node {
 
@@ -11,8 +14,9 @@ export default class CustomNode extends Node {
 
     private rng: RandomHelper|null = null;
     private defaultPoints: Array<[number, number]> = [[0, 100], [900, 100]];
+    private defaultMode: string = "curveMonotone";
+    private curve: Curve|null = null;
     private randomSampler: RandomSampler|null = null;
-    private curveMonotone: CurveMonotone|null = null;
 
     constructor() {
         super();
@@ -21,32 +25,55 @@ export default class CustomNode extends Node {
         this.addInputInterface("Min", "number", Options.NumberOption, 0);
         this.addInputInterface("Max", "number", Options.NumberOption, 10);
         this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
-        this.addOption("Custom Distribution", Options.ButtonOption, { points: this.defaultPoints}, CustomOption);
+        this.addOption(
+            "Custom Distribution",
+            Options.ButtonOption,
+            { points: this.defaultPoints, mode: this.defaultMode },
+            CustomOption
+        );
     }
 
     public prepare() {
         // Read option values
         const seed = this.getInterface("Seed").value;
-        const discrete = this.getInterface("Discrete").value;
         const value = this.getOptionValue("Custom Distribution");
 
         // Set uniform random generator with seed
         this.rng = new RandomHelper(seed, false);
 
-        // Set interpolator
-        this.curveMonotone = new CurveMonotone(value.points);
-        const interpolatedPoints = this.curveMonotone.curve(0,900,1);
+        // Set curve interpolator
+        switch (value.mode) {
+            case "curveMonotone": {
+                this.curve = new CurveMonotone(value.points);
+                break;
+            }
+            case "curveLinear": {
+                this.curve = new CurveLinear(value.points);
+                break;
+            }
+            case "curveStep": {
+                this.curve = new CurveStep(value.points);
+                break;
+            }
+            default: {
+                throw new Error("Invalid mode");
+            }
+        }
+        const interpolatedPoints = this.curve!.curve();
 
         // Set custom random generator
         this.randomSampler = new RandomSampler(interpolatedPoints);
         this.randomSampler.calculateCdf();
+        console.log(this.randomSampler.cdf);
     }
 
     public calculate(index?: number) {
         const min = this.getInterface("Min").value;
         const max = this.getInterface("Max").value;
+        const discrete = this.getInterface("Discrete").value;
+
         const uniformRandom = this.rng!.uniform(index, { fixed: 8, min: 0, max: 1 });
-        const customRandom = this.randomSampler!.sample(uniformRandom);
-        this.getInterface("Output").value = customRandom * (max - min) + min;
+        const customRandom = this.randomSampler!.sample(uniformRandom) * (max - min) + min;
+        this.getInterface("Output").value = discrete ? Math.round(customRandom) : customRandom;
     }
 }

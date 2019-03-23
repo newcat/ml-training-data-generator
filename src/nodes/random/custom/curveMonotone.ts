@@ -1,10 +1,13 @@
-export default class CurveMonotone {
+import Curve from "./curve";
+
+export default class CurveMonotone implements Curve {
 
     xs!: number[];
     ys!: number[];
     c1s!: number[];
     c2s!: number[];
     c3s!: number[];
+    accuracy: number = 1; // every accuracy'th x is interpolated
 
     constructor(points: Array<[number, number]>) {
         // Pass data points
@@ -22,12 +25,6 @@ export default class CurveMonotone {
         // Deal with length issues
         if (length !== ys.length) { throw new Error('Need an equal count of xs and ys.'); }
         if (length === 0) { throw new Error('Empty array.'); }
-        if (length === 1) {
-            // Precomputing the result prevents problems if ys is mutated later and allows garbage collection of ys
-            // Unary plus properly converts values to numbers
-            const result = +ys[0];
-            return result;
-        }
 
         // Rearrange xs and ys so that xs is sorted
         const indexes = [];
@@ -130,9 +127,11 @@ export default class CurveMonotone {
         return ys[i] + c1s[i] * diff + c2s[i] * diffSq + c3s[i] * diff * diffSq;
     }
 
-    curve(start: number, end: number, stepSize: number) {
+    curve() {
         const data: Array<[number, number]> = [];
-        for (let i = start; i <= end; i += stepSize) {
+        const start = this.xs[0];
+        const end = this.xs[this.xs.length - 1];
+        for (let i = start; i <= end; i += this.accuracy) {
             data.push([i, this.interpolate(i)]);
         }
         return data;

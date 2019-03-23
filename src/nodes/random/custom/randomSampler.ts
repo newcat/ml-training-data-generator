@@ -30,6 +30,7 @@ export default class RandomSampler {
         }
     }
 
+    // Scale the cdf on the y-axis (vertically) for potential required visualisation stretchings
     scaleCdf(yMax: number) {
         const cdf = this.cdf;
         const factor = yMax / cdf[cdf.length - 1][1];
@@ -42,6 +43,11 @@ export default class RandomSampler {
         if (uniformRandom < 0 || uniformRandom > 1) {
             return -1;
         }
+
+        // Find the position i of random in cdf of the exact next point with bigger y
+        // random will be between the array positions i and i-1
+        // Following with a linear interpolation of random in this interval the actual estimated
+        // x can be calculated
         const cdf = this.cdf;
         const random = uniformRandom * cdf[cdf.length - 1][1];
         let i = 0;
@@ -50,7 +56,12 @@ export default class RandomSampler {
                 break;
             }
         }
-        const x = (((cdf[i][1] + cdf[i - 1][1]) / 2) / cdf[i][1] ) * cdf[i][0];
+
+        // Calculate corresponding x from y
+        // y = ((y1 - y2) / (x2 - x2)) * x + y1 - ((y1 - y2) / (x2 - x2)) * x1 ====>
+        // x = (y - y1) / /(y1 - y2) / (x2 - x2)) + x1
+        const m = (cdf[i - 1][1] - cdf[i][1]) / (cdf[i - 1][0] - cdf[i][0]);
+        const x = (random - cdf[i][1]) / m + cdf[i][0];
 
         return x / cdf[cdf.length - 1][0];
     }

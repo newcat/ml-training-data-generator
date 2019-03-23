@@ -4,7 +4,10 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import Curve from "./curve";
 import CurveMonotone from "./curveMonotone";
+import CurveStep from "./curveStep";
+import CurveLinear from "./curveLinear";
 import RandomSampler from "./randomSampler";
 
 @Component
@@ -16,25 +19,47 @@ export default class CustomRandom extends Vue {
     @Prop()
     loadedPoints!: Array<[number, number]>;
 
-    @Prop({default: "curveMonotoneX"})
+    @Prop({default: "curveMonotone"})
     mode!: string;
 
-    // State
-    canvas!: HTMLCanvasElement;
-    context!: CanvasRenderingContext2D|null;
+    @Prop()
+    min!: number;
+
+    @Prop()
+    max!: number;
+
+    @Watch("loadedPoints")
+    onLoadedPointsChanged() {
+        this.setupPoints();
+    }
+
+    @Watch("min")
+    onMinChanged() {
+        this.update();
+    }
+
+    @Watch("max")
+    onMaxChanged() {
+        this.update();
+    }
+
+    // Canvas
+    canvas: HTMLCanvasElement|null = null;
+    context: CanvasRenderingContext2D|null = null;
+
+    // Data points
     points: Array<[number, number]> = [];
     interpolatedPoints: Array<[number, number]> = [];
     draggedPoint: [number, number]|null = null;
-    curveMonotone!: CurveMonotone;
-    clicked: boolean = false;
     selectedPoint: [number, number]|null = null;
-    startPoint!: [number, number];
-    endPoint!: [number, number];
-    isMounted: boolean = false;
-    isPaused: boolean = false;
+    startPoint: [number, number]|null = null;
+    endPoint: [number, number]|null = null;
+    crossHair: [number, number] = [0, 0];
+
+    // Curve
+    curve: Curve|null = null;
 
     // Curve configuration
-    stepSize: number = 1; // Accuracy of interpolation
     curveSelectionOffsetX: number = 10;
     curveSelectionOffsetY: number = 1000;
     pointRadius: number = 10;
@@ -46,10 +71,13 @@ export default class CustomRandom extends Vue {
     gridColor = "rgba(100,100,200,0.1)";
     axisColor = "rgba(100,100,100,1)";
 
+    // Click state
+    clicked: boolean = false;
+
     mounted() {
         // Get canvas element
         this.canvas = this.$refs.canvas as HTMLCanvasElement;
-        this.context = this.canvas.getContext("2d");
+        this.context = this.canvas!.getContext("2d");
 
         // To preserve responsiveness, canvas is set to 100% width regarding parent container element.
         // The height will be dependend on the actual canvas resolution / ratio.
@@ -57,23 +85,19 @@ export default class CustomRandom extends Vue {
         this.canvas!.height	= 1000;
 
         // Set graph origin
-        this.origin = [50, this.canvas.height - 50];
+        this.origin = [50, this.canvas!.height - 50];
 
         // Setup points, startPoint, endPoint from loadedPoints
         this.setupPoints();
 
         // Attach event listeners
-        this.canvas.onmousedown = this.mouseDownHandler;
-        this.canvas.onmousemove = this.mouseMoveHandler;
-        this.canvas.onmouseup = this.mouseUpHandler;
-        this.canvas.onmouseleave = this.mouseUpHandler;
-        this.canvas.oncontextmenu = (e) => { e.preventDefault(); };
-
-        // set isMounted for watchers
-        this.isMounted = true;
+        this.canvas!.onmousedown = this.mouseDownHandler;
+        this.canvas!.onmousemove = this.mouseMoveHandler;
+        this.canvas!.onmouseup = this.mouseUpHandler;
+        this.canvas!.onmouseleave = this.mouseUpHandler;
+        this.canvas!.oncontextmenu = (e) => { e.preventDefault(); };
     }
 
-    @Watch("loadedPoints")
     setupPoints() {
         // Copy loaded points that are within bounds
         const points: Array<[number, number]> = [];
@@ -86,6 +110,7 @@ export default class CustomRandom extends Vue {
             }
         });
 
+        // Setup references to start and end point
         let foundStartPoint: [number, number]|null = null;
         let foundEndPoint: [number, number]|null = null;
         points.forEach((point) => {
@@ -116,22 +141,46 @@ export default class CustomRandom extends Vue {
     }
 
     update() {
-        // Interpolate points
-        this.curveMonotone = new CurveMonotone(this.points);
-        this.interpolatedPoints = this.curveMonotone.curve(0, this.canvas.width - 2 * this.origin[0], this.stepSize);
+        // Set curve interpolator
+        switch (this.mode) {
+            case "curveMonotone": {
+                this.curve = new CurveMonotone(this.points);
+                break;
+            }
+            case "curveLinear": {
+                this.curve = new CurveLinear(this.points);
+                break;
+            }
+            case "curveStep": {
+                this.curve = new CurveStep(this.points);
+                break;
+            }
+            default: {
+                throw new Error("Invalid mode");
+            }
+        }
+        this.interpolatedPoints = this.curve!.curve();
 
         // Reset canvas
-        this.context!.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context!.clearRect(0, 0, this.canvas!.width, this.canvas!.height);
 
         // Draw x- and y-axis
         this.context!.beginPath();
-        this.context!.moveTo(this.origin[0], this.canvas.height);
+        this.context!.moveTo(this.origin[0], this.canvas!.height);
         this.context!.lineTo(this.origin[0], this.editorBounds.top);
         this.context!.moveTo(0, this.origin[1]);
         this.context!.lineTo(this.editorBounds.right, this.origin[1]);
         this.context!.strokeStyle = this.axisColor;
         this.context!.stroke();
         this.context!.closePath();
+
+        // Draw axis labels
+        this.context!.font = "30px Arial";
+        this.context!.textAlign = "right";
+        this.context!.fillStyle = this.curveColor;
+        this.context!.fillText(this.max.toString(), this.editorBounds.right, this.editorBounds.bottom + 30);
+        this.context!.textAlign = "left";
+        this.context!.fillText(this.min.toString(), this.editorBounds.left, this.editorBounds.bottom + 30);
 
         // Draw vertical grid lines
         this.context!.beginPath();
@@ -153,9 +202,9 @@ export default class CustomRandom extends Vue {
         this.interpolatedPoints.forEach((point) => {
             this.context!.lineTo(this.mx(point[0]), this.my(point[1]));
         });
-        this.context!.lineTo(this.canvas.width - this.origin[0], this.origin[1]);
+        this.context!.lineTo(this.canvas!.width - this.origin[0], this.origin[1]);
 
-        // save the un-clipped context state
+        // Save the un-clipped context state
         this.context!.save();
 
         // Create a clipping area from the path
@@ -163,11 +212,11 @@ export default class CustomRandom extends Vue {
         // the clipping area
         this.context!.clip();
 
-        // fill some of the clipping area
+        // Fill some of the clipping area
         this.context!.fillStyle = this.areaColor;
-        this.context!.fillRect(this.origin[0], 0, this.canvas.width - this.origin[0], this.origin[1]);
+        this.context!.fillRect(this.origin[0], 0, this.canvas!.width - this.origin[0], this.origin[1]);
 
-        // restore the un-clipped context state
+        // Restore the un-clipped context state
         // (the clip is un-done)
         this.context!.restore();
 
@@ -194,10 +243,22 @@ export default class CustomRandom extends Vue {
         randomSampler.cdf.forEach((point) => {
             this.context!.lineTo(this.mx(point[0]), this.my(point[1]));
         });
-        this.context!.lineTo(this.canvas.width - this.origin[0], this.origin[1]);
+        this.context!.lineTo(this.canvas!.width - this.origin[0], this.origin[1]);
         this.context!.strokeStyle = "rgba(100,0,0,0.5)";
         this.context!.stroke();
         this.context!.closePath();
+
+        // Draw Crosshair
+        this.context!.setLineDash([50, 30]); // Dashes are 5px and spaces are 3px
+        this.context!.beginPath();
+        this.context!.moveTo(this.crossHair[0], 0);
+        this.context!.lineTo(this.crossHair[0], this.canvas!.height);
+        this.context!.moveTo(0, this.crossHair[1]);
+        this.context!.lineTo(this.canvas!.width, this.crossHair[1]);
+        this.context!.strokeStyle = "rgba(100,100,100,1)";
+        this.context!.stroke();
+        this.context!.closePath();
+        this.context!.setLineDash([]);
     }
 
     distance(a: [number, number], b: [number, number]) {
@@ -212,8 +273,7 @@ export default class CustomRandom extends Vue {
 
         // Check for collision with point within radius
         const collision = this.points.find((point) => {
-            return Math.sqrt(Math.pow(this.mx(point[0]) - mousePos[0], 2) +
-                Math.pow(this.my(point[1]) - mousePos[1], 2)) < 10;
+            return this.distance([this.mx(point[0]), this.my(point[1])], [mousePos[0], mousePos[1]]) < this.pointRadius;
         });
 
         // Save point reference as dragged element
@@ -223,7 +283,11 @@ export default class CustomRandom extends Vue {
 
         // Add point on double left click
         if (e.button === 0) {
-            const currY = this.curveMonotone.interpolate(this.x(mousePos[0]));
+            // Get curve's interpolated y coordinate at mouse position x
+            const x = this.x(mousePos[0]);
+            const currY = this.curve!.interpolate(x);
+
+            // Check if mouse y is near enough
             if (Math.abs(this.my(currY) - mousePos[1]) < this.curveSelectionOffsetY) {
                 // Double click registered on curve
                 if (this.clicked) {
@@ -289,6 +353,9 @@ export default class CustomRandom extends Vue {
             this.selectedPoint = null;
         }
 
+        // Update crosshair position
+        this.crossHair = mousePos;
+
         this.update();
     }
 
@@ -303,14 +370,14 @@ export default class CustomRandom extends Vue {
     // Convert mouse position to its actual position in the canvas
     // https://stackoverflow.com/questions/17130395/real-mouse-position-in-canvas
     getMousePos(evt: MouseEvent) {
-        const rect = this.canvas.getBoundingClientRect(); // abs. size of element
-        const scaleX = this.canvas.width / rect.width;    // relationship bitmap vs. element for X
-        const scaleY = this.canvas.height / rect.height;  // relationship bitmap vs. element for Y
+        const rect = this.canvas!.getBoundingClientRect(); // abs. size of element
+        const scaleX = this.canvas!.width / rect.width;    // relationship bitmap vs. element for X
+        const scaleY = this.canvas!.height / rect.height;  // relationship bitmap vs. element for Y
 
         return [
             (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
             (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
-        ];
+        ] as [number, number];
     }
 
     // Map an x-coordinate to its actual position in the editor
@@ -338,7 +405,7 @@ export default class CustomRandom extends Vue {
     get editorBounds() {
         return {
             left: this.origin[0],
-            right: this.canvas.width - this.origin[0],
+            right: this.canvas!.width - this.origin[0],
             bottom: this.origin[1],
             top: 50
         };
