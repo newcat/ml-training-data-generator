@@ -1,4 +1,4 @@
-import Curve from "./curve";
+import Curve, { Vector2D } from "./curve";
 
 export default class CurveMonotone implements Curve {
 
@@ -9,7 +9,7 @@ export default class CurveMonotone implements Curve {
     c3s!: number[];
     accuracy: number = 1; // every accuracy'th x is interpolated
 
-    constructor(points: Array<[number, number]>) {
+    constructor(points: Vector2D[]) {
         // Pass data points
         this.xs = points.map((point) => point[0] );
         this.ys = points.map((point) => point[1] );
@@ -128,7 +128,7 @@ export default class CurveMonotone implements Curve {
     }
 
     curve() {
-        const data: Array<[number, number]> = [];
+        const data: Vector2D[] = [];
         const start = this.xs[0];
         const end = this.xs[this.xs.length - 1];
         for (let i = start; i <= end; i += this.accuracy) {

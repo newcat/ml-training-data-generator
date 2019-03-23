@@ -1,14 +1,16 @@
+import { Vector2D } from "./curve";
+
 export default class RandomSampler {
 
-    distribution: Array<[number, number]> = [];
-    cdf: Array<[number, number]> = [];
+    distribution: Vector2D[] = [];
+    cdf: Vector2D[] = [];
 
-    constructor(points: Array<[number, number]>) {
+    constructor(points: Vector2D[]) {
         // Pass points data
         this.setDistribution(points);
     }
 
-    setDistribution(distribution: Array<[number, number]>) {
+    setDistribution(distribution: Vector2D[]) {
         this.distribution = [];
         distribution.forEach((point) => {
             this.distribution.push([point[0], point[1]]);

@@ -1,10 +1,17 @@
 <template>
-    <canvas ref="canvas"
+    <canvas
+        ref="canvas"
+        @mousedown="mouseDownHandler"
+        @mousemove="mouseMoveHandler"
+        @mouseup="mouseUpHandler"
+        @mouseleave="mouseUpHandler"
+        @contextmenu.prevent=""
     ></canvas>
 </template>
+
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import Curve from "./curve";
+import Curve, { Vector2D } from "./curve";
 import CurveMonotone from "./curveMonotone";
 import CurveStep from "./curveStep";
 import CurveLinear from "./curveLinear";
@@ -17,7 +24,7 @@ export default class CustomRandom extends Vue {
     value!: number;
 
     @Prop()
-    loadedPoints!: Array<[number, number]>;
+    loadedPoints!: Vector2D[];
 
     @Prop({default: "curveMonotone"})
     mode!: string;
@@ -48,13 +55,13 @@ export default class CustomRandom extends Vue {
     context: CanvasRenderingContext2D|null = null;
 
     // Data points
-    points: Array<[number, number]> = [];
-    interpolatedPoints: Array<[number, number]> = [];
-    draggedPoint: [number, number]|null = null;
-    selectedPoint: [number, number]|null = null;
-    startPoint: [number, number]|null = null;
-    endPoint: [number, number]|null = null;
-    crossHair: [number, number] = [0, 0];
+    points: Vector2D[] = [];
+    interpolatedPoints: Vector2D[] = [];
+    draggedPoint: Vector2D|null = null;
+    selectedPoint: Vector2D|null = null;
+    startPoint: Vector2D|null = null;
+    endPoint: Vector2D|null = null;
+    crossHair: Vector2D = [0, 0];
 
     // Curve
     curve: Curve|null = null;
@@ -66,7 +73,7 @@ export default class CustomRandom extends Vue {
     curveColor: string = "rgba(250,250,250,1)";
 
     // Axis configuration
-    origin!: [number, number];
+    origin!: Vector2D;
     gridSize: number = 20; // length of a cell's edge
     gridColor = "rgba(100,100,200,0.1)";
     axisColor = "rgba(100,100,100,1)";
@@ -89,30 +96,23 @@ export default class CustomRandom extends Vue {
 
         // Setup points, startPoint, endPoint from loadedPoints
         this.setupPoints();
-
-        // Attach event listeners
-        this.canvas!.onmousedown = this.mouseDownHandler;
-        this.canvas!.onmousemove = this.mouseMoveHandler;
-        this.canvas!.onmouseup = this.mouseUpHandler;
-        this.canvas!.onmouseleave = this.mouseUpHandler;
-        this.canvas!.oncontextmenu = (e) => { e.preventDefault(); };
     }
 
     setupPoints() {
         // Copy loaded points that are within bounds
-        const points: Array<[number, number]> = [];
+        const points: Vector2D[] = [];
         this.loadedPoints.forEach((point) => {
             if (point[0] >= 0 &&
                 point[0] <= this.editorBounds.right - this.editorBounds.left &&
                 point[1] >= 0 &&
                 point[1] <= this.editorBounds.bottom - this.editorBounds.top) {
-                points.push(point.slice() as [number, number]);
+                points.push(point.slice() as Vector2D);
             }
         });
 
         // Setup references to start and end point
-        let foundStartPoint: [number, number]|null = null;
-        let foundEndPoint: [number, number]|null = null;
+        let foundStartPoint: Vector2D|null = null;
+        let foundEndPoint: Vector2D|null = null;
         points.forEach((point) => {
             if (!foundStartPoint && point[0] === 0) {
                 foundStartPoint = point;
@@ -261,7 +261,7 @@ export default class CustomRandom extends Vue {
         this.context!.setLineDash([]);
     }
 
-    distance(a: [number, number], b: [number, number]) {
+    distance(a: Vector2D, b: Vector2D) {
         return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
     }
 
@@ -292,7 +292,7 @@ export default class CustomRandom extends Vue {
                 // Double click registered on curve
                 if (this.clicked) {
                     this.clicked = false;
-                    const newPoint: [number, number] =  [this.x(mousePos[0]), currY];
+                    const newPoint: Vector2D =  [this.x(mousePos[0]), currY];
                     if (!this.points.find((point) => point[0] === newPoint[0] && point[1] === newPoint[1])) {
                         this.points.push(newPoint);
                         this.update();
@@ -377,7 +377,7 @@ export default class CustomRandom extends Vue {
         return [
             (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
             (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
-        ] as [number, number];
+        ] as Vector2D;
     }
 
     // Map an x-coordinate to its actual position in the editor

@@ -20,6 +20,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import CustomNode from "./CustomNode";
+import { Vector2D } from "./curve";
 
 // The following is necessary to prevent ace from being loaded in a web worker
 const components = {};
@@ -65,7 +66,7 @@ export default class CustomOption extends Vue {
     }
 
     // Save points from component vie event
-    updatePoints(points: Array<[number, number]>) {
+    updatePoints(points: Vector2D[]) {
         this.value.points = points;
     }
 

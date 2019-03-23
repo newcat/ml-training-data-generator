@@ -1,11 +1,11 @@
-import Curve from "./curve";
+import Curve, { Vector2D } from "./curve";
 
 export default class CurveLinear implements Curve {
 
     xs!: number[];
     ys!: number[];
 
-    constructor(points: Array<[number, number]>) {
+    constructor(points: Vector2D[]) {
         // Pass data points
         this.xs = points.map((point) => point[0] );
         this.ys = points.map((point) => point[1] );
@@ -67,7 +67,7 @@ export default class CurveLinear implements Curve {
     curve() {
         const xs = this.xs;
         const ys = this.ys;
-        const data: Array<[number, number]> = [];
+        const data: Vector2D[] = [];
         for (let i = 0; i < xs.length; i++) {
             data.push([xs[i], ys[i]]);
         }

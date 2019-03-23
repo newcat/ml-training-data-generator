@@ -2,7 +2,7 @@ import { Node, Options } from "baklavajs";
 import CustomOption from "./CustomOption.vue";
 import RandomHelper from "../randomHelper";
 import RandomSampler from "./randomSampler";
-import Curve from "./curve";
+import Curve, { Vector2D } from "./curve";
 import CurveMonotone from "./curveMonotone";
 import CurveLinear from "./curveLinear";
 import CurveStep from "./curveStep";
@@ -13,7 +13,7 @@ export default class CustomNode extends Node {
     public name = this.type;
 
     private rng: RandomHelper|null = null;
-    private defaultPoints: Array<[number, number]> = [[0, 100], [900, 100]];
+    private defaultPoints: Vector2D[] = [[0, 100], [900, 100]];
     private defaultMode: string = "curveMonotone";
     private curve: Curve|null = null;
     private randomSampler: RandomSampler|null = null;
