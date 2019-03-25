@@ -1,14 +1,20 @@
 import Curve, { Vector2D } from "./curve";
 
-export default class CurveMonotone implements Curve {
+export default class CurveStep implements Curve {
 
     xs!: number[];
     ys!: number[];
+    mode: string = "before";
 
-    constructor(points: Vector2D[]) {
+    constructor(points: Vector2D[], mode: string) {
         // Pass data points
         this.xs = points.map((point) => point[0] );
         this.ys = points.map((point) => point[1] );
+        if (mode !== "mid" && mode !== "after" && mode !== "before") {
+            throw new Error("Invalid mode");
+        } else {
+            this.mode = mode;
+        }
         this.prepare();
     }
 
@@ -59,12 +65,33 @@ export default class CurveMonotone implements Curve {
             }
         }
         // Compare x with mid of current and previous x
-        const m = (xs[i] + xs[i - 1]) / 2;
         let y = 0;
-        if (x >= m) {
-            y = ys[i];
-        } else {
-            y = ys[i - 1];
+        switch (this.mode) {
+            case "mid": {
+                const m = (xs[i] + xs[i - 1]) / 2;
+                if (x >= m) {
+                    y = ys[i];
+                } else {
+                    y = ys[i - 1];
+                }
+                break;
+            }
+            case "after": {
+                if (x < xs[i]) {
+                    y = ys[i];
+                } else {
+                    y = ys[i + 1];
+                }
+                break;
+            }
+            case "before": {
+                if (x < xs[i]) {
+                    y = ys[i - 1];
+                } else {
+                    y = ys[i];
+                }
+                break;
+            }
         }
         return y;
     }
@@ -76,9 +103,22 @@ export default class CurveMonotone implements Curve {
         let i = 0;
         for (i = 0; i < xs.length - 1; i++) {
             data.push([xs[i], ys[i]]);
-            const x = (xs[i] + xs[i + 1]) / 2;
-            data.push([x, ys[i]]);
-            data.push([x, ys[i + 1]]);
+            switch (this.mode) {
+                case "mid": {
+                    const x = (xs[i] + xs[i + 1]) / 2;
+                    data.push([x, ys[i]]);
+                    data.push([x, ys[i + 1]]);
+                    break;
+                }
+                case "after": {
+                    data.push([xs[i], ys[i + 1]]);
+                    break;
+                }
+                case "before": {
+                    data.push([xs[i + 1], ys[i]]);
+                    break;
+                }
+            }
         }
         data.push([xs[i], ys[i]]);
         return data;

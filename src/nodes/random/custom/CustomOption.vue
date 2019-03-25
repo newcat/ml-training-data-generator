@@ -4,7 +4,9 @@
     <select v-model="value.mode">
         <option>curveMonotone</option>
         <option>curveLinear</option>
-        <option>curveStep</option>
+        <option>curveStepBefore</option>
+        <option>curveStepMid</option>
+        <option>curveStepAfter</option>
     </select>
     <custom-random
         ref = "customRandom"
@@ -22,7 +24,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import CustomNode from "./CustomNode";
 import { Vector2D } from "./curve";
 
-// The following is necessary to prevent ace from being loaded in a web worker
+// The following is necessary to prevent components from being loaded in a web worker
 const components = {};
 // @ts-ignore
 if (typeof(WorkerGlobalScope) === 'undefined' || !(self instanceof WorkerGlobalScope)) {

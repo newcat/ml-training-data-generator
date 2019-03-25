@@ -51,8 +51,16 @@ export default class CustomNode extends Node {
                 this.curve = new CurveLinear(value.points);
                 break;
             }
-            case "curveStep": {
-                this.curve = new CurveStep(value.points);
+            case "curveStepMid": {
+                this.curve = new CurveStep(value.points, "mid");
+                break;
+            }
+            case "curveStepAfter": {
+                this.curve = new CurveStep(value.points, "after");
+                break;
+            }
+            case "curveStepBefore": {
+                this.curve = new CurveStep(value.points, "before");
                 break;
             }
             default: {
@@ -64,7 +72,6 @@ export default class CustomNode extends Node {
         // Set custom random generator
         this.randomSampler = new RandomSampler(interpolatedPoints);
         this.randomSampler.calculateCdf();
-        console.log(this.randomSampler.cdf);
     }
 
     public calculate(index?: number) {
