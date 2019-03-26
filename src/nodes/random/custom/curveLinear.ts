@@ -68,8 +68,8 @@ export default class CurveLinear implements Curve {
         const xs = this.xs;
         const ys = this.ys;
         const data: Vector2D[] = [];
-        for (let i = 0; i < xs.length; i++) {
-            data.push([xs[i], ys[i]]);
+        for (let i = 0; i < xs[xs.length - 1]; i++) {
+            data.push([i, this.interpolate(i)]);
         }
         return data;
     }

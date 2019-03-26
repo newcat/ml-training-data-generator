@@ -60,6 +60,7 @@ export default class CustomRandom extends Vue {
     canvas: HTMLCanvasElement|null = null;
     context: CanvasRenderingContext2D|null = null;
     canvasHelper: CanvasHelper|null = null;
+    margin: number = 50;
 
     // Data points
     points: Vector2D[] = [];
@@ -80,7 +81,6 @@ export default class CustomRandom extends Vue {
     curveColor: string = "rgba(250,250,250,1)";
 
     // Axis configuration
-    origin!: Vector2D;
     gridSize: number = 20; // length of a cell's edge
     gridColor = "rgba(100,100,200,0.1)";
     axisColor = "rgba(100,100,100,1)";
@@ -99,9 +99,6 @@ export default class CustomRandom extends Vue {
         // The height will be dependend on the actual canvas resolution / ratio.
         this.canvas!.width = 1000;
         this.canvas!.height	= 1000;
-
-        // Set graph origin
-        this.origin = [50, this.canvas!.height - 50];
 
         // Setup points, startPoint, endPoint from loadedPoints
         this.setupPoints();
@@ -335,23 +332,23 @@ export default class CustomRandom extends Vue {
 
     // Map an x-coordinate to its actual position in the editor
     mx(x: number) {
-        return x + this.origin[0];
+        return x + this.editorBounds.left;
     }
 
     // Map an y-coordinate to its actual position in the editor
     my(y: number) {
-        return this.origin[1] - y;
+        return this.editorBounds.bottom - y;
     }
 
     // Inverse of mx
     x(mx: number) {
-        return mx - this.origin[0];
+        return mx - this.editorBounds.left;
     }
 
     // Inverse of _<
     // @ts-ignore
     y(my: number) {
-        return this.origin[1] - my;
+        return this.editorBounds.bottom - my;
     }
 
     p(mp: Vector2D) {
@@ -377,10 +374,10 @@ export default class CustomRandom extends Vue {
     // Xs and Ys bounds of the editor
     get editorBounds() {
         return {
-            left: this.origin[0],
-            right: this.canvas!.width - this.origin[0],
-            bottom: this.origin[1],
-            top: 50
+            left: this.margin,
+            right: this.canvas!.width - this.margin,
+            bottom: this.canvas!.height - this.margin,
+            top: this.margin
         };
     }
 
