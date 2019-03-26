@@ -56,7 +56,11 @@ export default class CanvasHelper {
             this.context!.beginPath();
             this.context!.arc(point[0], point[1], radius, 0, 2 * Math.PI);
             this.context!.fillStyle = color;
-            selectedPoint === point ? this.context!.fill() : this.context!.stroke();
+            if (selectedPoint && selectedPoint[0] === point[0] && selectedPoint[1] === point[1]) {
+                this.context!.fill();
+            } else {
+                this.context!.stroke();
+            }
             this.context!.closePath();
         });
     }

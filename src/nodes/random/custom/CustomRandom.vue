@@ -51,6 +51,11 @@ export default class CustomRandom extends Vue {
         this.update();
     }
 
+    @Watch("mode")
+    onModeChanged() {
+        this.update();
+    }
+
     // Canvas
     canvas: HTMLCanvasElement|null = null;
     context: CanvasRenderingContext2D|null = null;
@@ -125,7 +130,6 @@ export default class CustomRandom extends Vue {
                 foundEndPoint = point;
             }
         });
-
         if (!foundStartPoint) {
             foundStartPoint = [0, 0];
             points.push(foundStartPoint);
@@ -194,7 +198,8 @@ export default class CustomRandom extends Vue {
 
         // Draw points
         const transformedPoints = this.pointsToCanvas(this.points);
-        canvasHelper.drawPoints(transformedPoints, this.selectedPoint, this.curveColor, this.pointRadius);
+        const transformedSelectedPoint = (this.selectedPoint ? this.mp(this.selectedPoint) : null) as Vector2D|null;
+        canvasHelper.drawPoints(transformedPoints, transformedSelectedPoint, this.curveColor, this.pointRadius);
 
         // Calculate cdf
         const randomSampler = new RandomSampler(this.interpolatedPoints);
@@ -347,6 +352,14 @@ export default class CustomRandom extends Vue {
     // @ts-ignore
     y(my: number) {
         return this.origin[1] - my;
+    }
+
+    p(mp: Vector2D) {
+        return [this.x(mp[0]), this.y(mp[1])];
+    }
+
+    mp(p: Vector2D) {
+        return [this.mx(p[0]), this.my(p[1])];
     }
 
     pointsToCanvas(points: Vector2D[]) {
