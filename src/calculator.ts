@@ -1,18 +1,22 @@
 import { Editor } from "baklavajs";
 import Worker from "worker-loader!./calculationWorker";
 import { ICalculationWorkerMessage } from './types';
-import StreamSaver from "./streamSaver";
+
+export interface IResult {
+    data: string;
+}
 
 export class Calculator {
 
     private editor: Editor;
     private workers: Worker[] = [];
 
-    private stream: StreamSaver|null = null;
     private wroteCsvHeaders = false;
-    private promiseResolver: (() => void)|null = null;
+    private promiseResolver: ((result: IResult) => void)|null = null;
     private jobsDone = 0;
     private totalJobs = 0;
+    // use an object for call-by-reference
+    private result: IResult = { data: "" };
 
     public constructor(editor: Editor) {
         this.editor = editor;
@@ -37,8 +41,6 @@ export class Calculator {
     }
 
     public async runBatch(batchSize: number) {
-        this.stream = new StreamSaver();
-        await this.stream.initialize("data.csv");
 
         const workerCount = this.workers.length;
         if (workerCount <= 0) {
@@ -74,6 +76,7 @@ export class Calculator {
             currentIndex += batchSizePerWorker[i];
         }
 
+        this.result = { data: "" };
         this.wroteCsvHeaders = false;
         this.jobsDone = 0;
         for (let i = 0; i < this.workers.length; i++) {
@@ -85,31 +88,25 @@ export class Calculator {
             } as ICalculationWorkerMessage);
         }
 
-        return new Promise((res) => {
+        return new Promise<IResult>((res) => {
             this.promiseResolver = res;
         });
 
     }
 
     private async handleWorkerMessage(worker: Worker, msg: MessageEvent) {
-        const d = msg.data;
-        console.log(d);
         await this.onData(msg.data);
     }
 
     private async onData(data: Array<Record<string, any>>) {
-        console.log(data);
-        if (!this.stream) {
-            throw new Error("Stream not opened");
-        }
 
         if (!this.wroteCsvHeaders) {
-            await this.stream.write(Object.keys(data[0]).join(","));
+            this.result.data = Object.keys(data[0]).join(";") + "\n";
             this.wroteCsvHeaders = true;
         }
 
         for (const r of data) {
-            await this.stream.write(Object.values(r).join(","));
+            this.result.data += Object.values(r).join(";") + "\n";
         }
 
         this.jobsDone += data.length;
@@ -120,11 +117,8 @@ export class Calculator {
     }
 
     private async finalize() {
-        if (this.stream) {
-            await this.stream.close();
-        }
         if (this.promiseResolver) {
-            this.promiseResolver();
+            this.promiseResolver(this.result);
             this.promiseResolver = null;
         }
     }
