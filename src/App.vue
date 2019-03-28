@@ -26,9 +26,15 @@ export default class extends Vue {
 
     async calculate() {
         console.log("Start");
-        const results = await this.c.runBatch(10);
+        const results = await this.c.runBatch(10000);
         console.log("Finish");
-        console.log(results);
+        if (results) {
+            const blob = new Blob([results.data], { type: "text/csv" });
+            const a = document.createElement("a");
+            a.download = "data.csv";
+            a.href = window.URL.createObjectURL(blob);
+            a.click();
+        }
     }
 
     save() {
