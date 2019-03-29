@@ -22,11 +22,11 @@ export default class PercentageNode extends Node {
         this.rng = new RandomHelper(seed, false);
     }
 
-    public calculate(index?: number) {
+    public calculate() {
         const p = this.getInterface("Percentage").value;
         const v = this.getInterface("Value").value;
         const discrete = this.getInterface("Discrete").value;
-        const factor = this.rng!.normal(index, { mean: 0, dev: p / 200 });
+        const factor = this.rng!.normal(this.state.index, { mean: 0, dev: p / 200 });
         const newValue = v + v * factor;
         this.getInterface("Output").value = discrete ? Math.round(newValue) : newValue;
     }

@@ -24,4 +24,5 @@ export const StringValueNode = new NodeBuilder("StringValueNode")
 
 export const IndexValueNode = new NodeBuilder("IndexValueNode")
     .addOutputInterface("Index", { type: "number" })
+    .onCalculate((n) => { n.getInterface("Index").value = n.state.index; })
     .build();

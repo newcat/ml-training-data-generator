@@ -23,9 +23,9 @@ export default class ExponentialNode extends Node {
         this.rng = new RandomHelper(seed, discrete);
     }
 
-    public calculate(index?: number) {
+    public calculate() {
         const lambda = this.getInterface("Lambda").value;
-        const u = this.rng!.uniform(index, { fixed: 8, min: 0, max: 1 });
+        const u = this.rng!.uniform(this.state.index, { fixed: 8, min: 0, max: 1 });
         // https://stackoverflow.com/questions/2106503/pseudorandom-number-generator-exponential-distribution
         this.getInterface("Output").value = Math.log(1 - u) / (-lambda);
     }

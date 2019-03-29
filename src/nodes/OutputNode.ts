@@ -14,7 +14,7 @@ export default class OutputNode extends Node {
 
     public calculate() {
         const value = this.getInterface("Input").value;
-        (this.state as Record<string, any>).result = value;
+        this.state.result = value;
     }
 
 }

@@ -23,10 +23,10 @@ export default class NormalNode extends Node {
         this.rng = new RandomHelper(seed, discrete);
     }
 
-    public calculate(index?: number) {
+    public calculate() {
         const mean = this.getInterface("Mean").value;
         const dev = this.getInterface("Std. Dev.").value;
-        this.getInterface("Output").value = this.rng!.normal(index, { mean, dev });
+        this.getInterface("Output").value = this.rng!.normal(this.state.index, { mean, dev });
     }
 
 }

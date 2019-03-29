@@ -23,10 +23,10 @@ export default class UniformNode extends Node {
         this.rng = new RandomHelper(seed, discrete);
     }
 
-    public calculate(index?: number) {
+    public calculate() {
         const min = this.getInterface("Min").value;
         const max = this.getInterface("Max").value;
-        this.getInterface("Output").value = this.rng!.uniform(index, { min, max, fixed: 8 });
+        this.getInterface("Output").value = this.rng!.uniform(this.state.index, { min, max, fixed: 8 });
     }
 
 }

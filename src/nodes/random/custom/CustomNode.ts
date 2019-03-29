@@ -69,12 +69,12 @@ export default class CustomNode extends Node {
         this.randomSampler.calculateCdf();
     }
 
-    public calculate(index?: number) {
+    public calculate() {
         const min = this.getInterface("Min").value;
         const max = this.getInterface("Max").value;
         const discrete = this.getInterface("Discrete").value;
 
-        const uniformRandom = this.rng!.uniform(index, { fixed: 8, min: 0, max: 1 });
+        const uniformRandom = this.rng!.uniform(this.state.index, { fixed: 8, min: 0, max: 1 });
         const customRandom = this.randomSampler!.sample(uniformRandom) * (max - min) + min;
         this.getInterface("Output").value = discrete ? Math.round(customRandom) : customRandom;
     }

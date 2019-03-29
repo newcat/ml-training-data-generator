@@ -74,7 +74,7 @@ export default class extends Vue {
         const file = event.target.files[0] as File;
         const reader = new FileReader();
         reader.onload = async (readerEvent) => {
-            //this.editor.load(JSON.parse((readerEvent.target as any).result));
+            this.editor.load(JSON.parse((readerEvent.target as any).result));
         };
         reader.readAsText(file);
     }
