@@ -7,16 +7,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-
-// The following is necessary to prevent ace from being loaded in a web worker
-const components = {};
 // @ts-ignore
-if (typeof(WorkerGlobalScope) === 'undefined' || !(self instanceof WorkerGlobalScope)) {
-    // @ts-ignore
-    components.AceEditor = () => import("vue2-ace-editor").then((module) => module.default);
-}
+import AceEditor from "vue2-ace-editor";
 
-@Component({ components })
+@Component({
+    components: { AceEditor }
+})
 export default class CodeEditor extends Vue {
 
     @Prop({ type: String })

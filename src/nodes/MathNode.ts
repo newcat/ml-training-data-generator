@@ -1,4 +1,4 @@
-import { Node, Options } from "baklavajs";
+import { Node } from "@baklavajs/core";
 
 const operations = [
     "Add", "Subtract", "Multiply", "Divide", "Sine", "Cosine", "Tangent", "Arcsine", "Arccosine",
@@ -12,13 +12,13 @@ export default class MathNode extends Node {
 
     constructor() {
         super();
-        this.addInputInterface("Value 1", "number", Options.NumberOption, 0);
-        this.addInputInterface("Value 2", "number", Options.NumberOption, 0);
-        this.addOption("Operation", Options.SelectOption, {
+        this.addInputInterface("Value 1", "NumberOption", 0, { type: "number" });
+        this.addInputInterface("Value 2", "NumberOption", 0, { type: "number" });
+        this.addOption("Operation", "SelectOption", {
             selected: "Add",
             items: operations
         });
-        this.addOutputInterface("Result", "number");
+        this.addOutputInterface("Result", { type: "number" });
     }
 
     calculate() {

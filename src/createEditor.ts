@@ -1,4 +1,5 @@
-import { Editor, NodeConstructor } from "baklavajs";
+import { Editor, NodeConstructor } from "@baklavajs/core";
+import { InterfaceTypePlugin } from "@baklavajs/plugin-interface-types";
 
 import UniformNode from "./nodes/random/UniformNode";
 import NormalNode from "./nodes/random/NormalNode";
@@ -9,12 +10,14 @@ import BooleanNode from "./nodes/BooleanNode";
 import MathNode from "./nodes/MathNode";
 import OutputNode from "./nodes/OutputNode";
 import StringListNode from './nodes/StringListNode';
-import FunctionNode from "./nodes/function/FunctionNode";
+import FunctionNode from "./nodes/FunctionNode";
 import * as ValueNodes from "./nodes/ValueNodes";
 
 export default function createEditor(): Editor {
 
     const editor = new Editor();
+    const intfTypes = new InterfaceTypePlugin();
+    editor.use(intfTypes);
 
     Object.keys(ValueNodes).forEach((x) => {
         editor.registerNodeType(x, (ValueNodes as Record<string, NodeConstructor>)[x], "Value");
@@ -29,7 +32,8 @@ export default function createEditor(): Editor {
     editor.registerNodeType("MathNode", MathNode);
     editor.registerNodeType("StringListNode", StringListNode);
     editor.registerNodeType("OutputNode", OutputNode);
-    editor.nodeInterfaceTypes
+
+    intfTypes
         .addType("number", "cyan")
         .addType("string", "crimson")
         .addType("boolean", "lightgreen")

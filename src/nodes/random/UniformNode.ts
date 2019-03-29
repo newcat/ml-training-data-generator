@@ -1,4 +1,4 @@
-import { Node, Options } from "baklavajs";
+import { Node } from "@baklavajs/core";
 import RandomHelper from "./randomHelper";
 
 export default class UniformNode extends Node {
@@ -10,11 +10,11 @@ export default class UniformNode extends Node {
 
     constructor() {
         super();
-        this.addOutputInterface("Output", "number");
-        this.addInputInterface("Seed", "string", Options.InputOption, "");
-        this.addInputInterface("Min", "number", Options.NumberOption, 0);
-        this.addInputInterface("Max", "number", Options.NumberOption, 10);
-        this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
+        this.addOutputInterface("Output", { type: "number" });
+        this.addInputInterface("Seed", "InputOption", { type: "string" });
+        this.addInputInterface("Min", "NumberOption", 0, { type: "number" });
+        this.addInputInterface("Max", "NumberOption", 10, { type: "number" });
+        this.addInputInterface("Discrete", "CheckboxOption", true, { type: "boolean" });
     }
 
     public prepare() {

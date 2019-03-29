@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import FunctionNode from "./FunctionNode";
+import FunctionNode from "../nodes/FunctionNode";
 import InterfaceView from "./InterfaceView.vue";
 import CodeEditor from "./CodeEditor.vue";
 
@@ -32,6 +32,8 @@ import CodeEditor from "./CodeEditor.vue";
     components: { InterfaceView, CodeEditor }
 })
 export default class CodeOption extends Vue {
+
+    // TODO: Make interface list reactive
 
     @Prop()
     node!: FunctionNode;

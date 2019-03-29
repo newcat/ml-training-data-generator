@@ -18,19 +18,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import CustomNode from "./CustomNode";
-import { Vector2D } from "./curve";
-import { Options } from "baklavajs";
+import { SelectOption } from "@baklavajs/plugin-options-vue";
+import CustomRandom from "./CustomRandom.vue";
 
-// The following is necessary to prevent components from being loaded in a web worker
-const components = { SelectOption: Options.SelectOption };
-// @ts-ignore
-if (typeof(WorkerGlobalScope) === 'undefined' || !(self instanceof WorkerGlobalScope)) {
-    // @ts-ignore
-    components.CustomRandom = () => import("./CustomRandom.vue").then((module) => module.default);
-}
+type Vector2D = [number, number];
 
 @Component({
-    components
+    components: { SelectOption, CustomRandom }
 })
 export default class CustomOption extends Vue {
     @Prop()

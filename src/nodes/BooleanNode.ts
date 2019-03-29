@@ -1,4 +1,4 @@
-import { Node, Options } from "baklavajs";
+import { Node } from "@baklavajs/core";
 
 const operations = [ "==", ">", "<", ">=", "<=" ];
 
@@ -9,15 +9,15 @@ export default class BooleanNode extends Node {
 
     constructor() {
         super();
-        this.addInputInterface("Value 1", "number", Options.NumberOption, 0);
-        this.addInputInterface("Value 2", "number", Options.NumberOption, 0);
-        this.addInputInterface("Use Integer Values", "boolean", Options.CheckboxOption, false);
-        this.addInputInterface("Invert Output", "boolean", Options.CheckboxOption, false);
-        this.addOption("Operation", Options.SelectOption, {
+        this.addInputInterface("Value 1", "NumberOption", 0, { type: "number" });
+        this.addInputInterface("Value 2", "NumberOption", 0, { type: "number" });
+        this.addInputInterface("Use Integer Values", "CheckboxOption", false, { type: "boolean" });
+        this.addInputInterface("Invert Output", "CheckboxOption", false, { type: "boolean" });
+        this.addOption("Operation", "SelectOption", {
             selected: "==",
             items: operations
         });
-        this.addOutputInterface("Result", "boolean");
+        this.addOutputInterface("Result", { type: "boolean" });
     }
 
     calculate() {

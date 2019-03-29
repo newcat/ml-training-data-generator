@@ -1,4 +1,4 @@
-import { Node, Options } from "baklavajs";
+import { Node } from "@baklavajs/core";
 import RandomHelper from './randomHelper';
 
 export default class ExponentialNode extends Node {
@@ -10,10 +10,10 @@ export default class ExponentialNode extends Node {
 
     constructor() {
         super();
-        this.addOutputInterface("Output", "number");
-        this.addInputInterface("Seed", "string", Options.InputOption, "");
-        this.addInputInterface("Lambda", "number", Options.NumberOption, 10);
-        this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
+        this.addOutputInterface("Output", { type: "number" });
+        this.addInputInterface("Seed", "InputOption", "", { type: "string" });
+        this.addInputInterface("Lambda", "NumberOption", 10, { type: "number" });
+        this.addInputInterface("Discrete", "CheckboxOption", true, { type: "boolean" });
     }
 
     public prepare() {

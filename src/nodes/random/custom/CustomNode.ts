@@ -1,5 +1,4 @@
-import { Node, Options } from "baklavajs";
-import CustomOption from "./CustomOption.vue";
+import { Node } from "@baklavajs/core";
 import RandomHelper from "../randomHelper";
 import RandomSampler from "./randomSampler";
 import Curve, { Vector2D } from "./curve";
@@ -20,17 +19,13 @@ export default class CustomNode extends Node {
 
     constructor() {
         super();
-        this.addOutputInterface("Output", "number");
-        this.addInputInterface("Seed", "string", Options.InputOption, "");
-        this.addInputInterface("Min", "number", Options.NumberOption, 0);
-        this.addInputInterface("Max", "number", Options.NumberOption, 10);
-        this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, true);
-        this.addOption(
-            "Custom Distribution",
-            Options.ButtonOption,
-            { points: this.defaultPoints, mode: this.defaultMode },
-            CustomOption
-        );
+        this.addOutputInterface("Output", { type: "number" });
+        this.addInputInterface("Seed", "InputOption", "", { type: "string" });
+        this.addInputInterface("Min", "NumberOption", 0, { type: "number" });
+        this.addInputInterface("Max", "NumberOption", 10, { type: "number" });
+        this.addInputInterface("Discrete", "CheckboxOption", true, { type: "boolean" });
+        this.addOption("Custom Distribution", "ButtonOption",
+            { points: this.defaultPoints, mode: this.defaultMode }, "CustomRandomOption");
     }
 
     public prepare() {

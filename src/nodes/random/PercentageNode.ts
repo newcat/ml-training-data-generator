@@ -1,4 +1,4 @@
-import { Node, Options } from "baklavajs";
+import { Node } from "@baklavajs/core";
 import RandomHelper from "./randomHelper";
 
 export default class PercentageNode extends Node {
@@ -10,11 +10,11 @@ export default class PercentageNode extends Node {
 
     public constructor() {
         super();
-        this.addInputInterface("Value", "number", Options.NumberOption, 0);
-        this.addInputInterface("Seed", "string", Options.InputOption, "");
-        this.addInputInterface("Percentage", "number", Options.NumberOption, 5);
-        this.addInputInterface("Discrete", "boolean", Options.CheckboxOption, false);
-        this.addOutputInterface("Output", "number");
+        this.addInputInterface("Value", "NumberOption", 0, { type: "number" });
+        this.addInputInterface("Seed", "InputOption", "", { type: "string" });
+        this.addInputInterface("Percentage", "NumberOption", 5, { type: "number" });
+        this.addInputInterface("Discrete", "CheckboxOption", false, { type: "boolean" });
+        this.addOutputInterface("Output", { type: "number" });
     }
 
     public prepare() {

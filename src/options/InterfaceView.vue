@@ -9,11 +9,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Options } from "baklavajs";
+import { InputOption } from "@baklavajs/plugin-options-vue";
 
 @Component({
     components: {
-        DarkInput: Options.InputOption
+        DarkInput: InputOption
     }
 })
 export default class InterfaceView extends Vue {

@@ -1,4 +1,5 @@
-import { Editor, Node } from "baklavajs";
+import { Editor, Node } from "@baklavajs/core";
+import { calculateOrder } from "@baklavajs/plugin-engine";
 import createEditor from "./createEditor";
 import { ICalculationWorkerMessage } from "./types";
 
@@ -32,6 +33,7 @@ async function runBatch(data: ICalculationWorkerMessage, e: Editor) {
         .map((n) => [ n.getOptionValue("Label"), n ]) as Array<[string, Node]>;
 
     const results = [];
+    const order = calculateOrder(e.nodes, e.connections);
 
     for (let i = data.startIndex; i <= data.endIndex; i++) {
 
@@ -39,7 +41,7 @@ async function runBatch(data: ICalculationWorkerMessage, e: Editor) {
         indexValueNodes.forEach((n) => n.getInterface("Index").value = i);
 
         // calculate all nodes
-        for (const n of e.nodeCalculationOrder) {
+        for (const n of order) {
             await (n as any).calculate(i);
         }
 

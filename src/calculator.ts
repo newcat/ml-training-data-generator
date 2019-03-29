@@ -1,4 +1,4 @@
-import { Editor } from "baklavajs";
+import { Editor } from "@baklavajs/core";
 import Worker from "worker-loader!./calculationWorker";
 import { ICalculationWorkerMessage } from './types';
 

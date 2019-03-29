@@ -2,6 +2,31 @@
 # yarn lockfile v1
 
 
+"@baklavajs/core@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@baklavajs/core/-/core-1.0.4.tgz#0365f8a0cd7d59ef6a1e4ffe930a900371231216"
+  integrity sha512-5VPnTXmZOiuxjXCVhtEJWwMCBZc2btQvbGGMUlgxP6wKFN65qRnt/f3Syh9bgjLmdhofgv/rKJYLa7yTQVL7WA==
+
+"@baklavajs/plugin-engine@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-engine/-/plugin-engine-1.0.4.tgz#c4b988b9be38f04c9475bc46c983ad233185f18f"
+  integrity sha512-wqb5ybWkTb8FdTQR+w83yPp3EZBLq9GA4KYmxS9ygXinLcjWbFXDYJT6bZH0zicDZUber6mmUCXpgREwDOT9Uw==
+
+"@baklavajs/plugin-interface-types@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-interface-types/-/plugin-interface-types-1.0.4.tgz#61acb9b1894353ca0af81948e5e48abc7dc0256a"
+  integrity sha512-ikDsISBUtj/1GrFk+Qyl/5mGH0wAdPPDbDFe3y51hulpEzKNQdXl/ksGvBGhwuMlCggCGRTJMstqjtvsGeghQQ==
+
+"@baklavajs/plugin-options-vue@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-options-vue/-/plugin-options-vue-1.0.4.tgz#ea761333eed9833819c37864f9f24f9dea418797"
+  integrity sha512-4K5PfZSWdceEQsGl7+pszrrQTFtUl0gZlDy+VdSvfvsTSScTXuo4ZE0ViTMg180cFZqcclSTI5kXHeJqqh3a+Q==
+
+"@baklavajs/plugin-renderer-vue@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-renderer-vue/-/plugin-renderer-vue-1.0.4.tgz#9efa55d80ef9beab512312431e4ecc56350f7d22"
+  integrity sha512-iSA/Gnz0h8nELwW52R2NJ2rbQLb46vMB5AyyeiQCP5/OEhu+wJg1srCro1by8PFJQ6tl2GcdYtW310Hx36Xmvw==
+
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@intervolga/optimize-cssnano-plugin/-/optimize-cssnano-plugin-1.0.6.tgz#be7c7846128b88f6a9b1d1261a0ad06eb5c0fdf8"
@@ -776,11 +801,6 @@ babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
     chalk "^1.1.3"
     esutils "^2.0.2"
     js-tokens "^3.0.2"
-
-baklavajs@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/baklavajs/-/baklavajs-0.6.4.tgz#1a39f8e8f530a774456cf9e4c86772266d764916"
-  integrity sha512-K9bmn9ZJlfq45kF7si0xBIPiC3qYQeniCQaVqaklYut6y6ndDTAtsfC60prWrLJv0CFz4HiflkSgjItMeGMJbg==
 
 balanced-match@^1.0.0:
   version "1.0.0"

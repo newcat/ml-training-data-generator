@@ -1,28 +1,4 @@
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { Node, Options } from "baklavajs";
-import { CreateElement } from 'vue';
-
-@Component({
-    template: `<textarea v-model="value" class="w-100" rows="10"></textarea>`
-})
-class StringListOption extends Vue {
-
-    @Prop({ type: String, default: "" })
-    value!: string;
-
-    render(h: CreateElement) {
-        return h('textarea', {
-            directives: [{ name: "model", value: this.value, expression: "value" }],
-            staticClass: "w-100",
-            attrs: { rows: "6" },
-            domProps: { value: this.value },
-            on: {
-                input: ($event: any) => { this.$emit("input", $event.target.value); }
-            }
-        });
-    }
-
-}
+import { Node } from "@baklavajs/core";
 
 export default class StringListNode extends Node {
 
@@ -32,9 +8,9 @@ export default class StringListNode extends Node {
     constructor() {
         super();
         // TODO: Replace with IntegerOption
-        this.addInputInterface("Index", "number", Options.NumberOption, 0);
-        this.addOption("Strings", StringListOption, "String 1\nString 2");
-        this.addOutputInterface("String", "string");
+        this.addInputInterface("Index", "NumberOption", 0, { type: "number" });
+        this.addOption("Strings", "StringListOption", "String 1\nString 2");
+        this.addOutputInterface("String", { type: "string" });
     }
 
     calculate() {

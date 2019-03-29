@@ -3,9 +3,9 @@ import App from "./App.vue";
 
 Vue.config.productionTip = false;
 
-import Baklava from "baklavajs";
-Vue.use(Baklava);
-import "baklavajs/dist/styles/all.scss";
+import { BaklavaVuePlugin } from "@baklavajs/plugin-renderer-vue";
+Vue.use(BaklavaVuePlugin);
+import "@baklavajs/plugin-renderer-vue/dist/styles.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
