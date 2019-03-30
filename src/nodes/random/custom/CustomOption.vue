@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import CustomNode from "./CustomNode";
 import { SelectOption } from "@baklavajs/plugin-options-vue";
 import CustomRandom from "./CustomRandom.vue";
@@ -27,6 +27,7 @@ type Vector2D = [number, number];
     components: { SelectOption, CustomRandom }
 })
 export default class CustomOption extends Vue {
+
     @Prop()
     node!: CustomNode;
 
@@ -41,6 +42,11 @@ export default class CustomOption extends Vue {
         selected: this.value.mode,
         items: ["curveMonotone", "curveLinear", "curveStepBefore", "curveStepMid", "curveStepAfter"]
     };
+
+    @Watch("selectValue")
+    onSelectValueChange() {
+        this.value.mode = this.selectValue.selected;
+    }
 
     get mode() {
         return this.selectValue.selected;
