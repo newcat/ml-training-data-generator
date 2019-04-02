@@ -80,7 +80,6 @@ export class Calculator {
         this.wroteCsvHeaders = false;
         this.jobsDone = 0;
         const state = JSON.stringify(this.editor.save());
-        console.log(state);
         for (let i = 0; i < this.workers.length; i++) {
             const w = this.workers[i];
             w.postMessage({

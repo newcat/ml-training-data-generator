@@ -11,3 +11,11 @@ html {
 body {
     height: 100vh;
 }
+
+.table-dark {
+    background-color: $dark;
+}
+
+.table-dark th, .table-dark td, .table-dark thead th, .table-dark tbody + tbody {
+    border-color: #9a9a9a;
+}

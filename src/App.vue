@@ -3,6 +3,7 @@ div.d-flex.flex-column(style="width:100%;height:100%;")
     navbar.flex-shrink(@save="save", @load="load", @calculate="calculate")
     
     settings.flex-fill(v-if="$route.name === 'settings'", v-model="settings")
+    preview.flex-fill(v-else-if="$route.name === 'preview'")
     baklava-editor.flex-fill(v-else, :plugin="plugin")
     
     input(ref="fileinput", type="file", accept="application/json", style="display: none;", @change="loadFile")
@@ -23,9 +24,10 @@ import CustomRandomOption from "@/nodes/random/custom/CustomOption.vue";
 
 import Navbar from "@/components/Navbar.vue";
 import Settings from "@/views/Settings.vue";
+import Preview from "@/views/Preview.vue";
 
 @Component({
-    components: { Navbar, Settings }
+    components: { Navbar, Settings, Preview }
 })
 export default class extends Vue {
 
