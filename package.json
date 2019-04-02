@@ -1,35 +1,39 @@
 {
-    "name": "ml-training-data-generator",
-    "version": "0.0.0",
-    "license": "GPL-3.0-only",
-    "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build"
-    },
-    "dependencies": {
-        "@baklavajs/core": "^1.0.4",
-        "@baklavajs/plugin-engine": "^1.0.4",
-        "@baklavajs/plugin-interface-types": "^1.0.4",
-        "@baklavajs/plugin-options-vue": "^1.0.4",
-        "@baklavajs/plugin-renderer-vue": "^1.0.4",
-        "@types/chance": "^1.0.1",
-        "@types/seedrandom": "^2.4.27",
-        "@vue/cli-plugin-typescript": "^3.4.1",
-        "@vue/cli-service": "^3.4.1",
-        "bootstrap": "^4.3.1",
-        "chance": "^1.0.18",
-        "vue-class-component": "^7.0.1",
-        "vue-template-compiler": "^2.6.8",
-        "vue2-ace-editor": "^0.0.13",
-        "worker-loader": "^2.0.0"
-    },
-    "devDependencies": {
-        "node-sass": "^4.11.0",
-        "sass-loader": "^7.1.0",
-        "tslint": "^5.12.1",
-        "typescript": "^3.2.2",
-        "vue": "^2.5.22",
-        "vue-property-decorator": "^7.3.0",
-        "webpack": "^4.26.0"
-    }
+  "name": "ml-training-data-generator",
+  "version": "0.0.0",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@baklavajs/core": "^1.0.4",
+    "@baklavajs/plugin-engine": "^1.0.4",
+    "@baklavajs/plugin-interface-types": "^1.0.4",
+    "@baklavajs/plugin-options-vue": "^1.0.4",
+    "@baklavajs/plugin-renderer-vue": "^1.0.4",
+    "@types/chance": "^1.0.1",
+    "@types/seedrandom": "^2.4.27",
+    "@vue/cli-plugin-typescript": "^3.4.1",
+    "@vue/cli-service": "^3.4.1",
+    "bootstrap": "^4.3.1",
+    "chance": "^1.0.18",
+    "jquery": "^3.3.1",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
+    "vue-class-component": "^7.0.1",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.6.8",
+    "vue2-ace-editor": "^0.0.13",
+    "worker-loader": "^2.0.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.2",
+    "vue": "^2.5.22",
+    "vue-property-decorator": "^7.3.0",
+    "webpack": "^4.26.0"
+  },
+  "license": "GPL-3.0-only"
 }
