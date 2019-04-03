@@ -18,4 +18,6 @@ nav.navbar.navbar-dark.bg-secondary.navbar-expand-lg
                 router-link.nav-link(:to="{ name: 'settings' }") Settings
             li.nav-item(:class="{ active: $route.name === 'preview' }")
                 router-link.nav-link(:to="{ name: 'preview' }") Preview Data
+            li.nav-item
+                router-link.nav-link(:to="{ name: 'visualisation' }") Visualisation
 </template>
