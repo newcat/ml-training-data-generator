@@ -32,7 +32,7 @@ export default class ProgressModal extends Vue {
         if (this.open) {
             $(this.$el).modal("show");
         } else {
-            $(this.$el).modal("hide");
+            setTimeout(() => $(this.$el).modal("hide"), 500);
         }
     }
 
