@@ -11,7 +11,7 @@ export default class UniformNode extends Node {
     constructor() {
         super();
         this.addOutputInterface("Output", { type: "number" });
-        this.addInputInterface("Seed", "InputOption", { type: "string" });
+        this.addInputInterface("Seed", "InputOption", "", { type: "string" });
         this.addInputInterface("Min", "NumberOption", 0, { type: "number" });
         this.addInputInterface("Max", "NumberOption", 10, { type: "number" });
         this.addInputInterface("Discrete", "CheckboxOption", true, { type: "boolean" });

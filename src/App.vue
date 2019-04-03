@@ -1,15 +1,15 @@
-<template>
-    <div style="width:100%;height:90vh;">
-        <baklava-editor :plugin="plugin"></baklava-editor>
-        <button @click="calculate">Calculate</button>
-        <button @click="save">Save</button>
-        <button @click="load">Load</button>
-        <input ref="fileinput" type="file" accept="application/json" style="display: none;" @change="loadFile">
-    </div>
+<template lang="pug">
+div.d-flex.flex-column(style="width:100%;height:100%;")
+    navbar.flex-shrink(@save="save", @load="load", @calculate="calculate")
+    
+    settings.flex-fill(v-if="$route.name === 'settings'", v-model="settings")
+    baklava-editor.flex-fill(v-else, :plugin="plugin")
+    
+    input(ref="fileinput", type="file", accept="application/json", style="display: none;", @change="loadFile")
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Provide } from "vue-property-decorator";
 import { OptionPlugin } from "@baklavajs/plugin-options-vue";
 
 import createEditor from "@/createEditor";
@@ -21,12 +21,24 @@ import FunctionSidebarOption from "@/options/CodeOption.vue";
 import StringListOption from "@/options/StringListOption";
 import CustomRandomOption from "@/nodes/random/custom/CustomOption.vue";
 
-@Component
+import Navbar from "@/components/Navbar.vue";
+import Settings from "@/views/Settings.vue";
+
+@Component({
+    components: { Navbar, Settings }
+})
 export default class extends Vue {
 
     editor = createEditor();
     c = new Calculator(this.editor);
     plugin = new ViewPlugin();
+
+    settings = {
+        batchCount: 100
+    };
+
+    @Provide("app")
+    app = this;
 
     constructor() {
         super();
@@ -45,7 +57,7 @@ export default class extends Vue {
 
     async calculate() {
         console.log("Start");
-        const results = await this.c.runBatch(10000);
+        const results = await this.c.runBatch(this.settings.batchCount);
         console.log("Finish");
         if (results) {
             const blob = new Blob([results.data], { type: "text/csv" });
