@@ -14,4 +14,6 @@ nav.navbar.navbar-dark.bg-secondary.navbar-expand-lg
                 a.nav-link(@click="$emit('calculate')", href="#") Calculate
             li.nav-item
                 router-link.nav-link(:to="{ name: 'settings' }") Settings
+            li.nav-item
+                router-link.nav-link(:to="{ name: 'visualisation' }") Visualisation
 </template>
