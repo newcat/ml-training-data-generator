@@ -7,6 +7,7 @@ import ExponentialNode from "./nodes/random/ExponentialNode";
 import PercentageNode from "./nodes/random/PercentageNode";
 import CustomNode from "./nodes/random/custom/CustomNode";
 import BooleanNode from "./nodes/BooleanNode";
+import ConstraintNode from "./nodes/ConstraintNode";
 import MathNode from "./nodes/MathNode";
 import OutputNode from "./nodes/OutputNode";
 import StringListNode from './nodes/StringListNode';
@@ -29,6 +30,7 @@ export default function createEditor(): Editor {
     editor.registerNodeType("PercentageNode", PercentageNode, "Random");
     editor.registerNodeType("FunctionNode", FunctionNode);
     editor.registerNodeType("BooleanNode", BooleanNode);
+    editor.registerNodeType("ConstraintNode", ConstraintNode);
     editor.registerNodeType("MathNode", MathNode);
     editor.registerNodeType("StringListNode", StringListNode);
     editor.registerNodeType("OutputNode", OutputNode);

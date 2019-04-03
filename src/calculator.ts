@@ -21,8 +21,6 @@ export class Calculator {
     private jobsDone = 0;
     private totalJobs = 0;
 
-    private start = 0;
-
     public events = {
         progress: new BaklavaEvent<IProgressEventData>(),
         finished: new BaklavaEvent<void>()
@@ -97,7 +95,6 @@ export class Calculator {
                 endIndex: jobs[i].end
             } as ICalculationWorkerMessage);
         }
-        this.start = Date.now();
 
     }
 
@@ -110,9 +107,7 @@ export class Calculator {
         data.forEach((d) => this.results.push(d));
         this.jobsDone += data.length;
         this.events.progress.emit({ current: this.jobsDone, total: this.totalJobs });
-        console.log("Received " + data.length + " results");
         if (this.jobsDone >= this.totalJobs) {
-            console.log("Time: " + (Date.now() - this.start));
             this.events.finished.emit();
         }
     }
