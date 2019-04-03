@@ -1,22 +1,54 @@
 <template lang="pug">
 div.bg-dark.text-light
     .container.mt-3
-        div.form-group
-            label Data Visualisation via 2-dimensional Scatter Plot
-        scatter-plot(:data="value")
+        
+        div.d-flex
+            div.mr-3.flex-grow-1.text-nowrap X-Axis
+            select-option(v-model="xSelect", name="X-Axis")
+
+        div.d-flex.mt-2
+            div.mr-3.flex-grow-1.text-nowrap Y-Axis
+            select-option(v-model="ySelect", name="Y-Axis")
+
+        scatter-plot.mt-4(:data="points")
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from "vue-property-decorator";
+import { Component, Vue, Prop, Watch, Inject } from "vue-property-decorator";
 import ScatterPlot from "@/components/ScatterPlot.vue";
+import { Calculator } from "../calculator";
+import { SelectOption } from "@baklavajs/plugin-options-vue";
 
 @Component({
-    components: { ScatterPlot }
+    components: { ScatterPlot, SelectOption }
 })
 export default class Visualisation extends Vue {
 
     @Prop()
-    value!: any;
+    calculator!: Calculator;
+
+    xSelect = { selected: "", items: [""] };
+    ySelect = { selected: "", items: [""] };
+
+    get points() {
+        if (!this.xSelect.selected || !this.ySelect.selected) {
+            return [];
+        }
+        const x = this.xSelect.selected;
+        const y = this.ySelect.selected;
+        return this.calculator.results.map((r) => [ r[x], r[y] ]);
+    }
+
+    mounted() {
+        if (this.calculator.results.length === 0) {
+            return;
+        }
+
+        const columns = Object.keys(this.calculator.results[0])
+            .filter((k) => this.calculator.results.every((r) => typeof(r[k]) === "number"));
+        this.xSelect.items = columns;
+        this.ySelect.items = columns;
+    }
 
 }
 </script>

@@ -3,7 +3,7 @@ div.d-flex.flex-column(style="width:100%;height:100%;")
     navbar.flex-shrink(@action="onAction")
     
     settings.flex-fill(v-if="$route.name === 'settings'", v-model="settings")
-    visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", v-model="visualisation")
+    visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", :calculator="calculator")
     preview.flex-fill(v-else-if="$route.name === 'preview'")
     baklava-editor.flex-fill(v-else, :plugin="plugin")
 
