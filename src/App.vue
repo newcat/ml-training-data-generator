@@ -4,6 +4,7 @@ div.d-flex.flex-column(style="width:100%;height:100%;")
     
     settings.flex-fill(v-if="$route.name === 'settings'", v-model="settings")
     visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", v-model="test")
+    preview.flex-fill(v-else-if="$route.name === 'preview'")
     baklava-editor.flex-fill(v-else, :plugin="plugin")
     
     input(ref="fileinput", type="file", accept="application/json", style="display: none;", @change="loadFile")
@@ -25,9 +26,10 @@ import CustomRandomOption from "@/nodes/random/custom/CustomOption.vue";
 import Navbar from "@/components/Navbar.vue";
 import Settings from "@/views/Settings.vue";
 import Visualisation from "@/views/Visualisation.vue";
+import Preview from "@/views/Preview.vue";
 
 @Component({
-    components: { Navbar, Settings, Visualisation }
+    components: { Navbar, Settings, Visualisation, Preview }
 })
 export default class extends Vue {
 
@@ -37,10 +39,6 @@ export default class extends Vue {
 
     settings = {
         batchCount: 100
-    };
-
-    test = {
-        gay: 100
     };
 
     @Provide("app")
