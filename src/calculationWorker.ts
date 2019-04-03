@@ -16,9 +16,12 @@ editor.use(engine);
 ctx.addEventListener("message", async (msg) => {
     const d = msg.data as ICalculationWorkerMessage;
     editor.load(JSON.parse(d.editorState));
-    const r = await runBatch(d, editor);
-    ctx.postMessage(r);
+    runBatch(d, editor);
 });
+
+function sendData(data: Array<Record<string, any>>) {
+    ctx.postMessage(data);
+}
 
 async function runBatch(data: ICalculationWorkerMessage, e: Editor) {
 
@@ -33,8 +36,7 @@ async function runBatch(data: ICalculationWorkerMessage, e: Editor) {
         .filter((n) => n.type === "OutputNode")
         .map((n) => [ n.getOptionValue("Label"), n ]) as Array<[string, Node]>;
 
-    const results = [];
-
+    let results = [];
     for (let i = data.startIndex; i <= data.endIndex; i++) {
 
         // inject current index into every IndexValueNode
@@ -49,8 +51,15 @@ async function runBatch(data: ICalculationWorkerMessage, e: Editor) {
         });
         results.push(result);
 
+        if (results.length >= 1000) {
+            sendData(results);
+            results = [];
+        }
+
     }
 
-    return results;
+    if (results.length > 0) {
+        sendData(results);
+    }
 
 }

@@ -1,4 +1,4 @@
-import { Editor } from "@baklavajs/core";
+import { Editor, BaklavaEvent } from "@baklavajs/core";
 import Worker from "worker-loader!./calculationWorker";
 import { ICalculationWorkerMessage } from './types';
 
@@ -6,17 +6,27 @@ export interface IResult {
     data: string;
 }
 
+export interface IProgressEventData {
+    current: number;
+    total: number;
+}
+
 export class Calculator {
+
+    public results: Array<Record<string, any>> = [];
 
     private editor: Editor;
     private workers: Worker[] = [];
 
-    private wroteCsvHeaders = false;
-    private promiseResolver: ((result: IResult) => void)|null = null;
     private jobsDone = 0;
     private totalJobs = 0;
-    // use an object for call-by-reference
-    private result: IResult = { data: "" };
+
+    private start = 0;
+
+    public events = {
+        progress: new BaklavaEvent<IProgressEventData>(),
+        finished: new BaklavaEvent<void>()
+    };
 
     public constructor(editor: Editor) {
         this.editor = editor;
@@ -40,7 +50,7 @@ export class Calculator {
         }
     }
 
-    public async runBatch(batchSize: number) {
+    public run(batchSize: number) {
 
         const workerCount = this.workers.length;
         if (workerCount <= 0) {
@@ -76,8 +86,7 @@ export class Calculator {
             currentIndex += batchSizePerWorker[i];
         }
 
-        this.result = { data: "" };
-        this.wroteCsvHeaders = false;
+        this.results = [];
         this.jobsDone = 0;
         const state = JSON.stringify(this.editor.save());
         for (let i = 0; i < this.workers.length; i++) {
@@ -88,39 +97,23 @@ export class Calculator {
                 endIndex: jobs[i].end
             } as ICalculationWorkerMessage);
         }
-
-        return new Promise<IResult>((res) => {
-            this.promiseResolver = res;
-        });
+        this.start = Date.now();
 
     }
 
-    private async handleWorkerMessage(worker: Worker, msg: MessageEvent) {
-        await this.onData(msg.data);
+    private handleWorkerMessage(worker: Worker, msg: MessageEvent) {
+        this.onData(msg.data);
     }
 
-    private async onData(data: Array<Record<string, any>>) {
-
-        if (!this.wroteCsvHeaders) {
-            this.result.data = Object.keys(data[0]).join(";") + "\n";
-            this.wroteCsvHeaders = true;
-        }
-
-        for (const r of data) {
-            this.result.data += Object.values(r).join(";") + "\n";
-        }
-
+    private onData(data: Array<Record<string, any>>) {
+        if (data.length === 0) { return; }
+        data.forEach((d) => this.results.push(d));
         this.jobsDone += data.length;
+        this.events.progress.emit({ current: this.jobsDone, total: this.totalJobs });
+        console.log("Received " + data.length + " results");
         if (this.jobsDone >= this.totalJobs) {
-            await this.finalize();
-        }
-
-    }
-
-    private async finalize() {
-        if (this.promiseResolver) {
-            this.promiseResolver(this.result);
-            this.promiseResolver = null;
+            console.log("Time: " + (Date.now() - this.start));
+            this.events.finished.emit();
         }
     }
 

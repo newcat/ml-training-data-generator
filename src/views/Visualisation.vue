@@ -3,7 +3,7 @@ div.bg-dark.text-light
     .container.mt-3
         div.form-group
             label Data Visualisation via 2-dimensional Scatter Plot
-        scatter-plot(:data="value.data")
+        scatter-plot(:data="value")
 </template>
 
 <script lang="ts">

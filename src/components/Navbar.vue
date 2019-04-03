@@ -8,10 +8,11 @@ nav.navbar.navbar-dark.bg-secondary.navbar-expand-lg
             li.nav-item.dropdown
                 a#actionDropdown.nav-link.dropdown-toggle(role="button", data-toggle="dropdown", href="#") Actions
                     .dropdown-menu
-                        a.dropdown-item(@click="$emit('load')", href="#") Load
-                        a.dropdown-item(@click="$emit('save')", href="#") Save
+                        a.dropdown-item(@click="$emit('action', 'load')", href="#") Load
+                        a.dropdown-item(@click="$emit('action', 'save')", href="#") Save
                         .dropdown-divider
-                        a.dropdown-item(@click="$emit('calculate')", href="#") Calculate
+                        a.dropdown-item(@click="$emit('action', 'calculate')", href="#") Calculate
+                        a.dropdown-item(@click="$emit('action', 'export')", href="#") Export to CSV
             li.nav-item(:class="{ active: $route.name === 'editor' }")
                 router-link.nav-link(:to="{ name: 'editor' }") Editor
             li.nav-item(:class="{ active: $route.name === 'settings' }")

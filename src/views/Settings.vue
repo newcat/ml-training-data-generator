@@ -15,7 +15,7 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 @Component
 export default class Settings extends Vue {
 
-    tempBatchCount = 0;
+    tempBatchCount = "0";
 
     @Prop()
     value!: any;
@@ -27,7 +27,7 @@ export default class Settings extends Vue {
 
     save() {
         this.$emit("input", {
-            batchCount: this.tempBatchCount
+            batchCount: parseInt(this.tempBatchCount, 10)
         });
         this.back();
     }

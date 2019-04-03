@@ -1,11 +1,13 @@
 <template lang="pug">
 div.d-flex.flex-column(style="width:100%;height:100%;")
-    navbar.flex-shrink(@save="save", @load="load", @calculate="calculate")
+    navbar.flex-shrink(@action="onAction")
     
     settings.flex-fill(v-if="$route.name === 'settings'", v-model="settings")
     visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", v-model="visualisation")
     preview.flex-fill(v-else-if="$route.name === 'preview'")
     baklava-editor.flex-fill(v-else, :plugin="plugin")
+
+    progress-modal(:open="calculating", :progress="progress")
     
     input(ref="fileinput", type="file", accept="application/json", style="display: none;", @change="loadFile")
 </template>
@@ -15,7 +17,7 @@ import { Component, Prop, Vue, Provide } from "vue-property-decorator";
 import { OptionPlugin } from "@baklavajs/plugin-options-vue";
 
 import createEditor from "@/createEditor";
-import { Calculator } from '@/calculator';
+import { Calculator, IProgressEventData } from '@/calculator';
 import { IPlugin } from '@baklavajs/core';
 import { ViewPlugin } from '@baklavajs/plugin-renderer-vue';
 
@@ -24,40 +26,43 @@ import StringListOption from "@/options/StringListOption";
 import CustomRandomOption from "@/nodes/random/custom/CustomOption.vue";
 
 import Navbar from "@/components/Navbar.vue";
+import ProgressModal from "@/components/ProgressModal.vue";
 import Settings from "@/views/Settings.vue";
 import Visualisation from "@/views/Visualisation.vue";
 import Preview from "@/views/Preview.vue";
 
 @Component({
-    components: { Navbar, Settings, Visualisation, Preview }
+    components: { Navbar, Settings, Visualisation, Preview, ProgressModal }
 })
 export default class extends Vue {
 
     editor = createEditor();
-    c = new Calculator(this.editor);
+    calculator = new Calculator(this.editor);
     plugin = new ViewPlugin();
+
+    calculating = false;
+    progress = 0;
 
     settings = {
         batchCount: 100
     };
 
-    visualisation = {
-        data: [
-            [10, 10],
-            [20, 20],
-            [30, 30],
-            [40, 40],
-            [50, 50],
-            [60, 60],
-            [70, 70]
-        ]
-    };
+    visualisation = [
+        [10, 10],
+        [20, 20],
+        [30, 30],
+        [40, 40],
+        [50, 50],
+        [60, 60],
+        [70, 70]
+    ];
 
     @Provide("app")
     app = this;
 
     constructor() {
         super();
+
         this.editor.use(this.plugin);
         this.editor.use(new OptionPlugin());
 
@@ -65,23 +70,56 @@ export default class extends Vue {
         this.plugin.registerOption("StringListOption", StringListOption);
         this.plugin.registerOption("CustomRandomOption", CustomRandomOption);
 
+        this.calculator.events.progress.addListener(this, (p) => this.onCalculationProgress(p));
+        this.calculator.events.finished.addListener(this, () => this.onCalculationFinished());
+
     }
 
     mounted() {
-        this.c.setWorkerCount(4);
+        this.calculator.setWorkerCount(4);
+        this.editor.hooks.save.tap(this, (state) => {
+            console.log(JSON.stringify(this.settings));
+            state.mlsettings = this.settings;
+            return state;
+        });
+        this.editor.hooks.load.tap(this, (state) => {
+            if (state.mlsettings) {
+                console.log(state.mlsettings);
+                this.settings = state.mlsettings;
+            }
+            return state;
+        });
     }
 
-    async calculate() {
-        console.log("Start");
-        const results = await this.c.runBatch(this.settings.batchCount);
-        console.log("Finish");
-        if (results) {
-            const blob = new Blob([results.data], { type: "text/csv" });
-            const a = document.createElement("a");
-            a.download = "data.csv";
-            a.href = window.URL.createObjectURL(blob);
-            a.click();
+    onAction(action: string) {
+        switch (action) {
+            case "load":
+                this.load();
+                break;
+            case "save":
+                this.save();
+                break;
+            case "calculate":
+                this.calculate();
+                break;
+            case "export":
+                this.export();
+                break;
         }
+    }
+
+    calculate() {
+        this.calculating = true;
+        this.progress = 0;
+        this.calculator.run(this.settings.batchCount);
+    }
+
+    onCalculationProgress(p: IProgressEventData) {
+        this.progress = p.current * 100 / p.total;
+    }
+
+    onCalculationFinished() {
+        this.calculating = false;
     }
 
     save() {
@@ -105,6 +143,26 @@ export default class extends Vue {
             this.editor.load(JSON.parse((readerEvent.target as any).result));
         };
         reader.readAsText(file);
+        (this.$refs.fileinput as HTMLInputElement).type = "text";
+        (this.$refs.fileinput as HTMLInputElement).type = "file";
+    }
+
+    export() {
+        if (this.calculator.results.length === 0) {
+            return;
+        }
+
+        let csv = Object.keys(this.calculator.results[0]).join(";") + "\n";
+        this.calculator.results.forEach((r) => {
+            csv += Object.values(r).join(";") + "\n";
+        });
+        csv = csv.slice(0, -1); // remove trailing newline
+
+        const blob = new Blob([csv], { type: "text/csv" });
+        const a = document.createElement("a");
+        a.download = "data.csv";
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
     }
 
 }

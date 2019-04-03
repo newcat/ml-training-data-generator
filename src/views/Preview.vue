@@ -24,9 +24,9 @@ export default class Preview extends Vue {
     previewData = "";
 
     async mounted() {
-        const r = await this.app.c.runBatch(20);
-        if (!r) { return; }
-        this.previewData = r.data;
+        // const r = await this.app.c.runBatch(20);
+        // if (!r) { return; }
+        // this.previewData = r.data;
     }
 
     get headers() {
