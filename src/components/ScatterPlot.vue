@@ -13,7 +13,7 @@ import { Component, Prop, Watch } from 'vue-property-decorator';
 @Component
 export default class ScatterPlot extends Vue {
 
-    @Prop()
+    @Prop({ default: [] })
     data!: Array<[number, number]>;
 
     canvas: HTMLCanvasElement|null = null;
@@ -29,17 +29,13 @@ export default class ScatterPlot extends Vue {
         this.canvas.width = 1000;
         this.canvas.height = 1000;
         this.context = this.canvas.getContext("2d");
-        this.update();
-    }
 
-    @Watch("data")
-    update() {
         this.chart = new Chart(this.context!, {
             type: 'scatter',
             data: {
                 datasets: [{
                     label: 'Scatter Dataset',
-                    data: this.ScatterPlotDataPoints()
+                    data: this.scatterPlotDataPoints
                 }]
             },
             options: {
@@ -81,7 +77,18 @@ export default class ScatterPlot extends Vue {
         });
     }
 
-    ScatterPlotDataPoints() {
+    @Watch("scatterPlotDataPoints")
+    update() {
+        const datasets = this.chart!.data!.datasets;
+        if (datasets && datasets.length > 0) {
+            datasets[0].data = this.scatterPlotDataPoints;
+        } else {
+            throw new Error("Undefined dataset");
+        }
+        this.chart!.update();
+    }
+
+    get scatterPlotDataPoints() {
         const data = this.data;
         const result: Array<{x: number, y: number}> = data.map((point) => {
             return {

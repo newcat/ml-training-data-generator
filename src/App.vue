@@ -3,7 +3,7 @@ div.d-flex.flex-column(style="width:100%;height:100%;")
     navbar.flex-shrink(@save="save", @load="load", @calculate="calculate")
     
     settings.flex-fill(v-if="$route.name === 'settings'", v-model="settings")
-    visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", v-model="test")
+    visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", v-model="visualisation")
     preview.flex-fill(v-else-if="$route.name === 'preview'")
     baklava-editor.flex-fill(v-else, :plugin="plugin")
     
@@ -39,6 +39,18 @@ export default class extends Vue {
 
     settings = {
         batchCount: 100
+    };
+
+    visualisation = {
+        data: [
+            [10, 10],
+            [20, 20],
+            [30, 30],
+            [40, 40],
+            [50, 50],
+            [60, 60],
+            [70, 70]
+        ]
     };
 
     @Provide("app")
