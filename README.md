@@ -3,10 +3,10 @@
 ## ToDo
 - [ ] Error handling for calculation
 - [ ] Visualization scaling
-- [ ] Data preview
+- [x] Data preview
 - [ ] Custom distribution performance
-- [ ] Close modal
-- [ ] Show how much data is loaded
-- [ ] Settings: Add Worker Count
-- [ ] Settings: CSV delimiter
+- [x] Close modal
+- [x] Show how much data is loaded
+- [x] Settings: Add Worker Count
+- [x] Settings: CSV delimiter
 - [ ] Tests

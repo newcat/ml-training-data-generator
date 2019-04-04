@@ -1,6 +1,6 @@
 <template lang="pug">
 div.d-flex.flex-column(style="width:100%;height:100%;")
-    navbar.flex-shrink(@action="onAction")
+    navbar.flex-shrink(@action="onAction", :loadedRows="loadedRows")
     
     settings.flex-fill(v-if="$route.name === 'settings'", v-model="settings")
     visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", :calculator="calculator")
@@ -42,9 +42,12 @@ export default class extends Vue {
 
     calculating = false;
     progress = 0;
+    loadedRows = 0;
 
     settings = {
-        batchCount: 100
+        batchCount: 100,
+        workerCount: 4,
+        csvDelimiter: ";"
     };
 
     visualisation = [
@@ -76,7 +79,7 @@ export default class extends Vue {
     }
 
     mounted() {
-        this.calculator.setWorkerCount(4);
+        this.calculator.setWorkerCount(this.settings.workerCount);
         this.editor.hooks.save.tap(this, (state) => {
             console.log(JSON.stringify(this.settings));
             state.mlsettings = this.settings;
@@ -120,6 +123,7 @@ export default class extends Vue {
 
     onCalculationFinished() {
         this.calculating = false;
+        this.loadedRows = this.calculator.results.length;
     }
 
     save() {
@@ -141,6 +145,7 @@ export default class extends Vue {
         const reader = new FileReader();
         reader.onload = async (readerEvent) => {
             this.editor.load(JSON.parse((readerEvent.target as any).result));
+            this.calculator.reset();
         };
         reader.readAsText(file);
         (this.$refs.fileinput as HTMLInputElement).type = "text";
@@ -152,9 +157,9 @@ export default class extends Vue {
             return;
         }
 
-        let csv = Object.keys(this.calculator.results[0]).join(";") + "\n";
+        let csv = Object.keys(this.calculator.results[0]).join(this.settings.csvDelimiter) + "\n";
         this.calculator.results.forEach((r) => {
-            csv += Object.values(r).join(";") + "\n";
+            csv += Object.values(r).join(this.settings.csvDelimiter) + "\n";
         });
         csv = csv.slice(0, -1); // remove trailing newline
 
@@ -165,12 +170,10 @@ export default class extends Vue {
         a.click();
     }
 
+    onSettingsUpdate(newSettings: any) {
+        this.settings = newSettings;
+        this.calculator.setWorkerCount(newSettings.workerCount);
+    }
+
 }
 </script>
-
-<style>
-.ace_tooltip {
-    left: 10px !important;
-}
-</style>
-

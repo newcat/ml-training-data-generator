@@ -64,7 +64,7 @@ async function runBatch(data: ICalculationWorkerMessage, e: Editor) {
         });
         results.push(result);
 
-        if (results.length >= 1000) {
+        if (results.length >= 10000) {
             sendData(results);
             results = [];
         }

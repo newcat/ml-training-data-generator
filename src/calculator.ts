@@ -98,6 +98,10 @@ export class Calculator {
 
     }
 
+    public reset() {
+        this.results = [];
+    }
+
     private handleWorkerMessage(worker: Worker, msg: MessageEvent) {
         this.onData(msg.data);
     }

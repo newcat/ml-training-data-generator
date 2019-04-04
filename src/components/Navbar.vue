@@ -21,4 +21,17 @@ nav.navbar.navbar-dark.bg-secondary.navbar-expand-lg
                 router-link.nav-link(:to="{ name: 'preview' }") Preview Data
             li.nav-item
                 router-link.nav-link(:to="{ name: 'visualisation' }") Visualisation
+        div.text-light {{ loadedRows }} rows loaded
 </template>
+
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+
+@Component
+export default class Navbar extends Vue {
+
+    @Prop({ default: 0 })
+    loadedRows!: number;
+
+}
+</script>
