@@ -4,7 +4,7 @@ import createEditor from "./createEditor";
 import { ICalculationWorkerMessage } from "./types";
 
 const ctx: Worker = self as any;
-const MAX_TRIES = 100;
+const MAX_TRIES = 1000;
 
 interface IPreparableNode extends Node {
     prepare?(): void;
@@ -51,6 +51,7 @@ async function runBatch(data: ICalculationWorkerMessage, e: Editor) {
 
         if (constraintNodes.some((n) => n.getInterface("Is Valid").value === false)) {
             tries++;
+            i--;
             if (tries >= MAX_TRIES) {
                 throw new Error("Constraint node caused infinite loop");
             }
