@@ -41,6 +41,11 @@ export default class CodeOption extends Vue {
     @Prop()
     value!: string;
 
+    mounted() {
+        this.node.events.addInterface.addListener(this, () => { this.$forceUpdate(); });
+        this.node.events.removeInterface.addListener(this, () => { this.$forceUpdate(); });
+    }
+
     addInput() {
         this.node.addInput("Input" + Object.keys(this.node.inputInterfaces).length);
     }
@@ -54,13 +59,11 @@ export default class CodeOption extends Vue {
     }
 
     renameInput(from: string, to: string) {
-        this.node.removeInterface(from);
-        this.node.addInput(to);
+        this.node.renameInterface(from, to);
     }
 
     renameOutput(from: string, to: string) {
-        this.node.removeInterface(from);
-        this.node.addOutput(to);
+        this.node.renameInterface(from, to);
     }
 
 }

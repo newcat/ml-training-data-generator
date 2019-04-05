@@ -18,11 +18,12 @@ export default class FunctionNode extends Node {
         this.addInput("input");
         this.addOutput("output");
         this.hooks.load.tap(this, (state) => {
-            Object.entries(state.customInterfaces).forEach(([name, isInput]) => {
-                if (isInput) {
-                    this.addInputInterface(name, undefined, undefined, { type: "any" });
+            Object.entries(state.customInterfaces).forEach(([name, data]) => {
+                const d = data as any;
+                if (d.isInput) {
+                    this.addInputInterface(name, undefined, undefined, { type: "any", id: d.id });
                 } else {
-                    this.addOutputInterface(name, { type: "any" });
+                    this.addOutputInterface(name, { type: "any", id: d.id });
                 }
             });
             return state;
@@ -30,7 +31,7 @@ export default class FunctionNode extends Node {
         this.hooks.save.tap(this, (state) => {
             state.customInterfaces = {};
             this.interfaces.forEach((intf, name) => {
-                state.customInterfaces[name] = intf.isInput;
+                state.customInterfaces[name] = { isInput: intf.isInput, id: intf.id };
             });
             return state;
         });
@@ -42,6 +43,15 @@ export default class FunctionNode extends Node {
 
     addOutput(name: string) {
         this.addOutputInterface(name, { type: "any" });
+    }
+
+    renameInterface(oldName: string, newName: string) {
+        const intf = this.interfaces.get(oldName);
+        if (intf) {
+            this.interfaces.set(newName, intf);
+            this.interfaces.delete(oldName);
+            this.events.addInterface.emit(intf);
+        }
     }
 
     removeInterface(name: string) {

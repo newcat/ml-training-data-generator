@@ -81,13 +81,11 @@ export default class extends Vue {
     mounted() {
         this.calculator.setWorkerCount(this.settings.workerCount);
         this.editor.hooks.save.tap(this, (state) => {
-            console.log(JSON.stringify(this.settings));
             state.mlsettings = this.settings;
             return state;
         });
         this.editor.hooks.load.tap(this, (state) => {
             if (state.mlsettings) {
-                console.log(state.mlsettings);
                 this.settings = state.mlsettings;
             }
             return state;
