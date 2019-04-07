@@ -50,7 +50,6 @@ export default class CustomOption extends Vue {
     canvas!: HTMLCanvasElement;
     context!: CanvasRenderingContext2D|null;
 
-
     @Watch("selectValue")
     onSelectValueChange() {
         this.value.mode = this.selectValue.selected;

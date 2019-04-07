@@ -43,7 +43,6 @@ export default class extends Vue {
     calculating = false;
     progress = 0;
     loadedRows = 0;
-    time = 0;
 
     settings = {
         batchCount: 100,
@@ -111,7 +110,6 @@ export default class extends Vue {
     }
 
     calculate() {
-        this.time = Date.now();
         this.calculating = true;
         this.progress = 0;
         this.calculator.run(this.settings.batchCount);
@@ -124,7 +122,6 @@ export default class extends Vue {
     onCalculationFinished() {
         this.calculating = false;
         this.loadedRows = this.calculator.results.length;
-        console.log("Duration:" + (Date.now() - this.time));
     }
 
     save() {

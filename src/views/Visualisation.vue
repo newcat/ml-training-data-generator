@@ -38,8 +38,7 @@ export default class Visualisation extends Vue {
         const x: string = this.xSelect.selected;
         const y: string = this.ySelect.selected;
         const p = this.calculator.results.map((r) => [ r[x], r[y] ] as [number, number]);
-        // Remove duplicates for better performance of the scatter plot
-        return this.removeDuplicates(p);
+        return p;
     }
 
     mounted() {
@@ -51,20 +50,6 @@ export default class Visualisation extends Vue {
             .filter((k) => this.calculator.results.every((r) => typeof(r[k]) === "number"));
         this.xSelect.items = columns;
         this.ySelect.items = columns;
-    }
-
-    // Remove Duplicates from an array of points
-    removeDuplicates(a: Array<[number, number]>) {
-        const hash: any = {};
-        const out: any = [];
-        for (let i = 0, l = a.length; i < l; i++) {
-            let key = a[i].join('|');
-            if (!hash[key]) {
-                out.push(a[i]);
-                hash[key] = true;
-            }
-        }
-        return out;
     }
 }
 </script>
