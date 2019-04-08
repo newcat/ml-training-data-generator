@@ -2,30 +2,30 @@
 # yarn lockfile v1
 
 
-"@baklavajs/core@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@baklavajs/core/-/core-1.0.7.tgz#45574fdfa77ea30bd73a8e95b71870eb5348050e"
-  integrity sha512-aDVhgw5uv8QzFfOcwmLlSBrPofPhHHOsa+iV8aO+4tepTNJy3ddlgNNBHOLdT/uVdHi0reZVuSZ4oYuXZtYYbw==
+"@baklavajs/core@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@baklavajs/core/-/core-1.0.8.tgz#c5573d81c12d1602dc2e58adbc5fa8526d7b83a0"
+  integrity sha512-jKa8FK2zhYH8zSUwaE6nW+FkP5VCPKv9pw0Z0UJ4x3PsNxFyXpct2PMV1GYNnm6xSDu9hndog36rsc+XpOqsmQ==
 
-"@baklavajs/plugin-engine@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-engine/-/plugin-engine-1.0.7.tgz#19733220da9fc02ab6ef88aa877d809c7678d826"
-  integrity sha512-7uPpH2RZaRIP3aHEDrsGzSiyqHDfZXJsjj9ekUyKX2zkVk+A9dPRhZP2M6Mfr4LgLCc//jQH3sBHfXe8AJ5mFg==
+"@baklavajs/plugin-engine@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-engine/-/plugin-engine-1.0.9.tgz#789e1241c21dd4d0aec94b9b67a69567e5a39c9d"
+  integrity sha512-I77vZUJ1yrJHn5JoSVY5A6yr2wQU7l2nW4R4s4DxUcGBBlFBh/20VeCPw82gWLriok601aEYpD4SlAhVQWZ3Xw==
 
-"@baklavajs/plugin-interface-types@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-interface-types/-/plugin-interface-types-1.0.7.tgz#fecd0bf8a4c4943361c2c3aa3aae75f6da74a577"
-  integrity sha512-jT5gwXkMK3v68zAZSes/8c0peA6dqdhhhm7k7GXM7LY4uWaw59xlLHu/aEacaURND/6DZP2Y1q2etVrZgD8bGw==
+"@baklavajs/plugin-interface-types@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-interface-types/-/plugin-interface-types-1.0.9.tgz#85a2f0e691c8f3b914714daa68a033f022e99157"
+  integrity sha512-TqY1jGI6JmL2+tQsq3Iqfd1ZT/vKziKJTrunxNJLGw2tAPBcrNSPZVmgL1r2/Lo8lO3ZMRPM+XHTYoymZlvDgw==
 
-"@baklavajs/plugin-options-vue@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-options-vue/-/plugin-options-vue-1.0.7.tgz#0d0c081e30734b6f747e115cdc119f24e93f2b1d"
-  integrity sha512-fBFKvCBZOgcx6JjtYd475PLaw37UIUe20EOIHvc9oX7148JmeioRs0Y2cV272qkYZ8PGXFMaPJtzq8TT/0WS3w==
+"@baklavajs/plugin-options-vue@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-options-vue/-/plugin-options-vue-1.0.9.tgz#1412bd9492b77bd3b796b143756488336235d9cf"
+  integrity sha512-E7vfpchLzFzrUXgCLOH1ayaBOwn7nKnAEb7C7w9kQ9uu2PTV4EN2u8C8bOOvR1P2hMS01QU57SoLurS+1IaHGw==
 
-"@baklavajs/plugin-renderer-vue@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-renderer-vue/-/plugin-renderer-vue-1.0.7.tgz#2079582a97df9c6e4516a88d10d919230f6d7071"
-  integrity sha512-AZ5tLMSv+itIabMiLdJP63yzPWhX4Ia9mt9tSZeTvUMQX7u/zrzpKkcVclZsgzmGjn41I1czJ/9xzOe20CdyDA==
+"@baklavajs/plugin-renderer-vue@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-renderer-vue/-/plugin-renderer-vue-1.0.9.tgz#9b7b1f45e604c6304c6bc4d4b6f6d3813d010458"
+  integrity sha512-lM8zN/CAPFeJ6HyoWFL7Xdg+U9QhsNGTjAwWgc7vCYhhT5clkBMrOx4icT7EmCbEe4yvqs5daoiaadP4gjWkbQ==
 
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
