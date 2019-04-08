@@ -1,6 +1,7 @@
 {
   "name": "ml-training-data-generator",
-  "version": "0.0.0",
+  "license": "GPL-3.0",
+  "version": "1.0.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
@@ -34,8 +35,8 @@
     "tslint": "^5.12.1",
     "typescript": "^3.2.2",
     "vue": "^2.5.22",
+    "vue-cli-plugin-webpack-bundle-analyzer": "^1.2.0",
     "vue-property-decorator": "^7.3.0",
     "webpack": "^4.26.0"
-  },
-  "license": "GPL-3.0-only"
+  }
 }

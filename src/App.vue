@@ -28,11 +28,16 @@ import CustomRandomOption from "@/nodes/random/custom/CustomOption.vue";
 import Navbar from "@/components/Navbar.vue";
 import ProgressModal from "@/components/ProgressModal.vue";
 import Settings from "@/views/Settings.vue";
-import Visualisation from "@/views/Visualisation.vue";
 import Preview from "@/views/Preview.vue";
 
 @Component({
-    components: { Navbar, Settings, Visualisation, Preview, ProgressModal }
+    components: {
+        Navbar,
+        Settings,
+        Visualisation: () => import("@/views/Visualisation.vue"),
+        Preview,
+        ProgressModal
+    }
 })
 export default class extends Vue {
 

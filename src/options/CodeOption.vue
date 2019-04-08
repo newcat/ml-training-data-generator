@@ -26,10 +26,12 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import FunctionNode from "../nodes/FunctionNode";
 import InterfaceView from "./InterfaceView.vue";
-import CodeEditor from "./CodeEditor.vue";
 
 @Component({
-    components: { InterfaceView, CodeEditor }
+    components: {
+        InterfaceView,
+        CodeEditor: () => import("./CodeEditor.vue")
+    }
 })
 export default class CodeOption extends Vue {
 

@@ -1,5 +1,7 @@
 module.exports = {
-    devServer: {
-        hot: false
+    pluginOptions: {
+        webpackBundleAnalyzer: {
+            openAnalyzer: false
+        }
     }
 }
