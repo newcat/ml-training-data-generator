@@ -1,5 +1,5 @@
 import { Editor, Node } from "@baklavajs/core";
-import { Engine } from "@baklavajs/plugin-engine";
+import { Engine, calculateOrder } from "@baklavajs/plugin-engine";
 import createEditor from "./createEditor";
 import { ICalculationWorkerMessage } from "./types";
 
@@ -32,6 +32,11 @@ async function runBatch(data: ICalculationWorkerMessage, e: Editor) {
             n.prepare();
         }
     });
+    console.log(engine);
+    engine.calculateOrder();
+    console.log(engine);
+    console.log(calculateOrder(e.nodes, e.connections));
+    console.log(calculateOrder(e.nodes, e.connections, undefined));
 
     const outputNodes = e.nodes
         .filter((n) => n.type === "OutputNode")

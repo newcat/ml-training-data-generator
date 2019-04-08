@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@baklavajs/core/-/core-1.0.8.tgz#c5573d81c12d1602dc2e58adbc5fa8526d7b83a0"
   integrity sha512-jKa8FK2zhYH8zSUwaE6nW+FkP5VCPKv9pw0Z0UJ4x3PsNxFyXpct2PMV1GYNnm6xSDu9hndog36rsc+XpOqsmQ==
 
-"@baklavajs/plugin-engine@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-engine/-/plugin-engine-1.0.9.tgz#789e1241c21dd4d0aec94b9b67a69567e5a39c9d"
-  integrity sha512-I77vZUJ1yrJHn5JoSVY5A6yr2wQU7l2nW4R4s4DxUcGBBlFBh/20VeCPw82gWLriok601aEYpD4SlAhVQWZ3Xw==
+"@baklavajs/plugin-engine@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-engine/-/plugin-engine-1.0.11.tgz#0f4f86ac067a09498c52cd3e532cbc3f26a535e5"
+  integrity sha512-SKt9AtygNUTxeeBgzudW+fj6o2TgRrANzsXGlbKSsCQLkAnMnicZbxqChNkPAmJoqP2JJtwKMNYuD8B/X+tqfQ==
 
 "@baklavajs/plugin-interface-types@^1.0.9":
   version "1.0.9"
