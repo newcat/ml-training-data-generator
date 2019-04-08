@@ -11,6 +11,7 @@ div.bg-dark.text-light
             select-option(v-model="ySelect", name="Y-Axis")
 
         scatter-plot.mt-4(:data="points")
+
 </template>
 
 <script lang="ts">
@@ -34,9 +35,10 @@ export default class Visualisation extends Vue {
         if (!this.xSelect.selected || !this.ySelect.selected) {
             return [];
         }
-        const x = this.xSelect.selected;
-        const y = this.ySelect.selected;
-        return this.calculator.results.map((r) => [ r[x], r[y] ]);
+        const x: string = this.xSelect.selected;
+        const y: string = this.ySelect.selected;
+        const p = this.calculator.results.map((r) => [ r[x], r[y] ] as [number, number]);
+        return p;
     }
 
     mounted() {
@@ -49,6 +51,5 @@ export default class Visualisation extends Vue {
         this.xSelect.items = columns;
         this.ySelect.items = columns;
     }
-
 }
 </script>

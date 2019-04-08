@@ -20,6 +20,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import CustomNode from "./CustomNode";
 import { SelectOption } from "@baklavajs/plugin-options-vue";
 import CustomRandom from "./CustomRandom.vue";
+import { NodeInterface } from '@baklavajs/core';
 
 type Vector2D = [number, number];
 
@@ -34,14 +35,20 @@ export default class CustomOption extends Vue {
     @Prop()
     value!: any;
 
-    canvas!: HTMLCanvasElement;
-    context!: CanvasRenderingContext2D|null;
-
     width: number = 800;
+
     selectValue: { selected: string, items: string[] } = {
         selected: this.value.mode,
         items: ["curveMonotone", "curveLinear", "curveStepBefore", "curveStepMid", "curveStepAfter"]
     };
+
+    seedInterface: NodeInterface = this.node.getInterface("Seed");
+    minInterface: NodeInterface = this.node.getInterface("Min");
+    maxInterface: NodeInterface = this.node.getInterface("Max");
+    discreteInterface: NodeInterface = this.node.getInterface("Discrete");
+
+    canvas!: HTMLCanvasElement;
+    context!: CanvasRenderingContext2D|null;
 
     @Watch("selectValue")
     onSelectValueChange() {
@@ -53,23 +60,19 @@ export default class CustomOption extends Vue {
     }
 
     get seed() {
-        return this.node.getInterface("Seed").value;
+        return this.seedInterface.value;
     }
 
     get discrete() {
-        return this.node.getInterface("Discrete").value;
+        return this.discreteInterface.value;
     }
 
     get min() {
-        return this.node.getInterface("Min").value;
+        return this.minInterface.value;
     }
 
     get max() {
-        return this.node.getInterface("Max").value;
-    }
-
-    generateRandom() {
-        this.value = Math.random();
+        return this.maxInterface.value;
     }
 
     // Save points from component vie event
