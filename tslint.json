@@ -1,5 +1,5 @@
 {
-    "defaultSeverity": "error",
+    "defaultSeverity": "warning",
     "extends": [
         "tslint:recommended"
     ],
@@ -7,7 +7,13 @@
     "rules": {
         "comment-format": false,
         "trailing-comma": false,
-        "quotemark": false
+        "quotemark": false,
+        "no-console": false,
+        "member-ordering": false,
+        "ordered-imports": false,
+        "member-access": false,
+        "object-literal-sort-keys": false,
+        "max-classes-per-file": false
     },
     "rulesDirectory": []
 }

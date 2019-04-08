@@ -1,0 +1,29 @@
+$primary: #5379B5;
+$secondary: #2C2C2C;
+$dark: #3C3C3C;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+html {
+    height: 100vh;
+}
+
+body {
+    height: 100vh;
+}
+
+.table-dark {
+    background-color: $dark;
+}
+
+.table-dark th, .table-dark td, .table-dark thead th, .table-dark tbody + tbody {
+    border-color: #9a9a9a;
+}
+
+.progress-bar {
+    transition: none !important;
+}
+
+.ace_tooltip {
+    left: 10px !important;
+}
