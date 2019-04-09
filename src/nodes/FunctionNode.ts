@@ -18,6 +18,12 @@ export default class FunctionNode extends Node {
         this.addInput("input");
         this.addOutput("output");
         this.hooks.load.tap(this, (state) => {
+
+            // Remove existing interfaces
+            for (const i of Array.from(this.interfaces.keys())) {
+                this.removeInterface(i);
+            }
+
             Object.entries(state.customInterfaces).forEach(([name, data]) => {
                 const d = data as any;
                 if (d.isInput) {
