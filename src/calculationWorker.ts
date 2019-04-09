@@ -32,11 +32,6 @@ async function runBatch(data: ICalculationWorkerMessage, e: Editor) {
             n.prepare();
         }
     });
-    console.log(engine);
-    engine.calculateOrder();
-    console.log(engine);
-    console.log(calculateOrder(e.nodes, e.connections));
-    console.log(calculateOrder(e.nodes, e.connections, undefined));
 
     const outputNodes = e.nodes
         .filter((n) => n.type === "OutputNode")

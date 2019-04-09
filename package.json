@@ -4,11 +4,11 @@
   "version": "1.0.0",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --mode development"
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "@baklavajs/core": "^1.0.8",
-    "@baklavajs/plugin-engine": "^1.0.11",
+    "@baklavajs/plugin-engine": "^1.0.12",
     "@baklavajs/plugin-interface-types": "^1.0.9",
     "@baklavajs/plugin-options-vue": "^1.0.9",
     "@baklavajs/plugin-renderer-vue": "^1.0.9",
