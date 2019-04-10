@@ -13,7 +13,8 @@
         "ordered-imports": false,
         "member-access": false,
         "object-literal-sort-keys": false,
-        "max-classes-per-file": false
+        "max-classes-per-file": false,
+        "no-unused-expression": false
     },
     "rulesDirectory": []
 }

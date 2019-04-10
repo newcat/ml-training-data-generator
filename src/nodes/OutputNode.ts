@@ -9,7 +9,6 @@ export default class OutputNode extends Node {
         super();
         this.addInputInterface("Input", "any");
         this.addOption("Label", "InputOption");
-        this.addOption("Value", "TextOption");
     }
 
     public calculate() {

@@ -7,8 +7,7 @@ export default class StringListNode extends Node {
 
     constructor() {
         super();
-        // TODO: Replace with IntegerOption
-        this.addInputInterface("Index", "NumberOption", 0, { type: "number" });
+        this.addInputInterface("Index", "IntegerOption", 0, { type: "number" });
         this.addOption("Strings", "StringListOption", "String 1\nString 2");
         this.addOutputInterface("String", { type: "string" });
     }
@@ -17,8 +16,14 @@ export default class StringListNode extends Node {
         const arr = (this.getOptionValue("Strings") as string).split("\n");
         const i = Math.floor(this.getInterface("Index").value);
         let value = "";
-        if (i >= 0 && i < arr.length) {
-            value = arr[i];
+        if (arr.length >= 1) {
+            if (i < 0) {
+                value = arr[0];
+            } else if (i >= arr.length) {
+                value = arr[arr.length - 1];
+            } else {
+                value = arr[i];
+            }
         }
         this.getInterface("String").value = value;
     }
