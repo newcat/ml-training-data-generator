@@ -95,6 +95,12 @@ export default class extends Vue {
             }
             return state;
         });
+        this.plugin.hooks.renderNode.tap(this, (v) => {
+            if (v.data.type === "OutputNode") {
+                (v.$el as HTMLElement).style.backgroundColor = "#5379B5CC";
+            }
+            return v;
+        });
     }
 
     onAction(action: string) {
