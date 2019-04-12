@@ -4,7 +4,6 @@ import RandomSampler from "./randomSampler";
 import Curve, { Vector2D } from "./curve";
 import CurveMonotone from "./curveMonotone";
 import CurveLinear from "./curveLinear";
-import CurveStep from "./curveStep";
 
 export default class CustomNode extends Node {
 
@@ -12,7 +11,7 @@ export default class CustomNode extends Node {
     public name = this.type;
 
     private rng: RandomHelper|null = null;
-    private defaultPoints: Vector2D[] = [[0, 100], [900, 100]];
+    private defaultPoints: Vector2D[] = [[0, 0], [50, 50], [100, 20]];
     private defaultMode: string = "curveMonotone";
     private curve: Curve|null = null;
     private randomSampler: RandomSampler|null = null;
@@ -44,18 +43,6 @@ export default class CustomNode extends Node {
             }
             case "curveLinear": {
                 this.curve = new CurveLinear(value.points);
-                break;
-            }
-            case "curveStepMid": {
-                this.curve = new CurveStep(value.points, "mid");
-                break;
-            }
-            case "curveStepAfter": {
-                this.curve = new CurveStep(value.points, "after");
-                break;
-            }
-            case "curveStepBefore": {
-                this.curve = new CurveStep(value.points, "before");
                 break;
             }
             default: {

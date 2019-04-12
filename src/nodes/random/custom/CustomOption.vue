@@ -39,7 +39,7 @@ export default class CustomOption extends Vue {
 
     selectValue: { selected: string, items: string[] } = {
         selected: this.value.mode,
-        items: ["curveMonotone", "curveLinear", "curveStepBefore", "curveStepMid", "curveStepAfter"]
+        items: ["curveMonotone", "curveLinear"]
     };
 
     seedInterface: NodeInterface = this.node.getInterface("Seed");
