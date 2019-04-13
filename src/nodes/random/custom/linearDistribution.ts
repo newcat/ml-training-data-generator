@@ -1,6 +1,6 @@
-import Curve, { Vector2D } from "./curve";
+import Distribution, { Vector2D } from './distribution';
 
-export default class CurveLinear implements Curve {
+export default class LinearDistribution implements Distribution {
 
     xs!: number[];
     ys!: number[];
@@ -66,7 +66,6 @@ export default class CurveLinear implements Curve {
 
     curve() {
         const xs = this.xs;
-        const ys = this.ys;
         const data: Vector2D[] = [];
         for (let i = 0; i < xs[xs.length - 1]; i++) {
             data.push([i, this.interpolate(i)]);

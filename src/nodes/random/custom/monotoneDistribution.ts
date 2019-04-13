@@ -1,6 +1,6 @@
-import Curve, { Vector2D } from "./curve";
+import Distribution, { Vector2D } from "./distribution";
 
-export default class CurveMonotone implements Curve {
+export default class MontoneDistribution implements Distribution {
 
     xs!: number[];
     ys!: number[];

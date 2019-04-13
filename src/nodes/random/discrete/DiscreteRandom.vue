@@ -13,7 +13,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import Curve, { Vector2D } from "./curve";
 import Chart, { ChartData, ChartType, ChartConfiguration, ChartPoint, ChartElementsOptions, defaults } from "chart.js";
 
 @Component
@@ -67,15 +66,12 @@ export default class DiscreteRandom extends Vue {
 
     // Data points
     values: number[] = [];
-    draggedPointIndex: number = -1;
-    mousePosition: Vector2D = [0, 0];
 
     // Curve configuration
     textColor: string = "white";
     axisColor: string = "rgba(100,100,100,0.8)";
     gridColor: string = "rgba(100,100,100,0.3)";
     barColor: string = "rgba(200,200,200,1)";
-    digits: number = 1;
     defaultValue: number = 1;
     LMBClicked = false;
 
@@ -231,13 +227,9 @@ export default class DiscreteRandom extends Vue {
         if (this.LMBClicked) {
             this.setBarToMouse(e);
         }
-        console.log(e.button);
     }
 
     mouseUpHandler(e: MouseEvent) {
-        // Release point by resetting draggedPoint
-        this.draggedPointIndex = -1;
-        
         // Reset state
         if (e.button === 0) {
             this.LMBClicked = false;
@@ -257,7 +249,6 @@ export default class DiscreteRandom extends Vue {
     }
 
     get chartLabels() {
-        console.log("recalculated");
         let labels: string[] = [];
         for(let i = this.min; i <= this.max; i++) {
             labels.push(i.toString());

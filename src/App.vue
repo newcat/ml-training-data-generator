@@ -24,7 +24,7 @@ import { ViewPlugin } from '@baklavajs/plugin-renderer-vue';
 import FunctionSidebarOption from "@/options/CodeOption.vue";
 import StringListOption from "@/options/StringListOption";
 import CustomRandomOption from "@/nodes/random/custom/CustomOption.vue";
-import DiscreteRandomOption from "@/nodes/random/custom/DiscreteOption.vue";
+import DiscreteRandomOption from "@/nodes/random/discrete/DiscreteOption.vue";
 
 import Navbar from "@/components/Navbar.vue";
 import ProgressModal from "@/components/ProgressModal.vue";

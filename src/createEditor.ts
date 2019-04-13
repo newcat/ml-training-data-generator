@@ -6,6 +6,7 @@ import NormalNode from "./nodes/random/NormalNode";
 import ExponentialNode from "./nodes/random/ExponentialNode";
 import PercentageNode from "./nodes/random/PercentageNode";
 import CustomNode from "./nodes/random/custom/CustomNode";
+import DiscreteNode from './nodes/random/discrete/DiscreteNode';
 import BooleanNode from "./nodes/BooleanNode";
 import ConstraintNode from "./nodes/ConstraintNode";
 import MathNode from "./nodes/MathNode";
@@ -13,7 +14,6 @@ import OutputNode from "./nodes/OutputNode";
 import StringListNode from './nodes/StringListNode';
 import FunctionNode from "./nodes/FunctionNode";
 import * as ValueNodes from "./nodes/ValueNodes";
-import DiscreteNode from './nodes/random/custom/DiscreteNode';
 
 export default function createEditor(): Editor {
 

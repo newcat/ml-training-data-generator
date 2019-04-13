@@ -1,8 +1,6 @@
 import { Node } from "@baklavajs/core";
 import RandomHelper from "../randomHelper";
-import RandomSampler from "./randomSampler";
-import Curve, { Vector2D } from "./curve";
-import CurveStep from "./curveStep";
+import RandomSamplerDiscrete from "./randomSamplerDiscrete";
 
 export default class DiscreteNode extends Node {
 
@@ -14,8 +12,8 @@ export default class DiscreteNode extends Node {
     private defaultValue: number = 5;
     private defaultMin: number = 0;
     private defaultMax: number = 10;
-    private curve: Curve|null = null;
-    private randomSampler: RandomSampler|null = null;
+    private min: number = 0;
+    private distribution: RandomSamplerDiscrete|null = null;
 
     constructor() {
         super();
@@ -32,32 +30,26 @@ export default class DiscreteNode extends Node {
     }
 
     public prepare() {
-        /*
         // Read option values
         const seed = this.getInterface("Seed").value;
         const value = this.getOptionValue("Discrete Distribution");
+        this.min = this.getInterface("Min").value;
+        const values = value.values;
 
         // Set uniform random generator with seed
         this.rng = new RandomHelper(seed, false);
 
-        this.curve = new CurveStep(value.points, "mid");
-        const interpolatedPoints = this.curve.curve();
+        // Transform values to actual points
+        const points = values.map((value: number, index: number) => [index, value]);
 
         // Set custom random generator
-        this.randomSampler = new RandomSampler(interpolatedPoints);
-        this.randomSampler.calculateCdf();
-        */
+        this.distribution = new RandomSamplerDiscrete(points);
+        this.distribution.calculateCdf();
     }
 
     public calculate() {
-        /*
-        const min = this.getInterface("Min").value;
-        const max = this.getInterface("Max").value;
-
         const uniformRandom = this.rng!.uniform(this.state.index, { fixed: 8, min: 0, max: 1 });
-        const discreteRandom = this.randomSampler!.sample(uniformRandom) * (max - min) + min;
-        this.getInterface("Output").value = discreteRandom;
-        */
-       this.getInterface("Output").value = -1;
+        const discreteRandom = this.distribution!.sample(uniformRandom);
+        this.getInterface("Output").value = discreteRandom + this.min;
     }
 }
