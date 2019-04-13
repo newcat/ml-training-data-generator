@@ -5,6 +5,7 @@
         v-model="selectValue"
     ></select-option>
     <custom-random
+        :ref="customRandom"
         :loadedPoints="value.points"
         :min="min"
         :max="max"
