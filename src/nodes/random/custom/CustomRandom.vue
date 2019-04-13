@@ -1,7 +1,7 @@
 <template>
     <div class="chart-container" style="position: relative; width: 100%; height: 70vh; max-height: 1000px;">
         <canvas
-            ref="canvas"
+            ref="customCanvas"
             @mousedown="mouseDownHandler"
             @mousemove="mouseMoveHandler"
             @mouseup="mouseUpHandler"
@@ -14,9 +14,6 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import Curve, { Vector2D } from "./curve";
-import CurveMonotone from "./curveMonotone";
-import CurveLinear from "./curveLinear";
-import RandomSampler from "./randomSampler";
 import Chart, { ChartData, ChartType, ChartConfiguration, ChartPoint, ChartElementsOptions, defaults } from "chart.js";
 
 type Point2D = {x: number, y: number};
@@ -162,7 +159,7 @@ export default class CustomRandom extends Vue {
 
     mounted() {
         // Get canvas element via reference
-        this.canvas = this.$refs.canvas as HTMLCanvasElement;
+        this.canvas = this.$refs.customCanvas as HTMLCanvasElement;
 
         // Set canvas size
         this.canvas!.width = 1000;
@@ -351,37 +348,16 @@ export default class CustomRandom extends Vue {
         return {x: valueX, y: valueY};
     }
 
-    // Convert mouse position to its actual position in the canvas
-    // https://stackoverflow.com/questions/17130395/real-mouse-position-in-canvas
-    getMousePos(evt: MouseEvent) {
-        const rect = this.canvas!.getBoundingClientRect(); // abs. size of element
-        const scaleX = this.canvas!.width / rect.width;    // relationship bitmap vs. element for X
-        const scaleY = this.canvas!.height / rect.height;  // relationship bitmap vs. element for Y
-
-        return [
-            (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
-            (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
-        ] as Vector2D;
-    }
-
     get chartData() {
         const points = this.loadedPoints;
         const hash: any = {};
         const data: Array<Point2D> = [];
-        let maxOccurrences = 1;
         for (let i = 0, l = points.length; i < l; i++) {
             const pointKey = points[i].join('|');
             if (!hash[pointKey]) {
                 const point = { x: points[i][0], y: points[i][1] };
                 data.push(point);
                 hash[pointKey] = true;
-            }
-        }
-        const radiusVector: number[] = new Array(data.length);
-        for (const pointKey in hash) {
-            if (hash.hasOwnProperty(pointKey)) {
-                const pointData = hash[pointKey];
-                radiusVector[pointData[1]] = pointData[0];
             }
         }
         return data;
