@@ -75,7 +75,7 @@ export default class CustomOption extends Vue {
         return this.maxInterface.value;
     }
 
-    // Save points from component vie event
+    // Save points from component via event
     updatePoints(points: Vector2D[]) {
         this.value.points = points;
     }
