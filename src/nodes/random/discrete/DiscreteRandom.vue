@@ -66,8 +66,9 @@ export default class DiscreteRandom extends Vue {
 
     // Data points
     values: number[] = [];
+    lastMousePos: {x: number, y: number} = {x: 0, y: 0};
 
-    // Curve configuration
+    // Chart configuration
     textColor: string = "white";
     axisColor: string = "rgba(100,100,100,0.8)";
     gridColor: string = "rgba(100,100,100,0.3)";
@@ -180,11 +181,7 @@ export default class DiscreteRandom extends Vue {
     setChartData(data: number[]) {
         const datasets = this.chart!.data!.datasets;
         if (datasets && datasets.length > 0) {
-            datasets.forEach((dataset) => {
-                dataset.data = data;
-            })
-        } else {
-            throw new Error("Undefined dataset");
+            datasets[0]!.data = data;
         }
     }
 
@@ -195,17 +192,47 @@ export default class DiscreteRandom extends Vue {
         this.chart!.update();
     }
 
-    setBarToMouse(e: MouseEvent) {
+    setBars(e: MouseEvent) {
+        const mousePos = this.getPointFromChart(e);
+        const lastMousePos = this.lastMousePos;
+
+        // Determine from to 
+        let startPos;
+        let endPos;
+        if(lastMousePos.x <= mousePos.x) {
+            startPos = lastMousePos;
+            endPos = mousePos;
+        } else {
+            startPos = mousePos;
+            endPos = lastMousePos;     
+        }
+
+        // Linear interpolate start and end pos
+        const x1 = startPos.x;
+        const x2 = endPos.x;
+        const y1 = startPos.y;
+        const y2 = endPos.y;
+        const m = (x2 - x1) === 0 ? 0 : (y2 - y1) / (x2 - x1);
+        const c = y1 - m * x1; 
+        for (let i = x1; i <= x2; i++) {
+            // Update y value of point at current x value
+            this.values[i] = m * i + c;
+        }
+
+        // Update last mouse pos
+        this.lastMousePos = mousePos;
+        this.chart!.update();
+    }
+
+    setBarToMouse(pos: {x: number, y: number}) {
         // Set limits of chart
-        let pos = this.getPointFromChart(e);
         if (pos.y < 0) pos.y = 0;
         if (pos.y > 100) pos.y = 100; 
         if (pos.x < 0) pos.x = 0; 
         if (pos.x > this.values.length - 1) pos.x = this.values.length - 1;
 
         // Update y value of point at current x value
-        this.values[parseInt(pos.x)] = pos.y;
-        this.setChartData(this.values);
+        this.values[Math.floor(pos.x)] = pos.y;
         this.update();
     }
 
@@ -216,7 +243,9 @@ export default class DiscreteRandom extends Vue {
         // Keep track on left click state
         if (e.button === 0) {
             this.LMBClicked = true;
-            this.setBarToMouse(e);
+            const mousePos = this.getPointFromChart(e);
+            this.setBarToMouse(mousePos);
+            this.lastMousePos = mousePos;
         }
 
         this.update();
@@ -225,7 +254,7 @@ export default class DiscreteRandom extends Vue {
     mouseMoveHandler(e: MouseEvent) {
         // On mouse left click
         if (this.LMBClicked) {
-            this.setBarToMouse(e);
+            this.setBars(e);
         }
     }
 
@@ -245,7 +274,7 @@ export default class DiscreteRandom extends Vue {
         const valueX = scaleX.getValueForPixel(e.offsetX);
         const scaleY = scales["y-axis-0"];
         const valueY = scaleY.getValueForPixel(e.offsetY);
-        return {x: valueX, y: valueY};
+        return {x: parseInt(valueX), y: parseInt(valueY)};
     }
 
     get chartLabels() {

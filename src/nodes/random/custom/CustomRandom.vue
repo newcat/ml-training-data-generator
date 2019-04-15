@@ -98,7 +98,11 @@ export default class CustomRandom extends Vue {
                         beginAtZero: true,
                         min: 0,
                         max: 100,
-                        stepSize: 10
+                        stepSize: 10,
+                        callback: (label, index, labels) => {
+                            // Don't show ticks
+                            return "";
+                        }
                     },
                     gridLines: {
                         color: this.gridColor,
@@ -138,10 +142,12 @@ export default class CustomRandom extends Vue {
             tooltips: {
                 callbacks: {
                     label: (tooltipitem, data) => {
+                        const xLabel: string = tooltipitem.xLabel ? tooltipitem.xLabel as string : "?";
+                        const yLabel: string = tooltipitem.yLabel ? tooltipitem.yLabel as string : "?";
                         let label: string = "(";
-                        label += Math.round((parseFloat(tooltipitem.xLabel!) / 100 * (this.max - this.min) + this.min) * Math.pow(10, this.digits)) / Math.pow(10, this.digits);
+                        label += Math.round((parseFloat(xLabel) / 100 * (this.max - this.min) + this.min) * Math.pow(10, this.digits)) / Math.pow(10, this.digits);
                         label += ","
-                        label += Math.round(parseFloat(tooltipitem.yLabel!) * Math.pow(10, this.digits)) / Math.pow(10, this.digits);
+                        label += Math.round(parseFloat(yLabel) * Math.pow(10, this.digits)) / Math.pow(10, this.digits);
                         label += ")"
                         return label;
                     }
