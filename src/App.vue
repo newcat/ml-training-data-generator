@@ -17,7 +17,7 @@ import { Component, Prop, Vue, Provide } from "vue-property-decorator";
 import { OptionPlugin } from "@baklavajs/plugin-options-vue";
 
 import createEditor from "@/createEditor";
-import { Calculator, IProgressEventData } from '@/calculator';
+import { Calculator, IProgressEventData } from '@/calculationManager';
 import { IPlugin } from '@baklavajs/core';
 import { ViewPlugin } from '@baklavajs/plugin-renderer-vue';
 

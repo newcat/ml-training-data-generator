@@ -15,7 +15,7 @@ div.bg-dark.text-light
 <script lang="ts">
 import { Component, Prop, Vue, Inject } from "vue-property-decorator";
 import AppVue from "@/App.vue";
-import { IResult } from "@/calculator";
+import { IResult } from "@/calculationManager";
 
 @Component
 export default class Preview extends Vue {
