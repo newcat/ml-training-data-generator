@@ -1,0 +1,10 @@
+*.synctex.gz
+.project
+output/
+dokumentation.pdf
+*.pdf
+*.swp
+*.backup
+*.bak
+*.orig
+*compile.log
