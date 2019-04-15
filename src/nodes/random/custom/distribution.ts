@@ -1,6 +1,6 @@
 export type Vector2D = [number, number];
 
-export default abstract class Curve {
+export default abstract class Distribution {
 
     xs!: number[];
     ys!: number[];

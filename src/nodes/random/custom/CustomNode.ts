@@ -1,10 +1,9 @@
 import { Node } from "@baklavajs/core";
 import RandomHelper from "../randomHelper";
 import RandomSampler from "./randomSampler";
-import Curve, { Vector2D } from "./curve";
-import CurveMonotone from "./curveMonotone";
-import CurveLinear from "./curveLinear";
-import CurveStep from "./curveStep";
+import Distribution, { Vector2D } from "./distribution";
+import MonotoneDistribution from "./monotoneDistribution";
+import LinearDistribution from "./linearDistribution";
 
 export default class CustomNode extends Node {
 
@@ -12,9 +11,9 @@ export default class CustomNode extends Node {
     public name = this.type;
 
     private rng: RandomHelper|null = null;
-    private defaultPoints: Vector2D[] = [[0, 100], [900, 100]];
+    private defaultPoints: Vector2D[] = [[0, 0], [50, 50], [100, 20]];
     private defaultMode: string = "curveMonotone";
-    private curve: Curve|null = null;
+    private curve: Distribution|null = null;
     private randomSampler: RandomSampler|null = null;
 
     constructor() {
@@ -39,23 +38,11 @@ export default class CustomNode extends Node {
         // Set curve interpolator
         switch (value.mode) {
             case "curveMonotone": {
-                this.curve = new CurveMonotone(value.points);
+                this.curve = new MonotoneDistribution(value.points);
                 break;
             }
             case "curveLinear": {
-                this.curve = new CurveLinear(value.points);
-                break;
-            }
-            case "curveStepMid": {
-                this.curve = new CurveStep(value.points, "mid");
-                break;
-            }
-            case "curveStepAfter": {
-                this.curve = new CurveStep(value.points, "after");
-                break;
-            }
-            case "curveStepBefore": {
-                this.curve = new CurveStep(value.points, "before");
+                this.curve = new LinearDistribution(value.points);
                 break;
             }
             default: {

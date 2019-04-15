@@ -24,6 +24,7 @@ import { ViewPlugin } from '@baklavajs/plugin-renderer-vue';
 import FunctionSidebarOption from "@/options/CodeOption.vue";
 import StringListOption from "@/options/StringListOption";
 import CustomRandomOption from "@/nodes/random/custom/CustomOption.vue";
+import DiscreteRandomOption from "@/nodes/random/discrete/DiscreteOption.vue";
 
 import Navbar from "@/components/Navbar.vue";
 import ProgressModal from "@/components/ProgressModal.vue";
@@ -77,6 +78,7 @@ export default class extends Vue {
         this.plugin.registerOption("FunctionSidebarOption", FunctionSidebarOption);
         this.plugin.registerOption("StringListOption", StringListOption);
         this.plugin.registerOption("CustomRandomOption", CustomRandomOption);
+        this.plugin.registerOption("DiscreteRandomOption", DiscreteRandomOption);
 
         this.calculator.events.progress.addListener(this, (p) => this.onCalculationProgress(p));
         this.calculator.events.finished.addListener(this, () => this.onCalculationFinished());
@@ -94,6 +96,12 @@ export default class extends Vue {
                 this.settings = state.mlsettings;
             }
             return state;
+        });
+        this.plugin.hooks.renderNode.tap(this, (v) => {
+            if (v.data.type === "OutputNode") {
+                (v.$el as HTMLElement).style.backgroundColor = "#5379B5CC";
+            }
+            return v;
         });
     }
 
