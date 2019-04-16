@@ -45,7 +45,7 @@ export default class DiscreteNode extends Node {
 
         // Set custom random generator
         this.distribution = new DiscreteDistribution(points);
-        this.distribution.integrate();
+        this.distribution.integrate(this.distribution.points);
     }
 
     public calculate() {

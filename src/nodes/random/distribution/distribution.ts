@@ -15,8 +15,8 @@ export default abstract class Distribution {
 
     abstract curve(): Vector2D[];
 
-    integrate(): void {
-        const ps = this.points;
+    integrate(curve: Vector2D[]): void {
+        const ps = curve;
         const cdf: Vector2D[] = [];
         cdf.push([0, 0]);
         // Calculate areas

@@ -47,8 +47,8 @@ export default class CustomNode extends Node {
                 throw new Error("Invalid mode");
             }
         }
-        this.distribution!.curve();
-        this.distribution!.integrate();
+        const c = this.distribution!.curve();
+        this.distribution!.integrate(c);
     }
 
     public calculate() {
