@@ -99,10 +99,7 @@ export default class CustomRandom extends Vue {
                         min: 0,
                         max: 100,
                         stepSize: 10,
-                        callback: (label, index, labels) => {
-                            // Don't show ticks
-                            return "";
-                        }
+                        callback: (label, index, labels) => ""
                     },
                     gridLines: {
                         color: this.gridColor,
@@ -116,12 +113,11 @@ export default class CustomRandom extends Vue {
                         min: 0,
                         max: 100,
                         stepSize: 10,
-                        callback: (label, index, labels) => {
+                        callback: (label, index, labels) =>
                             // Apply min max to ticks and round by digits
-                            return Math.round(
-                                    (label / 100 * (this.max - this.min) + this.min) * Math.pow(10, this.digits)
-                                ) / Math.pow(10, this.digits);
-                        }
+                            Math.round(
+                                (label / 100 * (this.max - this.min) + this.min) * Math.pow(10, this.digits)
+                            ) / Math.pow(10, this.digits)
                     },
                     gridLines: {
                         color: this.gridColor,

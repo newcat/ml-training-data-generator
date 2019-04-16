@@ -99,7 +99,8 @@ export default class DiscreteRandom extends Vue {
                         beginAtZero: true,
                         min: 0,
                         max: 100,
-                        stepSize: 10
+                        stepSize: 10,
+                        callback: (label, index, labels) => ""
                     },
                 }]
             },
