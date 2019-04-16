@@ -13,8 +13,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { Vector2D } from "../distribution/distribution";
 import Chart, { ChartData, ChartType, ChartConfiguration, ChartPoint, ChartElementsOptions, defaults } from "chart.js";
+import Distribution, { Vector2D } from "../distribution/distribution";
+import MonotoneDistribution from "../distribution/monotoneDistribution";
+import LinearDistribution from "../distribution/linearDistribution";
 
 interface IPoint2D { x: number; y: number; }
 
@@ -27,7 +29,7 @@ export default class CustomRandom extends Vue {
     @Prop()
     loadedPoints!: Vector2D[];
 
-    @Prop({default: "curveMonotone"})
+    @Prop({default: "monotone"})
     mode!: string;
 
     @Prop()
@@ -39,7 +41,7 @@ export default class CustomRandom extends Vue {
     @Watch("mode")
     onModeChanged() {
         switch (this.mode) {
-            case "curveMonotone":
+            case "monotone":
                 this.chart!.data.datasets![0].cubicInterpolationMode = "monotone";
                 break;
             default:
@@ -54,6 +56,7 @@ export default class CustomRandom extends Vue {
     canvas: HTMLCanvasElement|null = null;
     context: CanvasRenderingContext2D|null = null;
     chart!: Chart;
+    distribution!: Distribution;
 
     // Data points
     points: IPoint2D[] = [];

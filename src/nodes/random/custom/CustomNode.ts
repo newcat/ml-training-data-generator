@@ -11,7 +11,7 @@ export default class CustomNode extends Node {
 
     private rng: RandomHelper|null = null;
     private defaultPoints: Vector2D[] = [[0, 0], [50, 50], [100, 20]];
-    private defaultMode: string = "curveMonotone";
+    private defaultMode: string = "monotone";
     private distribution: Distribution|null = null;
 
     constructor() {
@@ -35,11 +35,11 @@ export default class CustomNode extends Node {
 
         // Set curve interpolator
         switch (value.mode) {
-            case "curveMonotone": {
+            case "monotone": {
                 this.distribution = new MonotoneDistribution(value.points);
                 break;
             }
-            case "curveLinear": {
+            case "linear": {
                 this.distribution = new LinearDistribution(value.points);
                 break;
             }

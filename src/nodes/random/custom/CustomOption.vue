@@ -38,7 +38,7 @@ export default class CustomOption extends Vue {
 
     selectValue: { selected: string, items: string[] } = {
         selected: this.value.mode,
-        items: ["curveMonotone", "curveLinear"]
+        items: ["monotone", "linear"]
     };
 
     minInterface: NodeInterface = this.node.getInterface("Min");
