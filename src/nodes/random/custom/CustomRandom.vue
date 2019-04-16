@@ -18,7 +18,7 @@ import Distribution, { Vector2D } from "../distribution/distribution";
 import MonotoneDistribution from "../distribution/monotoneDistribution";
 import LinearDistribution from "../distribution/linearDistribution";
 
-type Point2D = { x: number, y: number }
+interface IPoint2D { x: number; y: number; }
 
 @Component
 export default class CustomRandom extends Vue {
@@ -58,12 +58,12 @@ export default class CustomRandom extends Vue {
     chart!: Chart;
     distribution!: Distribution;
     fullIntegral: number = 99;
-    
+
     // Data points
-    points: Point2D[] = [];
-    draggedPoint: Point2D |null = null;
-    startPoint: Point2D |null = null;
-    endPoint: Point2D |null = null;
+    points: IPoint2D[] = [];
+    draggedPoint: IPoint2D |null = null;
+    startPoint: IPoint2D |null = null;
+    endPoint: IPoint2D |null = null;
     mousePosition: Vector2D = [0, 0];
 
     // Curve configuration
@@ -103,7 +103,8 @@ export default class CustomRandom extends Vue {
                         min: 0,
                         max: 100,
                         stepSize: 10,
-                        // 10 refers to stepSize
+                        // 10 refers to x-axis stepSize - normally, x-axis goes from 0 to 100 but values are mapped
+                        // to [min; max] -> 10 steps * 10 ticks = 100 -> width of  1 unit is 10
                         callback: (label, index, labels) => {
                             const i = this.getFullIntegral();
                             if (i !== 0) {
@@ -154,8 +155,10 @@ export default class CustomRandom extends Vue {
                     label: (tooltipitem, data) => {
                         // Retrieve actual labels
                         const xLabel: string = tooltipitem.xLabel ? tooltipitem.xLabel as string : "0";
-                        // Meaning of y is: Probability for an occurrence of a number = Area of x - whereas x is 1 TICK
-                        const yLabel: string = tooltipitem.yLabel ? (parseFloat(tooltipitem.yLabel as string) * 10 / this.getFullIntegral() * 100).toString() as string : "0";
+                        // Meaning of y is: Probability for an occurrence of a number = Area of x - x is 1 TICK
+                        const yLabel: string = tooltipitem.yLabel ?
+                            (parseFloat(tooltipitem.yLabel as string) * 10 / this.getFullIntegral() * 100).toString()
+                            : "0";
                         // Build custom label string
                         let label: string = "(";
                         // Map x: [0 - 100] to [min - max] and round to digits
@@ -206,7 +209,7 @@ export default class CustomRandom extends Vue {
     setupPoints() {
         // Copy loaded points that are within bounds
         this.points = [];
-        const points: Point2D[] = this.points;
+        const points: IPoint2D[] = this.points;
         this.loadedPoints.forEach((point) => {
             if (point[0] >= 0 &&
                 point[0] <= 100 &&
@@ -217,8 +220,8 @@ export default class CustomRandom extends Vue {
         });
 
         // Setup references to start and end point
-        let foundStartPoint: Point2D |null = null;
-        let foundEndPoint: Point2D |null = null;
+        let foundStartPoint: IPoint2D |null = null;
+        let foundEndPoint: IPoint2D |null = null;
         points.forEach((point) => {
             if (!foundStartPoint && point.x === 0) {
                 foundStartPoint = point;
@@ -246,7 +249,7 @@ export default class CustomRandom extends Vue {
         this.update();
     }
 
-    setChartData(data: Point2D[]) {
+    setChartData(data: IPoint2D[]) {
         const datasets = this.chart!.data!.datasets;
         if (datasets && datasets.length > 0) {
             datasets.forEach((dataset) => {
@@ -310,7 +313,7 @@ export default class CustomRandom extends Vue {
         this.update();
     }
 
-    orderedInsert(data: Point2D[], point: Point2D) {
+    orderedInsert(data: IPoint2D[], point: IPoint2D) {
         // insert target into arr such that arr[first..last] is sorted,
         // given that arr[first..last-1] is already sorted.
         // Return the position where inserted.
@@ -407,7 +410,7 @@ export default class CustomRandom extends Vue {
     get chartData() {
         const points = this.loadedPoints;
         const hash: any = {};
-        const data: Point2D[] = [];
+        const data: IPoint2D[] = [];
         for (let i = 0, l = points.length; i < l; i++) {
             const pointKey = points[i].join('|');
             if (!hash[pointKey]) {
