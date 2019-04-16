@@ -1,28 +1,44 @@
-import { Vector2D } from "../custom/distribution";
+import Distribution, { Vector2D } from './distribution';
 
-export default class RandomSamplerDiscrete {
-
-    distribution!: Vector2D[];
-    cdf: Vector2D[] = [];
+export default class DiscreteDistribution extends Distribution {
 
     constructor(points: Vector2D[]) {
-        // Pass points data
-        this.setDistribution(points);
+        super(points);
     }
 
-    setDistribution(distribution: Vector2D[]) {
-        this.distribution = [];
-        distribution.forEach((point) => {
-            this.distribution.push([point[0], point[1]]);
-        });
+    interpolate(x: number) {
+        const ps = this.points;
+        if (x >= ps[ps.length - 1][0]) {
+            return ps[ps.length - 1][1];
+        }
+        // Search for x
+        let i = 0;
+        for (i = 0; i < ps.length; i++) {
+            if (x < ps[i][0]) {
+                break;
+            }
+        }
+        // Compare x with mid of current and previous x
+        const m = (ps[i - 1][1] - ps[i][1]) / (ps[i - 1][0] - ps[i][0]);
+        const y = m * x + ps[i][1] - m * ps[i][0];
+        return y;
     }
 
-    calculateCdf() {
-        const distribution = this.distribution;
+    curve() {
+        const ps = this.points;
+        const data: Vector2D[] = [];
+        for (let i = 0; i < ps[ps.length - 1][0]; i++) {
+            data.push([i, this.interpolate(i)]);
+        }
+        return data;
+    }
+
+    integrate() {
+        const ps = this.points;
         const cdf = this.cdf;
         cdf.push([0, 0]);
         // Calculate areas
-        for (const point of distribution) {
+        for (const point of ps) {
             cdf.push([
                     point[0] + 1,
                     point[1]

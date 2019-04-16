@@ -1,6 +1,7 @@
 import { Node } from "@baklavajs/core";
 import RandomHelper from "../randomHelper";
-import RandomSamplerDiscrete from "./randomSamplerDiscrete";
+import Distribution from "../distribution/distribution";
+import DiscreteDistribution from "../distribution/discreteDistribution";
 
 export default class DiscreteNode extends Node {
 
@@ -13,7 +14,7 @@ export default class DiscreteNode extends Node {
     private defaultMin: number = 0;
     private defaultMax: number = 10;
     private min: number = 0;
-    private distribution: RandomSamplerDiscrete|null = null;
+    private distribution: Distribution|null = null;
 
     constructor() {
         super();
@@ -43,8 +44,8 @@ export default class DiscreteNode extends Node {
         const points = values.map((val: number, index: number) => [index, val]);
 
         // Set custom random generator
-        this.distribution = new RandomSamplerDiscrete(points);
-        this.distribution.calculateCdf();
+        this.distribution = new DiscreteDistribution(points);
+        this.distribution.integrate();
     }
 
     public calculate() {

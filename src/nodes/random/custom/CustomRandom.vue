@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import { Vector2D } from "./distribution";
+import { Vector2D } from "../distribution/distribution";
 import Chart, { ChartData, ChartType, ChartConfiguration, ChartPoint, ChartElementsOptions, defaults } from "chart.js";
 
 interface IPoint2D { x: number; y: number; }
