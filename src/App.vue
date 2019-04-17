@@ -26,6 +26,7 @@ import { ViewPlugin } from '@baklavajs/plugin-renderer-vue';
 import FunctionSidebarOption from "@/options/CodeOption.vue";
 import StringListOption from "@/options/StringListOption";
 import CustomRandomOption from "@/nodes/random/custom/CustomOption.vue";
+import DiscreteRandomOption from "@/nodes/random/discrete/DiscreteOption.vue";
 
 import Navbar from "@/components/Navbar.vue";
 import ProgressModal from "@/components/ProgressModal.vue";
@@ -84,6 +85,7 @@ export default class extends Vue {
         this.plugin.registerOption("FunctionSidebarOption", FunctionSidebarOption);
         this.plugin.registerOption("StringListOption", StringListOption);
         this.plugin.registerOption("CustomRandomOption", CustomRandomOption);
+        this.plugin.registerOption("DiscreteRandomOption", DiscreteRandomOption);
 
         this.calculator.events.progress.addListener(this, (p) => this.onCalculationProgress(p));
         this.calculator.events.finished.addListener(this, () => this.onCalculationFinished());

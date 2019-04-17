@@ -1,22 +1,22 @@
 <template>
-    <canvas
-        ref="canvas"
-        @mousedown="mouseDownHandler"
-        @mousemove="mouseMoveHandler"
-        @mouseup="mouseUpHandler"
-        @mouseleave="mouseUpHandler"
-        @contextmenu.prevent=""
-    ></canvas>
+    <div class="chart-container" style="position: relative; width: 100%; height: 70vh; max-height: 1000px;">
+        <canvas
+            ref="customCanvas"
+            @mousedown="mouseDownHandler"
+            @mousemove="mouseMoveHandler"
+            @mouseup="mouseUpHandler"
+            @mouseleave="mouseUpHandler"
+            @contextmenu.prevent=""
+        ></canvas>
+    </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import Curve, { Vector2D } from "./curve";
-import CurveMonotone from "./curveMonotone";
-import CurveStep from "./curveStep";
-import CurveLinear from "./curveLinear";
-import RandomSampler from "./randomSampler";
-import CanvasHelper from "./CanvasHelper";
+import Chart, { ChartData, ChartType, ChartConfiguration, ChartPoint, ChartElementsOptions, defaults } from "chart.js";
+import { Vector2D } from "../distribution/distribution";
+
+interface IPoint2D { x: number; y: number; }
 
 @Component
 export default class CustomRandom extends Vue {
@@ -27,7 +27,7 @@ export default class CustomRandom extends Vue {
     @Prop()
     loadedPoints!: Vector2D[];
 
-    @Prop({default: "curveMonotone"})
+    @Prop({default: "monotone"})
     mode!: string;
 
     @Prop()
@@ -36,69 +36,143 @@ export default class CustomRandom extends Vue {
     @Prop()
     max!: number;
 
-    @Watch("loadedPoints")
-    onLoadedPointsChanged() {
-        this.setupPoints();
-    }
-
-    @Watch("min")
-    onMinChanged() {
-        this.update();
-    }
-
-    @Watch("max")
-    onMaxChanged() {
-        this.update();
-    }
-
     @Watch("mode")
     onModeChanged() {
+        switch (this.mode) {
+            case "monotone":
+                this.chart!.data.datasets![0].cubicInterpolationMode = "monotone";
+                break;
+            default:
+                this.chart!.data.datasets![0].cubicInterpolationMode = "default";
+                this.chart!.data.datasets![0].lineTension = 0;
+                break;
+        }
         this.update();
     }
 
     // Canvas
     canvas: HTMLCanvasElement|null = null;
     context: CanvasRenderingContext2D|null = null;
-    canvasHelper: CanvasHelper|null = null;
-    margin: number = 50;
+    chart!: Chart;
 
     // Data points
-    points: Vector2D[] = [];
-    interpolatedPoints: Vector2D[] = [];
-    draggedPoint: Vector2D|null = null;
-    selectedPoint: Vector2D|null = null;
-    startPoint: Vector2D|null = null;
-    endPoint: Vector2D|null = null;
+    points: IPoint2D[] = [];
+    draggedPoint: IPoint2D |null = null;
+    startPoint: IPoint2D |null = null;
+    endPoint: IPoint2D |null = null;
     mousePosition: Vector2D = [0, 0];
 
-    // Curve
-    curve: Curve|null = null;
-
     // Curve configuration
-    curveSelectionOffsetX: number = 10;
-    curveSelectionOffsetY: number = 1000;
-    pointRadius: number = 10;
-    curveColor: string = "rgba(250,250,250,1)";
-
-    // Axis configuration
-    gridSize: number = 20; // length of a cell's edge
-    gridColor = "rgba(100,100,200,0.1)";
-    axisColor = "rgba(100,100,100,1)";
-    cdfColor = "rgba(190, 220, 250, 0.8";
+    textColor: string = "white";
+    axisColor: string = "rgba(100,100,100,0.8)";
+    gridColor: string = "rgba(100,100,100,0.3)";
+    curveColor: string = "rgba(200,200,200,1)";
+    digits: number = 1;
+    pointRadius: number = 7;
 
     // Click state
     clicked: boolean = false;
+    options: ChartConfiguration = {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Probability Distribution',
+                data: this.chartData,
+                borderColor: this.curveColor,
+                backgroundColor: this.areaColor,
+                fill: true,
+                pointRadius: this.pointRadius,
+                pointHitRadius: this.pointRadius,
+                pointHoverRadius: this.pointRadius + 2,
+                showLine: true,
+                cubicInterpolationMode: 'monotone'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: this.textColor,
+                        beginAtZero: true,
+                        min: 0,
+                        max: 100,
+                        stepSize: 10,
+                        callback: (label, index, labels) => ""
+                    },
+                    gridLines: {
+                        color: this.gridColor,
+                        zeroLineColor: this.axisColor
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: this.textColor,
+                        beginAtZero: true,
+                        min: 0,
+                        max: 100,
+                        stepSize: 10,
+                        callback: (label, index, labels) =>
+                            // Apply min max to ticks and round by digits
+                            Math.round(
+                                (label / 100 * (this.max - this.min) + this.min) * Math.pow(10, this.digits)
+                            ) / Math.pow(10, this.digits)
+                    },
+                    gridLines: {
+                        color: this.gridColor,
+                        zeroLineColor: this.axisColor
+                    }
+                }],
+            },
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    fontColor: this.textColor,
+                }
+            },
+            elements: {
+                point: {
+                    borderColor: "white",
+                    backgroundColor: "#C3C3C3"
+                }
+            },
+            tooltips: {
+                callbacks: {
+                    label: (tooltipitem, data) => {
+                        // Retrieve actual labels
+                        const xLabel: string = tooltipitem.xLabel ? tooltipitem.xLabel as string : "0";
+                        // Build custom label string
+                        let label: string = "(";
+                        // Map x: [0 - 100] to [min - max] and round to digits
+                        label += Math.round((parseFloat(xLabel) / 100 * (this.max - this.min) + this.min) *
+                            Math.pow(10, this.digits)) / Math.pow(10, this.digits);
+                        label += ")";
+                        return label;
+                    }
+                }
+            },
+            animation: {
+                duration: 0, // general animation time
+            },
+            hover: {
+                animationDuration: 0, // duration of animations when hovering an item
+            },
+            responsiveAnimationDuration: 0, // animation duration after a resize
+        }
+    };
 
     mounted() {
-        // Get canvas element
-        this.canvas = this.$refs.canvas as HTMLCanvasElement;
-        this.context = this.canvas!.getContext("2d");
-        this.canvasHelper = new CanvasHelper(this.canvas, this.context!);
+        // Get canvas element via reference
+        this.canvas = this.$refs.customCanvas as HTMLCanvasElement;
 
-        // To preserve responsiveness, canvas is set to 100% width regarding parent container element.
-        // The height will be dependend on the actual canvas resolution / ratio.
+        // Set canvas size
         this.canvas!.width = 1000;
         this.canvas!.height	= 1000;
+
+        // Setup Chart
+        this.context = this.canvas!.getContext("2d");
+        this.chart = new Chart(this.context!, this.options);
 
         // Setup points, startPoint, endPoint from loadedPoints
         this.setupPoints();
@@ -106,207 +180,165 @@ export default class CustomRandom extends Vue {
 
     setupPoints() {
         // Copy loaded points that are within bounds
-        const points: Vector2D[] = [];
+        this.points = [];
+        const points: IPoint2D[] = this.points;
         this.loadedPoints.forEach((point) => {
             if (point[0] >= 0 &&
-                point[0] <= this.editorBounds.right - this.editorBounds.left &&
+                point[0] <= 100 &&
                 point[1] >= 0 &&
-                point[1] <= this.editorBounds.bottom - this.editorBounds.top) {
-                points.push(point.slice() as Vector2D);
+                point[1] <= 100) {
+                points.push({x: point[0], y: point[1]});
             }
         });
 
         // Setup references to start and end point
-        let foundStartPoint: Vector2D|null = null;
-        let foundEndPoint: Vector2D|null = null;
+        let foundStartPoint: IPoint2D |null = null;
+        let foundEndPoint: IPoint2D |null = null;
         points.forEach((point) => {
-            if (!foundStartPoint && point[0] === 0) {
+            if (!foundStartPoint && point.x === 0) {
                 foundStartPoint = point;
             }
-            if (!foundEndPoint && point[0] === this.editorBounds.right - this.editorBounds.left) {
+            if (!foundEndPoint && point.x === 100) {
                 foundEndPoint = point;
             }
         });
+
+        // If there are no start and end points, add them
         if (!foundStartPoint) {
-            foundStartPoint = [0, 0];
+            foundStartPoint = {x: 0, y: 0};
             points.push(foundStartPoint);
         }
         if (!foundEndPoint) {
-            foundEndPoint = [this.editorBounds.right - this.editorBounds.left, 0];
+            foundEndPoint = {x: 100, y: 0};
             points.push(foundEndPoint);
         }
         this.startPoint = foundStartPoint;
         this.endPoint = foundEndPoint;
 
-        // Pass points to this.points only at the end to prevent spamming watchers
-        this.points = points;
+        this.setChartData(points);
 
         // Update editor
         this.update();
     }
 
-    update() {
-        const canvasHelper = this.canvasHelper!;
-
-        // Set curve interpolator
-        switch (this.mode) {
-            case "curveMonotone": {
-                this.curve = new CurveMonotone(this.points);
-                break;
-            }
-            case "curveLinear": {
-                this.curve = new CurveLinear(this.points);
-                break;
-            }
-            case "curveStepMid": {
-                this.curve = new CurveStep(this.points, "mid");
-                break;
-            }
-            case "curveStepAfter": {
-                this.curve = new CurveStep(this.points, "after");
-                break;
-            }
-            case "curveStepBefore": {
-                this.curve = new CurveStep(this.points, "before");
-                break;
-            }
-            default: {
-                throw new Error("Invalid mode");
-            }
+    setChartData(data: IPoint2D[]) {
+        const datasets = this.chart!.data!.datasets;
+        if (datasets && datasets.length > 0) {
+            datasets.forEach((dataset) => {
+                dataset.data = data;
+            });
+        } else {
+            throw new Error("Undefined dataset");
         }
-        this.interpolatedPoints = this.curve!.curve();
+    }
 
-        // Reset canvas
-        canvasHelper.clear();
-
-        // Draw x- and y-axis
-        canvasHelper.drawAxis(this.editorBounds, this.axisColor);
-
-        // Draw axis labels
-        const currentX = this.x(this.mousePosition[0]) / this.endPoint![0] * (this.max - this.min) + this.min;
-        canvasHelper.drawMarkers(this.min, this.max, currentX, this.editorBounds);
-
-        // Draw vertical grid lines
-        canvasHelper.drawGrid(this.editorBounds, this.gridSize, this.gridSize, this.gridColor);
-
-        // Draw interpolation graph
-        const transformedInterpolatedPoints = this.pointsToCanvas(this.interpolatedPoints);
-        canvasHelper.drawFilledCurve(transformedInterpolatedPoints, this.editorBounds, this.curveColor, this.areaColor);
-
-        // Draw points
-        const transformedPoints = this.pointsToCanvas(this.points);
-        const transformedSelectedPoint = (this.selectedPoint ? this.mp(this.selectedPoint) : null) as Vector2D|null;
-        canvasHelper.drawPoints(transformedPoints, transformedSelectedPoint, this.curveColor, this.pointRadius);
-
-        // Calculate cdf
-        const randomSampler = new RandomSampler(this.interpolatedPoints);
-        randomSampler.calculateCdf();
-        randomSampler.scaleCdf(this.editorBounds.bottom - this.editorBounds.top);
-
-        // Draw cdf
-        const transformedCdf = this.pointsToCanvas(randomSampler.cdf);
-        canvasHelper.drawCurve(transformedCdf, this.cdfColor);
-
-        // Draw label for cdf
-        canvasHelper.drawLabel("cummulative distribution function (cdf)",
-            this.editorBounds.right, this.editorBounds.top, this.cdfColor, "right");
-
-        // Draw crosshair
-        canvasHelper.drawCrosshair(this.mousePosition[0], this.mousePosition[1]);
+    @Watch("min")
+    @Watch("max")
+    update() {
+        // Update chart
+        this.chart!.update();
     }
 
     mouseDownHandler(e: MouseEvent) {
         e.preventDefault();
         e.stopPropagation();
 
-        const mousePos = this.getMousePos(e);
+        // Get point at mouse cursor
+        const firstPoint: any = this.chart.getElementAtEvent(e)[0];
 
-        // Check for collision with point within radius
-        const collision = this.points.find((point) => {
-            return this.distance([this.mx(point[0]), this.my(point[1])], [mousePos[0], mousePos[1]]) < this.pointRadius;
-        });
-
-        // Save point reference as dragged element
-        if (collision) {
-            this.draggedPoint = collision;
+        // On mouse left click
+        if (e.button === 0) {
+            // If a point has been selected
+            if (firstPoint) {
+                // Remember selected point
+                this.draggedPoint = this.points[firstPoint._index];
+            }
         }
 
-        // Add point on double left click
-        if (e.button === 0) {
-            // Get curve's interpolated y coordinate at mouse position x
-            const x = this.x(mousePos[0]);
-            const y = this.curve!.interpolate(x);
-
-            // Check if mouse y is near enough
-            if (Math.abs(this.my(y) - mousePos[1]) < this.curveSelectionOffsetY) {
-                // Double click registered on curve
-                if (this.clicked) {
-                    this.clicked = false;
-                    const newPoint: Vector2D =  [this.x(mousePos[0]), y];
-                    if (!this.points.find((point) => point[0] === newPoint[0] && point[1] === newPoint[1])) {
-                        this.points.push(newPoint);
-                        this.update();
-                    }
-                } else {
-                    this.clicked = true;
-                    setTimeout(() => { this.clicked = false; }, 500);
+        // On mouse right click
+        if (e.button === 2) {
+             // If a point has been selected
+            if (firstPoint) {
+                const selectedPoint = this.points[firstPoint._index];
+                // Prevent deletion of start or end point
+                if (selectedPoint !== this.startPoint && selectedPoint !== this.endPoint) {
+                    // Remove selected point
+                    this.points.splice(firstPoint._index, 1);
                 }
             }
         }
 
-        // Remove point on right click
-        if (e.button === 2) {
-            const found = this.points.findIndex((point) => {
-                return Math.abs(this.mx(point[0]) - mousePos[0]) < this.curveSelectionOffsetX
-                    && Math.abs(this.my(point[1]) - mousePos[1]) < this.curveSelectionOffsetY;
-                });
-            if (found >= 0 && this.points[found] !== this.startPoint && this.points[found] !== this.endPoint) {
-                this.points.splice(found, 1);
-                this.update();
+         // On mouse double left click
+        if (e.button === 0) {
+            if (this.clicked) {
+                this.clicked = false;
+                const point = this.getPointFromChart(e);
+                if (point.x >= 0 && point.x <= 100 && point.y >= 0 && point.y <= 100) {
+                    this.orderedInsert(this.points, point);
+                }
+            } else {
+                this.clicked = true;
+                setTimeout(() => { this.clicked = false; }, 500);
             }
         }
+
+        this.update();
+    }
+
+    orderedInsert(data: IPoint2D[], point: IPoint2D) {
+        // insert target into arr such that arr[first..last] is sorted,
+        // given that arr[first..last-1] is already sorted.
+        // Return the position where inserted.
+        const first = 0;
+        const last = data.length;
+        let i = last;
+        while ((i > first) && (point.x < data[i - 1].x)) {
+            data[i] = data[i - 1];
+            i = i - 1;
+        }
+        data[i] = point;
+        return i;
     }
 
     mouseMoveHandler(e: MouseEvent) {
-        const mousePos = this.getMousePos(e);
-
-        // Drag point that has been selected with mouse down.
-        // draggesPoint is a reference to a point in the points array.
-        // If draggedPoints gets changed, this.points will change and trigger update event via watcher!
+        // Move dragged point
         if (this.draggedPoint) {
-            if (this.draggedPoint !== this.startPoint && this.draggedPoint !== this.endPoint) {
-                if (mousePos[0] <= this.editorBounds.left) {
-                    this.draggedPoint[0] = this.x(this.editorBounds.left + 0.01);
-                } else if (mousePos[0] >= this.editorBounds.right) {
-                    this.draggedPoint[0] = this.x(this.editorBounds.right - 0.01);
-                } else {
-                    this.draggedPoint[0] = this.x(mousePos[0]);
-                }
-            }
-            if (mousePos[1] >= this.editorBounds.bottom) {
-                this.draggedPoint[1] = this.y(this.editorBounds.bottom);
-            } else if (mousePos[1] <= this.editorBounds.top) {
-                this.draggedPoint[1] = this.y(this.editorBounds.top);
+            const pos = this.getPointFromChart(e);
+            // Tolerance to remain order of start and end point
+            const tol = 0.001;
+            // Set limitation of chart
+            pos.y = pos.y < 0 ? 0 : pos.y;
+            pos.y = pos.y > 100 ? 100 : pos.y;
+            pos.x = pos.x < 0 ? 0 + tol : pos.x;
+            pos.x = pos.x > 100 ? 100 - tol : pos.x;
+
+            // Lock start and end point on y-axis
+            if (this.draggedPoint === this.startPoint || this.draggedPoint === this.endPoint) {
+                this.draggedPoint.y = pos.y;
             } else {
-                this.draggedPoint[1] = this.y(mousePos[1]);
+                // Manage order even when points are passing each other while moving
+                const index = this.points.indexOf(this.draggedPoint) as number;
+                if (index > 0 && index < this.points.length - 1) {
+                    if (this.points[index - 1].x > pos.x) {
+                        // Swap with previous point
+                        const temp = this.points[index];
+                        this.points[index] = this.points[index - 1];
+                        this.points[index - 1] = temp;
+                    } else if (this.points[index + 1].x < pos.x) {
+                        // Swap with next point
+                        const temp = this.points[index];
+                        this.points[index] = this.points[index + 1];
+                        this.points[index + 1] = temp;
+                    } else {
+                        // Prevent user from creating two points at same x-coordinate
+                        this.points[index].x += tol;
+                    }
+                }
+                this.draggedPoint.x = pos.x;
+                this.draggedPoint.y = pos.y;
             }
+            this.update();
         }
-
-        // Check for collision with points within radius
-        const collision = this.points.find((point) => {
-            return Math.sqrt(Math.pow(this.mx(point[0]) - mousePos[0], 2) +
-                Math.pow(this.my(point[1]) - mousePos[1], 2)) < 10;
-        });
-        if (collision) {
-            this.selectedPoint = collision;
-        } else {
-            this.selectedPoint = null;
-        }
-
-        // Update crosshair position
-        this.mousePosition = mousePos;
-
-        this.update();
     }
 
     mouseUpHandler(e: MouseEvent) {
@@ -314,71 +346,31 @@ export default class CustomRandom extends Vue {
         this.draggedPoint = null;
 
         // Emit update event whenever the points have been changed by either adding, removing or moving, update
-        this.$emit("pointsUpdated", this.points);
+        this.$emit("pointsUpdated", this.points.map((point) => [point.x, point.y]));
     }
 
-    // Convert mouse position to its actual position in the canvas
-    // https://stackoverflow.com/questions/17130395/real-mouse-position-in-canvas
-    getMousePos(evt: MouseEvent) {
-        const rect = this.canvas!.getBoundingClientRect(); // abs. size of element
-        const scaleX = this.canvas!.width / rect.width;    // relationship bitmap vs. element for X
-        const scaleY = this.canvas!.height / rect.height;  // relationship bitmap vs. element for Y
-
-        return [
-            (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
-            (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
-        ] as Vector2D;
+    getPointFromChart(e: MouseEvent) {
+        const scales: any = (this.chart as Chart.ChartOptions).scales;
+        const scaleX = scales["x-axis-1"];
+        const valueX = scaleX.getValueForPixel(e.offsetX);
+        const scaleY = scales["y-axis-1"];
+        const valueY = scaleY.getValueForPixel(e.offsetY);
+        return {x: valueX, y: valueY};
     }
 
-    // Map an x-coordinate to its actual position in the editor
-    mx(x: number) {
-        return x + this.editorBounds.left;
-    }
-
-    // Map an y-coordinate to its actual position in the editor
-    my(y: number) {
-        return this.editorBounds.bottom - y;
-    }
-
-    // Inverse of mx
-    x(mx: number) {
-        return mx - this.editorBounds.left;
-    }
-
-    // Inverse of _<
-    // @ts-ignore
-    y(my: number) {
-        return this.editorBounds.bottom - my;
-    }
-
-    p(mp: Vector2D) {
-        return [this.x(mp[0]), this.y(mp[1])];
-    }
-
-    mp(p: Vector2D) {
-        return [this.mx(p[0]), this.my(p[1])];
-    }
-
-    pointsToCanvas(points: Vector2D[]) {
-        const transformedPoints: Vector2D[] = [];
-        points.forEach((point) => {
-            transformedPoints.push([this.mx(point[0]), this.my(point[1])]);
-        });
-        return transformedPoints;
-    }
-
-    distance(a: Vector2D, b: Vector2D) {
-        return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
-    }
-
-    // Xs and Ys bounds of the editor
-    get editorBounds() {
-        return {
-            left: this.margin,
-            right: this.canvas!.width - this.margin,
-            bottom: this.canvas!.height - this.margin,
-            top: this.margin
-        };
+    get chartData() {
+        const points = this.loadedPoints;
+        const hash: any = {};
+        const data: IPoint2D[] = [];
+        for (let i = 0, l = points.length; i < l; i++) {
+            const pointKey = points[i].join('|');
+            if (!hash[pointKey]) {
+                const point = { x: points[i][0], y: points[i][1] };
+                data.push(point);
+                hash[pointKey] = true;
+            }
+        }
+        return data;
     }
 
     // Calculate a brighter color from curveColor
