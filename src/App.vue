@@ -7,6 +7,8 @@ div.d-flex.flex-column(style="width:100%;height:100%;")
     preview.flex-fill(v-else-if="$route.name === 'preview'")
     baklava-editor.flex-fill(v-else, :plugin="plugin")
 
+    notification(header="Error", v-model="showErrorNotification") {{ errorMessage }}
+
     progress-modal(:open="calculating", :progress="progress")
     
     input(ref="fileinput", type="file", accept="application/json", style="display: none;", @change="loadFile")
@@ -17,7 +19,7 @@ import { Component, Prop, Vue, Provide } from "vue-property-decorator";
 import { OptionPlugin } from "@baklavajs/plugin-options-vue";
 
 import createEditor from "@/createEditor";
-import { Calculator, IProgressEventData } from '@/calculator';
+import { Calculator, IProgressEventData } from '@/calculationManager';
 import { IPlugin } from '@baklavajs/core';
 import { ViewPlugin } from '@baklavajs/plugin-renderer-vue';
 
@@ -28,6 +30,7 @@ import DiscreteRandomOption from "@/nodes/random/discrete/DiscreteOption.vue";
 
 import Navbar from "@/components/Navbar.vue";
 import ProgressModal from "@/components/ProgressModal.vue";
+import Notification from "@/components/Notification.vue";
 import Settings from "@/views/Settings.vue";
 import Preview from "@/views/Preview.vue";
 
@@ -37,7 +40,8 @@ import Preview from "@/views/Preview.vue";
         Settings,
         Visualisation: () => import("@/views/Visualisation.vue"),
         Preview,
-        ProgressModal
+        ProgressModal,
+        Notification
     }
 })
 export default class extends Vue {
@@ -65,6 +69,9 @@ export default class extends Vue {
         [60, 60],
         [70, 70]
     ];
+
+    errorMessage = "";
+    showErrorNotification = false;
 
     @Provide("app")
     app = this;
@@ -106,6 +113,7 @@ export default class extends Vue {
     }
 
     onAction(action: string) {
+        this.showErrorNotification = true;
         switch (action) {
             case "load":
                 this.load();

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import CustomNode from "@/nodes/random/custom/CustomNode";
 
-const modes = ["curveLinear", "curveMonotone"];
+const modes = ["linear", "monotone"];
 
 describe("CustomNode", () => {
 

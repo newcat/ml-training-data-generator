@@ -17,6 +17,8 @@
     "@types/seedrandom": "^2.4.28",
     "@vue/cli-plugin-typescript": "^3.6.0",
     "@vue/cli-service": "^3.6.0",
+    "@types/jquery": "^3.3.29",
+    "@types/sinon": "^7.0.11",
     "bootstrap": "^4.3.1",
     "chance": "^1.0.18",
     "chart.js": "^2.8.0",
@@ -26,6 +28,7 @@
     "vue-class-component": "^7.0.2",
     "vue-router": "^3.0.4",
     "vue-template-compiler": "^2.6.10",
+    "sinon": "^7.3.1",
     "vue2-ace-editor": "^0.0.13",
     "worker-loader": "^2.0.0"
   },

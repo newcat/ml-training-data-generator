@@ -17,7 +17,7 @@ div.bg-dark.text-light
 <script lang="ts">
 import { Component, Vue, Prop, Watch, Inject } from "vue-property-decorator";
 import ScatterPlot from "@/components/ScatterPlot.vue";
-import { Calculator } from "../calculator";
+import { Calculator } from "@/calculationManager";
 import { SelectOption } from "@baklavajs/plugin-options-vue";
 
 @Component({

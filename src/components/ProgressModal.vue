@@ -11,8 +11,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
-// @ts-ignore
-import * as $ from "jquery";
+import $ from "jquery";
 
 @Component
 export default class ProgressModal extends Vue {
@@ -24,15 +23,15 @@ export default class ProgressModal extends Vue {
     progress!: number;
 
     mounted() {
-        $(this.$el).modal("hide");
+        ($(this.$el) as any).modal("hide");
     }
 
     @Watch("open")
     onOpenChange() {
         if (this.open) {
-            $(this.$el).modal("show");
+            ($(this.$el) as any).modal("show");
         } else {
-            setTimeout(() => $(this.$el).modal("hide"), 500);
+            setTimeout(() => ($(this.$el) as any).modal("hide"), 500);
         }
     }
 
