@@ -14,9 +14,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import Chart, { ChartData, ChartType, ChartConfiguration, ChartPoint, ChartElementsOptions, defaults } from "chart.js";
-import Distribution, { Vector2D } from "../distribution/distribution";
-import MonotoneDistribution from "../distribution/monotoneDistribution";
-import LinearDistribution from "../distribution/linearDistribution";
+import { Vector2D } from "../distribution/distribution";
 
 interface IPoint2D { x: number; y: number; }
 
@@ -56,8 +54,6 @@ export default class CustomRandom extends Vue {
     canvas: HTMLCanvasElement|null = null;
     context: CanvasRenderingContext2D|null = null;
     chart!: Chart;
-    distribution!: Distribution;
-    fullIntegral: number = 99;
 
     // Data points
     points: IPoint2D[] = [];
@@ -103,16 +99,7 @@ export default class CustomRandom extends Vue {
                         min: 0,
                         max: 100,
                         stepSize: 10,
-                        // 10 refers to x-axis stepSize - normally, x-axis goes from 0 to 100 but values are mapped
-                        // to [min; max] -> 10 steps * 10 ticks = 100 -> width of  1 unit is 10
-                        callback: (label, index, labels) => {
-                            const i = this.getFullIntegral();
-                            if (i !== 0) {
-                                return Math.round(label * 10 / i * 100);
-                            } else {
-                                return 0;
-                            }
-                        }
+                        callback: (label, index, labels) => ""
                     },
                     gridLines: {
                         color: this.gridColor,
@@ -155,19 +142,11 @@ export default class CustomRandom extends Vue {
                     label: (tooltipitem, data) => {
                         // Retrieve actual labels
                         const xLabel: string = tooltipitem.xLabel ? tooltipitem.xLabel as string : "0";
-                        // Meaning of y is: Probability for an occurrence of a number = Area of x - x is 1 TICK
-                        const yLabel: string = tooltipitem.yLabel ?
-                            (parseFloat(tooltipitem.yLabel as string) * 10 / this.getFullIntegral() * 100).toString()
-                            : "0";
                         // Build custom label string
                         let label: string = "(";
                         // Map x: [0 - 100] to [min - max] and round to digits
                         label += Math.round((parseFloat(xLabel) / 100 * (this.max - this.min) + this.min) *
                             Math.pow(10, this.digits)) / Math.pow(10, this.digits);
-                        label += ",";
-                        // Map y: [0 - 100] to integral ratio
-                        label += Math.round(parseFloat(yLabel) * Math.pow(10, this.digits)) /
-                            Math.pow(10, this.digits);
                         label += ")";
                         return label;
                     }
@@ -197,13 +176,6 @@ export default class CustomRandom extends Vue {
 
         // Setup points, startPoint, endPoint from loadedPoints
         this.setupPoints();
-
-        // Calculate integral for yAxis from loaded points
-        this.calcIntegral();
-    }
-
-    getFullIntegral() {
-        return this.fullIntegral;
     }
 
     setupPoints() {
@@ -365,29 +337,8 @@ export default class CustomRandom extends Vue {
                 this.draggedPoint.x = pos.x;
                 this.draggedPoint.y = pos.y;
             }
-            this.calcIntegral();
             this.update();
         }
-    }
-
-    calcIntegral() {
-        // Calculate integral over whole graph
-        switch (this.mode) {
-            case "monotone":
-                this.distribution = new MonotoneDistribution(this.points.map((p) => [p.x, p.y] as [number, number]));
-                break;
-            case "linear":
-                this.distribution = new LinearDistribution(this.points.map((p) => [p.x, p.y] as [number, number]));
-                break;
-            default:
-                throw new Error("Invalid mode");
-                break;
-        }
-        const c = this.distribution.curve();
-        console.log(c);
-        this.distribution.integrate(c);
-        console.log(this.distribution.cdf);
-        this.fullIntegral = this.distribution.cdf[this.distribution.cdf.length - 1][1];
     }
 
     mouseUpHandler(e: MouseEvent) {

@@ -14,8 +14,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import Chart, { ChartData, ChartType, ChartConfiguration, ChartPoint, ChartElementsOptions, defaults } from "chart.js";
-import Distribution, { Vector2D } from "../distribution/distribution";
-import DiscreteDistribution from "../distribution/monotoneDistribution";
+import { Vector2D } from "../distribution/distribution";
 
 @Component
 export default class DiscreteRandom extends Vue {
@@ -65,8 +64,6 @@ export default class DiscreteRandom extends Vue {
     canvas: HTMLCanvasElement|null = null;
     context: CanvasRenderingContext2D|null = null;
     chart!: Chart;
-    distribution!: Distribution;
-    fullIntegral: number = 99;
 
     // Data points
     values: number[] = [];
@@ -105,14 +102,7 @@ export default class DiscreteRandom extends Vue {
                         min: 0,
                         max: 100,
                         stepSize: 10,
-                        callback: (label, index, labels) => {
-                            const i = this.getFullIntegral();
-                            if (i !== 0) {
-                                return Math.round(label / i * 100);
-                            } else {
-                                return 0;
-                            }
-                        }
+                        callback: (label, index, labels) => ""
                     },
                 }]
             },
@@ -124,16 +114,9 @@ export default class DiscreteRandom extends Vue {
                     label: (tooltipitem, data) => {
                         // Retrieve actual labels
                         const xLabel: string = tooltipitem.xLabel ? tooltipitem.xLabel as string : "0";
-                        // Meaning of y is: Probability for an occurrence of a number = Area of x - x is 1 TICK
-                        const yLabel: string = tooltipitem.yLabel ?
-                            (parseFloat(tooltipitem.yLabel as string) / this.getFullIntegral() * 100).toString()
-                            : "0";
                         // Build custom label
                         let label: string = "(";
                         label += xLabel;
-                        label += ",";
-                        label += Math.round(parseFloat(yLabel) * Math.pow(10, this.digits)) /
-                            Math.pow(10, this.digits);
                         label += ")";
                         return label;
                     }
@@ -169,9 +152,6 @@ export default class DiscreteRandom extends Vue {
 
         // Setup values
         this.setupPoints();
-
-        // Calc y-axis value
-        this.calcIntegral();
     }
 
     setupPoints() {
@@ -200,10 +180,6 @@ export default class DiscreteRandom extends Vue {
 
         // Update editor
         this.update();
-    }
-
-    getFullIntegral() {
-        return this.fullIntegral;
     }
 
     setChartData(data: number[]) {
@@ -263,15 +239,6 @@ export default class DiscreteRandom extends Vue {
         this.update();
     }
 
-    calcIntegral() {
-        // Transform values to actual points
-        const points = this.values.map((val: number, index: number) => [index, val] as [number, number]);
-        // Calculate integral over whole graph
-        this.distribution = new DiscreteDistribution(points);
-        this.distribution.integrate(this.distribution.points);
-        this.fullIntegral = this.distribution.cdf[this.distribution.cdf.length - 1][1];
-    }
-
     mouseDownHandler(e: MouseEvent) {
         e.preventDefault();
         e.stopPropagation();
@@ -291,7 +258,6 @@ export default class DiscreteRandom extends Vue {
         // On mouse left click
         if (this.LMBClicked) {
             this.setBars(e);
-            this.calcIntegral();
             this.chart!.update();
         }
     }

@@ -31,7 +31,7 @@ describe("CustomNode", () => {
                     inRange = false;
                 }
             }
-            expect(inRange);
+            expect(inRange).to.be.true;
         });
 
         it(`calculates peak correctly (mode: '${mode}')`, () => {
@@ -50,21 +50,22 @@ describe("CustomNode", () => {
             v.points = points;
             n.setOptionValue("Custom Distribution", v);
 
-            // Setup data to store occurrences
+            // Setup data to store occurrences within pentiles ( parts)
             const data: number[] = [];
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 5; i++) {
                 data.push(0);
             }
 
             // Calculate 10000 random values
             n.prepare();
             for (let i = 0; i < 10000; i++) {
-                n.calculate();
-                const r = Math.floor((parseFloat(n.getInterface("Output").value) - min) / (max - min + 1) * 10);
+                n.calculate(); // 0-3 auf 0-9
+                const o = parseFloat(n.getInterface("Output").value);
+                const r = Math.floor((o - min) / (max - min) * (data.length - 0.0000001));
                 data[r]++;
             }
-            const e = Math.floor((extremum - min) / (max - min + 1) * 10);
-            expect(Math.max(...data) === data[e]);
+            const e = Math.floor((extremum - min) / (max - min) * data.length);
+            expect(Math.max(...data) === data[e]).to.be.true;
         });
     });
 });

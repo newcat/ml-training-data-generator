@@ -18,6 +18,7 @@ export default class DiscreteNode extends Node {
 
     constructor() {
         super();
+        // Fill with default values
         const numOfValues = this.defaultMax - this.defaultMin;
         for (let i = 0; i <= numOfValues; i++) {
             this.defaultValues.push(this.defaultValue);
