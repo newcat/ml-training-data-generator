@@ -1,7 +1,52 @@
+%!TEX root = ../dokumentation.tex
+
 \chapter{Technologie Evaluation}
 
-\section{Dataflow Programming}
+In diesem Kapitel werden die Entscheidungen im Hinblick auf die verwendeten Technologien vorgestellt.
+
+\section{Plattform}
+
+Da die verwendete Plattform Basis für alle weiteren zu treffenden Entscheidungen ist, muss diese zuerst gewählt werden. Für die zu entwickelnde Applikation gab es dabei folgende technische Anforderungen an die Plattform:
+
+\begin{itemize}
+    \item Grafische Benutzeroberfläche
+    \item Effizientes Berechnen des Datensatzes aus dem Modell
+    \item Möglichkeit zur Visualisierung von Daten
+\end{itemize}
+
+Die Applikation soll auf jeden Fall auf Windows laufen können, andere Betriebssysteme sollen nach Möglichkeit aber auch unterstützt werden. Aus diesen Anforderungen, sowie der Erfahrung der Teammitglieder, ergaben sich folgende Möglichkeiten:
+\begin{itemize}
+    \item C\#
+    \item Java
+    \item Web (HTML, CSS, JavaScript/TypeScript, Web Assembly)
+\end{itemize}
 
 \section{JavaScript / TypeScript}
 
 \section{Chrome vs Electron}
+
+\section{Node Editor}
+
+Für die Entwicklung blabla
+
+% TODO
+Vergleich HTML Canvas vs SVG
+
+\subsection{Node-Editoren für JavaScript}
+
+Es gibt bereits einige offene Bibliotheken für JavaScript, die die Funktionalität eines Node-Editors bieten. Im Folgenden werden einige dieser Bibliotheken inklusive deren Vor- und Nachteile vorgestellt.
+
+\subsubsection*{litegraph.js}
+\textit{litegraph.js} ist eine Canvas-basierte Bibliothek. Damit bietet sie eine hohe Leistung. Es ist allerdings aufwändig, eigene Steuerelemente einzufügen, da diese selber gezeichnet werden müssen. Auch ist die Dokumentation spärlich.
+
+\subsubsection*{ThreeNodes.js}
+Die Bibliothek \textit{ThreeNodes.js} ist auf die Bearbeitung von WebGL-Szenen ausgelegt.
+
+\subsubsection*{vue-blocks}
+\textit{vue-blocks} ist eine rudimentäre Umsetzung eines Node-Editors mit VueJS. Allerdings sind die Möglichkeiten der Bibliothek sehr beschränkt; es gibt beispielsweise keine Möglichkeit, eigene Steuerelemente in den Nodes anzuzeigen.
+
+\subsubsection*{Nodes}
+\textit{Nodes} ist eine mit VueJS entwickelte Bibliothek, die auf dem HTML5-Canvas aufbaut. Der Autor schreibt allerdings selber, dass die Bibliothek mehr als Experiment gedacht war und man lieber eine eigene Bibliothek entwickeln solle anstatt diese Bibliothek zu verwenden.
+
+\subsubsection*{linker}
+\textit{Linker} 

@@ -1,3 +1,15 @@
+%!TEX root = ../dokumentation.tex
+
 \chapter{Stand der Technik}
 
 Themenumfeld und Stand der Technik erörtern (insg. 3 Seiten)
+
+Es gibt einige Datengeneratoren; diese sind jedoch extrem auf einen bestimmten Anwendungsfall zugeschnitten.
+
+TODO: Quellen
+
+\begin{itemize}
+    \item \textbf{Scikit-Learn}: Die Machine Learning Bibliothek scikit-learn bietet Funktionalität, um Beispieldaten zu generieren. Allerdings bietet sie nur vorgefertigte Funktionen, die bestimmte Muster zufällig generieren. Die Funktionen lassen sich kaum anpassen und es ist nicht möglich, damit ein komplexes Modell abzubilden.
+    \item \textbf{SynthOSNdataGenerator}: Dieses Programm ist in der Lage, die Struktur eines sozialen Netzwerks zu erzeugen. Auch hier ist die Funktionalität sehr auf der Anwendungsfall angepasst und nicht universell genug, um als Basis für die in dieser Arbeit zu entwickelnde Applikation zu dienen.
+    \item \textbf{log-synth}: Das Tool log-synth ist in der Lage, künstliche Log-Dateien zu erzeugen. Es erlaubt eine sehr flexible Konfiguration und hat bereits viele eingebaute Funktionen, jedoch ist es sehr schwierig, Zusammenhänge zwischen mehreren Eigenschaften zu modellieren. Dadurch kann auch dieses Tool nicht als Grundlage für die Arbeit genommen werden.
+\end{itemize}
