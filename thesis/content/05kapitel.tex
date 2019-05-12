@@ -26,4 +26,75 @@ Jeder Knoten besteht aus drei Teilen:
 
 \subsection{Ausführungsreihenfolge des Graphen}
 
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[shape=circle,draw=black] (A) at (0,0) {A};
+        \node[shape=circle,draw=black] (B) at (-1,-3) {B};
+        \node[shape=circle,draw=black] (C) at (1,-1.5) {C};
+        \path[->](B) edge node[left] {} (A);
+        \path[->](B) edge node[left] {} (C);
+        \path[->](C) edge node[left] {} (A);
+    \end{tikzpicture}
+    \caption{Beispielgraph}
+    \label{fig:nodeExecutionOrder1}
+\end{figure}
+
+In Abbildung \ref{fig:nodeExecutionOrder1} ist ein Beispielgraph mit Knoten und Kanten zu sehen. Die Ausführungsreihenfolge der Knoten muss folgende Bedingungen erfüllen:
+\begin{itemize}
+    \item Jeder Knoten wird genau einmal ausgeführt
+    \item Ein Knoten kann erst ausgeführt werden, wenn alle Knoten, die Kanten zu ihm haben, ausgeführt wurden
+\end{itemize}
+
+Um diese Anforderungen zu erfüllen, darf der Graph keine Zyklen enthalten. Mit folgendem Algorithmus kann die Ausführungsreihenfolge bestimmt werden:
+\begin{enumerate}
+    \item Adjazenzliste erstellen
+    \item Baum aufbauen mit Zykluserkennung
+    \item Breitensuche um die Ausführungsreihenfolge zu bestimmen 
+\end{enumerate}
+
+\begin{algorithm}[H]
+    \caption{Baum aufbauen mit Zykluserkennung}
+    \begin{algorithmic}[1]
+        \Function{findDescendants}{treeNode, ancestors, adjacency}
+            \ForAll{$c$ in $treeNode.children$}
+                \If{$c$ in $ancestors$}
+                    \State Cycle detected
+                \EndIf
+                \State $ancestors.push(c)$
+                \State $c.children = findChildren(c)$
+                \State \Call{findDescendants}{c, ancestors, adjacency}
+                \State $ancestors.pop()$
+            \EndFor
+        \EndFunction
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \caption{Breitensuche um die Ausführungsreihenfolge zu bestimmen}
+    \begin{algorithmic}[1]
+        \State $queue \gets \textbf{new} \ Queue()$
+        \State $stack \gets \textbf{new} \ Stack()$
+        \State $queue.push(root)$
+        \While{\textbf{not} $queue.isEmpty()$}
+            \State $current \gets queue.dequeue()$
+            \ForAll{$c$ in $current.children$}
+                \State $stack.push(c)$
+                \State $queue.enqueue(c)$
+            \EndFor
+        \EndWhile
+        \State $calculationOrder \gets \textbf{new} \ List()$
+        \While{\textbf{not} $stack.isEmpty()$}
+            \State $current \gets stack.pop()$
+            \If{\textbf{not} $calculationOrder.contains(current)$}
+                \State $calculationOrder.append(current)$
+            \EndIf
+        \EndWhile
+    \end{algorithmic}
+\end{algorithm}
+
+Am Beispiel des Graphen in Abbildung \ref{fig:nodeExecutionOrder1} sieht der Algorithmus folgendermaßen aus:
+
+\todo
+
 \section{Random Sampling / Custom Random}
