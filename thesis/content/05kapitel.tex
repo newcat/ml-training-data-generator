@@ -98,3 +98,23 @@ Am Beispiel des Graphen in Abbildung \ref{fig:nodeExecutionOrder1} sieht der Alg
 \todo
 
 \section{Random Sampling / Custom Random}
+lool
+Wieso müssen wir Random-Zahlen generieren mit Beispielen?
+- Essentielle Grundfunktion zur Generation von neuen Daten 
+Wie können random Zahlen generiert werden? 
+- Theorie PRNG
+- Beispielimplementierungen von PRNGs
+- schlechte und gute PRNGs vergleichen
+Was ist ein Seed und warum brauchen wir den?
+- PRNGs, die Seeds unterstützen und Funktionsweise
+Warum brauchen wir custom-verteilte Zufallswerte mit Beispielen?
+- Normalverteilung (Größe), Exponentialverteilung (Bremsweg vs Geschwindigkeit)
+Wie können custom-verteilte Zufallswerte generiert werden?
+- Bestimmung der Integrierten Funktion
+- Bestimmung der Inversen
+- Sei x eine gleichverteilte reelle Zahl zwischen 0 und 1, so ist die custom-verteile Zahl bestimmt durch cdf-1(xmaxcdf)
+Was ist aber wenn andere Custom-Funktionen zur Modellierung herangezogen werden sollen?
+- Möglichkeit Wahrscheinlichkeitsfunktionen zeichnen zu können
+- Spline-Interpolation, Linear
+- Bestimmung der cdf durch annäherndes Integrierten --> Algorithmus
+- Verwendung von Chart.BaklavaJS
