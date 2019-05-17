@@ -97,24 +97,56 @@ Am Beispiel des Graphen in Abbildung \ref{fig:nodeExecutionOrder1} sieht der Alg
 
 \todo
 
-\section{Random Sampling / Custom Random}
-lool
-Wieso müssen wir Random-Zahlen generieren mit Beispielen?
-- Essentielle Grundfunktion zur Generation von neuen Daten 
+\section{Random Sampling}
+
+Mit Random Sampling ist eine Zufallsstichprobe gemeint bei der eine Stichprobe aus einer Grundgesamtheit $X$ mit $n$ Elementen gezogen wird. Seien die Elemente der Grundgesamheit $x_1,x_2,\dots,x_n-1,x_n$, dann unterliegt die Auswahl eines Elements $x \in M$ einem Auswahlverfahren, das angibt mit welcher Auftrittswahrscheinlichkeit $P(x)$ ein Element in die Stichprobe $N$ gelangen kann.
+Es gelten die Bedingungen:
+\begin{itemize}
+    \item $P(x) > 0$ (Positivität)
+    \item $\sum_{i=1}^{n}P(x_i)=1$ (Vollständigkeit)
+\end{itemize}
+
+Bei einer einfachen Zufallsstichprobe handelt es sich um die Auswahl einer Teilmenge einer statistischen Population, bei der jedes Element die gleiche Wahrscheinlichkeit $P(x)=\frac{1}{\lvert M \rvert}=\frac{1}{n}$ hat, ausgewählt zu werden. Zudem darf eine Ziehung aus einer Gesamtmenge nicht die nachfolgenden Ziehungen beeinflussen, weil sie unabhängig voneinander erfolgen müssen. Übertragen auf das typische Urnenexperiment der Stochastik, kommt es bei einer einfachen Zufallsstichprobe zu einer Ziehung mit Zurücklegen.
+
+Für die Generation von Trainingsdaten ist das Random Sampling von großer Bedeutung, weil nur durch Einbeziehung einer Zufallskomponente neue Datensätze generiert werden können. Sollen beispielsweise zufällig ortspezfische Personendaten generiert werden, könnte die Herausforderung bestehen Daten von hunderten Personen aus nur vier Wohnorten zu generieren. Jeder Person soll dabei ein Wohnort zugewiesen werden, der zufällig bestimmt wird. Ist die Wahrscheinlichkeit für die Auswahl eines Wohnorts gleich groß, so ergibt sich eine einfache Zufallsstichprobe.
+Oft genügt eine Gleichverteilung jedoch nicht, um eine Zufallsvariable zu modellieren, weil in der Realität andere Faktoren die Wahrscheinlichkeitsverteilung beeinflussen. Will man bezogen auf die Generation von Personendaten beispielsweise Größen generieren, wird eine Normal-, auch Gauß- oder Glockenverteilung benötigt.
+Es kann auch sein, dass die Wahrscheinlichkeitsverteilung so spezifisch definiert ist, dass sie nicht mit einer einzigen Funktion dargestellt werden kann.
+
+In den folgenden Kapiteln soll auf die genannten Fälle und deren Umsetzung eingegangen werden.
+
+\subsection{Generation von gleichverteilten Zufallszahlen}
+
+Für die einfache Zufallsstichprobe kann das Problem auf die Frage reduziert werden, wie eine gleichverteilte Zufallszahl in dem Intervall $I=[0;1]$ generiert werden kann. Diese Zufallszahl kann dann auf ein beliebiges Intervall transformiert werden. Sei $x_1$ eine gleichverteilte Zufallszahl im Intervall $I_1=[0;1]$ und seien $a$, $b$ Grenzen des Intervalls $I_2=[a;b]$, so ist die Zufallszahl $x_2$ im intervall $I_2$ bestimmt durch $x_2=x_1 \cdot b+a$. Durch das Runden auf die Einerstelle, können so diskrete Werte generiert werden.
+
+Um gleichverteilte Zufallszahlen generieren zu können wird ein \ac{PRNG} verwendet.
+
 Wie können random Zahlen generiert werden? 
 - Theorie PRNG
 - Beispielimplementierungen von PRNGs
 - schlechte und gute PRNGs vergleichen
-Was ist ein Seed und warum brauchen wir den?
-- PRNGs, die Seeds unterstützen und Funktionsweise
-Warum brauchen wir custom-verteilte Zufallswerte mit Beispielen?
+
+\subsection{Generation von nicht-gleichverteilten Zufallszahlen}
+
+Warum brauchen wir auch nicht-verteilte Zufallswerte mit Beispielen?
 - Normalverteilung (Größe), Exponentialverteilung (Bremsweg vs Geschwindigkeit)
-Wie können custom-verteilte Zufallswerte generiert werden?
+
+\subsection{Generation von Zufallszahlen einer benutzerdefinierten Wahrscheinlichkeitsverteilung}
+
+Was ist damit gemeint und warum brauchen wir benutzerdefinierte Zufallszahlen?
+Wie ist das Problem bei benutzerdefinierten Wahrscheinlichkeitsverteilung und wie kann dies am einfachsten gelöst werden?
+Der CustomRandom-Node teilt sich in drei verschiedene Komponenten: 1. UI, 2. Interpolation, 3. Berechnung
+
+\subsubsection{Benutzerdefinierte Erstellung einer Wahrscheinlichkeitsverteilung}
+
+--> Anzeige und benutzerdefinierte Erstellung einer Wahrscheinlichkeitsverteilung im Graph-Editor
+- Chart.js, Canvas
+
+\subsubsection{Inerpolation der erstellten Wahrscheinlichkeitsverteilung}
+
+- Chart.js bietet out-of-the-box bereits Interpolationsmöglichkeiten an, jedoch gibt es keine geeignete Schnittstelle, um auf die Interpolationsdaten zuzugreifen, daher muss eigener Algorithmus implementiert werden
+
+\subsubsection{Bestimmung der inversen kummulativen Wahrscheinlichkeitsverteilung}
+--> Bestimmung der inversen kummulativen Wahrscheinlichkeitsverteilung
 - Bestimmung der Integrierten Funktion
 - Bestimmung der Inversen
 - Sei x eine gleichverteilte reelle Zahl zwischen 0 und 1, so ist die custom-verteile Zahl bestimmt durch cdf-1(xmaxcdf)
-Was ist aber wenn andere Custom-Funktionen zur Modellierung herangezogen werden sollen?
-- Möglichkeit Wahrscheinlichkeitsfunktionen zeichnen zu können
-- Spline-Interpolation, Linear
-- Bestimmung der cdf durch annäherndes Integrierten --> Algorithmus
-- Verwendung von Chart.BaklavaJS
