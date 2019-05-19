@@ -97,4 +97,45 @@ Am Beispiel des Graphen in Abbildung \ref{fig:nodeExecutionOrder1} sieht der Alg
 
 \todo
 
+\subsection{Grafische Umsetzung}
+
+\subsubsection{VueJS}
+VueJS ist ein JavaScript Framework zum Erstellen von Browser-Frontends. Ein wichtiges Konzept in Vue sind \textit{Komponenten}. Komponenten sind kleine, eigenständige und wiederverwendbare UI-Elemente. \url{https://vuejs.org/v2/guide/#Composing-with-Components}
+
+In Anlehnung an das MVVM-Pattern (\url{https://vuejs.org/v2/guide/instance.html}) ist Vue \textit{reaktiv} gestaltet und bietet Datenbindung. Reaktiv bedeutet, dass Daten im sogenannten \textit{ViewModel} geändert werden können und diese Änderungen direkt in der \textit{View} angezeigt werden. \todo{Grafik zur Verdeutlichung}
+
+Diese Art der Wiederverwendbarkeit ist essentiell, um die Knoten und Kanten zu zeichnen. Besonders hilfreich ist hierbei die \texttt{v-for}-Direktive. Sie erlaubt es, eine Liste von Komponenten zu rendern. Dabei werden Änderungen in der Liste über Datenbindung direkt in der UI übernommen. \todo{Mehr Erklärung}
+
+
+
+\begin{itemize}
+    \item Erklärung VueJS
+    \item Wie werden die Kanten gezeichnet?
+    \item Wie werden NodeOptions gezeichnet?
+    \item Wie wird Zoom / Panning umgesetzt?
+\end{itemize}
+
+\subsection{Plugin-System und Event-System}
+
+\subsection{BaklavaJS Pakete}
+\begin{itemize}
+    \item Core
+    \item Engine
+    \item Interface-Types
+    \item Vue-Renderer
+    \item Vue-Options
+\end{itemize}
+
+\section{Datengenerierung}
+
+\begin{itemize}
+    \item Worker / Multithreading
+    \item Gefailter Ansatz mit Streamsaving
+\end{itemize}
+
 \section{Random Sampling / Custom Random}
+
+\section{Build-System / Webpack}
+\begin{itemize}
+    \item Code-Splitting / Bundle-Optimization
+\end{itemize}
