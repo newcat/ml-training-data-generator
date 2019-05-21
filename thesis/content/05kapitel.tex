@@ -26,6 +26,9 @@ Jeder Knoten besteht aus drei Teilen:
 
 \subsection{Ausführungsreihenfolge des Graphen}
 
+\todo{Topological Sorting}
+\todo{JSPerf mit Kahn's algorithm vs custom algorithm}
+
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}
@@ -95,7 +98,7 @@ Um diese Anforderungen zu erfüllen, darf der Graph keine Zyklen enthalten. Mit 
 
 Am Beispiel des Graphen in Abbildung \ref{fig:nodeExecutionOrder1} sieht der Algorithmus folgendermaßen aus:
 
-\todo
+\todo{}
 
 \subsection{Grafische Umsetzung}
 
@@ -119,14 +122,29 @@ Diese Art der Wiederverwendbarkeit ist essentiell, um die Knoten und Kanten zu z
 
 \subsection{BaklavaJS Pakete}
 \begin{itemize}
-    \item Core
-    \item Engine
-    \item Interface-Types
-    \item Vue-Renderer
-    \item Vue-Options
+    \item \textbf{Core}: Dieses Paket enthält alle notwendigen Klassen und Funktionen, um Knoten hinzuzufügen \todo{More}
+    \item \textbf{Engine}: 
+    \item \textbf{Interface-Types}: 
+    \item \textbf{Vue-Renderer}: 
+    \item \textbf{Vue-Options}: 
 \end{itemize}
 
 \section{Datengenerierung}
+
+JavaScript ist im Browser single-threaded. Das bedeutet, dass wenn eine Berechnung lange benötigt, die Webseite ,,einfriert''. Es kann also keine Interaktion mit der Seite mehr vorgenommen werden. Solche Interaktionen sind beispielsweise das Klicken auf Buttons oder das Scrollen der Seite.
+
+Für diese Arbeit muss jedoch eine große Anzahl von Datensätzen generiert werden. Dies soll möglichst schnell geschehen; gleichzeitig soll die Applikation trotzdem bedienbar bleiben und einen Fortschrittsbalken anzeigen.
+
+Um diese Anforderungen umzusetzen, werden sogenannte \textit{WebWorker} verwendet. WebWorker sind ähnlich wie separate Prozesse. Da JavaScript nicht multithreading-fähig ist, besitzen der Hauptthread und die WebWorker keinen geteilten Adressraum. Es können also keine Objektreferenzen aus dem Hauptthread im WebWorker oder andersherum verwendet werden.
+
+Die Kommunikation zwischen Hauptthread und WebWorkern funktioniert über Nachrichten. Jeder Nachricht können Daten beigefügt werden.
+\todo{Structured Cloning / JSON}
+
+\todo{Umsetzung mit Codebeispielen}
+
+Idealerweise sollten die Daten parallel zur Generierung bereits in die Ausgabedatei geschrieben werden. Damit kann die Arbeitsspeicherauslastung gering gehalten werden, was besonders auf Geräten mit kleinem Arbeitsspeicher, wie zum Beispiel günstigen Laptops oder bei Mobilgeräten wichtig ist.
+
+Allerdings ist mit JavaScript in Browsern aus Sicherheitsgründen kein direkter Zugriff auf das Dateisystem möglich. 
 
 \begin{itemize}
     \item Worker / Multithreading
