@@ -123,10 +123,10 @@ Diese Art der Wiederverwendbarkeit ist essentiell, um die Knoten und Kanten zu z
 \subsection{BaklavaJS Pakete}
 \begin{itemize}
     \item \textbf{Core}: Dieses Paket enthält alle notwendigen Klassen und Funktionen, um Knoten hinzuzufügen \todo{More}
-    \item \textbf{Engine}: 
-    \item \textbf{Interface-Types}: 
-    \item \textbf{Vue-Renderer}: 
-    \item \textbf{Vue-Options}: 
+    \item \textbf{Engine}: Erlaubt es, die Knoten in dem Graphen auszuführen und sorgt dafür, dass Daten über die Kanten übertragen werden
+    \item \textbf{Interface-Types}: Fügt Typen zu Knoten-Schnittstellen hinzu. Standardmäßig können nur zwei Schnittstellen mit gleichem Typ miteinander verbunden werden. Es ist aber möglich, Ausnahmen anzugeben, sodass auch Schnittstellen unterschiedlichen Typs miteinander verbunden werden können. Dabei kann auch eine Konvertierungsfunktion mit angegeben werden. So kann zum Beispiel eine Number-Schnittstelle mit einer String-Schnittstelle verbunden werden. Die Konvertierungsfunktion wandelt dabei die Number in einen String um. 
+    \item \textbf{Vue-Renderer}: Der Renderer bietet eine Oberfläche für den Editor, welcher im Core implementiert ist.
+    \item \textbf{Vue-Options}: Das Vue-Options-Plugin fügt vorgefertigte Knoten-Optionen zum Renderer hinzu.
 \end{itemize}
 
 \section{Datengenerierung}
