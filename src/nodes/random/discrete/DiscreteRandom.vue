@@ -220,7 +220,7 @@ export default class DiscreteRandom extends Vue {
         const c = y1 - m * x1;
         for (let i = x1; i <= x2; i++) {
             // Update y value of point at current x value
-            this.values[i] = m * i + c;
+            this.values[i] = Math.max(Math.min(m * i + c, 100), 0);
         }
 
         // Update last mouse pos
