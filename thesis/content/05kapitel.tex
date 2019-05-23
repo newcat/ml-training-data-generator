@@ -26,9 +26,6 @@ Jeder Knoten besteht aus drei Teilen:
 
 \subsection{Ausführungsreihenfolge des Graphen}
 
-\todo{Topological Sorting}
-\todo{JSPerf mit Kahn's algorithm vs custom algorithm}
-
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}
@@ -43,13 +40,33 @@ Jeder Knoten besteht aus drei Teilen:
     \label{fig:nodeExecutionOrder1}
 \end{figure}
 
-In Abbildung \ref{fig:nodeExecutionOrder1} ist ein Beispielgraph mit Knoten und Kanten zu sehen. Die Ausführungsreihenfolge der Knoten muss folgende Bedingungen erfüllen:
+In Abbildung \ref{fig:nodeExecutionOrder1} ist ein Beispielgraph mit Knoten und Kanten zu sehen. Der Graph kann als Abhängigkeitsgraph interpretiert werden: Um den Knoten $A$ auszuführen, müssen vorher die Knoten $B$ und $C$ ausgeführt werden, damit die Ergebnisse dieser Knoten verfügbar sind. Auch muss der Knoten $B$ vor dem Knoten $C$ ausgeführt werden. $B$ hat keine Abhängigkeiten. Somit ergibt sich als Ausführungsreihenfolge $B \rightarrow C \rightarrow A$.
+
+Die Ausführungsreihenfolge der Knoten muss folgende Bedingungen erfüllen:
 \begin{itemize}
     \item Jeder Knoten wird genau einmal ausgeführt
     \item Ein Knoten kann erst ausgeführt werden, wenn alle Knoten, die Kanten zu ihm haben, ausgeführt wurden
 \end{itemize}
 
-Um diese Anforderungen zu erfüllen, darf der Graph keine Zyklen enthalten. Mit folgendem Algorithmus kann die Ausführungsreihenfolge bestimmt werden:
+\todo{Topological Sorting}
+
+Topologische Sortierung kann nur auf azyklischen, gerichteten Graphen durchgeführt werden. Anhand des folgenden, zyklischen Graphen ist das leicht erkennbar:
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[shape=circle,draw=black] (A) at (-1,0) {A};
+        \node[shape=circle,draw=black] (B) at (1,0) {B};
+        \path[->](A) edge[bend left] node[left] {} (B);
+        \path[->](B) edge[bend left] node[left] {} (A);
+    \end{tikzpicture}
+    \caption{Zyklischer Graph}
+    \label{fig:cyclicGraph}
+\end{figure}
+Knoten $B$ hat Knoten $A$ als Abhängigkeit. Somit muss Knoten $B$ vor Knoten $A$ ausgeführt werden. Allerdings hat $B$ den Knoten $A$ als Abhängigkeit. Es müsste somit der jeweils andere Knoten zuerst berechnet werden, was nicht möglich ist. Aus diesem Grund darf der Graph keine Zyklen enthalten.
+
+\todo{JSPerf mit Kahn's algorithm vs custom algorithm}
+
+Mit folgendem Algorithmus kann die Ausführungsreihenfolge bestimmt werden:
 \begin{enumerate}
     \item Adjazenzliste erstellen
     \item Baum aufbauen mit Zykluserkennung
@@ -131,14 +148,24 @@ Diese Art der Wiederverwendbarkeit ist essentiell, um die Knoten und Kanten zu z
 
 \section{Datengenerierung}
 
-JavaScript ist im Browser single-threaded. Das bedeutet, dass wenn eine Berechnung lange benötigt, die Webseite ,,einfriert''. Es kann also keine Interaktion mit der Seite mehr vorgenommen werden. Solche Interaktionen sind beispielsweise das Klicken auf Buttons oder das Scrollen der Seite.
+JavaScript ist im Browser single-threaded. Das bedeutet, dass die Webseite ,,einfriert'', wenn eine Berechnung lange benötigt. Es kann also keine Interaktion mit der Seite mehr vorgenommen werden \cite{googledev:webworkers}. Solche Interaktionen sind beispielsweise das Klicken auf Buttons oder das Scrollen der Seite.
 
 Für diese Arbeit muss jedoch eine große Anzahl von Datensätzen generiert werden. Dies soll möglichst schnell geschehen; gleichzeitig soll die Applikation trotzdem bedienbar bleiben und einen Fortschrittsbalken anzeigen.
 
-Um diese Anforderungen umzusetzen, werden sogenannte \textit{WebWorker} verwendet. WebWorker sind ähnlich wie separate Prozesse. Da JavaScript nicht multithreading-fähig ist, besitzen der Hauptthread und die WebWorker keinen geteilten Adressraum. Es können also keine Objektreferenzen aus dem Hauptthread im WebWorker oder andersherum verwendet werden.
+Um diese Anforderungen umzusetzen, werden sogenannte \textit{Web Worker} verwendet. Web Worker werden in separaten Hintegrundthreads ausgeführt und blockieren dadurch nicht den Haupthread \cite{mdn:webworkers}. Da JavaScript nicht multithreading-fähig ist, besitzen der Hauptthread und die Web Worker keinen geteilten Adressraum. Es können also keine Objektreferenzen aus dem Hauptthread im Web Worker oder andersherum verwendet werden \cite{mdn:webworkers}.
 
-Die Kommunikation zwischen Hauptthread und WebWorkern funktioniert über Nachrichten. Jeder Nachricht können Daten beigefügt werden.
+Die Kommunikation zwischen Hauptthread und Web Workern funktioniert über Nachrichten. Jeder Nachricht können Daten beigefügt werden. Weil keine Referenzen verwendet werden können, werden die Daten kopiert \cite{mdn:webworkers}.
+
 \todo{Structured Cloning / JSON}
+Um komplexe Datentypen zwischen Workern und dem Hauptthread zu übertragen, gibt es mehrere Möglichkeiten:
+\begin{itemize}
+    \item \textbf{Serialisierung über JSON}: Über die Standardfunktionen \texttt{JSON.stringify()} und \texttt{JSON.parse()} können komplexe Datentypen serialisiert beziehungsweise deserialisiert werden. So kann beispielsweise ein Objekt im Worker serialisiert werden, der entstandene String über \texttt{postMessage()} an den Hauptthread übertragen werden und das Objekt dort deserialisiert werden. Mit dieser Methode können keine zyklischen Objekte (also Objekte, die eine Referenz auf sich selber enthalten) serialisiert werden \cite{mdn:json_stringify}; dies stellt aber im Kontext dieser Arbeit kein Problem dar.
+    \item \textbf{Structured Cloning}: Für die Übergabe von Objekten von und zu Workern wurde der Structured Cloning Algorithmus entwickelt. Dieser klont die Objekte und unterstützt dabei auch zyklische Referenzen \cite{mdn:structured_cloning}.
+    \item \textbf{Transferables}:
+\end{itemize}
+
+\todo{Performanzmessung}
+z. B. mit \url{https://nolanlawson.github.io/webworker-postmessage-perf-test/}
 
 \todo{Umsetzung mit Codebeispielen}
 
