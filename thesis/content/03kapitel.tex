@@ -9,10 +9,27 @@
 \end{itemize}
 
 \begin{quote}
-    TODO: Definition nach Mitchell
-    Machine Learning is the study of computer algorithms that improve automatically through experience
+    \enquote{A computer program is said to learn from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$.}
+    \todo{Quelle}
 \end{quote}
 
 Das Ziel von maschinellem Lernen ist es, einen Algorithmus zu entwickeln, der anhand von Eingabedaten Ausgabedaten erzeugt. TODO
 
 Die Vorgehensweise beim Trainieren kann hauptsächlich in zwei Gruppen eingeteilt werden: \textit{Supervised Learning} und \textit{Unsupervised Learning}. Beim Supervised Learning benötigt man in der Trainingsphase Daten, die sowohl aus den Eingabedaten, als auch aus den erwarteten Ausgabedaten bestehen. Der Algorithmus wird während des Trainings so angepasst, dass die Eingabedaten die erwarteten Ausgabedaten erzeugen. Häufig wird Supervised Learning für \textit{Klassifikation} oder \textit{Regression} eingesetzt. Bei der Klassifikation wird den Eingabedaten eine von mehreren vordefinierten Klassen zugewiesen. Bei der Regression dagegen wird 
+
+Sowohl für Supervised, als auch für Unsupervised Learning werden Trainingsdaten benötigt. Diese Trainingsdaten bestehen aus sogenannten Features. Die Features kann man sich wie Spalten einer Tabelle vorstellen.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ || c | c | c | c || c || }
+        \hline
+        Räume & Fläche (m$^2$) & Grundstücksfläche (m$^2$) & Baujahr & Preis (Euro) \\
+        \hline
+        8 & 240 & 633 & 1976 & 679000 \\
+        5 & 130 & 504 & 1978 & 320000 \\
+        6 & 175 & 247 & 2020 & 595000 \\
+        \hline
+    \end{tabular}
+    \caption{Beispiel für Trainingsdaten einer Regression}
+    \label{tbl:trainingdata}
+\end{table}
