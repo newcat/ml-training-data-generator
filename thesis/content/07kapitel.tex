@@ -80,6 +80,10 @@ Um komplexe Datentypen zwischen Workern und dem Hauptthread zu übertragen, gibt
     \item \textbf{Transferables}:
 \end{itemize}
 
+Auch wenn Transferables in der Theorie die schnellste Art sein sollten, Daten auszutauschen, zeigt sich in der Praxis, dass es stark auf die Art der Daten ankommt, welche Methode die schnellste ist. Im Kontext dieser Arbeit \todo{Wir haben hier Objekte, werden nicht unterstützt, nur ArrayBuffer}
+\url{https://www.joji.me/en-us/blog/performance-issue-of-using-massive-transferable-objects-in-web-worker}
+\url{https://nolanlawson.com/2016/02/29/high-performance-web-worker-messages/}
+
 \todo{Performanzmessung}
 z. B. mit \url{https://nolanlawson.github.io/webworker-postmessage-perf-test/}
 
