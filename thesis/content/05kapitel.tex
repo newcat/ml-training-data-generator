@@ -178,6 +178,46 @@ Allerdings ist mit JavaScript in Browsern aus Sicherheitsgründen kein direkter 
     \item Gefailter Ansatz mit Streamsaving
 \end{itemize}
 
+\section{Knoten-Arten}
+Der Kern der Applikation bilden die verschiedenen Knoten: Mit ihnen kann das Modell aufgebaut werden. Dabei ist es wichtig, dass die Knoten die verschiedenen Anwendungsfälle abdecken.
+
+Um herauszufinden, welche Knoten-Arten benötigt werden, wurden mehrere Beispiel-Modelle durchgespielt und evaluiert, mit welchen Knoten diese sich am besten umsetzen lassen.
+
+Wohnungsbeispiel:
+\begin{algorithm}[H]
+    \caption{Beispielmodell Wohnungspreise}
+    \begin{algorithmic}[1]
+        \State Fläche = ZufallGauss($\mu = 80$, $\sigma = 20$)
+        \State a = Mathematik(Division, $\textrm{Fläche}$, $40$)
+        \State b = ZufallDiskret($-1: 10\%, 0: 80\%, 1: 10\%$)
+        \State c = Mathematik(Addition, $a$, $b$)
+        \State Räume = Mathematik(Maximum, $c$, $1$)
+        \State d = $\textrm{Fläche} \cdot 2500 + 250 \cdot \textrm{Räume}$
+        \State Preis = ZufallProzentual($d$, $5\%$)
+    \end{algorithmic}
+\end{algorithm}
+
+Die Knoten lassen sich in folgende Kategorien unterteilen:
+\begin{itemize}
+    \item \textbf{Werteknoten} können benutzt werden, um den gleichen Wert an verschiedene andere Knoten weiterzugeben. Es gibt sie für die Datentypen \textit{Boolean}, \textit{Number} und \textit{String}. Zusätzlich gibt es den Index-Knoten. Dieser gibt den aktuellen Index innerhalb des Berechnungsprozesses aus.
+    \item \textbf{Zufallsknoten}
+    \begin{itemize}
+        \item \textbf{Gleichverteilung} mit einstellbarem Minimum und Maximum
+        \item \textbf{Normalverteilung} mit einstellbarem Mittelwert $\mu$ und Standardabweichung\nobreakspace $\sigma$
+        \item \textbf{Exponentialverteilung} mit einstellbarem $\lambda$
+        \item \textbf{Anpassbare Verteilung}: Bei diesem Knoten kann die Wahrscheinlichkeitsdichtefunktion über einen grafischen Editor eingestellt werden. Die Wahrscheinlichkeitsdichtefunktion kann sowohl diskret als auch kontinuierlich sein.
+        \item \textbf{Prozentuale Abweichung}: Dieser Knoten nimmt einen Wert und addiert einen zufälligen Wert zwischen $\pm \, \, inputValue \cdot \frac{percentage}{100}$
+    \end{itemize}
+    \item \textbf{Berechnungsknoten}
+    \begin{itemize}
+        \item \textbf{Mathematik}
+        \item \textbf{Funktion}
+        \item \textbf{Boolean}
+    \end{itemize}
+    \item \textbf{Bedingungsknoten}
+    \item \textbf{Ausgabeknoten}
+\end{itemize}
+
 \section{Random Sampling / Custom Random}
 
 \section{Build-System / Webpack}
