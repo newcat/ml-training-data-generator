@@ -30,34 +30,3 @@ Die Applikation soll auf jeden Fall auf Windows laufen können, andere Betriebss
 Electron ist eine Bibliothek für die Entwicklung von Cross-Platform-Applikationen unter der Nutzung von Webtechnologien (\url{https://electronjs.org/docs/tutorial/about}). Mit Electron können Web-Applikationen entwickelt werden, die als Desktop-Applikation auf Windows, Linux oder MacOS laufen und Zugriff auf Betriebssystemfunktionalitäten wie zum Beispiel das Dateisystem haben.
 
 \todo{Warum haben wir nicht Electron genommen?}
-
-\section{Node Editor}
-
-Für die Entwicklung des Node Editors wird eine Möglichkeit benötigt spezifische grafische Elemente anzeigen zu können. Herkömmliche HTML-Elemente sind unvorteilhaft dafür zu benutzen, weil es ihnen an Flexibilität und Interagierbarkeit fehlt. Da der Benutzer in der Lage sein soll einzelne Nodes flexibel im Raum verschieben, konfigurieren und verbinden zu können, wird eine Zeichenfläche benötigt z.B. durch ein Canvas- oder SVG-Element.
-
-Canvas ist ein HTML-Element, das verwendet wird, um Grafiken auf einer Webseite zu zeichnen. Es handelt sich um eine Bitmap auf der mittels einer grafischen Anwendungsprogrammierschnittstelle (API) pixelweise gezeichnet werden kann.
-
-SVG-Elemente werden auch dazu verwendet Grafiken auf einer Zeichenfläche anzuzeigen, jedoch werden Objekte mit Vektoren dargestellt. Das HTML <svg>-Element ist ein Container, der die Nutzung von SVG-Grafiken auf Webseiten unterstützt.
-
-% TODO
-Vorteile Nachteile HTML Canvas / SVG
-Warum Entscheidung für SVG?
-
-\subsection{Node-Editoren für JavaScript}
-
-Es gibt bereits einige offene Bibliotheken für JavaScript, die die Funktionalität eines Node-Editors bieten. Im Folgenden werden einige dieser Bibliotheken inklusive deren Vor- und Nachteile vorgestellt.
-
-\subsubsection*{litegraph.js}
-\textit{litegraph.js} ist eine Canvas-basierte Bibliothek. Damit bietet sie eine hohe Leistung. Es ist allerdings aufwändig, eigene Steuerelemente einzufügen, da diese selber gezeichnet werden müssen. Auch ist die Dokumentation spärlich.
-
-\subsubsection*{ThreeNodes.js}
-Die Bibliothek \textit{ThreeNodes.js} ist auf die Bearbeitung von WebGL-Szenen ausgelegt.
-
-\subsubsection*{vue-blocks}
-\textit{vue-blocks} ist eine rudimentäre Umsetzung eines Node-Editors mit VueJS. Allerdings sind die Möglichkeiten der Bibliothek sehr beschränkt; es gibt beispielsweise keine Möglichkeit, eigene Steuerelemente in den Nodes anzuzeigen.
-
-\subsubsection*{Nodes}
-\textit{Nodes} ist eine mit VueJS entwickelte Bibliothek, die auf dem HTML5-Canvas aufbaut. Der Autor schreibt allerdings selber, dass die Bibliothek mehr als Experiment gedacht war und man lieber eine eigene Bibliothek entwickeln solle anstatt diese Bibliothek zu verwenden.
-
-\subsubsection*{linker}
-\textit{Linker} 

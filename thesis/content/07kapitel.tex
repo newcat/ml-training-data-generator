@@ -1,5 +1,95 @@
 %!TEX root = ../dokumentation.tex
 
-\chapter{Fazit}
+\chapter{Datengenerierung}
 
-Insg. 5 Seiten
+\section{Random Sampling}
+
+Mit Random Sampling ist eine Zufallsstichprobe gemeint bei der eine Stichprobe aus einer Grundgesamtheit $X$ mit $n$ Elementen gezogen wird. Seien die Elemente der Grundgesamheit $x_1,x_2,\dots,x_n-1,x_n$, dann unterliegt die Auswahl eines Elements $x \in M$ einem Auswahlverfahren, das angibt mit welcher Auftrittswahrscheinlichkeit $P(x)$ ein Element in die Stichprobe $N$ gelangen kann.
+Es gelten die Bedingungen:
+\begin{itemize}
+    \item $P(x) > 0$ (Positivität)
+    \item $\sum_{i=1}^{n}P(x_i)=1$ (Vollständigkeit)
+\end{itemize}
+
+Bei einer einfachen Zufallsstichprobe handelt es sich um die Auswahl einer Teilmenge einer statistischen Population, bei der jedes Element die gleiche Wahrscheinlichkeit $P(x)=\frac{1}{\lvert M \rvert}=\frac{1}{n}$ hat, ausgewählt zu werden. Zudem darf eine Ziehung aus einer Gesamtmenge nicht die nachfolgenden Ziehungen beeinflussen, weil sie unabhängig voneinander erfolgen müssen. Übertragen auf das typische Urnenexperiment der Stochastik, kommt es bei einer einfachen Zufallsstichprobe zu einer Ziehung mit Zurücklegen.
+
+Für die Generation von Trainingsdaten ist das Random Sampling von großer Bedeutung, weil nur durch Einbeziehung einer Zufallskomponente neue Datensätze generiert werden können. Sollen beispielsweise zufällig ortspezfische Personendaten generiert werden, könnte die Herausforderung bestehen Daten von hunderten Personen aus nur vier Wohnorten zu generieren. Jeder Person soll dabei ein Wohnort zugewiesen werden, der zufällig bestimmt wird. Ist die Wahrscheinlichkeit für die Auswahl eines Wohnorts gleich groß, so ergibt sich eine einfache Zufallsstichprobe. Oft genügt eine Gleichverteilung jedoch nicht, um eine Zufallsvariable zu modellieren, weil in der Realität andere Faktoren die Wahrscheinlichkeitsverteilung beeinflussen. Will man bezogen auf die Generation von Personendaten beispielsweise Größen generieren, wird eine Normal-, auch Gauß- oder Glockenverteilung benötigt. Es kann auch sein, dass die Wahrscheinlichkeitsverteilung so spezifisch definiert ist, dass sie nicht mit einer einzigen Funktion dargestellt werden kann.
+
+In den folgenden Kapiteln soll auf die genannten Fälle und deren Umsetzung eingegangen werden.
+
+\subsection{Generation von gleichverteilten Zufallszahlen}
+
+Für die einfache Zufallsstichprobe kann das Problem auf die Frage reduziert werden, wie eine gleichverteilte Zufallszahl in dem Intervall $I=[0;1]$ generiert werden kann. Diese Zufallszahl kann dann auf ein beliebiges Intervall transformiert werden. Sei $x_1$ eine gleichverteilte Zufallszahl im Intervall $I_1=[0;1]$ und seien $a$, $b$ Grenzen des Intervalls $I_2=[a;b]$, so ist die Zufallszahl $x_2$ im intervall $I_2$ bestimmt durch $x_2=x_1 \cdot b+a$. Durch das Runden auf die Einerstelle, können so auch diskrete Werte resultieren.
+
+Um gleichverteilte Zufallszahlen generieren zu können wird ein \ac{PRNG} verwendet. Ein \ac{PRNG} oder auch Zufallszahlengenerator stellt einen Algorithmus dar, der eine Sequenz von Zufallszahlen generiert. Es handelt sich bei den generierten Zahlen um Pseudo-Zufallszahlen, weil das zugrundeliegende Verfahren deterministisch implementiert ist. Bei gleichen Eingangsparametern ist auch immer das gleiche Ergebnis zu erwarten. 
+Der essentielle Parameter eines \ac{PRNG}'s ist der sogenannte Seed. Der Seed ist ein Startwert, der bei dem allerersten Aufruf des \ac{PRNG}'s initial gesetzt wird. Aufbauend auf diesem Seed können alle weiteren Zufallszahlen generiert werden. Jeder generierte Wert wird als neuer Startwert für das Verfahren verwendet. Da der mögliche Wertebereich durch eine festgelegte Speichergröße begrenzt ist, muss zwangsläufig irgendwann eine Zahl generiert werden, die bereits in der Sequenz aufgetaucht ist. Weil sich die generierte Sequenz wiederholt, ist der Zufallszahlengenerator periodisch. Simple lineare Kongruenzgeneratoren durchlaufen den Wertebereich im besten Fall einmal pro Periode, weil sie mit nur einem Seed als initialen Wert arbeiten. Andere \ac{PRNG}'s wie zum Beispiel der Mersenne-Twister arbeiten mit mehreren Seeds, wodurch eine erheblich größere Periodenlänge erreicht werden kann.
+
+Ein Algorithmus kann Pseudo-Zufallszahlen generieren, die sich nur in einer bestimmten Anwendung nicht von echten Zufallszahlen unterscheiden lassen. Manche Generatoren sind deshalb für bestimmte Anwendungen gut geeignet und andere wiederum nicht. Müssen beispielsweise lange Sequenzen von Zufallszahlen generiert werden, ist ein linearer Kongruenzgenerator nicht zu empfehlen. Hingegen wäre er bei einer performanten Generation von kurzen Sequenzen eher geeignet. Echte Zufallszahlen verhalten sich immer gleich und bieten hohe Güte. Zur Generation von echten Zufallszahlen kommen pyhsikalische Zufallszahlengeneratoren zum Einsatz, die die naturgemäße Zufälligkeit von physikalischen Prozessen zu Nütze machen.
+Beispiele für solche physikalischen Prozesse sind Spannungsschwankungen an einer Z-Diode, thermisches Rauschen eines Widerstands und radioaktive Zerfallsvorgänge. Logischerweise ist die Benutzung eines Seeds und damit die Reproduzierbarkeit von physikalischen Zufallszahlengeneratoren nicht gegeben.
+Die Möglichkeit einen Seed verwenden zu können, hat allerdings den großen Vorteil der Reproduzierbarkeit von Ergebnissen, weshalb die Verwendung von echten Zufallszahlen unpassend ist. Gerade bei der Erstellung von komplexen Zusammenhängen innerhalb der Applikation soll ein Neustart der Generation nach kleinen Veränderungen nicht komplett neue Daten generieren. Dem Benuter soll es möglich sein benutzerdefinierte Zufallsvariablen mit einem Seed zu versehen, um gleiche Ausgangswerte erhalten zu können.
+
+Vorteile von Seeds:
+\begin{itemize}
+    \item Portabilität: Durch Speicherung der Seed-Werte bei einem Projektexport, werden bei unverändertem Projekt immer gleiche Trainingsdaten generiert, sodass das Projekt geteilt und wiederverwendet werden kann. 
+    \item Debugging: Werden unerwartete Trainingsdaten generiert, können mithilfe von Seeds einzelne Änderungen vorgenommen werden, sodass die neuen Daten mit den letzten abgeglichen werden können
+\end{itemize}
+
+- Alte Library vs. neue Library
+- Benutzten PRNG vorstellen und Auswahlbegründung -> Güte
+
+\subsection{Generation von nicht-gleichverteilten Zufallszahlen}
+
+Warum brauchen wir auch nicht-verteilte Zufallswerte mit Beispielen?
+- Normalverteilung (Größe), Exponentialverteilung (Alter)
+
+\subsection{Generation von Zufallszahlen einer benutzerdefinierten Wahrscheinlichkeitsverteilung}
+
+Was ist damit gemeint und warum brauchen wir benutzerdefinierte Zufallszahlen?
+Wie ist das Problem bei benutzerdefinierten Wahrscheinlichkeitsverteilung und wie kann dies am einfachsten gelöst werden?
+Der CustomRandom-Node teilt sich in drei verschiedene Komponenten: 1. UI, 2. Interpolation, 3. Berechnung
+
+\subsubsection{Benutzerdefinierte Erstellung einer Wahrscheinlichkeitsverteilung}
+
+--> Anzeige und benutzerdefinierte Erstellung einer Wahrscheinlichkeitsverteilung im Graph-Editor
+- Chart.js, Canvas
+
+\subsubsection{Interpolation der erstellten Wahrscheinlichkeitsverteilung}
+
+- Chart.js bietet out-of-the-box bereits Interpolationsmöglichkeiten an, jedoch gibt es keine geeignete Schnittstelle, um auf die Interpolationsdaten zuzugreifen, daher muss eigener Algorithmus implementiert werden
+
+\subsubsection{Bestimmung der inversen kummulativen Wahrscheinlichkeitsverteilung}
+--> Bestimmung der inversen kummulativen Wahrscheinlichkeitsverteilung
+- Bestimmung der Integrierten Funktion
+- Bestimmung der Inversen
+- Sei x eine gleichverteilte reelle Zahl zwischen 0 und 1, so ist die custom-verteile Zahl bestimmt durch cdf-1(xmaxcdf)
+
+\section{Web Worker}
+JavaScript ist im Browser single-threaded. Das bedeutet, dass die Webseite \enquote{einfriert}, wenn eine Berechnung lange benötigt. Es kann also keine Interaktion mit der Seite mehr vorgenommen werden \cite{googledev:webworkers}. Solche Interaktionen sind beispielsweise das Klicken auf Buttons oder das Scrollen der Seite.
+
+Für diese Arbeit muss jedoch eine große Anzahl von Datensätzen generiert werden. Dies soll möglichst schnell geschehen; gleichzeitig soll die Applikation trotzdem bedienbar bleiben und einen Fortschrittsbalken anzeigen.
+
+Um diese Anforderungen umzusetzen, werden sogenannte \textit{Web Worker} verwendet. Web Worker werden in separaten Hintegrundthreads ausgeführt und blockieren dadurch nicht den Haupthread \cite{mdn:webworkers}. Da JavaScript nicht multithreading-fähig ist, besitzen der Hauptthread und die Web Worker keinen geteilten Adressraum. Es können also keine Objektreferenzen aus dem Hauptthread im Web Worker oder andersherum verwendet werden \cite{mdn:webworkers}.
+
+Die Kommunikation zwischen Hauptthread und Web Workern funktioniert über Nachrichten. Jeder Nachricht können Daten beigefügt werden. Weil keine Referenzen verwendet werden können, werden die Daten kopiert \cite{mdn:webworkers}.
+
+\todo{Structured Cloning / JSON}
+Um komplexe Datentypen zwischen Workern und dem Hauptthread zu übertragen, gibt es mehrere Möglichkeiten:
+\begin{itemize}
+    \item \textbf{Serialisierung über JSON}: Über die Standardfunktionen \texttt{JSON.stringify()} und \texttt{JSON.parse()} können komplexe Datentypen serialisiert beziehungsweise deserialisiert werden. So kann beispielsweise ein Objekt im Worker serialisiert werden, der entstandene String über \texttt{postMessage()} an den Hauptthread übertragen werden und das Objekt dort deserialisiert werden. Mit dieser Methode können keine zyklischen Objekte (also Objekte, die eine Referenz auf sich selber enthalten) serialisiert werden \cite{mdn:json_stringify}; dies stellt aber im Kontext dieser Arbeit kein Problem dar.
+    \item \textbf{Structured Cloning}: Für die Übergabe von Objekten von und zu Workern wurde der Structured Cloning Algorithmus entwickelt. Dieser klont die Objekte und unterstützt dabei auch zyklische Referenzen \cite{mdn:structured_cloning}.
+    \item \textbf{Transferables}:
+\end{itemize}
+
+\todo{Performanzmessung}
+z. B. mit \url{https://nolanlawson.github.io/webworker-postmessage-perf-test/}
+
+\todo{Umsetzung mit Codebeispielen}
+
+Idealerweise sollten die Daten parallel zur Generierung bereits in die Ausgabedatei geschrieben werden. Damit kann die Arbeitsspeicherauslastung gering gehalten werden, was besonders auf Geräten mit kleinem Arbeitsspeicher, wie zum Beispiel günstigen Laptops oder bei Mobilgeräten wichtig ist.
+
+Allerdings ist mit JavaScript in Browsern aus Sicherheitsgründen kein direkter Zugriff auf das Dateisystem möglich. 
+
+\begin{itemize}
+    \item Worker / Multithreading
+    \item Gefailter Ansatz mit Streamsaving
+\end{itemize}
