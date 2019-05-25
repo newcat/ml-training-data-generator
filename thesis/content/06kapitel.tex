@@ -23,7 +23,7 @@ Wohnungsbeispiel:
 
 Die Knoten lassen sich in folgende Kategorien unterteilen:
 \begin{itemize}
-    \item \textbf{Werteknoten} können benutzt werden, um den gleichen Wert an verschiedene andere Knoten weiterzugeben. Es gibt sie für die Datentypen \textit{Boolean}, \textit{Number} und \textit{String}. Zusätzlich gibt es den Index-Knoten. Dieser gibt den aktuellen Index innerhalb des Berechnungsprozesses aus.
+    \item \textbf{Werteknoten} können benutzt werden, um den gleichen Wert an verschiedene andere Knoten weiterzugeben. Es gibt sie für die Datentypen \textit{Boolean}, \textit{Number} und \textit{String}. Zusätzlich gibt es den Index-Knoten. Dieser gibt den aktuellen Index innerhalb des Berechnungsprozesses aus. Wird ein Wert nur für einen Knoten verwendet, kann dieser in der Regel direkt an der Eingangsschnittstelle des entsprechenden Knotens eingestellt werden; ein Werteknoten muss dafür nicht verwendet werden.
     \item \textbf{Zufallsknoten}
     \begin{itemize}
         \item \textbf{Gleichverteilung} mit einstellbarem Minimum und Maximum
@@ -34,10 +34,10 @@ Die Knoten lassen sich in folgende Kategorien unterteilen:
     \end{itemize}
     \item \textbf{Berechnungsknoten}
     \begin{itemize}
-        \item \textbf{Mathematik}
-        \item \textbf{Funktion}
-        \item \textbf{Boolean}
+        \item \textbf{Mathematik}: Der Mathematikknoten wendet eine einstellbare mathematische Funktion, wie zum Beispiel Addition, Division oder trigonometrische Funktionen auf ein oder zwei Eingabedaten an
+        \item \textbf{Funktion}: Der Funktionsknoten kann benutzt werden, um eine beliebige Funktion in JavaScript zu implementieren. Alle Eingangswerte werden im \texttt{this} Objekt zur Verfügung gestellt. Der Code muss ein Objekt zurückgeben, welches die Namen der Ausgangsschnittstellen als Keys und die dazugehörigen Werte enthält.
+        \item \textbf{Boolean}: Dieser Knoten vergleicht zwei numerische Werte und gibt das Resultat des Vergleichs aus.
     \end{itemize}
-    \item \textbf{Bedingungsknoten}
-    \item \textbf{Ausgabeknoten}
+    \item \textbf{Bedingungsknoten}: Bedingungsknoten können genutzt werden, um sicherzustellen, dass Ausgabedaten bestimmte Bedingungen erfüllen. Wenn an der Eingangsschnittstelle der Wert \texttt{false} anliegt, wird der aktuelle Datenpunkt neu berechnet.
+    \item \textbf{Ausgabeknoten}: Jeder Ausgabeknoten repräsentiert eine Spalte in den generierten Ausgabedaten. Der Name der Spalte kann im Textfeld des Ausgabeknotens gesetzt werden.
 \end{itemize}

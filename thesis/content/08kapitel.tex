@@ -24,3 +24,62 @@ Laut Moser ist der Ablauf eines Usability-Tests in sechs Phasen gegliedert \cite
     \item Resultate auswerten
 \end{enumerate}
 
+\subsection{Ziel und Zweck}
+Ziel der Untersuchung ist es, herauszufinden, ob die Umsetzung mittels grafischer Modellierung so zugänglich ist, dass auch neue Nutzer nach dem Lesen einer kurzen Anleitung ein Modell erstellen können.
+
+\subsection{Untersuchungsdesign entwerfen}
+
+\subsubsection*{Vorgehen}
+\begin{enumerate}
+    \item Testperson liest Anleitung (ca. 1 DIN-A4 Seite) [5 Minuten]
+    \item Testperson erhält Aufgabe und hat Zeit, diese durchzulesen sowie Fragen zu stellen [5 Minuten]
+    \item Testperson setzt das Modell um. Falls Fragen zur Aufgabe aufkommen, werden diese direkt vom Versuchsleiter beantwortet. Bei Fragen zur Applikation wird die Testperson ermuntert, die Antwort selber herauszufinden (zum Beispiel mit der Anleitung oder durch Experimentieren); sollte die Testperson nicht innerhalb einer angemessenen Zeitspanne auf die Antwort kommen, so wird der Versuchsleiter Hinweise geben. Der Versuch wird nicht abgebrochen, auch wenn die Testperson mehr Zeit benötigt. [15 Minuten]
+    \item Befragung der Testperson durch Versuchsleiter bezüglich Benutzererlebnisses während des Tests. Außerdem wird die Testperson ermutigt, Kritik bezüglich der Bedienbarkeit zu äußern. [5 Minuten]
+\end{enumerate}
+
+\subsubsection*{Umgebung}
+Die Versuche werden auf den Rechnern der Versuchsteilnehmer durchgeführt, um den Versuchspersonen eine vertraute Umgebung zu bieten. Während des gesamten Tests ist ein Versuchsleiter verfügbar, der Zugriff auf den Desktop des Versuchsteilnehmers hat und verbal mit dem Versuchsteilnehmer kommunizieren kann. Anleitung und Aufgabe werden den Versuchsteilnehmern digital zur Verfügung gestellt.
+
+\subsection{Teilnehmer rekrutieren}
+
+Moser empfiehlt für qualitative Tests etwa 5-10 Teilnehmer zu rekrutieren \cite{Moser2012}. Aufgrund der im Versuchsziel formulierten Anforderung werden Personen ausgewählt, die keine Vorerfahrung mit der Applikation haben.
+
+\subsection{Evaluation vorbereiten}
+
+Die Versuchspersonen testen eine Beta-Version der Applikation vom 11. April 2019. Diese erreichen sie über ihren Browser unter eine vorgegebenen URL. Es wird vom Versuchsleiter sichergestellt, dass die Versuchspersonen Google Chrome mit Version 72 oder neuer benutzen, da die Applikation für diesen Browser optimiert ist.
+
+\todo{Anleitung in den Anhang + Referenz darauf}
+
+Die Versuchspersonen erhalten folgende Aufgabe:
+
+\begin{quote}
+    
+    Erstellen Sie mit dem \textit{Machine Learning Training Data Generator} eine CSV-Datei. Diese soll 1000 Datensätze enthalten. Die Datensätze sollen einen Wohnungsmarkt modellieren. Jeder Datensatz stellt dabei eine Wohnung dar, die auf dem Markt verkauft wird. Jede Wohnung hat folgende Eigenschaften (Spalten): \textbf{Fläche} (in $m^2$), \textbf{Räume}, \textbf{Garage} (true/false) und \textbf{Preis} (in Euro).
+
+    Die Eigenschaften sind folgendermaßen zu modellieren:
+    \begin{itemize}
+        \item Eine Wohnung hat mit einer 50 Prozentigen Chance eine \textbf{Garage}.
+        \item Die \textbf{Fläche} der Wohnungen entspricht einer Normalverteilung mit dem Mittelwert $\mu = 130$ und der Standardabweichung $\sigma = 40$. Sollte bei der Fläche ein Wert $< 20$ herauskommen, ist der Datensatz ungültig und soll nicht in die Ausgabedatei übernommen werden.
+        \item Die Anzahl der \textbf{Räume} ist abhängig von der Fläche. Dabei gilt folgender Zusammenhang: $\textrm{Räume} = \textrm{Fläche} / 40$. Dies gilt in 80\% aller Fälle. In 10\% der Fälle hat eine Wohnung einen Raum mehr als mit der Formel berechnet, in 10\% der Fälle einen Raum weniger.
+        \item Der Preis ist abhängig von den drei vorher beschriebenen Faktoren. Dabei gilt folgender Zusammenhang:
+        
+        $\textrm{Preis} = 2500 \cdot \textrm{Fläche} + 250 \cdot \textrm{Räume}$.
+        
+        Wenn eine Garage zu der Wohnung gehört, steigert diese den Preis um $20000$ Euro. Da nicht jeder Verkäufer den Preis nach dieser Formel festlegt, kann eine prozentuale Abweichung von $\pm 5\%$ angenommen werden.
+    \end{itemize}
+
+    Das ganze Projekt soll zusätzlich in einer Datei lokal abgespeichert werden, um es zu einem späteren Zeitpunkt wieder öffnen zu können.
+
+\end{quote}
+
+Es werden folgende Merkmale untersucht:
+\begin{itemize}
+    \item Zeit, die für das Lösen der Aufgabe benötigt wird
+    \item Zufriedenheit der Versuchspersonen bezüglich Usability
+    \item Häufigkeit der Inanspruchnahme von Hilfe des Versuchsleiters
+    \item Unerwartete Schwierigkeiten der Versuchspersonen bei der Durchführung eines konkreten Teils der Aufgabe
+\end{itemize}
+
+\subsection{Evaluation durchführen}
+
+\subsection{Resultate auswerten}
