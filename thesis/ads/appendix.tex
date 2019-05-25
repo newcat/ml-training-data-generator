@@ -53,7 +53,29 @@ Die Applikation \textit{Machine Learning Training Data Generator} wird benutzt, 
 
 Das Modell wird dargestellt durch einen Graphen. Jeder Knoten in dem Graph entspricht einer Funktion die ausgeführt wird. Verbindungen (Kanten) übertragen Daten bzw. Zwischenergebnisse von einem Knoten zu einem anderen.
 
-\todo{Beispiel}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{simple_example.PNG}
+\end{figure}
+
+In diesem Beispiel ist ein einfaches Modell abgebildet. Es besteht aus einem Knoten, der gleichverteilte, ganzzahlige Werte zwischen 0 und 10 generiert, sowie einem Mathematikknoten, der diesen Wert mit der Zahl 2 multipliziert. Sowohl der Ausgang des Zufallsknotens, als auch der Ausgang des Mathematikknotens werden als Spalte in den generierten Daten ausgegeben.
+
+Die Ausgabe dieses Beispiels sieht folgendermaßen aus:
+\begin{table}[H]
+    \centering
+    \setlength\extrarowheight{-5pt}
+    \begin{tabular}{ | c | c | }
+        \hline
+        random & multiplied \\
+        \hline
+        9 & 18 \\
+        1 & 2 \\
+        4 & 8 \\
+        6 & 12 \\
+        5 & 10 \\
+        \hline
+    \end{tabular}
+\end{table}
 
 Neue Knoten können mit einem Rechtsklick im Editor hinzugefügt werden. Folgende Knoten stehen zur Auswahl:
 
