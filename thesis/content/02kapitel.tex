@@ -16,6 +16,11 @@ Es gibt einige Datengeneratoren; diese sind jedoch extrem auf einen bestimmten A
 
 \section{Node Editor}
 
+\todo{Einführung}
+
+Dataflow Programming, warum "Node-Editor" und nicht Graph-Editor?
+
+\todo{Überarbeiten}
 Für die Entwicklung des Node Editors wird eine Möglichkeit benötigt spezifische grafische Elemente anzeigen zu können. Herkömmliche HTML-Elemente sind unvorteilhaft dafür zu benutzen, weil es ihnen an Flexibilität und Interagierbarkeit fehlt. Da der Benutzer in der Lage sein soll einzelne Nodes flexibel im Raum verschieben, konfigurieren und verbinden zu können, wird eine Zeichenfläche benötigt z.B. durch ein Canvas- oder SVG-Element.
 
 Canvas ist ein HTML-Element, das verwendet wird, um Grafiken auf einer Webseite zu zeichnen. Es handelt sich um eine Bitmap auf der mittels einer grafischen Anwendungsprogrammierschnittstelle (API) pixelweise gezeichnet werden kann.
@@ -28,19 +33,23 @@ Warum Entscheidung für SVG?
 
 \subsection{Node-Editoren für JavaScript}
 
-Es gibt bereits einige offene Bibliotheken für JavaScript, die die Funktionalität eines Node-Editors bieten. Im Folgenden werden einige dieser Bibliotheken inklusive deren Vor- und Nachteile vorgestellt.
+\todo{KO-Kriterien für Node-Editor}
 
-\subsubsection*{litegraph.js}
-\textit{litegraph.js} ist eine Canvas-basierte Bibliothek. Damit bietet sie eine hohe Leistung. Es ist allerdings aufwändig, eigene Steuerelemente einzufügen, da diese selber gezeichnet werden müssen. Auch ist die Dokumentation spärlich.
+\begin{itemize}
+    \item Steuerelemente in den Knoten
+    \item Steuerelemente in den Eingangsschnittstellen
+    \item Sidebar für komplexe Einstellungen von Knoten
+    \item Ausführliche Dokumentation
+\end{itemize}
 
-\subsubsection*{ThreeNodes.js}
-Die Bibliothek \textit{ThreeNodes.js} ist auf die Bearbeitung von WebGL-Szenen ausgelegt.
+Es gibt bereits einige offene Bibliotheken für JavaScript, die die Funktionalität eines Node-Editors bieten. Im Folgenden werden einige dieser Bibliotheken vorgestellt.
 
-\subsubsection*{vue-blocks}
-\textit{vue-blocks} ist eine rudimentäre Umsetzung eines Node-Editors mit VueJS. Allerdings sind die Möglichkeiten der Bibliothek sehr beschränkt; es gibt beispielsweise keine Möglichkeit, eigene Steuerelemente in den Nodes anzuzeigen.
+\begin{itemize}
+    \item \textbf{litegraph.js} ist eine Canvas-basierte Bibliothek. Damit bietet sie eine hohe Leistung. Es ist allerdings aufwändig, eigene Steuerelemente einzufügen, da diese selber gezeichnet werden müssen. Auch ist die Dokumentation spärlich. \cite{litegraph}
+    \item \textbf{ThreeNodes.js} ist auf die Bearbeitung von WebGL-Szenen ausgelegt. Die Bibliothek basiert auf HTML und SVG und bietet laut eigener Aussage eine einfache Schnittstelle, um neue Knoten hinzuzufügen. Leider gibt es keine Dokumentation, außerdem wurde das Projekt zuletzt im Mai 2016 aktualisiert. \cite{threenodes}
+    \item \textbf{vue-blocks} ist eine rudimentäre Umsetzung eines Node-Editors mit VueJS. Allerdings sind die Möglichkeiten der Bibliothek sehr beschränkt; es gibt beispielsweise keine Möglichkeit, eigene Steuerelemente in den Nodes anzuzeigen. \cite{vueblocks}
+    \item \textbf{Nodes} ist eine mit VueJS entwickelte Bibliothek, die auf dem HTML5-Canvas aufbaut. Der Autor schreibt allerdings selber, dass die Bibliothek mehr als Experiment gedacht war und man lieber eine eigene Bibliothek entwickeln solle anstatt diese Bibliothek zu verwenden. \cite{nodes}
+    \item \textbf{Linker} baut auf HTML und SVG auf. Leider ist is mit Linker nicht möglich, Steuerelemente in die Nodes einzufügen. \cite{linker}
+\end{itemize}
 
-\subsubsection*{Nodes}
-\textit{Nodes} ist eine mit VueJS entwickelte Bibliothek, die auf dem HTML5-Canvas aufbaut. Der Autor schreibt allerdings selber, dass die Bibliothek mehr als Experiment gedacht war und man lieber eine eigene Bibliothek entwickeln solle anstatt diese Bibliothek zu verwenden.
-
-\subsubsection*{linker}
-\textit{Linker} 
+Da keine der Bibliotheken alle der oben genannten Kriterien erfüllt, wurde entschieden, eine eigene Bibliothek zu schreiben. Diese vereint die Vorteile der vorgestellten Bibliotheken und wird in Kapitel \ref{sec:grapheditor} (Seite \pageref{sec:grapheditor}) näher vorgestellt.
