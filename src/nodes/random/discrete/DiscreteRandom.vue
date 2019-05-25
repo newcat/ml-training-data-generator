@@ -76,7 +76,7 @@ export default class DiscreteRandom extends Vue {
     barColor: string = "rgba(200,200,200,1)";
     defaultValue: number = 1;
     LMBClicked = false;
-    digits: number = 3;
+    digits: number = 1;
 
     // Chart options
     options: ChartConfiguration = {
@@ -104,7 +104,19 @@ export default class DiscreteRandom extends Vue {
                         stepSize: 10,
                         callback: (label, index, labels) => ""
                     },
-                }]
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: this.textColor,
+                        beginAtZero: true,
+                        min: 0,
+                        max: 100,
+                        stepSize: 10,
+                        callback: (label, index, labels) =>
+                            // Limit digits
+                            Math.round(label * Math.pow(10, this.digits) / Math.pow(10, this.digits))
+                    }
+                }],
             },
             tooltips: {
                 callbacks: {

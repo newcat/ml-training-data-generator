@@ -53,7 +53,7 @@ export default class ScatterPlot extends Vue {
                             if (tooltipitem.index) {
                                 return t.analyzedData.occurrences[tooltipitem.index!] + "x";
                             } else {
-                                return "0x";
+                                return "1x";
                             }
                         }
                     }
@@ -162,4 +162,3 @@ canvas {
     width: 100%;
 }
 </style>
-

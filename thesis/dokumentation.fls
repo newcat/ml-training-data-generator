@@ -1,0 +1,581 @@
+PWD c:\Users\Leunar\Desktop\ml-training-data-generator\thesis
+INPUT C:\Users\Leunar\AppData\Local\MiKTeX\2.9\miktex\data\le\pdftex\pdflatex.fmt
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.tex
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.log
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\header.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\header.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\nag\nag.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\nag\nag.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\nag\nag-l2tabu.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\nag\nag-l2tabu.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\nag\nag-orthodox.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\nag\nag-orthodox.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrreprt.cls
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrreprt.cls
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrkbase.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrkbase.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrbase.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrbase.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrlfile.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrlfile.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\tocbasic.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\tocbasic.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrsize12pt.clo
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrsize12pt.clo
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmr12.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\typearea.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\typearea.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xstring\xstring.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xstring\xstring.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xstring\xstring.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\inputenc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\inputenc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\fontenc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\fontenc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\t1enc.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\t1enc.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\jknappen\ec\ecrm1200.tfm
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\einstellungen_liste.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\einstellungen_liste.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\einstellungen.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\einstellungen.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\lang\strings.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\lang\strings.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\lang\de.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\lang\de.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\switch.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\arabi\bblopts.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\arabi\bblopts.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-english\english.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-english\english.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\txtbabel.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-german\ngerman.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-german\ngerman.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-german\ngermanb.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometry.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometry.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometry.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometry.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\microtype.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\microtype.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\microtype-pdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\microtype-pdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\microtype.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\microtype.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\microtype.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\setspace\setspace.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\setspace\setspace.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\makeidx.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\makeidx.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\csquotes\csquotes.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\csquotes\csquotes.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\csquotes\csquotes.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\csquotes\csquotes.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\csquotes\csquotes.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\csquotes\csquotes.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\longtable.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\longtable.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphics.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphics.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdfpages\pdfpages.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdfpages\pdfpages.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ifthen.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ifthen.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\calc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\calc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\eso-pic\eso-pic.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\eso-pic\eso-pic.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\atbegshi.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\atbegshi.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdfpages\pppdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdfpages\pppdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\array.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\array.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\eurosym\eurosym.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\eurosym\eurosym.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\wrapfig\wrapfig.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\wrapfig\wrapfig.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\utilities\pgffor.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\utilities\pgffor.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\utilities\pgfrcs.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\utilities\pgfrcs.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common-lists.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-latex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\ms\everyshi.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\ms\everyshi.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgfrcs.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgfrcs.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\pgf.revision.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\pgf.revision.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\utilities\pgfkeys.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\utilities\pgfkeys.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeysfiltered.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\math\pgfmath.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\math\pgfmath.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathcalc.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathutil.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathparser.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.basic.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.trigonometric.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.random.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.comparison.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.base.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.round.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.misc.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfunctions.integerarithmetics.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmathfloat.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgffor.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgffor.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\footmisc\footmisc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\footmisc\footmisc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\acronym\acronym.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\acronym\acronym.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\bigfoot\suffix.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\bigfoot\suffix.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\listings.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\listings.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstmisc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstmisc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\listings.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\listings.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\algorithms\algorithm.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\algorithms\algorithm.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\algorithmicx\algpseudocode.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\algorithmicx\algpseudocode.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\algorithmicx\algorithmicx.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\algorithmicx\algorithmicx.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\frontendlayer\tikz.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\frontendlayer\tikz.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgf.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgf.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgfcore.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\basiclayer\pgfcore.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\systemlayer\pgfsys.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\systemlayer\pgfsys.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgf.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-pdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-pdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsys-common-pdf.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsyssoftpath.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsyssoftpath.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsysprotocol.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\systemlayer\pgfsysprotocol.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcore.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcore.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfmath.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\math\pgfint.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepoints.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathconstruct.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathusage.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorescopes.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoregraphicstate.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoretransformations.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorequick.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreobjects.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepathprocessing.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorearrows.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreshade.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreimage.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoreexternal.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorelayers.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcoretransparency.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorepatterns.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\basiclayer\pgfcorerdf.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduleshapes.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\modules\pgfmoduleplot.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\compatibility\pgfcomp-version-0-65.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\compatibility\pgfcomp-version-0-65.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\compatibility\pgfcomp-version-1-18.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pgf\compatibility\pgfcomp-version-1-18.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\tikz.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\tikz.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryplothandlers.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\libraries\pgflibraryplothandlers.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\modules\pgfmodulematrix.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarytopaths.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarytopaths.code.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\lmodern.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\lmodern.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\bookmark.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\bookmark.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\bkm-pdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\bkm-pdftex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\logreq\logreq.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\logreq\logreq.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\logreq\logreq.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\logreq\logreq.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\blx-dm.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\blx-dm.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\blx-compat.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\blx-compat.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.def
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric-comp.bbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric-comp.bbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric.bbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric.bbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\standard.bbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\standard.bbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\numeric-comp.cbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\numeric-comp.cbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\base\glossaries.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\base\glossaries.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\mfirstuc\mfirstuc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\mfirstuc\mfirstuc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\textcase\textcase.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\textcase\textcase.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xfor\xfor.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xfor\xfor.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\datatool\datatool-base.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\datatool\datatool-base.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amstext.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amstext.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\substr\substr.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\substr\substr.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\datatool\datatool-fp.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\datatool\datatool-fp.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\defpattern.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\defpattern.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-basic.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-basic.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-addons.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-addons.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-snap.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-snap.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-exp.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-exp.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-trigo.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-trigo.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-pas.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-pas.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-random.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-random.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-eqn.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-eqn.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-upn.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-upn.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-eval.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\fp\fp-eval.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\supertabular\supertabular.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\base\glossaries-compatible-307.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\base\glossaries-compatible-307.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tracklang\tracklang.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tracklang\tracklang.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\tracklang\tracklang.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\tracklang\tracklang.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\translator\translator.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\translator\translator.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\translator\translator.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries-german\glossaries-german.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries-german\glossaries-german.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries-german\glossaries-german.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries-english\glossaries-english.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries-english\glossaries-english.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries-english\glossaries-english.ldf
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\styles\glossary-hypernav.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\styles\glossary-hypernav.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\styles\glossary-list.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\styles\glossary-list.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\styles\glossary-long.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\styles\glossary-long.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\styles\glossary-super.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\styles\glossary-super.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\supertabular\supertabular.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\supertabular\supertabular.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\styles\glossary-tree.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\glossaries\styles\glossary-tree.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstlang1.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstlang1.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstlang2.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstlang2.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstmisc.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstmisc.sty
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.glo
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\glossary.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\glossary.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\ngerman.lbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\ngerman.lbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\german.lbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\german.lbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\german.lbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\german.lbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\english.lbx
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\english.lbx
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.aux
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.aux
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.aux
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmr.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmr.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr12.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-cmr.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-cmr.cfg
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\pdflscape.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\pdflscape.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\lscape.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\lscape.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.pdf
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.bcf
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.bbl
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.bbl
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.bbl
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\deckblatt.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\deckblatt.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\dhbw.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\dhbw.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\dhbw.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\dhbw.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\dhbw.png
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr17.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmbx12.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr12.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmbx12.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmbx12.tfm
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.ist
+INPUT C:\Users\Leunar\AppData\Local\MiKTeX\2.9\pdftex\config\pdftex.map
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\sperrvermerk.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\sperrvermerk.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmss.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmss.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmss12.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmssbx10.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmssbx10.tfm
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\erklaerung.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\erklaerung.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmri12.tfm
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\abstract.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\abstract.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmtt12.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr12.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr8.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr6.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi12.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi8.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi6.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy10.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy8.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy6.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmex10.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmr.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmr.fd
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmssbx10.tfm
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.toc
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.toc
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.toc
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\acronyms.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\acronyms.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.lof
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.lof
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.lof
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.lot
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.lot
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.lot
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.lol
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.lol
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.lol
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\01kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\01kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\01kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\02kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\02kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\02kapitel.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmssbx10.tfm
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\03kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\03kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\03kapitel.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmro12.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr10.tfm
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\04kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\04kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\04kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\05kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\05kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\05kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\node_parts.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\node_parts.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\node_parts.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\node_parts.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\node_parts.png
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr10.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmcsc10.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr8.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmbx8.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr6.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmbx6.tfm
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\06kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\06kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\06kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\07kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\07kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\07kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\08kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\08kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\08kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\09kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\09kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\09kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\55kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\55kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\55kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\logo.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\logo.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\logo.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\logo.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\images\logo.png
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\56kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\56kapitel.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\content\56kapitel.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmtt10.tfm
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.gls
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.gls
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.gls
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\appendix.tex
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\ads\appendix.tex
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr17.tfm
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmri8.tfm
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.aux
+INPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.run.xml
+OUTPUT c:\Users\Leunar\Desktop\ml-training-data-generator\thesis\dokumentation.run.xml
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-ec.enc
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-mathsy.enc
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-mathex.enc
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-mathit.enc
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-rm.enc
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmbx12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmbx12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmcsc10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmcsc10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmex10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmex10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi8.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi8.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr17.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr17.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr6.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr6.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr8.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr8.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmri12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmri12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmri8.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmri8.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmro12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmro12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmssbx10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmssbx10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy8.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy8.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmtt10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmtt10.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmtt12.pfb
+INPUT C:\Users\Leunar\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmtt12.pfb
