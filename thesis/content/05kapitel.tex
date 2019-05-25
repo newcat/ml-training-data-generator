@@ -22,7 +22,7 @@ Jeder Knoten besteht aus drei Teilen:
     \item \textbf{Output Interfaces}: Die Ausgangsschnittstellen stellen das Ergebnis bereit, damit es von anderen Knoten benutzt werden kann.
 \end{itemize}
 
-\subsection{Ausführungsreihenfolge des Graphen}
+\section{Ausführungsreihenfolge des Graphen}
 
 \begin{figure}[H]
     \centering
@@ -115,9 +115,9 @@ Am Beispiel des Graphen in Abbildung \ref{fig:nodeExecutionOrder1} sieht der Alg
 
 \todo{}
 
-\subsection{Grafische Umsetzung}
+\section{Grafische Umsetzung}
 
-\subsubsection{VueJS}
+\subsection{VueJS}
 VueJS ist ein JavaScript Framework zum Erstellen von Browser-Frontends. Ein wichtiges Konzept in Vue sind \textit{Komponenten}. Komponenten sind kleine, eigenständige und wiederverwendbare UI-Elemente \cite{vue:components}.
 
 In Anlehnung an das Model-View-Viewmodel-Pattern ist Vue \textit{reaktiv} gestaltet und bietet Datenbindung \cite{vue:instance}. Reaktiv bedeutet, dass Daten im sogenannten \textit{ViewModel} geändert werden können und diese Änderungen direkt in der \textit{View} angezeigt werden. \todo{Grafik zur Verdeutlichung}
@@ -133,9 +133,12 @@ Diese Art der Wiederverwendbarkeit ist essentiell, um die Knoten und Kanten zu z
     \item Wie wird Zoom / Panning umgesetzt?
 \end{itemize}
 
-\subsection{Plugin-System und Event-System}
+\section{Plugin-System und Event-System}
 
-\subsection{BaklavaJS Pakete}
+\section{Modulares Paketsystem}
+
+\todo{Warum Pakete? Modular = nur das, was man braucht}
+
 \begin{itemize}
     \item \textbf{Core}: Dieses Paket enthält alle notwendigen Klassen und Funktionen, um Knoten hinzuzufügen \todo{More}
     \item \textbf{Engine}: Erlaubt es, die Knoten in dem Graphen auszuführen und sorgt dafür, dass Daten über die Kanten übertragen werden
