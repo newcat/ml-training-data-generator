@@ -16,9 +16,11 @@ Es gibt einige Datengeneratoren; diese sind jedoch extrem auf einen bestimmten A
 
 \section{Node Editor}
 
-\todo{Einführung}
+Eine der Anforderungen ist eine graphische Oberfläche zur Modellierung des Modells zur Datengenerierung. Dafür wurde entschieden, das \textit{\ac{DFP}} Konzept umzusetzen.
 
-Dataflow Programming, warum "Node-Editor" und nicht Graph-Editor?
+Beim \ac{DFP} wird das Programm in einem gerichteten Graphen dargestellt. Jeder Knoten bildet eine Funktion ab und hat Ein- und Ausgabeschnittstellen. Über die Eingabeschnittstellen erhält die Funktion des Knotens die benötigten Parameter; das Resultat der Funktion wird über die Ausgabeschnittstellen anderen Knoten zur Verfügung gestellt. Die Schnittstellen von Knoten können über Kanten verbunden werden. Kanten symbolisieren einen Datenfluss von einer Aus- zu einer Eingabeschnittstelle \cite{dataflow}. Einer der Vorteile von \ac{DFP} ist, dass Abhängigkeiten von Operationen durch die grafische Programmierung direkt ersichtlich sind. Auch sind Programme, die mit \ac{DFP} erstellt wurden, parallelisierbar, solange die Knoten bei der Berechnung keine Seiteneffekte haben \cite{dataflow}.
+
+Der Node-Editor ist die grafische Oberfläche, die es erlaubt, das \ac{DFP}-Programm zu bearbeiten. Technisch gesehen ist ein Node-Editor ein Editor für gerichtete Graphen. Es hat sich aber bei Anwendersoftware der Begriff \textit{Node-Editor} durchgesetzt \cite{nodeeditor:blender, nodeeditor:maya}. Deshalb werden in dieser Arbeit die Begriffe \textit{Node-Editor} und \textit{Graph-Editor} synonym verwendet.
 
 \todo{Überarbeiten}
 Für die Entwicklung des Node Editors wird eine Möglichkeit benötigt spezifische grafische Elemente anzeigen zu können. Herkömmliche HTML-Elemente sind unvorteilhaft dafür zu benutzen, weil es ihnen an Flexibilität und Interagierbarkeit fehlt. Da der Benutzer in der Lage sein soll einzelne Nodes flexibel im Raum verschieben, konfigurieren und verbinden zu können, wird eine Zeichenfläche benötigt z.B. durch ein Canvas- oder SVG-Element.
@@ -26,10 +28,6 @@ Für die Entwicklung des Node Editors wird eine Möglichkeit benötigt spezifisc
 Canvas ist ein HTML-Element, das verwendet wird, um Grafiken auf einer Webseite zu zeichnen. Es handelt sich um eine Bitmap auf der mittels einer grafischen Anwendungsprogrammierschnittstelle (API) pixelweise gezeichnet werden kann.
 
 SVG-Elemente werden auch dazu verwendet Grafiken auf einer Zeichenfläche anzuzeigen, jedoch werden Objekte mit Vektoren dargestellt. Das HTML <svg>-Element ist ein Container, der die Nutzung von SVG-Grafiken auf Webseiten unterstützt.
-
-% TODO
-Vorteile Nachteile HTML Canvas / SVG
-Warum Entscheidung für SVG?
 
 \subsection{Node-Editoren für JavaScript}
 
