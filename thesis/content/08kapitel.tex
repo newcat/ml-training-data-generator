@@ -31,9 +31,9 @@ Ziel der Untersuchung ist es, herauszufinden, ob die Umsetzung mittels grafische
 
 \subsubsection*{Vorgehen}
 \begin{enumerate}
-    \item Testperson liest Anleitung (ca. 1 DIN-A4 Seite) [5 Minuten]
+    \item Testperson liest Anleitung (ca. 3 DIN-A4 Seiten) [10 Minuten]
     \item Testperson erhält Aufgabe und hat Zeit, diese durchzulesen sowie Fragen zu stellen [5 Minuten]
-    \item Testperson setzt das Modell um. Falls Fragen zur Aufgabe aufkommen, werden diese direkt vom Versuchsleiter beantwortet. Bei Fragen zur Applikation wird die Testperson ermuntert, die Antwort selber herauszufinden (zum Beispiel mit der Anleitung oder durch Experimentieren); sollte die Testperson nicht innerhalb einer angemessenen Zeitspanne auf die Antwort kommen, so wird der Versuchsleiter Hinweise geben. Der Versuch wird nicht abgebrochen, auch wenn die Testperson mehr Zeit benötigt. [15 Minuten]
+    \item Testperson setzt das Modell um. Falls Fragen zur Aufgabe aufkommen, werden diese direkt vom Versuchsleiter beantwortet. Bei Fragen zur Applikation wird die Testperson ermuntert, die Antwort selber herauszufinden (zum Beispiel mit der Anleitung oder durch Experimentieren); sollte die Testperson nicht innerhalb einer angemessenen Zeitspanne auf die Antwort kommen, so wird der Versuchsleiter Hinweise geben. Der Versuch wird nicht abgebrochen, auch wenn die Testperson mehr Zeit benötigt. [30 Minuten]
     \item Befragung der Testperson durch Versuchsleiter bezüglich Benutzererlebnisses während des Tests. Außerdem wird die Testperson ermutigt, Kritik bezüglich der Bedienbarkeit zu äußern. [5 Minuten]
 \end{enumerate}
 
@@ -44,13 +44,15 @@ Die Versuche werden auf den Rechnern der Versuchsteilnehmer durchgeführt, um de
 
 Moser empfiehlt für qualitative Tests etwa 5-10 Teilnehmer zu rekrutieren \cite{Moser2012}. Aufgrund der im Versuchsziel formulierten Anforderung werden Personen ausgewählt, die keine Vorerfahrung mit der Applikation haben.
 
+
+
 \subsection{Evaluation vorbereiten}
 
 Die Versuchspersonen testen eine Beta-Version der Applikation vom 11. April 2019. Diese erreichen sie über ihren Browser unter eine vorgegebenen URL. Es wird vom Versuchsleiter sichergestellt, dass die Versuchspersonen Google Chrome mit Version 72 oder neuer benutzen, da die Applikation für diesen Browser optimiert ist.
 
-\todo{Anleitung in den Anhang + Referenz darauf}
+Zuerst erhalten die Versuchspersonen eine Anleitung für den \ac{MLTDG}. Die Anleitung ist im Anhang A (S. \pageref{apx:manual}) zu finden.
 
-Die Versuchspersonen erhalten folgende Aufgabe:
+Anschließend erhalten die Versuchspersonen folgende Aufgabe:
 
 \begin{quote}
     
@@ -85,10 +87,28 @@ Es werden folgende Merkmale untersucht:
 \subsection{Resultate auswerten}
 
 \subsubsection{Zeit, die für das Lösen der Aufgabe benötigt wird}
-Die Aufgabe konnte von allen Versuchspersonen innerhalb von 30 - 45 Minuten gelöst werden. Diese Zeit beinhaltet nur das Lösen der Aufgabe an sich, nicht das Lesen der Anleitung und Aufgabe oder das anschließende Gespräch.
+Die Aufgabe konnte von allen Versuchspersonen innerhalb von 30 - 45 Minuten gelöst werden. Diese Zeit beinhaltet nur das Lösen der Aufgabe an sich, nicht das Lesen der Anleitung und Aufgabe oder das anschließende Gespräch. Im Durchschnitt haben die Versuchspersonen damit etwas länger gebraucht als die erwarteten 30 Minuten.
 
 \subsubsection{Zufriedenheit der Versuchspersonen bezüglich Usability}
 Das Konzept von \ac{DFP} haben alle Versuchsteilnehmern innerhalb weniger Minuten verstanden. Im Verlauf des Tests kamen allerdings bei allen Versuchsteilnehmern ähnliche Probleme bezüglich der Usability auf:
 \begin{itemize}
-    \item 
-\end{itemize} 
+    \item Teile des Kontextmenüs im Editor sind außerhalb des Bildschirms wenn das Kontextmenü zu nah am Rand geöffnet wird
+    \item Es war zuerst unklar, dass sich der Wert einer Eingangsschnittstelle direkt über das dazugehörige Steuerelement verändern lässt, wenn die Schnittstelle nicht verbunden ist
+    \item Viele der Versuchsteilnehmer haben rausgezoomed um einen besseren Überblick über den Gesamtgraphen zu haben. Dadurch wurde es schwierig, beim Verbinden die Verbindungspunkte der Knoten-Schnittstellen zu treffen.
+    \item Die Scrollbar beim Dropdown-Menü für die Operation des Mathematikknotens ist kaum sichtbar. Dadurch musste der Versuchsleiter oft einen Tipp geben, dass der Mathematikknoten noch deutlich mehr Operationen enthält als direkt angezeigt werden.
+    \item Das automatische Konvertieren von Datentypen (wie zum Beispiel von Boolean, also true/false, nach Number, also 0/1) ist weder direkt ersichtlich noch in der Anleitung beschrieben. Auch hier musste bei allen Versuchsteilnehmern ein Tipp vom Versuchsleiter gegeben werden.
+    \item Beim Umbenennen von Knoten muss der Name innerhalb der Textbox erst markiert werden. Dabei darf allerdings die Maus nicht außerhalb der Textbox losgelassen werden, da dies den Prozess den Umbennens beendet und die Textbox ausblendet. Des Weiteren wurde von einigen Probanden gewünscht, dass auch bei angepassten Name der Typ des Knotens weiterhin ersichtlich bleibt.
+\end{itemize}
+
+\subsubsection{Häufigkeit der Inanspruchnahme von Hilfe des Versuchsleiters}
+Alle Versuchsteilnehmer haben in etwa gleich viele Tipps bekommen. Konkret gab der Versuchsleiter pro Versuch etwa 5 - 10 Tipps. Meistens zielten die Tipps darauf ab, den Probanden Zeit zu sparen, damit der Versuch sich nicht zu sehr in die Länge zieht.
+
+\subsubsection{Unerwartete Schwierigkeiten der Versuchspersonen bei der Durchführung eines konkreten Teils der Aufgabe}
+Alle Teilnehmer hatten Probleme damit, bei der Berechnung des Preises 20000 Euro zu addieren, wenn die Wohnung eine Garage hat. Dies kam zum einen durch das vorher beschriebene Problem, dass die Versuchspersonen nicht wussten, dass Datentypen wie Boolean automatisch zu einer Nummer konvertiert werden können. Im Gespräch mit den Probanden kam aber heraus, dass viele eine Art \enquote{Switch}-Knoten vermisst haben. Dieser sollte eine Boolean-Eingangsschnittstelle, zwei Eingangsschnittstellen ohne Typ und eine Ausgangsschnittstelle ohne Typ haben. Liegt an der Boolean-Eingangsschnittstelle der Wert \texttt{false} an, hat die Ausgangsschnittstelle den Wert der ersten Eingangsschnittstelle ohne Typ, liegt der Wert \texttt{true} an, hat sie den Wert der zweiten Eingangsschnittstelle ohne Typ.
+
+\subsubsection{Allgemeine Erkenntnisse}
+Zusätzlich zu den bereits genannten Ergebnissen konnten durch die Beobachtung der Versuchspersonen weitere Erkenntnisse gewonnen werden:
+\begin{itemize}
+    \item \todo{Unterschiedliches Vorgehen}
+    \item \todo{Wie fängt man an?}
+\end{itemize}
