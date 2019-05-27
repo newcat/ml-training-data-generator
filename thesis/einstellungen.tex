@@ -78,7 +78,7 @@
 %% Farben (Angabe in HTML-Notation mit großen Buchstaben)
 \newcommand{\ladefarben}{%
 	\definecolor{LinkColor}{HTML}{00007A}
-	\definecolor{ListingBackground}{HTML}{FCF7DE}
+	\definecolor{ListingBackground}{HTML}{FFFFFF}
 }
 %% Mathematikpakete benutzen (Pakete aktivieren)
 %\usepackage{amsmath}
@@ -86,8 +86,15 @@
 
 %% Programmiersprachen Highlighting (Listings)
 \newcommand{\listingsettings}{%
+	\lstdefinelanguage{JavaScript}{%
+		morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+		morecomment=[s]{/*}{*/},
+		morecomment=[l]//,
+		morestring=[b]",
+		morestring=[b]'
+	}
 	\lstset{%
-		language=Java,			% Standardsprache des Quellcodes
+		language=JavaScript,	% Standardsprache des Quellcodes
 		numbers=left,			% Zeilennummern links
 		stepnumber=1,			% Jede Zeile nummerieren.
 		numbersep=5pt,			% 5pt Abstand zum Quellcode
@@ -102,8 +109,8 @@
 		extendedchars=true,		% Alle Zeichen vom Latin1 Zeichensatz anzeigen.
 		captionpos=b,			% sets the caption-position to bottom
 		backgroundcolor=\color{ListingBackground}, % Hintergrundfarbe des Quellcodes setzen.
-		xleftmargin=0pt,		% Rand links
-		xrightmargin=0pt,		% Rand rechts
+		xleftmargin=10pt,		% Rand links
+		xrightmargin=10pt,		% Rand rechts
 		frame=single,			% Rahmen an
 		frameround=ffff,
 		rulecolor=\color{darkgray},	% Rahmenfarbe

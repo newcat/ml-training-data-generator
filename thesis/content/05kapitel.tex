@@ -63,11 +63,13 @@ Topologische Sortierung kann nur auf azyklischen, gerichteten Graphen durchgefü
 \end{figure}
 Knoten $B$ hat Knoten $A$ als Abhängigkeit. Somit muss Knoten $B$ vor Knoten $A$ ausgeführt werden. Allerdings hat $B$ den Knoten $A$ als Abhängigkeit. Es müsste somit der jeweils andere Knoten zuerst berechnet werden, was nicht möglich ist. Aus diesem Grund darf der Graph keine Zyklen enthalten.
 
-Folgender Algorithmus wurde entwickelt, um die Ausführungsreihenfolge zu bestimmen:
+Es gibt bereits Algorithmen, die eine topologische Sortierung eines Graphen ermöglichen. Ein Beispiel davon ist Kahns Algorithmus \cite{Kahn:1962}. Jedoch war in einem Vorgängerprojekt dieser Arbeit bereits ein Algorithmus zur Errechnung einer topologischen Sortierung implementiert und getestet worden. Um keine neuen Fehler in die Applikation zu bringen, wurde der selbst entwickelte und ausführlich getestete Algorithmus in dieser Arbeit verwendet.
+
+Der Algorithmus setzt sich aus drei Teilen zusammen:
 \begin{enumerate}
-    \item Adjazenzlisten erstellen
+    \item Adjazenzliste für alle Knoten erstellen
     \item Baum aufbauen mit Zykluserkennung
-    \item Breitensuche um die Ausführungsreihenfolge zu bestimmen 
+    \item Breitensuche, um die Ausführungsreihenfolge zu bestimmen 
 \end{enumerate}
 
 Zuerst wird aus dem Modell für jeden Knoten eine Adjazenzliste erstellt. Eine Adjazenzliste ist eine Liste, die für den Knoten $k_0$ alle Knoten $k$ aus der Knotenmenge $K$ enthält, die eine Verbindung $V(k, k_0)$ zum Knoten $k_0$ haben.
@@ -122,10 +124,37 @@ Die Wurzel des Baums wird durch die Menge aller Knoten dargestellt, welche keine
 
 \section{Grafische Umsetzung}
 
-\subsection{VueJS}
-VueJS ist ein JavaScript Framework zum Erstellen von Browser-Frontends. Ein wichtiges Konzept in Vue sind \textit{Komponenten}. Komponenten sind kleine, eigenständige und wiederverwendbare UI-Elemente \cite{vue:components}.
+Die gesamte Visualisierung des Editors wurde mit VueJS umgesetzt. VueJS ist ein JavaScript Framework zum Erstellen von Browser-Frontends. Ein wichtiges Konzept in Vue sind \textit{Komponenten}. Komponenten sind kleine, eigenständige und wiederverwendbare UI-Elemente \cite{vue:components}.
 
-In Anlehnung an das Model-View-Viewmodel-Pattern ist Vue \textit{reaktiv} gestaltet und bietet Datenbindung \cite{vue:instance}. Reaktiv bedeutet, dass Daten im sogenannten \textit{ViewModel} geändert werden können und diese Änderungen direkt in der \textit{View} angezeigt werden. \todo{Grafik zur Verdeutlichung}
+In Anlehnung an das Model-View-Viewmodel-Pattern ist Vue \textit{reaktiv} gestaltet und bietet Datenbindung \cite{vue:instance}. Reaktiv bedeutet, dass Daten im sogenannten \textit{ViewModel} geändert werden können und diese Änderungen direkt in der \textit{View} angezeigt werden.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{vue_reactivity.png}
+    \caption{Reaktivität in VueJS \cite{vue:reactivity}}
+    \label{fig:vuereactivity}
+\end{figure}
+
+Die Daten im magentafarbenen Kreis sind die Daten im ViewModel. Werden diese geändert, wird der dazugehörige \textit{Setter} aufgerufen, welcher dafür sorgt, dass die Komponente neu gerendert wird. Beim Rendern werden die neuen Daten übernommen und somit dem Nutzer angezeigt.
+
+\todo{Beispiel einer einfachen Datenbindung}
+
+Durch den komponentenbasierten Ansatz bietet Vue viele praktische Hilfsfunktionen wie etwa bedingtes Anzeigen von Komponenten oder auch das Rendern von Komponenten anhand einer Liste.
+
+\begin{lstlisting}[caption=Rendern von Listen in Vue, label=lst:v-for,language=HTML]
+<ul>
+    <li v-for="x in array" :key="x">{{ x }}</li>
+</ul>
+\end{lstlisting}
+
+Wenn es im zugehörigen ViewModel des Codebeispiels \ref{lst:v-for} die Eigenschaft \texttt{array} gibt, wird für jedes Item in der Liste ein neues \texttt{<li>}-Tag im \ac{DOM} erstellt. Für \texttt{array = [1, 2, 3]} würde der Nutzer die folgende Ansicht erhalten:
+\begin{itemize}
+    \item 1
+    \item 2
+    \item 3
+\end{itemize}
+
+Das gleiche Prinzip wird beim Rendern von Knoten und Kanten verwendet. \todo{sdf}
 
 Diese Art der Wiederverwendbarkeit ist essentiell, um die Knoten und Kanten zu zeichnen. Besonders hilfreich ist hierbei die \texttt{v-for}-Direktive. Sie erlaubt es, eine Liste von Komponenten zu rendern. Dabei werden Änderungen in der Liste über Datenbindung direkt in der UI übernommen. \todo{Mehr Erklärung}
 

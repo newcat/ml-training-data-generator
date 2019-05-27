@@ -68,7 +68,7 @@ JavaScript ist im Browser single-threaded. Das bedeutet, dass die Webseite \enqu
 
 Für diese Arbeit muss jedoch eine große Anzahl von Datensätzen generiert werden. Dies soll möglichst schnell geschehen; gleichzeitig soll die Applikation trotzdem bedienbar bleiben und einen Fortschrittsbalken anzeigen.
 
-Um diese Anforderungen umzusetzen, werden sogenannte \textit{Web Worker} verwendet. Web Worker werden in separaten Hintegrundthreads ausgeführt und blockieren dadurch nicht den Haupthread \cite{mdn:webworkers}. Da JavaScript nicht multithreading-fähig ist, besitzen der Hauptthread und die Web Worker keinen geteilten Adressraum. Es können also keine Objektreferenzen aus dem Hauptthread im Web Worker oder andersherum verwendet werden \cite{mdn:webworkers}.
+Um diese Anforderungen umzusetzen, werden sogenannte \textit{Web Worker} verwendet. Web Worker werden in separaten Hintegrundthreads ausgeführt und blockieren dadurch nicht den Hauptthread \cite{mdn:webworkers}. Da JavaScript nicht multithreading-fähig ist, besitzen der Hauptthread und die Web Worker keinen geteilten Adressraum. Es können also keine Objektreferenzen aus dem Hauptthread im Web Worker oder andersherum verwendet werden \cite{mdn:webworkers}.
 
 Die Kommunikation zwischen Hauptthread und Web Workern funktioniert über Nachrichten. Jeder Nachricht können Daten beigefügt werden. Weil keine Referenzen verwendet werden können, werden die Daten kopiert \cite{mdn:webworkers}.
 
