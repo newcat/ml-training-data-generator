@@ -1,6 +1,6 @@
 %!TEX root = ../dokumentation.tex
 
-\chapter{Graph-Editor}
+\chapter{Implementierung des Graph-Editors}
 \label{sec:grapheditor}
 
 Eine der Anforderungen war es, das Modell visuell bearbeiten zu können. Dafür war es notwendig, einen Graph-Editor zu entwickeln. Ein solcher Editor erlaubt es, Knoten hinzuzufügen bzw. zu entfernen und sie miteinander zu verbinden. Der Editor wurde als separate Bibliothek unter dem Namen \textit{BaklavaJS} entwickelt und ist somit auch für andere Projekte verwendbar.
@@ -63,26 +63,34 @@ Topologische Sortierung kann nur auf azyklischen, gerichteten Graphen durchgefü
 \end{figure}
 Knoten $B$ hat Knoten $A$ als Abhängigkeit. Somit muss Knoten $B$ vor Knoten $A$ ausgeführt werden. Allerdings hat $B$ den Knoten $A$ als Abhängigkeit. Es müsste somit der jeweils andere Knoten zuerst berechnet werden, was nicht möglich ist. Aus diesem Grund darf der Graph keine Zyklen enthalten.
 
-\todo{JSPerf mit Kahn's algorithm vs custom algorithm}
-
-Mit folgendem Algorithmus kann die Ausführungsreihenfolge bestimmt werden:
+Folgender Algorithmus wurde entwickelt, um die Ausführungsreihenfolge zu bestimmen:
 \begin{enumerate}
-    \item Adjazenzliste erstellen
+    \item Adjazenzlisten erstellen
     \item Baum aufbauen mit Zykluserkennung
     \item Breitensuche um die Ausführungsreihenfolge zu bestimmen 
 \end{enumerate}
 
+Zuerst wird aus dem Modell für jeden Knoten eine Adjazenzliste erstellt. Eine Adjazenzliste ist eine Liste, die für den Knoten $k_0$ alle Knoten $k$ aus der Knotenmenge $K$ enthält, die eine Verbindung $V(k, k_0)$ zum Knoten $k_0$ haben.
+
+Formal ist die Adjazenzliste für $k_0$ folgendermaßen definiert: $\{ k \in K : V(k, k_0) \}$
+
+Der zweite Schritt des Algorithmus baut einen Baum aus der Adjazenzliste auf. Dies wird durch die \texttt{findChildren}-Funktion erreicht. Die Funktion gibt einen neuen Baumknoten zurück, welcher den aktuellen Knoten $c$ sowie die Adjazenzliste von $c$ als Parameter übergebenen Knoten zurück.
+
+Die 
+
+Die Wurzel des Baums wird durch die Menge aller Knoten dargestellt, welche keine Ausgangsschnittstellen haben.
+
 \begin{algorithm}[H]
     \caption{Baum aufbauen mit Zykluserkennung}
     \begin{algorithmic}[1]
-        \Function{findDescendants}{treeNode, ancestors, adjacency}
+        \Function{findDescendants}{treeNode, ancestors}
             \ForAll{$c$ in $treeNode.children$}
                 \If{$c$ in $ancestors$}
                     \State Cycle detected
                 \EndIf
                 \State $ancestors.push(c)$
                 \State $c.children = findChildren(c)$
-                \State \Call{findDescendants}{c, ancestors, adjacency}
+                \State \Call{findDescendants}{c, ancestors}
                 \State $ancestors.pop()$
             \EndFor
         \EndFunction
@@ -111,10 +119,6 @@ Mit folgendem Algorithmus kann die Ausführungsreihenfolge bestimmt werden:
         \EndWhile
     \end{algorithmic}
 \end{algorithm}
-
-Am Beispiel des Graphen in Abbildung \ref{fig:nodeExecutionOrder1} sieht der Algorithmus folgendermaßen aus:
-
-\todo{}
 
 \section{Grafische Umsetzung}
 

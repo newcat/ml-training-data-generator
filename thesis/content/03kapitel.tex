@@ -8,14 +8,14 @@
     \item Was für Möglichkeiten gibt es, Trainingsdaten zu bekommen?
 \end{itemize}
 
+Tom Mitchell definiert Machine Learning folgendermaßen:
 \begin{quote}
-    \enquote{A computer program is said to learn from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$.}
-    \todo{Quelle}
+    \enquote{A computer program is said to learn from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$.} \cite{mitchell1997}
 \end{quote}
 
-Das Ziel von maschinellem Lernen ist es, einen Algorithmus zu entwickeln, der anhand von Eingabedaten Ausgabedaten erzeugt. TODO
+Es geht also darum, einen Algorithmus zu entwickeln, der aus \textit{Experience} lernt, eine Aufgabe besser durchzuführen. Diese Experience eignet sich der Algorithmus in der Regel während der Trainingsphase an. In der Trainingsphase erhält der Algorithmus Trainingsdaten und lernt mit diesen, die Aufgabe bestmöglich auszuführen. Nach der Trainingsphase soll der Algorithmus in der Lage sein, die Aufgabe auch mit neuen, unbekannten Daten zu lösen.
 
-Die Vorgehensweise beim Trainieren kann hauptsächlich in zwei Gruppen eingeteilt werden: \textit{Supervised Learning} und \textit{Unsupervised Learning}. Beim Supervised Learning benötigt man in der Trainingsphase Daten, die sowohl aus den Eingabedaten, als auch aus den erwarteten Ausgabedaten bestehen. Der Algorithmus wird während des Trainings so angepasst, dass die Eingabedaten die erwarteten Ausgabedaten erzeugen. Häufig wird Supervised Learning für \textit{Klassifikation} oder \textit{Regression} eingesetzt. Bei der Klassifikation wird den Eingabedaten eine von mehreren vordefinierten Klassen zugewiesen. Bei der Regression dagegen wird 
+Die Vorgehensweise beim Trainieren kann hauptsächlich in zwei Gruppen eingeteilt werden: \textit{Supervised Learning} und \textit{Unsupervised Learning}. Beim Supervised Learning benötigt man in der Trainingsphase Daten, die sowohl aus den Eingabedaten, als auch aus den erwarteten Ausgabedaten bestehen. Der Algorithmus wird während des Trainings so angepasst, dass die Eingabedaten die erwarteten Ausgabedaten erzeugen. Im Gegensatz dazu werden dem Algorithmus bei Unsupervised Learning nur Eingabedaten zur Verfügung gestellt. Ziel des Algorithmus ist es, Muster in diesen Daten zu finden.
 
 Sowohl für Supervised, als auch für Unsupervised Learning werden Trainingsdaten benötigt. Diese Trainingsdaten bestehen aus sogenannten Features. Die Features kann man sich wie Spalten einer Tabelle vorstellen.
 
