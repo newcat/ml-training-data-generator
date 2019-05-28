@@ -23,16 +23,18 @@ Beim \ac{DFP} wird das Programm in einem gerichteten Graphen dargestellt. Jeder 
 
 Der Node-Editor ist die grafische Oberfläche, die es erlaubt, das \ac{DFP}-Programm zu bearbeiten. Technisch gesehen ist ein Node-Editor ein Editor für gerichtete Graphen. Es hat sich aber bei Anwendersoftware der Begriff \textit{Node-Editor} durchgesetzt \cite{nodeeditor:blender, nodeeditor:maya}. Deshalb werden in dieser Arbeit die Begriffe \textit{Node-Editor} und \textit{Graph-Editor} synonym verwendet.
 
-\todo{Überarbeiten}
-Für die Entwicklung des Node Editors wird eine Möglichkeit benötigt spezifische grafische Elemente anzeigen zu können. Herkömmliche HTML-Elemente sind unvorteilhaft dafür zu benutzen, weil es ihnen an Flexibilität und Interagierbarkeit fehlt. Da der Benutzer in der Lage sein soll einzelne Nodes flexibel im Raum verschieben, konfigurieren und verbinden zu können, wird eine Zeichenfläche benötigt z.B. durch ein Canvas- oder SVG-Element.
+Für die Entwicklung des Node Editors wird eine Möglichkeit benötigt, grafische Elemente an beliebigen Positionen anzeigen zu können. Dafür gibt es zwei Ansätze.
 
-Canvas ist ein HTML-Element, das verwendet wird, um Grafiken auf einer Webseite zu zeichnen. Es handelt sich um eine Bitmap auf der mittels einer grafischen Anwendungsprogrammierschnittstelle (API) pixelweise gezeichnet werden kann.
+Die eine Möglichkeit ist die Nutzung von klassischen \ac{HTML}-Elementen wie \texttt{<div>} und der Anwendung der \ac{CSS}
+-Eigenschaft \texttt{position: absolute}. Mit dieser Eigenschaft können Elemente innerhalb des Elternelements frei verschoben werden \cite{mdn:position}. Zusätzlich können mit dieser Methode auch \ac{SVG} verwendet werden, um komplexe Formen wie beispielsweise die Verbindungen zwischen den Knoten zu zeichnen.
 
-SVG-Elemente werden auch dazu verwendet Grafiken auf einer Zeichenfläche anzuzeigen, jedoch werden Objekte mit Vektoren dargestellt. Das HTML <svg>-Element ist ein Container, der die Nutzung von SVG-Grafiken auf Webseiten unterstützt.
+Die andere Möglichkeit ist die Nutzung des HTML5-Canvas. Der Canvas ist ein HTML-Element, das verwendet wird, um Grafiken auf einer Webseite zu zeichnen. Gezeichnet wird mittels JavaScript über die Canvas-Programmierschnittstelle \cite{mdn:canvas}.
+
+Zwar bietet der Canvas eine hohe Leistung, er hat aber einen für diese Arbeit gravierenden Nachteil: Es können keine existierenden \ac{HTML}-Steuerelemente wie Eingabefelder oder Buttons verwendet werden. Alle Steuerelemente müssten selber gezeichnet werden. Zusätzlich müsste auch die Logik der Steuerelemente selber implementiert werden. Beispielsweise müsste bei einem Tastendruck in einem Textfeld der entsprechende Buchstabe an der Position des Cursors eingefügt werden.
 
 \subsection{Node-Editoren für JavaScript}
 
-Aufgrund den in Kapitel \todo{Referenz} beschriebenen Anforderungen wurden folgende Kriterien entwickelt, die der Node-Editor unbedingt bieten muss:
+Aufgrund der in Kapitel \todo{Referenz} beschriebenen Anforderungen wurden folgende Kriterien entwickelt, die der Node-Editor unbedingt bieten muss:
 \begin{itemize}
     \item Steuerelemente in den Knoten um komplexe Werte einzustellen
     \item Steuerelemente in den Eingangsschnittstellen, damit konstante Werte an nicht verbunden Eingangsschnittstellen direkt eingestellt werden können
@@ -50,4 +52,4 @@ Es gibt bereits einige offene Bibliotheken für JavaScript, die die Funktionalit
     \item \textbf{Linker} baut auf HTML und SVG auf. Leider ist is mit Linker nicht möglich, Steuerelemente in die Nodes einzufügen. \cite{linker}
 \end{itemize}
 
-Da keine der Bibliotheken alle der oben genannten Kriterien erfüllt, wurde entschieden, eine eigene Bibliothek zu schreiben. Diese vereint die Vorteile der vorgestellten Bibliotheken und wird in Kapitel \ref{sec:grapheditor} (Seite \pageref{sec:grapheditor}) näher vorgestellt.
+Da keine der Bibliotheken alle der oben genannten Kriterien erfüllt, wurde entschieden, eine eigene Bibliothek zu schreiben. Diese vereint die Vorteile der vorgestellten Bibliotheken und wird in Kapitel \ref{sec:grapheditor} (Seite \pageref{sec:grapheditor}) näher vorgestellt. Dabei wurde entschieden, nicht auf den HTML5-Canvas zu setzen, da dies einen sehr hohen Implementierungsaufwand mit sich bringen würde.
