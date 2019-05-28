@@ -1,14 +1,65 @@
 %!TEX root = ../dokumentation.tex
 
-\chapter{Ergebnisanalyse}
+\chapter{Ergebnisverifizierung}
 
 \section{Unit Tests}
 
-\begin{itemize}
-    \item Mocha \& Chai
-    \item Aufbau eines Tests
-    \item Beispieltests
-\end{itemize}
+Unit Testing ist eine Technik, die bei der Softwareentwicklung angewendet wird, um sicherzustellen, dass kleine logisch abtrennbare Komponenten wie entworfen funktionieren und die richtigen Ergebnisse liefern. Da das manuelle Komponententesten zeit- und arbeitsintensiv ist, gibt es viele Werkzeuge, um Komponententests automatisch durchzuführen. Kontinuierliche Build- und Integrationstools sorgen dafür, dass der entwickelte Code vor einem Commit fehlerfrei ist. In kollaborativer Entwicklung werden Komponenten separat entwickelt. Oft hängen bestimmte Funktionen der Software von anderen ab, wodurch Seiteneffekte schon bei kleinen Änderungen entstehen können. Durch die parallele Bereitstellung von Unit-Tests zum entwickelten Code, können negative Seiteneffekte erkannt und anschließend behoben werden \cite{Dalton2018}.
+
+Um schnell und einfach Unit-Tests schreiben zu können, wird das Testing-Framework Mocha im Zusammenspiel mit der Assertion-Bibliothek Chai verwendet. Mocha ist ein auf Node.js laufendes JavaScript-Testing-Framework, das die Erstellung von asynchronen Tests einfach macht. Mocha-Tests werden seriell ausgeführt und erlauben es Fehlerzustände auf die richtigen Testfälle zuzuordnen \cite{mocha}. Chai bietet Funktionen, mit denen das Ergebnis eines bestimmten Tests mit seinem erwarteten Wert verglichen werden kann. Zudem liefert Chai eine sehr lesbare Syntax, indem es sich an der englischen Sprache orientiert \cite{chai}.
+
+Durch eine hohe Anzahl an entwickelten Nodes im \ac{MLTDG} bieten sich optimale Komponenten für Unit-Tests an, um ihre Funktionalitäten zu testen. Im Folgenden wird beispielhaft ein Unit-Test für den $MathNode$ im \ac{MLTDG} mit Mocha und Chai erstellt.
+
+Um einen Unit-Test mit Chai erstellen zu können, muss die Chai-Bibliothek und die zu testende Komponente importiert werden. In diesem Fall wird also der $MathNode$ importiert.
+
+\begin{lstlisting}[caption=Unit-Test: Import,label=unit1]
+import { expect } from "chai";
+import MathNode from "@/nodes/MathNode";
+\end{lstlisting}
+
+Der $MathNode$ kann verschiedenste mathematische Funktionen auf maximal zwei Werte anwenden. Mit insgesamt 18 Testfällen lohnt es sich die Tests in einer Schleife zu erstellen. Dafür wird zunächst ein Array erstellt, der für jeden Testfall Name, Parameter A, Parameter B und das erwartete Ergebnis speichert.
+
+\begin{lstlisting}[caption=Unit-Test: Testdefinition,label=unit2]
+const tests = [
+    ["Add", 1, 1, 2],
+    ["Subtract", 1, 1, 0],
+    ["Multiply", 5, 5, 25],
+    ["Divide", 10, 5, 2],
+    ["Sine", 2, 0, Math.sin(2)],
+    ["Cosine", 2, 0, Math.cos(2)],
+    ["Tangent", 2, 0, Math.tan(2)],
+    ["Arcsine", 0.5, 0, Math.asin(0.5)],
+    ["Arccosine", 0.5, 0, Math.acos(0.5)],
+    ["Arctangent", 0.5, 0, Math.atan(0.5)],
+    ["Power", 2, 2, 4],
+    ["Logarithm", 4, 2, 2],
+    ["Minimum", 2, 4, 2],
+    ["Maximum", 2, 4, 4],
+    ["Round", 4.3, 0, 4],
+    ["Round", 4.7, 0, 5],
+    ["Modulo", 7, 3, 1],
+    ["Absolute", -1, 0, 1]
+] as Array<[string, number, number, number]>;
+\end{lstlisting}
+
+Nun können die Testfälle mit Mocha implementiert werden. Mit dem  $describe$-Befehl wird den Tests eine Struktur gegeben. Der Name des zu testenden Nodes $MathNode$ ist hier völlig ausreichend. Mit einer ForEach-Schleife wird durch das Array iteriert. Der $it$-Befehl beschreibt, was genau in dem Test geprüft wird. Der $MathNode$ soll natürlich die mathematische Operation korrekt ausführen. Bei jeder Iteration wird ein neuer MathNode erstellt, die Parameter gesetzt, die zugehörige Operation ausgewählt und die Berechnung ausgelöst. Das Ergebnis kann nun mithilfe der Assertion-Bibliothek Chai einfach mit dem erwarteten Ergebnis überprüft werden. 
+
+\begin{lstlisting}[caption=Unit-Test: Testdurchführung,label=unit3]
+describe("MathNode", () => {
+    tests.forEach(([op, val1, val2, expected]) => {
+        it(`performs the operation '${op}' correctly`, () => {
+            const n = new MathNode();
+            n.getInterface("Value 1").value = val1;
+            n.getInterface("Value 2").value = val2;
+            const v = n.getOptionValue("Operation");
+            v.selected = op;
+            n.setOptionValue("Operation", v);
+            n.calculate();
+            expect(n.getInterface("Result").value).to.equal(expected);
+        });
+    });
+});
+\end{lstlisting}
 
 \section{Usability-Tests}
 
