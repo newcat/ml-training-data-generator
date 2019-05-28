@@ -12,12 +12,15 @@ Das Ziel ist es eine Applikation zu entwickeln, die mittels einer grafischen Ben
 
 \section{Anforderungsanalyse}
 \label{sec:anforderungsanalyse}
+Die Anforderungsanalyse hat einige Anforderungen ergeben, die mit der entwickelten Applikation umgesetzt werden sollen.
 
-\begin{itemize}
-    \item Visualisierung des Modells mit Editierfunktion (ähnlich Netica)
-    \item Generierung von Trainingsdaten mit Randbedingungen (z. B. \enquote{es müssen mind. 10 positive Beispiele generiert werden})
-    \item Visualisierung der generierten Trainingsdaten
-    \item Export der Trainingsdaten
-    \item Export für dedizierte ML-Tools wie beispielsweise WEKA
-    \item Export in allgemeine Formate wie CSV oder JSON 
-\end{itemize}
+Die erste Anforderung ist die Visualisierung des Modells mit Editierfunktionen und umfasst die Grundfunktionalität der Applikation. Die Applikation soll es ermöglichen mithilfe einer grafischen Benutzeroberfläche ein Modell zu erstellen, auf dessen Basis Trainingsdaten generiert werden können.
+
+Es soll möglich sein die Menge an Positiv-Beispielen mit Randbedingungen einzuschränken.
+
+Eine weitere Anforderung ist die Möglichkeit generierte Traningsdaten zu visualisieren. Dies ist vor allem deshalb von großer Bedeutung, weil durch eine Visualisierung das erstellte Modell validiert werden kann. Aus den Rohdaten ist es schwer auf modellierte Zusammenhänge, Korrelationen oder andere Abhängigkeiten zu schließen. Hingegen kann eine Darstellung wie z. B. ein Streudiagramm Aufschluss über die Abhängigkeitsstruktur zweier Variablen geben.
+
+Da es möglich sein soll eine große Menge an Trainingsdaten zu generieren, stellt der Datenexport eine weitere entscheidende Anforderung dar. Die Trainingsdaten sollten in gängigen Formaten wie z. B. CSV oder JSON exportiert werden können, damit auch andere Applikationen problemlos die exportierten Daten importieren können.
+
+Eine andere Anforderung bezüglich des Datenexports ist die Möglichkeit die generierten Daten in einem Format zu exportieren, das dedizierte ML-Tools wie beispielweise WEKA unterstützen. Da es sich hierbei um eine Anfoderung handelt, welche nicht die Grundfunktionaliät umfasst, wird sie mit vergleichsweise geringer Priorität eingestuft. 
+
