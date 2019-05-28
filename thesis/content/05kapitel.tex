@@ -210,11 +210,11 @@ Durch den komponentenbasierten Ansatz bietet Vue viele praktische Hilfsfunktione
 </ul>
 \end{lstlisting}
 
-Wenn es im zugehörigen ViewModel des Codebeispiels \ref{lst:v-for} die Eigenschaft \texttt{array} gibt, wird für jedes Item in der Liste ein neues \texttt{<li>}-Tag im \ac{DOM} erstellt. Für \texttt{array = [1, 2, 3]} würde der Nutzer die folgende Ansicht erhalten:
+Wenn es im zugehörigen ViewModel des Codebeispiels \ref{lst:v-for} die Eigenschaft \texttt{array} gibt, wird für jedes Item in der Liste ein neues \texttt{<li>}-Tag im \ac{DOM} erstellt. Für \texttt{array = ["{}Element 1"{}, "{}Element 2"{}, "{}Element 3"{}]} würde der Nutzer die folgende Ansicht erhalten:
 \begin{itemize}
-    \item 1
-    \item 2
-    \item 3
+    \item Element 1
+    \item Element 2
+    \item Element 3
 \end{itemize}
 
 Das gleiche Prinzip wird beim Rendern von Knoten und Kanten verwendet. Im Modell gibt es sowohl für die Menge der Knoten, als auch für die Menge der Kanten eine Liste. Das ViewModel besitzt eine Referenz auf diese Listen, so dass die View an diese Listen binden kann. Somit wird automatisch für jeden Knoten im Modell eine Knoten Komponente gerendert. Diese Komponente erhält eine Datenbindung zum entsprechenden Knoten. Mit dieser kann sie auf die Eigenschaften des Knotens zugreifen und ihn anzeigen. Selbiges gilt für Kanten.
