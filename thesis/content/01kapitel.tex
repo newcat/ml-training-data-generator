@@ -2,16 +2,18 @@
 
 \chapter{Einleitung}
 
-In letzter Zeit werden lernende Algorithmen in immer mehr Bereichen eingesetzt \cite{mengesonnentag:2018}. Diese Algorithmen müssen mit Daten trainiert werden. Allerdings ist es schwierig, geeignete Datensätze zu finden. Dies gilt besonders für akademische Zwecke, da hierbei oft mehrere Datensätze ähnlicher Art benötigt werden, die aber leichte Unterschiede aufweisen. So kann in der Vorlesung mit einem Datensatz geübt werden und in der Klausuraufgabe ein ähnlicher, den Studenten aber bisher unbekannter Datensatz, verwendet werden.
+Immer mehr Unternehmen wie z.B. Google, Amazon und Facebook investieren verstärkend in Forschungen im Bereich Maschinelles Lernen. Dadurch gewinnen lernende Algorithmen eine immer größer werdende Bedeutung \cite{mengesonnentag:2018}. Diese Algorithmen müssen mit Daten trainiert werden. Allerdings ist es schwierig, geeignete Datensätze zu finden. Dies gilt besonders für akademische Zwecke, da hierbei oft mehrere Datensätze ähnlicher Art benötigt werden, die aber leichte Unterschiede aufweisen. So können Daten mit einer bestimmter Logik generiert werden, um dann testweise lernende Algorithmen auf die Trainingsdaten anzuwenden. Das trainierte Modell kann nun mit dem Modell verglichen werden, mit dem die Daten ursprünglich generiert wurden. Im Idealfall findet decken sich beide Modelle.
 
-Im Moment werden die Daten durch Formeln in einer Tabellenkalkulation erstellt. Mit dieser Vorgehensweise ist es allerdings kompliziert, Zusammenhänge darzustellen. Auch sind Randbedingungen, wie z. B. "mind. 10 positive Beispiele generieren" nur mit hohem Aufwand umsetzbar.
+Bisher werden die Daten durch Formeln in einer Tabellenkalkulation erzeugt. Mit dieser Vorgehensweise ist es allerdings sehr aufwändig komplexe Zusammenhänge darzustellen. Diese Arbeit befasst sich mit der Entwicklung einer Applikation, die eben diese beschriebene Vorgehensweise vereinfacht.
 
 \section{Aufgabenstellung}
 
-Das Ziel ist es eine Applikation zu entwickeln, die mittels einer grafischen Benutzeroberfläche bedient werden kann, um Daten vollsynthetisch, einfach, schnell und nach vorgegebenen Modellen zu generieren. Die Datengenerierung muss die Komplexität der bisher alternativen Methode verringern. Dadurch, dass die generierten Daten vor allem im Bereich Machine Learning eingesetzt werden, muss mit enorm großen Datenmengen, bis hin zu mehreren Millionen Datenpunkten pro Datensatz, gerechnet werden. Aus diesem Grund darf die Performance der Applikation nicht vernachlässigt werden.
+Das Ziel ist es eine Applikation zu entwickeln, die mittels einer grafischen Benutzeroberfläche bedient werden kann, um Daten vollsynthetisch, einfach, schnell und nach vorgegebenen Modellen zu generieren. Die Datengenerierung muss die Komplexität der bisher alternativen Methode verringern. Dadurch, dass die generierten Daten vor allem im Bereich Maschinelles Lernen eingesetzt werden, muss mit enorm großen Datenmengen, bis hin zu mehreren Millionen Datenpunkten pro Datensatz, gerechnet werden. Aus diesem Grund darf die Performance der Applikation nicht vernachlässigt werden.
 
 \section{Anforderungsanalyse}
 \label{sec:anforderungsanalyse}
+
+\todo{vllt. noch mehr Anforderungen, Performance, Usability etc.?}
 Die Anforderungsanalyse hat einige Anforderungen ergeben, die mit der entwickelten Applikation umgesetzt werden sollen.
 
 Die erste Anforderung ist die Visualisierung des Modells mit Editierfunktionen und umfasst die Grundfunktionalität der Applikation. Die Applikation soll es ermöglichen mithilfe einer grafischen Benutzeroberfläche ein Modell zu erstellen, auf dessen Basis Trainingsdaten generiert werden können.
@@ -22,5 +24,5 @@ Eine weitere Anforderung ist die Möglichkeit generierte Traningsdaten zu visual
 
 Da es möglich sein soll eine große Menge an Trainingsdaten zu generieren, stellt der Datenexport eine weitere entscheidende Anforderung dar. Die Trainingsdaten sollten in gängigen Formaten wie z. B. CSV oder JSON exportiert werden können, damit auch andere Applikationen problemlos die exportierten Daten importieren können.
 
-Eine andere Anforderung bezüglich des Datenexports ist die Möglichkeit die generierten Daten in einem Format zu exportieren, das dedizierte ML-Tools wie beispielweise WEKA unterstützen. Da es sich hierbei um eine Anfoderung handelt, welche nicht die Grundfunktionaliät umfasst, wird sie mit vergleichsweise geringer Priorität eingestuft. 
+Eine andere Anforderung bezüglich des Datenexports ist die Möglichkeit die generierten Daten in einem Format zu exportieren, das dedizierte ML-Tools wie beispielweise WEKA unterstützen. Da es sich hierbei um eine Anfoderung handelt, welche nicht die Grundfunktionaliät umfasst, wird sie mit vergleichsweise geringer Priorität eingestuft.
 
