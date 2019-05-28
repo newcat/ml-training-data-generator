@@ -87,8 +87,49 @@ Arrays sind in JavaScript nicht transferable. Das bedeutet, dass das generierte 
 
 \section{Dateispeicherung}
 
-Idealerweise sollten die Daten parallel zur Generierung bereits in die Ausgabedatei geschrieben werden. Damit kann die Arbeitsspeicherauslastung gering gehalten werden, was besonders auf Geräten mit kleinem Arbeitsspeicher, wie zum Beispiel günstigen Laptops oder bei Mobilgeräten wichtig ist.
+Idealerweise sollten die Daten parallel zur Generierung bereits in die Ausgabedatei geschrieben werden. Damit kann die Arbeitsspeicherauslastung gering gehalten werden, was besonders auf Geräten mit kleinem Arbeitsspeicher, wie zum Beispiel günstigen Laptops oder bei Mobilgeräten wichtig ist. Allerdings ist mit JavaScript in Browsern aus Sicherheitsgründen kein direkter Zugriff auf das Dateisystem möglich. Dadurch ist es schwierig, die Datei sequentiell zu schreiben.
 
-Allerdings ist mit JavaScript in Browsern aus Sicherheitsgründen kein direkter Zugriff auf das Dateisystem möglich. 
+Die Bibliothek \textit{StreamSaver.js} versucht, dieses Problem zu lösen \cite{streamsaver}. Dafür benutzt sie einen \textit{Service Worker}. Service Worker haben die Möglichkeit, Webseiten offline verfügbar zu machen, indem sie HTTP-Anfragen abfangen \cite{mdn:serviceworker}. StreamSaver.js nutzt diese Möglichkeit, um einen Download-Stream zu öffnen. Dieser wird vom Browser wie bei einem normalen Dateidownload sequentiell in das Dateisystem geschrieben.
 
-\todo{Gefailter Ansatz mit Streamsaving}
+\begin{figure}[H]
+    \centering
+    \begin{sequencediagram}
+        \newthread{mt}{Hauptthread}
+        \newinst[1]{sw}{Service Worker}
+        \newinst[1]{b}{Browser}
+
+        \begin{call}{mt}{1. Get URL}{sw}{2. URL}\end{call}
+
+        \begin{messcall}{mt}{3. Download URL}{b}
+            \begin{call}{b}{4. Fetch URL}{sw}{5. Stream}\end{call}
+        \end{messcall}
+
+        \begin{sdblock}{Loop}{}
+            \begin{messcall}{mt}{6. Write Data}{sw}
+                \begin{messcall}{sw}{
+                    \shortstack{7. Write Data \\ to Stream}}{b}\end{messcall}
+            \end{messcall}
+        \end{sdblock}
+
+        \begin{messcall}{mt}{8. End}{sw}
+            \begin{messcall}{sw}{9. Close Stream}{b}\end{messcall}
+        \end{messcall}
+
+    \end{sequencediagram}
+    \caption{UML-Sequenzdiagramm Download mit StreamSaver.js}
+    \label{fig:streamsaverflow}
+\end{figure}
+
+\begin{enumerate}
+    \item Der Hauptthread initiiert den Vorgang indem er eine Nachricht an den Service Worker schickt
+    \item Der Service Worker generiert eine Download-URL und schickt dem Hauptthread eine Nachricht zurück, die die Download-URL und einen speziellen Kommunikationskanal enthält, über den der Hauptthread Daten für diese URL an den Service Worker schicken kann
+    \item Der Hauptthread weist den Browser an, einen Download auf die erhaltene URL zu starten
+    \item Der Browser schickt eine HTTP-Anfrage an die URL. Der Service Worker erkennt, dass die URL eine von ihm generierte URL ist und fängt die Anfrage ab
+    \item Der Service Worker öffnet einen Stream, um dem Browser die Antwort zu schicken
+    \item Der Hauptthread schickt über den erhaltenen Kommunikationskanal Daten an den Service Worker
+    \item Der Service Worker erhält diese Daten und schreibt sie in den Stream, welcher in Schritt 5 geöffnet wurde
+    \item Der Hauptthread beendet die Kommunikation, indem er den speziellen Kommunikationskanal schließt
+    \item Der Service Worker erkennt, dass der Kommunikationskanal geschlossen wurde und schließt den Download-Stream. Damit erkennt der Browser, dass der Download abgeschlossen ist und markiert dies entsprechend in der grafischen Benutzeroberfläche des Browsers
+\end{enumerate}
+
+Dieser Ansatz hätte es erlaubt, die generierten Daten schon parallel zur Generierung in eine Datei zu schreiben und damit die Arbeitsspeicherauslastung gering zu halten. Leider konnte die Bibliothek in dieser Arbeit nicht zum Laufen gebracht werden; auch eine eigene Umsetzung schlug fehl. Aus diesem Grund werden in der finalen Implementierung dieser Arbeit erst alle Daten in den Arbeitsspeicher geladen und anschließend ein Download auf die Gesamtdatenmenge gestartet. Dies ist mit einfachen JavaScript-Funktionen umsetzbar.
