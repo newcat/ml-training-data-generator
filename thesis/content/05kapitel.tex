@@ -185,7 +185,8 @@ In Anlehnung an das Model-View-Viewmodel-Pattern ist Vue \textit{reaktiv} gestal
 
 Die Daten im magentafarbenen Kreis sind die Daten im ViewModel. Werden diese geändert, wird der dazugehörige \textit{Setter} aufgerufen, welcher dafür sorgt, dass die Komponente neu gerendert wird. Beim Rendern werden die neuen Daten übernommen und somit dem Nutzer angezeigt.
 
-Im Code sieht das folgendermaßen aus:
+\bigskip
+
 \begin{lstlisting}[caption=Datenbindung in Vue, label=lst:vuecomponent]
 <p>{{ counter }}</p>
 
@@ -199,7 +200,7 @@ Im Code sieht das folgendermaßen aus:
 }
 \end{lstlisting}
 
-\todo{Beispiel einer einfachen Datenbindung}
+Listing \ref{lst:vuecomponent} stellt schematisch eine einfache Datenbindung in Vue dar. Durch die Datenbindung würde der folgende HTML-Code gerendert werden: \texttt{<p>2</p>}. Würde der Wert von \texttt{counter} im ViewModel geändert werden, würde sich die gerenderte Zahl entsprechend anpassen.
 
 Durch den komponentenbasierten Ansatz bietet Vue viele praktische Hilfsfunktionen wie etwa bedingtes Anzeigen von Komponenten oder auch das Rendern von Komponenten anhand einer Liste.
 
@@ -217,10 +218,3 @@ Wenn es im zugehörigen ViewModel des Codebeispiels \ref{lst:v-for} die Eigensch
 \end{itemize}
 
 Das gleiche Prinzip wird beim Rendern von Knoten und Kanten verwendet. Im Modell gibt es sowohl für die Menge der Knoten, als auch für die Menge der Kanten eine Liste. Das ViewModel besitzt eine Referenz auf diese Listen, so dass die View an diese Listen binden kann. Somit wird automatisch für jeden Knoten im Modell eine Knoten Komponente gerendert. Diese Komponente erhält eine Datenbindung zum entsprechenden Knoten. Mit dieser kann sie auf die Eigenschaften des Knotens zugreifen und ihn anzeigen. Selbiges gilt für Kanten.
-
-\begin{itemize}
-    \item Erklärung VueJS
-    \item Wie werden die Kanten gezeichnet?
-    \item Wie werden NodeOptions gezeichnet?
-    \item Wie wird Zoom / Panning umgesetzt?
-\end{itemize}
