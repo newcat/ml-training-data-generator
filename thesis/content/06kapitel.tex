@@ -2,14 +2,14 @@
 
 \chapter{Implementierung der Knoten}
 
+Mit BaklavaJS wurde das Grundgerüst der Applikation erstellt. Auf BaklavaJS aufbauend wird im \ac{MLTDG} die Funktionalität mittels der verschiedenen Knoten implementiert. In diesem Kapitel wird zum einen vorgestellt, welche Knoten implementiert wurden. Zum anderen wird darauf eingegangen, wie die grafische Oberfläche für einstellbare Wahrscheinlichkeitsverteilungen implementiert wurde.
+
 \section{Knoten-Arten}
 Der Kern der Applikation bilden die verschiedenen Knoten: Mit ihnen kann das Modell aufgebaut werden. Dabei ist es wichtig, dass die Knoten die verschiedenen Anwendungsfälle abdecken.
 
-Um herauszufinden, welche Knoten-Arten benötigt werden, wurden mehrere Beispiel-Modelle durchgespielt und evaluiert, mit welchen Knoten diese sich am besten umsetzen lassen.
-
-Wohnungsbeispiel:
+Um herauszufinden, welche Knoten-Arten benötigt werden, wurden mehrere Beispiel-Modelle durchgespielt und evaluiert, mit welchen Knoten diese sich am besten umsetzen lassen. Beispielhaft ist hier ein Modell dargestellt, welches Daten für einen fiktiven Immobilienmarkt generieren kann:
 \begin{algorithm}[H]
-    \caption{Beispielmodell Wohnungspreise}
+    \caption{Beispielmodell Immobilienmarkt}
     \begin{algorithmic}[1]
         \State Fläche = ZufallGauss($\mu = 80$, $\sigma = 20$)
         \State a = Mathematik(Division, $\textrm{Fläche}$, $40$)

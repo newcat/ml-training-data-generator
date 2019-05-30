@@ -5,8 +5,6 @@
 
 Eine der Anforderungen war es, das Modell visuell bearbeiten zu können. Dafür war es notwendig, einen Graph-Editor zu entwickeln. Ein solcher Editor erlaubt es, Knoten hinzuzufügen bzw. zu entfernen und sie miteinander zu verbinden. Der Editor wurde als separate Bibliothek unter dem Namen \textit{BaklavaJS} entwickelt und ist somit auch für andere Projekte verwendbar.
 
-\todo{Generelle Architekturbeschreibung}
-
 \section{Plugin-System und Event-System}
 
 Um BaklavaJS möglichst flexibel und erweiterbar zu gestalten, wurde früh auf ein Plugin-System gesetzt. Dieses wurde durch \textit{Events} und \textit{Hooks} umgesetzt.
@@ -217,4 +215,4 @@ Wenn es im zugehörigen ViewModel des Codebeispiels \ref{lst:v-for} die Eigensch
     \item Element 3
 \end{itemize}
 
-Das gleiche Prinzip wird beim Rendern von Knoten und Kanten verwendet. Im Modell gibt es sowohl für die Menge der Knoten, als auch für die Menge der Kanten eine Liste. Das ViewModel besitzt eine Referenz auf diese Listen, so dass die View an diese Listen binden kann. Somit wird automatisch für jeden Knoten im Modell eine Knoten Komponente gerendert. Diese Komponente erhält eine Datenbindung zum entsprechenden Knoten. Mit dieser kann sie auf die Eigenschaften des Knotens zugreifen und ihn anzeigen. Selbiges gilt für Kanten.
+Das gleiche Prinzip wird beim Rendern von Knoten und Kanten verwendet. Im Modell gibt es sowohl für die Menge der Knoten, als auch für die Menge der Kanten eine Liste. Das ViewModel besitzt eine Referenz auf diese Listen, so dass die View an diese Listen binden kann. Somit wird automatisch für jeden Knoten im Modell eine Knoten-Komponente gerendert. Diese Komponente erhält eine Datenbindung zum entsprechenden Knoten. Mit dieser kann sie auf die Eigenschaften des Knotens zugreifen und ihn anzeigen. Selbiges gilt für Kanten.

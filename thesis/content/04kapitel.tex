@@ -18,7 +18,7 @@ Die Applikation soll auf jeden Fall auf Windows laufen können, andere Betriebss
 \begin{itemize}
     \item C\#
     \item Java
-    \item Web (HTML, CSS, JavaScript/TypeScript, Web Assembly)
+    \item Web (HTML, CSS, JavaScript/TypeScript)
 \end{itemize}
 
 Das Hauptaugenmerk der Applikation liegt auf dem grafischen Editor des Modells. Diese Funktionalität war, unter anderem aufgrund der Erfahrung der Teammitglieder, am einfachsten mit Webtechnologien umzusetzen. Konkret bedeutet das:
@@ -28,12 +28,12 @@ Das Hauptaugenmerk der Applikation liegt auf dem grafischen Editor des Modells. 
     \item JavaScript für die Funktionalität
 \end{itemize}
 
-Da JavaScript eine dynamisch typisierte Sprache ist, können leicht Laufzeitfehler auftreten, die durch inkompatible Typen entstehen \cite{mdn:javascript}. Um dies zu vermeiden, wurde entschieden, für die Entwicklung dieser Applikation TypeScript zu verwenden.
+Da JavaScript eine dynamisch typisierte Sprache ist \cite{mdn:javascript}, können leicht Laufzeitfehler auftreten, die durch inkompatible Typen entstehen. Um dies zu vermeiden, wurde entschieden, für die Entwicklung dieser Applikation TypeScript zu verwenden.
 
-TypeScript ist eine zu JavaScript kompatible Sprache. Zusätzlich zur normalen JavaScript Syntax lassen sich aber Typen für zum Beispiel Variablen oder Funktionen angeben \cite{typescript:mainpage}. Diese werden von TypeScript zu JavaScript kompiliert, welches im Browser ausgeführt werden kann. Dabei wird gleichzeitig eine Typüberprüfung durchgeführt. Somit lassen sich viele Fehler schon beim Entwickeln verhindern und nicht erst zur Laufzeit.
+TypeScript ist eine zu JavaScript kompatible Sprache. Zusätzlich zur normalen JavaScript Syntax lassen sich aber Typen für zum Beispiel Variablen oder Funktionen angeben \cite{typescript:mainpage}. Diese werden von TypeScript zu JavaScript kompiliert, welches im Browser ausgeführt werden kann. Während des Kompilierens wird eine Typüberprüfung durchgeführt. Somit lassen sich viele Fehler schon beim Entwickeln verhindern und nicht erst zur Laufzeit.
 
 Web-Technologien lassen sich mittlerweile nicht mehr nur in Browsern verwenden. Mit Electron gibt es eine Bibliothek für die Entwicklung von Cross-Platform-Applikationen unter der Nutzung von Webtechnologien \cite{electron:about}. Dadurch können Web-Applikationen entwickelt werden, die als Desktop-Applikation auf Windows, Linux oder MacOS laufen und Zugriff auf Betriebssystemfunktionalitäten wie zum Beispiel das Dateisystem haben.
 
 Ein erster Prototyp mit Electron zeigte allerdings einige Schwierigkeiten auf. So wurde zum Beispiel beim Entwickeln unter Windows der Electron-Prozess nicht beendet. Dies ist ein bekanntes Problem, was bis heute (Stand: Mai 2019) nicht behoben ist \cite{electron:processissue}. Auch muss die Applikation auf dem Rechner lokal installiert werden. Da Electron einen eigenen Chromium-Browser und viele andere Funktionalitäten mitbringt, beträgt die minimale Paketgröße deutlich über 100 Megabyte \cite{electron:sizeissue}.
 
-Die in dieser Arbeit entwickelte Applikation würde aber von dem großen Funktionsumfang, den Electron bietet, kaum Gebrauch machen. Aus diesem Grund wurde entschieden, die Applikation als Web-Applikation für den Browser zu entwickeln. Das Problem dabei ist, dass es verschiedene Browser-Hersteller gibt, die Funktionalitäten leicht unterschiedlich implementieren. Um den Entwicklungsaufwand im Rahmen dieser Arbeit nicht zu groß werden zu lassen, wurde entschieden, sich bei der Entwicklung auf den Googles Chrome-Browser zu fokussieren. Dieser hat weltweit auf dem Desktop mit etwa 70\% den größten Marktanteil \cite{statcounter:desktopbrowser} und bietet laut der Browser-Vergleichsseite \textit{caniuse.com} die meisten Features für Webentwicklung \cite{caniuse:home}.
+Die in dieser Arbeit entwickelte Applikation würde aber von dem großen Funktionsumfang, den Electron bietet, kaum Gebrauch machen. Aus diesem Grund wurde entschieden, die Applikation als Web-Applikation für den Browser zu entwickeln. Das Problem dabei ist, dass es verschiedene Browser-Hersteller gibt, die Funktionalitäten leicht unterschiedlich implementieren. Um den Entwicklungsaufwand im Rahmen dieser Arbeit nicht zu groß werden zu lassen, wurde entschieden, sich bei der Entwicklung auf Googles Chrome-Browser zu fokussieren. Dieser hat weltweit auf dem Desktop mit etwa 70\% den größten Marktanteil \cite{statcounter:desktopbrowser} und bietet laut der Browser-Vergleichsseite \textit{caniuse.com} die meisten Features für Webentwicklung \cite{caniuse:home}.
