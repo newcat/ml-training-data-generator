@@ -124,7 +124,11 @@ Die Dichtefunktion kann nun integriert werden, indem kumulativ der Flächeninhal
     \item Rechteck
     \item Trapez
 \end{itemize}
-In jedem Fall aber kann der Flächeninhalt mit der Trapezformel berechnet werden. Wird dieser zwischen allen Punkten berechnet und kumulativ aufaddiert, ist das Ergebnis die Wahrscheinlichkeitsfunktion oder englisch CDF (kumulative distribution function) \cite{denker:2008}. Dies wird in der folgenden Abbildung \ref{fig:cdf} visualisiert.
+In jedem Fall aber kann der Flächeninhalt mit der Trapezformel näherungsweise berechnet werden. Der Hintegrund ist, dass eine mithilfe einer Geraden der Breich zwischen den Punkten näherungsweise interpoliert wird.\\
+Wählt man zwei sukzessive Punkte der stetigen Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch
+$$A_n=(x_{n+1}-x_n)*\frac{y_n+y_{n+1}}{2}$$
+
+Wird der Flächheninhalt zwischen allen sukzessiven Punkten berechnet und kumulativ aufaddiert, ist das Ergebnis die Wahrscheinlichkeitsfunktion oder englisch CDF (kumulative distribution function) \cite{denker:2008}. Dies wird in der folgenden Abbildung \ref{fig:cdf} visualisiert.
 
 \begin{figure}[H]
     \centering
@@ -132,7 +136,7 @@ In jedem Fall aber kann der Flächeninhalt mit der Trapezformel berechnet werden
     \caption{Kumulative Wahrscheinlichkeitsverteilung}\label{fig:cdf}
 \end{figure}
 
-Eigentlich gilt für die eingeschlossene Fläche der Dichtefunktion $sum(pdf)=1$. Dies stellt jedoch kein Problem dar, da die $cdf$ auf $1$ problemlos normiert werden kann, indem jeder y-Wert der berechneten Punkte von der $cdf$ durch den gesamten Flächeninhalt der $pdf$ geteilt wird.
+Eigentlich gilt für die eingeschlossene Fläche der Dichtefunktion $sum(pdf)=1$. Bei der Modellierung der Wahrscheinlichkeitsverteilung kann nicht gleich garantiert werden, dass die Fläche unter der erstellten Kurve gleich $1$ ist. Dies stellt jedoch kein Problem dar, da die $cdf$ auf $1$ problemlos normiert werden kann, indem jeder y-Wert der berechneten Punkte von der $cdf$ durch den gesamten Flächeninhalt der $pdf$ geteilt wird.
 
 \begin{figure}[H]
     \centering
@@ -152,7 +156,9 @@ An dieser Stelle wird die Inversionsmethode verwendet, um eine $U(0,1)$-verteilt
 Anschaulich kann die beschriebene Methode in der Abbildung \ref{fig:cdfnormex} betrachtet werden. Durch die grünen Linien wird verdeutlicht, dass ein relativ großer Bereich auf der vetikalen Achse von ca. $0.1$ bis $0.6$ auf einen vergleichsweise kleineren Bereich auf der hoizontalen Achse von ca. $4$ bis $6$ abgebildet wird. Die Autrittswahrscheinlichkeit ist für die Werte $5$ und $9$ am größten.
 
 \subsubsection{Zufallszahlengeneration für stetige Wahrscheinlichkeitsverteilungen}
-\todo{looooool}
+Die näherungsweise Integration verläuft bei stetigen Wahrscheinlichkeitsverteilung ähnlich. Der Unterschied besteht jedoch darin, dass sukzessive Punkte nicht linear, sondern stufenweise verbunden sind. In diesem Fall kann der Flächeninhalt zwischen sukzessiven bestimmt werden, indem der Flächeninhalt eines Rechtecks berechnet wird.
+Wählt man zwei sukzessive Punkte der diskreten Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch
+$$A_n=(x_{n+1}-x_n)*y_n$$
 
 \section{Web Worker}
 JavaScript ist im Browser single-threaded. Das bedeutet, dass die Webseite \enquote{einfriert}, wenn eine Berechnung lange benötigt. Es kann also keine Interaktion mit der Seite mehr vorgenommen werden \cite{googledev:webworkers}. Solche Interaktionen sind beispielsweise das Klicken auf Buttons oder das Scrollen der Seite.
