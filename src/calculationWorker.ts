@@ -12,9 +12,19 @@ editor.use(engine);
 ctx.addEventListener("message", async (msg) => {
     const d = msg.data as ICalculationWorkerMessage;
     editor.load(JSON.parse(d.editorState));
-    runBatch(d.startIndex, d.endIndex, editor, engine, sendData);
+    try {
+        await runBatch(d.startIndex, d.endIndex, editor, engine, sendData);
+    } catch (error) {
+        ctx.postMessage({
+            type: "error",
+            error: error.message || error
+        });
+    }
 });
 
 function sendData(data: Array<Record<string, any>>) {
-    ctx.postMessage(data);
+    ctx.postMessage({
+        type: "data",
+        data
+    });
 }

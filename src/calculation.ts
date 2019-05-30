@@ -11,11 +11,11 @@ export async function runBatch(startIndex: number, endIndex: number, editor: Edi
                                resultCallback: (data: Array<Record<string, any>>) => void) {
 
     // prepare every node
-    editor.nodes.forEach((n: IPreparableNode) => {
+    for (const n of (editor.nodes as IPreparableNode[])) {
         if (n.prepare) {
             n.prepare();
         }
-    });
+    }
 
     const outputNodes = editor.nodes
         .filter((n) => n.type === "OutputNode")
@@ -31,7 +31,11 @@ export async function runBatch(startIndex: number, endIndex: number, editor: Edi
         editor.nodes.forEach((n) => { n.state.index = i; });
 
         // calculate all nodes
-        await engine.calculate();
+        try {
+            await engine.calculate();
+        } catch (err) {
+            throw err;
+        }
 
         if (constraintNodes.some((n) => n.getInterface("Is Valid").value === false)) {
             tries++;
