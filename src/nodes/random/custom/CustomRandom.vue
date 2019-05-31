@@ -41,6 +41,7 @@ export default class CustomRandom extends Vue {
         switch (this.mode) {
             case "monotone":
                 this.chart!.data.datasets![0].cubicInterpolationMode = "monotone";
+                this.chart!.data.datasets![0].lineTension = 1;
                 break;
             default:
                 this.chart!.data.datasets![0].cubicInterpolationMode = "default";
@@ -114,7 +115,7 @@ export default class CustomRandom extends Vue {
                         max: 100,
                         stepSize: 10,
                         callback: (label, index, labels) =>
-                            // Apply min max to ticks and round by digits
+                            // Apply min max to ticks and limit digits
                             Math.round(
                                 (label / 100 * (this.max - this.min) + this.min) * Math.pow(10, this.digits)
                             ) / Math.pow(10, this.digits)
