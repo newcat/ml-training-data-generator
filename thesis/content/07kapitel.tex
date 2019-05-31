@@ -32,7 +32,7 @@ Um gleichverteilte Zufallszahlen generieren zu können, wird ein \ac{PRNG} verwe
 
 Der entscheidende Parameter eines \ac{PRNG} ist der sogenannte Seed. Der Seed ist ein Startwert, der bei dem allerersten Aufruf des \ac{PRNG} initial gesetzt wird. Aufbauend auf diesem Seed können alle weiteren Zufallszahlen generiert werden. Jeder generierte Wert wird als neuer Startwert für das Verfahren verwendet. Da der mögliche Wertebereich durch eine festgelegte Speichergröße begrenzt ist, muss zwangsläufig irgendwann eine Zahl generiert werden, die bereits in der Sequenz aufgetaucht ist. Weil sich die generierte Sequenz wiederholt, ist der Zufallszahlengenerator periodisch. Simple lineare Kongruenzgeneratoren durchlaufen den Wertebereich im besten Fall einmal pro Periode, weil sie mit nur einem Seed als initialen Wert arbeiten \cite{prng}. Andere \ac{PRNG} wie z. B. der Mersenne-Twister arbeiten mit mehreren Seeds, wodurch eine erheblich größere Periodenlänge erreicht werden kann.
 
-Ein Algorithmus kann Pseudo-Zufallszahlen generieren, die sich nur in einer bestimmten Anwendung nicht von echten Zufallszahlen unterscheiden lassen. Manche Generatoren sind deshalb für bestimmte Anwendungen gut geeignet und andere wiederum nicht. Müssen beispielsweise lange Sequenzen von Zufallszahlen generiert werden, ist ein linearer Kongruenzgenerator nicht zu empfehlen. Hingegen wäre er bei einer performanten Generation von kurzen Sequenzen eher geeignet. Echte Zufallszahlen verhalten sich immer gleich und bieten hohe Güte. Zur Generation von echten Zufallszahlen kommen pyhsikalische Zufallszahlengeneratoren zum Einsatz, die die naturgemäße Zufälligkeit von physikalischen Prozessen zu Nütze machen. Beispiele für solche physikalischen Prozesse sind thermisches Rauschen eines Widerstands und radioaktive Zerfallsvorgänge \cite{prng}. Logischerweise ist die Benutzung eines Seeds und damit die Reproduzierbarkeit von physikalischen Zufallszahlengeneratoren nicht gegeben.
+Ein Algorithmus kann Pseudo-Zufallszahlen generieren, welche sich nur in einer bestimmten Anwendung nicht von echten Zufallszahlen unterscheiden lassen. Manche Generatoren sind deshalb für bestimmte Anwendungen gut geeignet und andere wiederum nicht. Müssen beispielsweise lange Sequenzen von Zufallszahlen generiert werden, ist ein linearer Kongruenzgenerator nicht zu empfehlen. Hingegen wäre er bei einer performanten Generation von kurzen Sequenzen eher geeignet. Echte Zufallszahlen verhalten sich immer gleich und bieten hohe Güte. Zur Generation von echten Zufallszahlen kommen pyhsikalische Zufallszahlengeneratoren zum Einsatz, die die naturgemäße Zufälligkeit von physikalischen Prozessen zu Nütze machen. Beispiele für solche physikalischen Prozesse sind thermisches Rauschen eines Widerstands und radioaktive Zerfallsvorgänge \cite{prng}. Logischerweise ist dann die Benutzung eines Seeds und damit die Reproduzierbarkeit von physikalischen Zufallszahlengeneratoren nicht gegeben.
 
 Die Möglichkeit einen Seed verwenden zu können, hat allerdings den großen Vorteil der Reproduzierbarkeit von Ergebnissen, weshalb die Verwendung von echten Zufallszahlen für den \ac{MLTDG} unpassend ist. Gerade bei der Erstellung von komplexen Zusammenhängen innerhalb der Applikation soll ein Neustart der Generation nach kleinen Veränderungen nicht komplett neue Daten generieren. Dem Benuter soll es möglich sein benutzerdefinierte Zufallsvariablen mit einem Seed zu versehen, um gleiche Ausgangswerte erhalten zu können.
 
@@ -42,7 +42,7 @@ Vorteile von Seeds:
     \item Debugging: Werden unerwartete Trainingsdaten generiert, können mithilfe von Seeds einzelne Änderungen vorgenommen werden, sodass die neuen Daten mit den letzten abgeglichen werden können. Aufgedeckte Singularitäten können so aufgedeckt und reproduziert werden. 
 \end{itemize}
 
-Es gibt einige JavaScript-Bibiliotheken, die \ac{PRNG}s bereits implementieren. Die Auswahl der Bibiliothek ist auf Chance.js gefallen aus den folgenden Gründen:
+Es gibt einige JavaScript-Bibiliotheken, die \ac{PRNG}s bereits implementieren. Die Auswahl der Bibiliothek ist auf Chance.js aus den folgenden Gründen gefallen:
 \begin{itemize}
     \item Einfache Nutzung durch die Verfügbarkeit als NPM-Package
     \item Ausführliche Dokumentation
@@ -52,7 +52,7 @@ Es gibt einige JavaScript-Bibiliotheken, die \ac{PRNG}s bereits implementieren. 
 
 \subsection{Generation von Zufallszahlen einer vorgegeben Wahrscheinlichkeitsverteilung}
 
-Oft unterliegen Zufallsvariablen keiner gleichverteilten, sondern einer anderen Wahrscheinlichkeitsverteilung wie zum Beispiel die Normalverteilunge oder Exponentialverteilung. In diesem Fall ein Verfahren benötigt, um aus einer gleichverteilten Zufallszahl eine Zufallszahl einer anderen Wahrscheinlichkeitsverteilung zu generieren.
+Oft unterliegen Zufallsvariablen keiner gleichverteilten, sondern einer anderen Wahrscheinlichkeitsverteilung wie zum Beispiel die Normalverteilunge oder Exponentialverteilung. In diesem Fall wird ein Verfahren benötigt, um aus einer gleichverteilten Zufallszahl eine Zufallszahl einer anderen Wahrscheinlichkeitsverteilung zu generieren.
 
 Die Inversionsmethode ist ein Algorithmus, der bei mehrfachem Aufruf eine Sequenz von Zufallszahlen $x_0, x_1, x2$ generiert, die einem vorgegeben stochastischem Modell entspringen. Der Algorithmus beschäftigt sich mit dem Problem, eine beliebige Verteilung auf $\mathbb{R}$ abzubilden. Neben der Verteilungsfunktion ist eine Voraussetzung für die Inversionsmethode ein vorhandener Zufallszahlengenerator, der gleichverteilte Zufallszahlen im Intervall $I=[0,1]$ generieren kann \cite{Inversionsmethode}. Hierfür kann der \ac{PRNG} der Bibliothek Chart.js aus dem letzten Kapitel herangezogen werden.
 
@@ -97,10 +97,12 @@ Es wurden einige Algorithmen entwickelt, um näherungsweise normalverteilte Zufa
     \item Polar-Methode
 \end{itemize}
 
+Die verwendete Bibliothek Chance.js implementiert die Polar-Methode von George Marsaglia und Thomas A. Die Polar-Methode basiert auf der Box-Muller-Methode und verbessert verbessert sie, indem die Berechnung von trigonometrischen Funktionen umgangen wird. Statt euklidischen Koordinaten werden Polar-Koordinaten verwendet \cite{polarmethode}.
+
 \subsection{Generation von Zufallszahlen einer benutzerdefinierten Wahrscheinlichkeitsverteilung}
 \label{sec:anpassbareverteilungberechnung}
 
-Steht man vor der Aufgabe Daten zu generieren, die von Zufallswerten einer komplexen Wahrscheinlichkeitsverteilung abhängen, ist es oft nur mit sehr großem Aufwand möglich eine passende Dichtefunktion zu finden. Ist die Dichtefunktion sehr spezifisch definiert, werden höher-gradige Funktionen benötigt, wodurch der rechnerische Aufwand stark ansteigt. Alternativ kann die Dichtefunktion mit stückweisen Polynomen approximiert werden, um dann Zufallszahlen näherungsweise mit der Inversionsmethode zu bestimmen. Dieses Kapitel beschreibt wie Zufallszahlen aus einer modellierten Wahrscheinlichkeitsverteilung erzegut werden können.
+Besteht die Aufgabe darin Daten zu generieren, die von Zufallswerten einer komplexen Wahrscheinlichkeitsverteilung abhängen, ist es oft nur mit sehr großem Aufwand möglich eine passende Dichtefunktion zu finden. Ist die Dichtefunktion sehr spezifisch definiert, werden höher-gradige Funktionen benötigt, wodurch der rechnerische Aufwand stark ansteigt. Alternativ kann die Dichtefunktion mit stückweisen Polynomen approximiert werden, um dann Zufallszahlen näherungsweise mit der Inversionsmethode zu bestimmen. Dieses Kapitel beschreibt wie Zufallszahlen aus einer modellierten Wahrscheinlichkeitsverteilung erzegut werden können.
 
 In den folgenden zwei Kapiteln wird bei der Generation von Zufallszahlen unterschieden, ob es sich um eine stetige Verteilung oder diskrete Verteilung handelt.
 
@@ -124,7 +126,7 @@ Die Dichtefunktion kann nun integriert werden, indem kumulativ der Flächeninhal
     \item Rechteck
     \item Trapez
 \end{itemize}
-In jedem Fall aber kann der Flächeninhalt mit der Trapezformel näherungsweise berechnet werden. Der Hintegrund ist, dass eine mithilfe einer Geraden der Breich zwischen den Punkten näherungsweise interpoliert wird.\\
+In jedem Fall aber kann der Flächeninhalt mit der Trapezformel näherungsweise berechnet werden. Der Hintegrund ist, dass mithilfe einer Geraden der Breich zwischen den Punkten näherungsweise interpoliert werden kann.\\
 Wählt man zwei sukzessive Punkte der stetigen Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch
 $$A_n=(x_{n+1}-x_n)*\frac{y_n+y_{n+1}}{2}$$
 
@@ -136,7 +138,7 @@ Wird der Flächheninhalt zwischen allen sukzessiven Punkten berechnet und kumula
     \caption{Kumulative Wahrscheinlichkeitsverteilung}\label{fig:cdf}
 \end{figure}
 
-Eigentlich gilt für die eingeschlossene Fläche der Dichtefunktion $sum(pdf)=1$. Bei der Modellierung der Wahrscheinlichkeitsverteilung kann nicht gleich garantiert werden, dass die Fläche unter der erstellten Kurve gleich $1$ ist. Dies stellt jedoch kein Problem dar, da die $cdf$ auf $1$ problemlos normiert werden kann, indem jeder y-Wert der berechneten Punkte von der $cdf$ durch den gesamten Flächeninhalt der $pdf$ geteilt wird.
+Eigentlich gilt für die eingeschlossene Fläche der Dichtefunktion $sum(pdf)=1$. Bei der Modellierung der Wahrscheinlichkeitsverteilung kann nicht gleich garantiert werden, dass die Fläche unter der erstellten Kurve gleich $1$ ist. Dies stellt jedoch kein Problem dar, da die $cdf$ problemlos normiert werden kann, indem jeder y-Wert der berechneten Punkte der $cdf$ durch den gesamten Flächeninhalt der $pdf$ geteilt wird.
 
 \begin{figure}[H]
     \centering
@@ -156,7 +158,7 @@ An dieser Stelle wird die Inversionsmethode verwendet, um eine $U(0,1)$-verteilt
 Anschaulich kann die beschriebene Methode in der Abbildung \ref{fig:cdfnormex} betrachtet werden. Durch die grünen Linien wird verdeutlicht, dass ein relativ großer Bereich auf der vetikalen Achse von ca. $0.1$ bis $0.6$ auf einen vergleichsweise kleineren Bereich auf der hoizontalen Achse von ca. $4$ bis $6$ abgebildet wird. Die Autrittswahrscheinlichkeit ist für die Werte $5$ und $9$ am größten.
 
 \subsubsection{Zufallszahlengeneration für stetige Wahrscheinlichkeitsverteilungen}
-Die näherungsweise Integration verläuft bei stetigen Wahrscheinlichkeitsverteilung ähnlich. Der Unterschied besteht jedoch darin, dass sukzessive Punkte nicht linear, sondern stufenweise verbunden sind. In diesem Fall kann der Flächeninhalt zwischen sukzessiven bestimmt werden, indem der Flächeninhalt eines Rechtecks berechnet wird.
+Die näherungsweise Integration verläuft bei stetigen Wahrscheinlichkeitsverteilung ähnlich. Der Unterschied besteht jedoch darin, dass sukzessive Punkte nicht linear, sondern stufenweise verbunden sind. In diesem Fall kann der Flächeninhalt zwischen sukzessiven Punkten bestimmt werden, indem der Flächeninhalt eines Rechtecks berechnet wird.
 Wählt man zwei sukzessive Punkte der diskreten Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch
 $$A_n=(x_{n+1}-x_n)*y_n$$
 
