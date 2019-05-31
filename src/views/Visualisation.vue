@@ -17,8 +17,9 @@ div.bg-dark.text-light
 <script lang="ts">
 import { Component, Vue, Prop, Watch, Inject } from "vue-property-decorator";
 import ScatterPlot from "@/components/ScatterPlot.vue";
-import { Calculator } from "../calculator";
+import { Calculator, ResultsType } from "@/calculationManager";
 import { SelectOption } from "@baklavajs/plugin-options-vue";
+import App from "@/App.vue";
 
 @Component({
     components: { ScatterPlot, SelectOption }
@@ -26,7 +27,7 @@ import { SelectOption } from "@baklavajs/plugin-options-vue";
 export default class Visualisation extends Vue {
 
     @Prop()
-    calculator!: Calculator;
+    results!: ResultsType;
 
     xSelect = { selected: "", items: [""] };
     ySelect = { selected: "", items: [""] };
@@ -37,19 +38,20 @@ export default class Visualisation extends Vue {
         }
         const x: string = this.xSelect.selected;
         const y: string = this.ySelect.selected;
-        const p = this.calculator.results.map((r) => [ r[x], r[y] ] as [number, number]);
+        const p = this.results.map((r) => [ r[x], r[y] ] as [number, number]);
         return p;
     }
 
-    mounted() {
-        if (this.calculator.results.length === 0) {
+    @Watch("results", { immediate: true })
+    onResultsChanged() {
+        if (this.results.length === 0) {
             return;
         }
-
-        const columns = Object.keys(this.calculator.results[0])
-            .filter((k) => this.calculator.results.every((r) => typeof(r[k]) === "number"));
+        const columns = Object.keys(this.results[0])
+            .filter((k) => this.results.every((r) => typeof(r[k]) === "number"));
         this.xSelect.items = columns;
         this.ySelect.items = columns;
     }
+
 }
 </script>

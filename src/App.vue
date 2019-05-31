@@ -1,11 +1,13 @@
 <template lang="pug">
 div.d-flex.flex-column(style="width:100%;height:100%;")
-    navbar.flex-shrink(@action="onAction", :loadedRows="loadedRows")
+    navbar.flex-shrink(@action="onAction", :loadedRows="results.length")
     
     settings.flex-fill(v-if="$route.name === 'settings'", v-model="settings")
-    visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", :calculator="calculator")
+    visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", :results="results")
     preview.flex-fill(v-else-if="$route.name === 'preview'")
     baklava-editor.flex-fill(v-else, :plugin="plugin")
+
+    notification(header="Error", v-model="showErrorNotification") {{ errorMessage }}
 
     progress-modal(:open="calculating", :progress="progress")
     
@@ -17,16 +19,19 @@ import { Component, Prop, Vue, Provide } from "vue-property-decorator";
 import { OptionPlugin } from "@baklavajs/plugin-options-vue";
 
 import createEditor from "@/createEditor";
-import { Calculator, IProgressEventData } from '@/calculator';
+import { Calculator, IProgressEventData, ResultsType } from '@/calculationManager';
 import { IPlugin } from '@baklavajs/core';
 import { ViewPlugin } from '@baklavajs/plugin-renderer-vue';
+import { Engine } from "@baklavajs/plugin-engine";
 
 import FunctionSidebarOption from "@/options/CodeOption.vue";
 import StringListOption from "@/options/StringListOption";
 import CustomRandomOption from "@/nodes/random/custom/CustomOption.vue";
+import DiscreteRandomOption from "@/nodes/random/discrete/DiscreteOption.vue";
 
 import Navbar from "@/components/Navbar.vue";
 import ProgressModal from "@/components/ProgressModal.vue";
+import Notification from "@/components/Notification.vue";
 import Settings from "@/views/Settings.vue";
 import Preview from "@/views/Preview.vue";
 
@@ -36,7 +41,8 @@ import Preview from "@/views/Preview.vue";
         Settings,
         Visualisation: () => import("@/views/Visualisation.vue"),
         Preview,
-        ProgressModal
+        ProgressModal,
+        Notification
     }
 })
 export default class extends Vue {
@@ -47,7 +53,7 @@ export default class extends Vue {
 
     calculating = false;
     progress = 0;
-    loadedRows = 0;
+    results: ResultsType = [];
 
     settings = {
         batchCount: 100,
@@ -55,15 +61,8 @@ export default class extends Vue {
         csvDelimiter: ";"
     };
 
-    visualisation = [
-        [10, 10],
-        [20, 20],
-        [30, 30],
-        [40, 40],
-        [50, 50],
-        [60, 60],
-        [70, 70]
-    ];
+    errorMessage = "";
+    showErrorNotification = false;
 
     @Provide("app")
     app = this;
@@ -73,14 +72,14 @@ export default class extends Vue {
 
         this.editor.use(this.plugin);
         this.editor.use(new OptionPlugin());
+        this.editor.use(new Engine(false));
 
         this.plugin.registerOption("FunctionSidebarOption", FunctionSidebarOption);
         this.plugin.registerOption("StringListOption", StringListOption);
         this.plugin.registerOption("CustomRandomOption", CustomRandomOption);
+        this.plugin.registerOption("DiscreteRandomOption", DiscreteRandomOption);
 
         this.calculator.events.progress.addListener(this, (p) => this.onCalculationProgress(p));
-        this.calculator.events.finished.addListener(this, () => this.onCalculationFinished());
-
     }
 
     mounted() {
@@ -120,19 +119,20 @@ export default class extends Vue {
         }
     }
 
-    calculate() {
+    async calculate() {
         this.calculating = true;
         this.progress = 0;
-        this.calculator.run(this.settings.batchCount);
+        try {
+            this.results = await this.calculator.run(this.settings.batchCount);
+        } catch (err) {
+            this.errorMessage = err;
+            this.showErrorNotification = true;
+        }
+        this.calculating = false;
     }
 
     onCalculationProgress(p: IProgressEventData) {
         this.progress = p.current * 100 / p.total;
-    }
-
-    onCalculationFinished() {
-        this.calculating = false;
-        this.loadedRows = this.calculator.results.length;
     }
 
     save() {
@@ -154,7 +154,6 @@ export default class extends Vue {
         const reader = new FileReader();
         reader.onload = async (readerEvent) => {
             this.editor.load(JSON.parse((readerEvent.target as any).result));
-            this.calculator.reset();
         };
         reader.readAsText(file);
         (this.$refs.fileinput as HTMLInputElement).type = "text";
@@ -162,12 +161,14 @@ export default class extends Vue {
     }
 
     export() {
-        if (this.calculator.results.length === 0) {
+        if (this.results.length === 0) {
+            this.errorMessage = "No rows loaded. Please calculate first";
+            this.showErrorNotification = true;
             return;
         }
 
-        let csv = Object.keys(this.calculator.results[0]).join(this.settings.csvDelimiter) + "\n";
-        this.calculator.results.forEach((r) => {
+        let csv = Object.keys(this.results[0]).join(this.settings.csvDelimiter) + "\n";
+        this.results.forEach((r) => {
             csv += Object.values(r).join(this.settings.csvDelimiter) + "\n";
         });
         csv = csv.slice(0, -1); // remove trailing newline

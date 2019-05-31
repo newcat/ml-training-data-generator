@@ -1,10 +1,8 @@
 import { Node } from "@baklavajs/core";
 import RandomHelper from "../randomHelper";
-import RandomSampler from "./randomSampler";
-import Curve, { Vector2D } from "./curve";
-import CurveMonotone from "./curveMonotone";
-import CurveLinear from "./curveLinear";
-import CurveStep from "./curveStep";
+import Distribution, { Vector2D } from "../distribution/distribution";
+import MonotoneDistribution from "../distribution/monotoneDistribution";
+import LinearDistribution from "../distribution/linearDistribution";
 
 export default class CustomNode extends Node {
 
@@ -12,10 +10,9 @@ export default class CustomNode extends Node {
     public name = this.type;
 
     private rng: RandomHelper|null = null;
-    private defaultPoints: Vector2D[] = [[0, 100], [900, 100]];
-    private defaultMode: string = "curveMonotone";
-    private curve: Curve|null = null;
-    private randomSampler: RandomSampler|null = null;
+    private defaultPoints: Vector2D[] = [[0, 0], [50, 50], [100, 20]];
+    private defaultMode: string = "monotone";
+    private distribution: Distribution|null = null;
 
     constructor() {
         super();
@@ -38,35 +35,20 @@ export default class CustomNode extends Node {
 
         // Set curve interpolator
         switch (value.mode) {
-            case "curveMonotone": {
-                this.curve = new CurveMonotone(value.points);
+            case "monotone": {
+                this.distribution = new MonotoneDistribution(value.points);
                 break;
             }
-            case "curveLinear": {
-                this.curve = new CurveLinear(value.points);
-                break;
-            }
-            case "curveStepMid": {
-                this.curve = new CurveStep(value.points, "mid");
-                break;
-            }
-            case "curveStepAfter": {
-                this.curve = new CurveStep(value.points, "after");
-                break;
-            }
-            case "curveStepBefore": {
-                this.curve = new CurveStep(value.points, "before");
+            case "linear": {
+                this.distribution = new LinearDistribution(value.points);
                 break;
             }
             default: {
                 throw new Error("Invalid mode");
             }
         }
-        const interpolatedPoints = this.curve!.curve();
-
-        // Set custom random generator
-        this.randomSampler = new RandomSampler(interpolatedPoints);
-        this.randomSampler.calculateCdf();
+        const c = this.distribution!.curve();
+        this.distribution!.integrate(c);
     }
 
     public calculate() {
@@ -75,7 +57,7 @@ export default class CustomNode extends Node {
         const discrete = this.getInterface("Discrete").value;
 
         const uniformRandom = this.rng!.uniform(this.state.index, { fixed: 8, min: 0, max: 1 });
-        const customRandom = this.randomSampler!.sample(uniformRandom) * (max - min) + min;
+        const customRandom = this.distribution!.sample(uniformRandom) * (max - min) + min;
         this.getInterface("Output").value = discrete ? Math.round(customRandom) : customRandom;
     }
 }

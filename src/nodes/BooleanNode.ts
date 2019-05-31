@@ -11,7 +11,7 @@ export default class BooleanNode extends Node {
         super();
         this.addInputInterface("Value 1", "NumberOption", 0, { type: "number" });
         this.addInputInterface("Value 2", "NumberOption", 0, { type: "number" });
-        this.addInputInterface("Use Integer Values", "CheckboxOption", false, { type: "boolean" });
+        this.addInputInterface("Round Values", "CheckboxOption", false, { type: "boolean" });
         this.addInputInterface("Invert Output", "CheckboxOption", false, { type: "boolean" });
         this.addOption("Operation", "SelectOption", {
             selected: "==",
@@ -24,26 +24,26 @@ export default class BooleanNode extends Node {
 
         const val1 = this.getInterface("Value 1").value;
         const val2 = this.getInterface("Value 2").value;
-        const useInt = this.getInterface("Use Integer Values").value;
+        const useInt = this.getInterface("Round Values").value;
         const invert = this.getInterface("Invert Output").value;
         const operation = this.getOptionValue("Operation").selected;
 
         let result = false;
         switch (operation) {
             case "==":
-                result = useInt ? Math.floor(val1) === Math.floor(val2) : val1 === val2;
+                result = useInt ? Math.round(val1) === Math.round(val2) : val1 === val2;
                 break;
             case ">":
-                result = useInt ? Math.floor(val1) > Math.floor(val2) : val1 > val2;
+                result = useInt ? Math.round(val1) > Math.round(val2) : val1 > val2;
                 break;
             case "<":
-                result = useInt ? Math.floor(val1) < Math.floor(val2) : val1 < val2;
+                result = useInt ? Math.round(val1) < Math.round(val2) : val1 < val2;
                 break;
             case ">=":
-                result = useInt ? Math.floor(val1) >= Math.floor(val2) : val1 >= val2;
+                result = useInt ? Math.round(val1) >= Math.round(val2) : val1 >= val2;
                 break;
             case "<=":
-                result = useInt ? Math.floor(val1) <= Math.floor(val2) : val1 <= val2;
+                result = useInt ? Math.round(val1) <= Math.round(val2) : val1 <= val2;
                 break;
         }
 
