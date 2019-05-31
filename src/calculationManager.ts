@@ -1,6 +1,7 @@
 import { Editor, BaklavaEvent } from "@baklavajs/core";
 import Worker from "worker-loader!./calculationWorker";
 import { ICalculationWorkerMessage } from './types';
+import WrappedPromise from "./wrappedPromise";
 
 export interface IResult {
     data: string;
@@ -11,19 +12,22 @@ export interface IProgressEventData {
     total: number;
 }
 
-export class Calculator {
+export type ResultsType = Array<Record<string, any>>;
 
-    public results: Array<Record<string, any>> = [];
+export class Calculator {
 
     private editor: Editor;
     private workers: Worker[] = [];
 
     private jobsDone = 0;
+    private workersActive = 0;
     private totalJobs = 0;
+    private results: ResultsType = [];
+    private calculationPromise?: WrappedPromise<ResultsType>;
 
     public events = {
         progress: new BaklavaEvent<IProgressEventData>(),
-        finished: new BaklavaEvent<void>()
+        error: new BaklavaEvent<any>()
     };
 
     public constructor(editor: Editor) {
@@ -48,12 +52,13 @@ export class Calculator {
         }
     }
 
-    public run(batchSize: number) {
+    public run(batchSize: number): Promise<ResultsType> {
+
+        this.calculationPromise = new WrappedPromise<ResultsType>();
 
         const workerCount = this.workers.length;
         if (workerCount <= 0) {
-            console.warn("No active workers");
-            return;
+            return Promise.reject("No active workers");
         }
 
         this.totalJobs = 0;
@@ -94,16 +99,22 @@ export class Calculator {
                 startIndex: jobs[i].start,
                 endIndex: jobs[i].end
             } as ICalculationWorkerMessage);
+            this.workersActive++;
         }
 
-    }
+        return this.calculationPromise.promise;
 
-    public reset() {
-        this.results = [];
     }
 
     private handleWorkerMessage(worker: Worker, msg: MessageEvent) {
-        this.onData(msg.data);
+        switch (msg.data.type) {
+            case "data":
+                this.onData(msg.data.data);
+                break;
+            case "error":
+                this.onError(msg.data.error);
+                break;
+        }
     }
 
     private onData(data: Array<Record<string, any>>) {
@@ -112,7 +123,18 @@ export class Calculator {
         this.jobsDone += data.length;
         this.events.progress.emit({ current: this.jobsDone, total: this.totalJobs });
         if (this.jobsDone >= this.totalJobs) {
-            this.events.finished.emit();
+            if (this.calculationPromise) {
+                this.calculationPromise.resolve(this.results);
+            }
+            this.results = [];
+        }
+    }
+
+    private onError(error: any) {
+        this.events.error.emit(error);
+        this.workersActive--;
+        if (this.workersActive === 0 && this.calculationPromise) {
+            this.calculationPromise.reject(error);
         }
     }
 

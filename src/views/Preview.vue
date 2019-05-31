@@ -26,21 +26,16 @@ export default class Preview extends Vue {
     previewData: Array<Record<string, any>> = [];
 
     mounted() {
-        if (this.app.calculator.results.length < 20) {
-            this.calculate();
-        } else {
-            this.calculationDone();
+        this.calculate();
+    }
+
+    async calculate() {
+        try {
+            this.previewData = await this.app.calculator.run(20);
+        } catch (err) {
+            this.app.errorMessage = err;
+            this.app.showErrorNotification = true;
         }
-    }
-
-    calculate() {
-        this.app.calculator.events.finished.addListener(this, () => this.calculationDone());
-        this.app.calculator.run(20);
-    }
-
-    calculationDone() {
-        console.log("calc done");
-        this.previewData = this.app.calculator.results.slice(0, 20);
     }
 
     get headers() {
