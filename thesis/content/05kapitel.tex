@@ -9,11 +9,11 @@ Eine der Anforderungen war es, das Modell visuell bearbeiten zu können. Dafür 
 
 Um BaklavaJS möglichst flexibel und erweiterbar zu gestalten, wurde früh auf ein Plugin-System gesetzt. Dieses wurde durch \textit{Events} und \textit{Hooks} umgesetzt.
 
-Jede Entität in BaklavaJS kann solche Events und Hooks haben. Entitäten sind zum Beispiel Knoten und Kanten, aber auch einzelne Schnittstellen von Knoten oder Optionen innerhalb von Knoten.
+Jede Entität in BaklavaJS kann solche Events und Hooks bereitstellen. Entitäten sind zum Beispiel Knoten und Kanten, aber auch einzelne Schnittstellen von Knoten oder Optionen innerhalb von Knoten.
 
 Für jede wichtige Änderung der Entität gibt es in der Regel zwei Events. Ein Event wird vor der Änderung gefeuert, das andere danach. Beide Events enthalten eine Nachricht, die den Zustand davor und danach beschreibt. Ein Plugin kann diese Events abonnieren und bei bestimmten Änderungen eigene Logik ausführen. Zusätzlich sind Events, die vor einer Änderung ausgelöst werden, in der Regel \textit{preventable}. Bei einem \texttt{PreventableEvent} kann ein Abonnent (Plugin) verhindern, dass eine Änderung durchgeführt wird.
 
-Hooks ergänzen Events um die Möglichkeit, dass Plugins aktiv bestimmte Daten verändern können, die sonst nicht zugänglich wären. Dies kommt zum Beispiel beim Speichern und Laden zum Einsatz. So ruft beim Speichern jede Entität ihren \texttt{save}-Hook auf. Alle Plugins, die sich auf den Hook registriert haben, haben nun die Möglichkeit, zusätzliche Daten abzuspeichern oder Daten der Entität zu verändern. Selbiges gilt beim Laden.
+Hooks ergänzen Events um die Möglichkeit, dass Plugins aktiv bestimmte Daten verändern können, die sonst nicht zugänglich wären. Dies kommt zum Beispiel beim Speichern und Laden von Modellen zum Einsatz. So ruft beim Speichern jede Entität ihren \texttt{save}-Hook auf. Alle Plugins, die sich auf den Hook registriert haben, haben nun die Möglichkeit, zusätzliche Daten abzuspeichern oder Daten der Entität zu verändern. Das gleiche Prinzip wird beim Laden eines Modells verwendet.
 
 \section{Modulares Paketsystem}
 
@@ -149,7 +149,19 @@ Anschließend wird mittels einer Breitensuche die umgekehrte Ausführungsreihenf
     \end{algorithmic}
 \end{algorithm}
 
-Durch die Breitensuche des Baumes aus Abbildung \ref{fig:nodeExecutionOrder2} entsteht folgender Stack: $[A, B, C, B]$. Nach dem Umkehren der Reihenfolge und dem Entfernen von Duplikaten entsteht die folgendende, erwartete Reihenfolge: $[B, C, A]$.
+Durch die Breitensuche des Baumes aus Abbildung \ref{fig:nodeExecutionOrder2} entsteht folgender Stack: $[A, B, C, B]$. Nach dem Umkehren der Reihenfolge und dem Entfernen von Duplikaten entsteht die folgendende, erwartete Reihenfolge:
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[shape=circle,draw=black] (A) at (1.5,0) {A};
+        \node[shape=circle,draw=black] (B) at (-1.5,0) {B};
+        \node[shape=circle,draw=black] (C) at (0,0) {C};
+        \path[->](B) edge node[left] {} (C);
+        \path[->](C) edge node[left] {} (A);
+    \end{tikzpicture}
+    \caption{Berechnete Reihenfolge}
+    \label{fig:nodeExecutionOrder3}
+\end{figure}
 
 \section{Grafische Umsetzung}
 \label{sec:baklava:ui}
