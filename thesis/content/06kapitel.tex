@@ -48,25 +48,25 @@ Die Knoten lassen sich in folgende Kategorien unterteilen:
 
 Steht man vor der Aufgabe Daten zu generieren, die von Zufallswerten einer komplexen Wahrscheinlichkeitsverteilung abhängen, besteht das Problem, dass mit den standardmäßigen Verteilungen oft keine passende Wahrscheinlichkeitsverteilung gefunden werden kann. 
 
-In dem Fall soll der Benutzer in der Lage sein, schnell und einfach mit einer grafischen Oberfläche eine gewünschte Wahrscheinlichkeitsverteilung zu modellieren. Dadurch wird zum einen eine konzeptuelle Umgebung geschaffen, als auch der Aufwand erspart eine exakte Dichtefunktion der Wahrscheinlichkeitsverteilung zu entwerfen. Selbst wenn es keine exakte Dichtefunktion für die Wahrscheinlichkeitsverteilung gibt, könnte sie mit diesem Node näherungsweise modelliert werden.
+In dem Fall soll der Benutzer in der Lage sein, schnell und einfach mit einer grafischen Oberfläche eine gewünschte Wahrscheinlichkeitsverteilung zu modellieren. Dadurch wird zum einen eine konzeptuelle Umgebung geschaffen, als auch der Aufwand erspart eine exakte Dichtefunktion der Wahrscheinlichkeitsverteilung zu entwerfen. Selbst wenn es keine exakte Dichtefunktion für die Wahrscheinlichkeitsverteilung gibt, könnte sie mit diesem Knoten näherungsweise modelliert werden.
 
-Da dies anpassbaren Zufallsknoten deutlich größeren Implementierugnsaufwand im Vergleich zu den anderen Knoten benötigen, wird auf deren Umsetzung näher eingegangen.
+Da die anpassbaren Zufallsknoten im Vergleich zu anderen Knoten einen deutlich höheren Implementierungsaufwand haben, wird auf deren Umsetzung hier näher eingegangen.
 
-Die Gestaltung einer Oberfläche unterscheidet sich hierbei maßgeblich dabei, ob es sich um eine stetige oder diskrete Wahrscheinlichkeitsverteilung handelt. Ein Verteilungsdiagramm für stetige Werte wird mit einer Kurve modelliert. Hingegen wird ein Verteilungsdiagramm für kontinuierliche Werte ein Säulendiagramm verwendet. Die anpassbaren Zufallsknoten bestehen aus den zwei Komponenten: 
+Die Gestaltung einer Oberfläche unterscheidet sich maßgeblich daran, ob es sich um eine stetige oder diskrete Wahrscheinlichkeitsverteilung handelt. Ein Verteilungsdiagramm für stetige Werte wird mit einer Kurve modelliert. Hingegen wird ein Säulendiagramm als Verteilungsdiagramm für kontinuierliche Werte verwendet. Die anpassbaren Zufallsknoten bestehen aus zwei Komponenten: 
 \begin{enumerate}
     \item Grafische Modellierung der Wahrscheinlichkeitsverteilung
     \item Erzeugung der Zufallszahl
 \end{enumerate}
 
-Für die grafische Oberfäche der beiden Knoten wird ein freier Zeichenraum benötigt, auf dem das Linien- und Säulendiagramm gezeichnet werden kann. Zudem soll die Oberfläche Interaktionsmöglichkeiten zur Gestaltung der Verteilung geben. Da es bereits einige Implementierungen von Visualisierungsmöglichkeiten in JavaScript gibt, wird auch an dieser Stelle auf eine bereits existierende Lösung zurückgegriffen. Hierfür wird das JavaScript Framework Chart.js verwendet aus den folgenden Gründen \cite{chartjs}:
+Für die grafische Oberfläche der beiden Knoten wird ein freier Zeichenraum benötigt, auf dem das Linien- oder Säulendiagramm gezeichnet werden kann. Zudem soll die Oberfläche Interaktionsmöglichkeiten zur Gestaltung der Verteilung geben. Da es bereits einige Implementierungen von Visualisierungsmöglichkeiten in JavaScript gibt, wird an dieser Stelle auf eine bereits existierende Lösung zurückgegriffen. Hierfür wird das JavaScript Framework Chart.js verwendet \cite{chartjs}. Dies hat folgende Gründe:
 \begin{itemize}
-    \item Open-Source + MIT License: Freie Nutzung ohne anfallende Kosten
+    \item Open-Source mit MIT License: Freie Nutzung ohne anfallende Kosten
     \item Unterstützung von 8 Chart-Typen: Inklusive Linien- und Säulendiagramm
-    \item HTML5 Canvas: Gute Rendering Performanz
+    \item HTML5 Canvas: Hohe Rendering-Leistung
     \item Responsive: Diagramme werden in einer skalierbaren Sidebar verwendet
 \end{itemize}
 
-In den folgenden Kapiteln soll auf die grafische Modellierung einer stetigen und diskreten Wahrscheinlichkeitsverteilung eingegangen werden. Wie aus der modellierten Wahrscheinlichkeitsfunktion eine Zufallszahl generiert werden kann, wird in der Theorie im Kapitel \ref{sec:anpassbareverteilungberechnung} (S. \pageref{sec:anpassbareverteilungberechnung}) behandelt.
+In den folgenden Kapiteln soll auf die grafische Modellierung einer stetigen und diskreten Wahrscheinlichkeitsverteilung eingegangen werden. Wie aus der modellierten Wahrscheinlichkeitsfunktion eine Zufallszahl generiert werden kann, wird in Kapitel \ref{sec:anpassbareverteilungberechnung} (S. \pageref{sec:anpassbareverteilungberechnung}) behandelt.
 
 \subsection{Grafische Modellierung einer stetigen Wahrscheinlichkeitsverteilung}
 
@@ -74,20 +74,21 @@ Für die stetige Wahrscheinlichkeitsverteilung müssen in dem Liniendiagramm Int
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=.35\textwidth]{custom_node_linear.png}
-    \caption{Grafische Oberfläche einer stetigen Wahrscheinlichkeitsverteilung im linearen Modus}\label{fig:customnodelinear}
+    \includegraphics[width=.55\textwidth]{custom_node_linear.png}
+    \caption{Grafische Oberfläche einer stetigen Wahrscheinlichkeitsverteilung im linearen Modus}
+    \label{fig:customnodelinear}
 \end{figure}
 
-Oft ist ein linearer Zusammenhang nicht realistisch genug, um eine Wahrscheinlichkeitsverteilung zu beschreiben. Um gekrümmte Verbindungen zwischen den Punkten zu erstellen, kann eine sogenannte Spline-Interpolation verwendet werden. Chart.js bietet bereits Interpolationsmöglichkeiten, die für die Visualisierung eingesetzt werden können, jedoch gibt es keine geeignete Schnittstelle, um auf die Interpolationsdaten zuzugreifen. Ein Spline-Algorithmus muss deshalb selbst implementiert werden. Die genaue Spline-Funktion wird zwingend benötigt, um die Werte zwischen den erstellten Punkte berechnen zu können.
+Oft ist ein linearer Zusammenhang nicht realistisch genug, um eine Wahrscheinlichkeitsverteilung zu beschreiben. Um gekrümmte Verbindungen zwischen den Punkten zu erstellen, kann eine sogenannte Spline-Interpolation verwendet werden. Chart.js bietet bereits Interpolationsmöglichkeiten, die für die Visualisierung eingesetzt werden können, jedoch gibt es keine geeignete Schnittstelle, um auf die Interpolationsdaten zuzugreifen. Ein Spline-Algorithmus muss deshalb selbst implementiert werden. Die genaue Spline-Funktion wird zwingend benötigt, um die Werte zwischen den erstellten Punkten berechnen zu können.
 
-Es gibt eine Menge Vorgehensweise, um passende Splinefunktion zu finden. 
+Es gibt mehrere Vorgehensweisen, um passende Splinefunktionen zu finden. 
 Kubische Splines interpolieren eine Menge von Kontrollpunkten mit Hilfe von
-stückweise kubischen Polynome. Die Verwendung von Polynomen niederer Ordnung ist für die Kurvenanpassung besonders attraktiv, da sie sehr performant sind und numerischen Instabilitäten verhindern, die bei höhergradigen Kurven entstehen können. Diese Instabilitäten verursachen unpassendes Kurvenverhalten, durch die Punkte, die in einer gemeinsamen Kurve verbunden werden. Höhergradige Funktionen sind oft zu aufwändig bei der Berechnung, um sie für Interpolationszwecke einzusetzen. Das wohl überzeugendste
+stückweisen kubischen Polynomen. Die Verwendung von Polynomen niederer Ordnung ist für die Kurvenanpassung besonders attraktiv, da sie sehr performant sind und numerische Instabilitäten verhindern, die bei höhergradigen Kurven entstehen können. Diese Instabilitäten verursachen unpassendes Kurvenverhalten durch die Punkte, die in einer gemeinsamen Kurve verbunden werden. Höhergradige Funktionen sind oft zu aufwändig bei der Berechnung, um sie für Interpolationszwecke einzusetzen. Das wohl überzeugendste
 Argument der kubisch hermiteschen Interpolation ist ihre $C^2$-
-Kontinuität, die garantiert, dass sich die Splinefunktion kontinuierlich über die erste und zweite Ableitung aller Polynomsemente hinweg fortsetzt.
+Kontinuität, die garantiert, dass sich die Splinefunktion kontinuierlich über die erste und zweite Ableitung aller Polynomsegmente hinweg fortsetzt.
 Kontinuität erzwingt einen glatte Transition über die ganze Kurve hinweg \cite{Wolberg1999}.
 
-Bezüglich der Gesaltung einer Wahrscheinlichkeitsverteilung, soll die Splinefunktion so bestimmt werden können, dass die gewünschte Wahrscheinlichkeitsverteilung am einfachsten und intuitivsten erstellt werden kann. Die kurvenartige Struktur von Splines ermöglicht es zwar realistische bzw. glatte Kurven zu erstellen, ein Problem, das sich bei den meisten Splines aber herausstellt ist ihre Tendenz zu überschwingen. 
+Die Splinefunktion soll so bestimmt werden können, dass die gewünschte Wahrscheinlichkeitsverteilung am einfachsten und intuitivsten erstellt werden kann. Die kurvenartige Struktur von Splines ermöglicht es zwar, realistische beziehungsweise glatte Kurven zu erstellen. Jedoch haben die meisten Splines eine Tendenz zu überschwingen. 
 
 Überschwingen ist die Bezeichnung für eine sprunghafte Änderung, wodurch eine Funktion über den eigentlich angezielten Wert hinausschießt und sich erst im weiteren Verlauf dem eigentlichen Wert annähert. Leider neigen kubisch hermitesche Splines zu diesem Überschwingen, weshalb ihre Nutzung in dieser Form für die Applikatoin ungünstig ist \cite{kruger:2007}.
 
@@ -119,9 +120,9 @@ Bezüglich der Gesaltung einer Wahrscheinlichkeitsverteilung, soll die Splinefun
     \caption{Spline mit Überschwingen}\label{fig:spline}
 \end{figure}
 
-In der Abbildung \ref{fig:spline} ist ein kubisch hermitescher Spline zu erkennen, der zwischen den vier Kontrollpunkten $P_1(0,1)$, $P_2(1,6)$, $P_3(2,2)$ und $P_4(3,9)$ interpoliert. Es is deutlich zu erkennen, wie das Splinepolynom zwischen $P_1$ und $P_2$ über den y-Wert von $P_2$ überschwingt. Auch zwischen $P_3$ und $P_4$ ist ein Unterschwingen zu erkennen.
+In Abbildung \ref{fig:spline} ist ein kubisch hermitescher Spline zu erkennen, der zwischen den vier Kontrollpunkten $P_1(0,1)$, $P_2(1,6)$, $P_3(2,2)$ und $P_4(3,9)$ interpoliert. Es ist deutlich zu erkennen, wie das Splinepolynom zwischen $P_1$ und $P_2$ über den y-Wert von $P_2$ überschwingt. Auch zwischen $P_3$ und $P_4$ ist ein Unterschwingen zu erkennen.
 
-Um das Über- und Unterschwingen zu verhindern muss die Monotonie-Eigenschaft der Splinefunktion garantiert werden.
+Um das Über- und Unterschwingen zu verhindern, muss die Monotonie-Eigenschaft der Splinefunktion garantiert werden.
 
 \begin{figure}[H]
     \center
@@ -143,7 +144,7 @@ Um das Über- und Unterschwingen zu verhindern muss die Monotonie-Eigenschaft de
     \caption{Monotone Kubische Interpolation}\label{fig:monotonespline}
 \end{figure}
 
-In der Abbildung \ref{fig:monotonespline} ist ein monotoner kubischer hermitescher Spline gezeichnet mit identischen Kontrollpunkten zu der Abbildung \ref{fig:spline}. Bei dieser Splinefunktion ist der Monotoniecharakter dadurch zu erkennen, dass sowohl das Überschwingen als auch das Unterschwingen verhindert wird, was ein intuitiveres Kurvenverhalten fördert. Das Über- und Unterschwingen wird vor allem dann deutlich, wenn beide Kurven überlagert werden (vgl. Abb. \ref{fig:diffmonotone}).
+In Abbildung \ref{fig:monotonespline} ist ein monotoner kubischer hermitescher Spline gezeichnet mit identischen Kontrollpunkten zu Abbildung \ref{fig:spline}. Bei dieser Splinefunktion ist der Monotoniecharakter dadurch zu erkennen, dass sowohl das Überschwingen, als auch das Unterschwingen verhindert wird, was ein intuitiveres Kurvenverhalten fördert. Das Über- und Unterschwingen wird vor allem dann deutlich, wenn beide Kurven überlagert werden (vgl. Abb. \ref{fig:diffmonotone}).
 
 \begin{figure}[H]
     \center
@@ -184,22 +185,22 @@ In der Abbildung \ref{fig:monotonespline} ist ein monotoner kubischer hermitesch
     \caption{Hermitescher Spline vs. Monotoner Spline}\label{fig:diffmonotone}
 \end{figure}
 
-Eine sehr einfache Art Punkte monoton kubisch zu interpolieren erarbeiten Fritsch und Carlson in ihrem Paper von 1980. Sie stellen notwendige und ausreichende Bedingungen für die Monotonie der Spline-Polynome auf. Der Fritsch-Carlson-Algorithmus macht eine einfache erste Schätzungen der Tangentensteigungen und übergibt dann erneut Datenpunkte, um eventuelle überschwingende Tangenten in die monotone Region zu verschieben \cite{Fritschcarlson:1980}. Es gibt andere Algorithmen wie zum Beispiel die Fritsch-Butland-Methode, der aufwändigere erste Schätzungen von Tangenten macht, sodass die Tangenten garantiert im monotonen Bereich liegen und kein zweiter Durchgang erforderlich ist \cite{Fritschbutland:1984}.
+Eine sehr einfache Art Punkte monoton kubisch zu interpolieren erarbeiten Fritsch und Carlson in ihrem Paper von 1980. Sie stellen notwendige und ausreichende Bedingungen für die Monotonie der Spline-Polynome auf. Der Fritsch-Carlson-Algorithmus führt eine einfache erste Schätzung der Tangentensteigungen durch und übergibt dann erneut Datenpunkte, um eventuell überschwingende Tangenten in die monotone Region zu verschieben \cite{Fritschcarlson:1980}. Es gibt andere Algorithmen, wie zum Beispiel die Fritsch-Butland-Methode, die aufwändigere erste Schätzungen von Tangenten macht, sodass die Tangenten garantiert im monotonen Bereich liegen und kein zweiter Durchgang erforderlich ist \cite{Fritschbutland:1984}.
 
-Da sich die Fritsch-Carlson-Methode vergleichsweise schnell und einfach implementieren lässt, wird die Fritsch-Carlson-Methode für die monotone kubische Interpolation verwendet. Die Fritsch-Carlson-Methode beschreibt einen Weg interpolierende Tangentensteigungen für jeden Kontrollpunkt so zu wählen, dass alle Splinesegmente monoton bleiben. Wie bereits erwähnt benötigt die Methode zwei Durchläufe. 
+Da sich die Fritsch-Carlson-Methode vergleichsweise schnell und einfach implementieren lässt, wird sie für die monotone kubische Interpolation verwendet. Die Fritsch-Carlson-Methode beschreibt einen Weg um interpolierende Tangentensteigungen für jeden Kontrollpunkt so zu wählen, dass alle Splinesegmente monoton bleiben. Wie bereits erwähnt benötigt die Methode zwei Durchläufe. 
 
 Seien die Kontrollpunkte gegeben durch $P_i(x_i,y_i)$ für $1\le i \le n$.
 Im ersten Durchlauf wird für den ersten bis vorletzten Kontrollpunkt, d.h. für $i=1,\dots,n-1$, die Steigung zum darauffolgenden Kontrollpunkt berechnet mit 
 $$delta_i=\frac{y_{i+1}-y_i}{x_{i+1}-x_i}$$
-Die vorläufige Tangentensteigung für alle Kontrollpounkte bis auf die Randknoten, d.h. für $i=2,\dots,n-1$, ist dann bestimmt als der Median der beiden Steigungen zum vorherigen und folgenden Kontrollpunkt.
+Die vorläufige Tangentensteigung für alle Kontrollpunkte bis auf die Randknoten, d.h. für $i=2,\dots,n-1$, ist dann bestimmt als der Median der beiden Steigungen zum vorherigen und folgenden Kontrollpunkt.
 $$m_i=\frac{delta_{i-1}+delta_i}{2}$$
 Wenn es ein Vorzeichenwechsel bei den Steigungen gibt, dann ist der Kontrollpunkt $P_i$ ein lokales Extremum. In diesem Fall muss die Steigung an der Stelle $x_i$ auf $0$ gesetzt werden, d.h.
 $m_i=0$, wenn $delta_i\cdot delta_{i-1} < 0$.
 Die Randwerte sind hierbei durch ihre einseitigen Differenzen bestimmt:
 $m_1=delta_1$, $m_{n}=delta_{n-1}$.
 
-Im zweiten Durchlauf werden die Tangentensteigungen hinreichend geprüft und korrigiert. Zunächst werden alle Sattelbereiche gefunden und die Steigungen auf $0$ gesetzt. Ein Sattelbereich ist bei einer Funktion dann vorhanden, wenn zwei sukzessive Punkte $P_i$, $P_{i+1}$ den gleichen y-Wert haben $y_i=y_{i+1}$ für $i=1,\dots,n-1$. Da aber bereits die Sekantensteigungen berechnet worden sind, kann auch überprüft werden, ob die Sekantensteigung gleich $0$ ist, d.h
-$m_i=m_{i+1}=0$, wenn $delta_i=0$. Für alle restlichen Steigungen, haben
+Im zweiten Durchlauf werden die Tangentensteigungen hinreichend geprüft und korrigiert. Zunächst werden alle Sattelbereiche gefunden und die Steigungen auf $0$ gesetzt. Ein Sattelbereich ist bei einer Funktion dann vorhanden, wenn zwei aufeinanderfolgende Punkte $P_i$, $P_{i+1}$ den gleichen y-Wert haben $y_i=y_{i+1}$ für $i=1,\dots,n-1$. Da aber bereits die Sekantensteigungen berechnet worden sind, kann auch überprüft werden, ob die Sekantensteigung gleich $0$ ist, d.h
+$m_i=m_{i+1}=0$, wenn $delta_i=0$. Für alle restlichen Steigungen haben
 Fritsch und Carlson herausgefunden, dass die Splines dann monoton sind, wenn alle Tangenten in einem bestimmten Bereich der Alpha-Beta-Ebene liegen. 
 $\alpha_i =\frac{m_i}{delta_i}$, $\beta_i =\frac{m_{i+1}}{delta_i}$
 Eine robuste Wahl ist es, Alpha und Beta in einen Kreis mit Radius 3 zu setzen.
@@ -243,22 +244,22 @@ In dem folgenden Listing \ref{Fritsch-Carlson} wird in vereinfachter Form beispi
     }
 \end{lstlisting}
 
-Zur Interpolation der Splinefunktion wird das kubische hermitesche Interpolationspolynom benötigt. Zunächst muss dafür im ersten Schritt das zu dem x-Wert passende Polynom gesucht werden. Da die berechneten Steigungen aus dem Fritsch-Carlson-Algorithmus in sortierter Reihenfolge vorliegen, kann eine binäre Suche verwendet werden.
-Ist das richtige Polynom p gefunden, ist die Interpolation an der Stelle t durch das Polynom
+Zur Interpolation der Splinefunktion wird das kubische hermitesche Interpolationspolynom benötigt. Zunächst muss dafür das zu dem x-Wert passende Polynom gesucht werden. Da die berechneten Steigungen aus dem Fritsch-Carlson-Algorithmus in sortierter Reihenfolge vorliegen, kann eine binäre Suche verwendet werden. Ist das richtige Polynom $p$ gefunden, ist die Interpolation an der Stelle $t$ durch das Polynom
 $$p_i(t)=(2t^3-3t^2+1)p_i+(t^3-2t^2+t)m_i+(-2t^3+3t^2)p_{i+1}+(t^3-t^2)m_{i+1}$$
 definiert \cite{Pat:2009}.
 
-Im monoton interpolierten Modus sind aufeinanderfolgende Punkte mit einem kurvigen Graphen verbunden, wodurch oft realistischere Wahrscheinlichkeitsverteilungen modelliert werden können. Das Endresultat wird in der Abbildung \ref{fig:customnodemonotone} dargestellt.
+Im monoton interpolierten Modus sind aufeinanderfolgende Punkte mit einem kurvigen Graphen verbunden, wodurch oft realistischere Wahrscheinlichkeitsverteilungen modelliert werden können. Das Endresultat wird in Abbildung \ref{fig:customnodemonotone} dargestellt.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=.35\textwidth]{custom_node_monotone.png}
-    \caption{Grafische Oberfläche einer stetigen Wahrscheinlichkeitsverteilung im monoton interpolierten Modus}\label{fig:customnodemonotone}
+    \includegraphics[width=.55\textwidth]{custom_node_monotone.png}
+    \caption{Grafische Oberfläche einer stetigen Wahrscheinlichkeitsverteilung im monoton interpolierten Modus}
+    \label{fig:customnodemonotone}
 \end{figure}
 
 \subsection{Grafische Modellierung einer diskreten Wahrscheinlichkeitsverteilung}
 
-Das Säulendiagramm für die diskrete Wahrscheinlichkeitsverteilung soll dem Nutzer die Möglichkeit geben die einzelnen Säulenhöhen zu setzen (Linksklick). Ein wichtiges Detail ist bei dem Setzen der Säulenhöhen, dass dies auch funktionieren soll, wenn der Zeiger sich bei gehaltener Taste über mehrere Säulen bewegt, weil sonst die Gestaltung des Verteilungsdiagramms bei einem großen Wertebereich sehr aufwändig wird. 
+Das Säulendiagramm für die diskrete Wahrscheinlichkeitsverteilung soll dem Nutzer die Möglichkeit geben, einzelne Säulenhöhen zu setzen (Linksklick). Ein wichtiges Detail beim Setzen der Säulenhöhen ist, dass dies auch funktionieren soll, wenn der Mauszeiger sich bei gehaltener linker Maustaste über mehrere Säulen bewegt, weil sonst die Gestaltung des Verteilungsdiagramms bei einem großen Wertebereich sehr aufwändig wird. 
 
 \begin{figure}[H]
     \center
@@ -275,7 +276,7 @@ Das Säulendiagramm für die diskrete Wahrscheinlichkeitsverteilung soll dem Nut
     \caption{Darstellung einer diskreten Verteilung}
 \end{figure}
 
-Sei der Wertebereich definiert durch die Werte $a,a+1,a+2,\dots,b-2,b-1,b$ im Intervall $[a,b]$, wobei $a,b \in\mathbb{N}_0$, $x_0 \le x_n$, dann werden genau $b-a+1$ Klicks benötigt, wenn alle Säulen gesetzt werden sollen. Der Aufwand könnte erheblich reduziert werden, indem im Optimalfall mit einem einzigen haltenden Klick und einer Bewegung des Zeigers alle Säulen gesetzt werden können.
+Sei der Wertebereich definiert durch die Werte $a,a+1,a+2,\dots,b-2,b-1,b$ im Intervall $[a,b]$, wobei $a,b \in\mathbb{N}_0$, $x_0 \le x_n$, \todo{gehen hier nicht auch negative Zahlen (also $\mathbb{Z}$ statt $\mathbb{N}_0$?)} dann werden genau $b-a+1$ Klicks benötigt, wenn alle Säulen gesetzt werden sollen. Der Aufwand kann erheblich reduziert werden, indem im Optimalfall mit einem einzigen haltenden Klick und einer Bewegung der Maus alle Säulen gesetzt werden können.
 
 Ein Problem bei dieser Funktion ist, dass oft nicht alle Säulen auf die Zeigerposition gesetzt werden, weil das mouseover-Event nicht oft genug auslöst. Dies wird durch mehrere Faktoren negativ beeinflusst:
 \begin{itemize}
@@ -288,6 +289,7 @@ Um diesem Effekt entgegenzuwirken, kann eine Schätzung der Mausbewegung mithilf
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=.35\textwidth]{discrete_node.png}
-    \caption{Grafische Oberfläche einer diskreten Wahrscheinlichkeitsverteilung}\label{fig:discretenode}
+    \includegraphics[width=.55\textwidth]{discrete_node.png}
+    \caption{Grafische Oberfläche einer diskreten Wahrscheinlichkeitsverteilung}
+    \label{fig:discretenode}
 \end{figure}

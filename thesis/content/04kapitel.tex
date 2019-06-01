@@ -1,6 +1,6 @@
 %!TEX root = ../dokumentation.tex
 
-\chapter{Technologie Evaluation}
+\chapter{Technologieevaluation}
 
 In diesem Kapitel werden die Entscheidungen im Hinblick auf die verwendeten Technologien vorgestellt.
 
@@ -10,7 +10,7 @@ Da die verwendete Plattform Basis für alle weiteren zu treffenden Entscheidunge
 
 \begin{itemize}
     \item Grafische Benutzeroberfläche
-    \item Effizientes Berechnen des Datensatzes aus dem Modell
+    \item Effizientes Berechnen der Datensätze aus dem Modell
     \item Möglichkeit zur Visualisierung von Daten
 \end{itemize}
 
@@ -32,7 +32,7 @@ Da JavaScript eine dynamisch typisierte Sprache ist \cite{mdn:javascript}, könn
 
 TypeScript ist eine zu JavaScript kompatible Sprache. Zusätzlich zur normalen JavaScript Syntax lassen sich aber Typen für zum Beispiel Variablen oder Funktionen angeben \cite{typescript:mainpage}. Diese werden von TypeScript zu JavaScript kompiliert, welches im Browser ausgeführt werden kann. Während des Kompilierens wird eine Typüberprüfung durchgeführt. Somit lassen sich viele Fehler schon beim Entwickeln verhindern und nicht erst zur Laufzeit.
 
-Web-Technologien lassen sich mittlerweile nicht mehr nur in Browsern verwenden. Mit Electron gibt es eine Bibliothek für die Entwicklung von Cross-Platform-Applikationen unter der Nutzung von Webtechnologien \cite{electron:about}. Dadurch können Web-Applikationen entwickelt werden, die als Desktop-Applikation auf Windows, Linux oder MacOS laufen und Zugriff auf Betriebssystemfunktionalitäten wie zum Beispiel das Dateisystem haben.
+Web-Technologien lassen sich mittlerweile nicht mehr nur in Browsern verwenden. Mit Electron gibt es eine Bibliothek für die Entwicklung von Cross-Platform-Applikationen unter der Nutzung von Webtechnologien \cite{electron:about}. Dadurch können Web-Applikationen entwickelt werden, die als Desktop-Applikation auf Windows, Linux oder MacOS laufen und Zugriff auf Betriebssystemfunktionalitäten, wie zum Beispiel das Dateisystem, haben.
 
 Ein erster Prototyp mit Electron zeigte allerdings einige Schwierigkeiten auf. So wurde zum Beispiel beim Entwickeln unter Windows der Electron-Prozess nicht beendet. Dies ist ein bekanntes Problem, was bis heute (Stand: Mai 2019) nicht behoben ist \cite{electron:processissue}. Auch muss die Applikation auf dem Rechner lokal installiert werden. Da Electron einen eigenen Chromium-Browser und viele andere Funktionalitäten mitbringt, beträgt die minimale Paketgröße deutlich über 100 Megabyte \cite{electron:sizeissue}.
 

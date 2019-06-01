@@ -11,7 +11,7 @@ Um BaklavaJS möglichst flexibel und erweiterbar zu gestalten, wurde früh auf e
 
 Jede Entität in BaklavaJS kann solche Events und Hooks haben. Entitäten sind zum Beispiel Knoten und Kanten, aber auch einzelne Schnittstellen von Knoten oder Optionen innerhalb von Knoten.
 
-Für jede wichtige Änderung der Entität gibt es in der Regel zwei Events. Ein Event wird vor der Änderung gefeuert, eines danach. Beide Events enthalten eine Nachricht, die den Zustand davor und danach beschreibt. Ein Plugin kann diese Events abonnieren und bei bestimmten Änderungen eigene Logik ausführen. Zusätzlich sind Events, die vor einer Änderung ausgelöst werden, in der Regel \textit{preventable}. Bei einem \texttt{PreventableEvent} kann ein Abonnent (Plugin) verhindern, dass eine Änderung durchgeführt wird.
+Für jede wichtige Änderung der Entität gibt es in der Regel zwei Events. Ein Event wird vor der Änderung gefeuert, das andere danach. Beide Events enthalten eine Nachricht, die den Zustand davor und danach beschreibt. Ein Plugin kann diese Events abonnieren und bei bestimmten Änderungen eigene Logik ausführen. Zusätzlich sind Events, die vor einer Änderung ausgelöst werden, in der Regel \textit{preventable}. Bei einem \texttt{PreventableEvent} kann ein Abonnent (Plugin) verhindern, dass eine Änderung durchgeführt wird.
 
 Hooks ergänzen Events um die Möglichkeit, dass Plugins aktiv bestimmte Daten verändern können, die sonst nicht zugänglich wären. Dies kommt zum Beispiel beim Speichern und Laden zum Einsatz. So ruft beim Speichern jede Entität ihren \texttt{save}-Hook auf. Alle Plugins, die sich auf den Hook registriert haben, haben nun die Möglichkeit, zusätzliche Daten abzuspeichern oder Daten der Entität zu verändern. Selbiges gilt beim Laden.
 
@@ -51,7 +51,7 @@ In Abbildung \ref{fig:nodeExecutionOrder1} ist ein Beispielgraph mit Knoten und 
 Die Ausführungsreihenfolge der Knoten muss folgende Bedingungen erfüllen:
 \begin{itemize}
     \item Jeder Knoten wird genau einmal ausgeführt
-    \item Ein Knoten kann erst ausgeführt werden, wenn alle Knoten, die Kanten zu ihm haben, ausgeführt wurden
+    \item Ein Knoten kann erst ausgeführt werden, wenn alle Knoten, die Kanten zu ihm haben, bereits ausgeführt wurden
 \end{itemize}
 
 Eine Reihenfolge, die diese Bedingungen erfüllt, wird auch \textit{topologische Sortierung} genannt.
@@ -170,14 +170,14 @@ Jeder Knoten besteht aus drei Teilen:
     \item \textbf{Output Interfaces}: Die Ausgangsschnittstellen stellen das Ergebnis bereit, damit es von anderen Knoten benutzt werden kann.
 \end{itemize}
 
-Die gesamte Visualisierung des Editors wurde mit VueJS umgesetzt. VueJS ist ein JavaScript Framework zum Erstellen von Browser-Frontends. Ein wichtiges Konzept in Vue sind \textit{Komponenten}. Komponenten sind kleine, eigenständige und wiederverwendbare UI-Elemente \cite{vue:components}.
+Die gesamte Visualisierung des Editors wurde mit Vue.js umgesetzt. Vue.js ist ein JavaScript Framework zum Erstellen von Browser-Frontends. Ein wichtiges Konzept in Vue sind \textit{Komponenten}. Komponenten sind kleine, eigenständige und wiederverwendbare UI-Elemente \cite{vue:components}.
 
 In Anlehnung an das Model-View-Viewmodel-Pattern ist Vue \textit{reaktiv} gestaltet und bietet Datenbindung \cite{vue:instance}. Reaktiv bedeutet, dass Daten im sogenannten \textit{ViewModel} geändert werden können und diese Änderungen direkt in der \textit{View} angezeigt werden.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{vue_reactivity.png}
-    \caption{Reaktivität in VueJS \cite{vue:reactivity}}
+    \caption{Reaktivität in Vue.js \cite{vue:reactivity}}
     \label{fig:vuereactivity}
 \end{figure}
 
