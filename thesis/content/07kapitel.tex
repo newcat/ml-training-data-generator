@@ -39,7 +39,7 @@ Die Möglichkeit einen Seed verwenden zu können hat allerdings den großen Vort
 Vorteile von Seeds:
 \begin{itemize}
     \item Portabilität: Durch Speicherung der Seed-Werte bei einem Projektexport werden bei unverändertem Projekt immer gleiche Trainingsdaten generiert, sodass das Projekt geteilt und wiederverwendet werden kann. 
-    \item Debugging: Werden unerwartete Trainingsdaten generiert, können mithilfe von Seeds einzelne Änderungen vorgenommen werden, sodass die neuen Daten mit den letzten abgeglichen werden können. Aufgedeckte Singularitäten können so aufgedeckt und reproduziert werden. \todo{Bitte what? Singularitäten? Satzbau? lol}
+    \item Debugging: Werden unerwartete Trainingsdaten generiert, können mithilfe von Seeds einzelne Änderungen vorgenommen werden, sodass die neuen Daten mit den letzten abgeglichen werden können.
 \end{itemize}
 
 Es gibt einige JavaScript-Bibiliotheken, die \ac{PRNG}s bereits implementieren. Die Auswahl der Bibiliothek ist auf Chance.js gefallen. Dies hat folgende Gründe:
@@ -159,10 +159,8 @@ Anschaulich kann die beschriebene Methode in Abbildung \ref{fig:cdfnormex} betra
 
 \subsubsection{Zufallszahlengeneration für stetige Wahrscheinlichkeitsverteilungen}
 
-\todo{Muss das hier nicht alles diskret heißen statt stetig?}
-
-Die näherungsweise Integration verläuft bei stetigen Wahrscheinlichkeitsverteilung ähnlich. Der Unterschied besteht jedoch darin, dass aufeinanderfolgende Punkte nicht linear, sondern stufenweise verbunden sind. In diesem Fall kann der Flächeninhalt zwischen aufeinanderfolgenden Punkten bestimmt werden, indem der Flächeninhalt eines Rechtecks berechnet wird.
-Wählt man zwei aufeinanderfolgende Punkte der diskreten Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch
+Die näherungsweise Integration verläuft bei diskreten Wahrscheinlichkeitsverteilung ähnlich. Der Unterschied besteht jedoch darin, dass aufeinanderfolgende Punkte nicht linear, sondern stufenweise verbunden sind. In diesem Fall kann der Flächeninhalt zwischen aufeinanderfolgenden Punkten bestimmt werden, indem der Flächeninhalt eines Rechtecks berechnet wird.
+Wählt man zwei aufeinanderfolgende Kontrollpunkte der diskreten Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch
 $$A_n=(x_{n+1}-x_n)*y_n$$
 
 \section{Web Worker}

@@ -190,21 +190,20 @@ Eine sehr einfache Art Punkte monoton kubisch zu interpolieren erarbeiten Fritsc
 Da sich die Fritsch-Carlson-Methode vergleichsweise schnell und einfach implementieren lässt, wird sie für die monotone kubische Interpolation verwendet. Die Fritsch-Carlson-Methode beschreibt einen Weg um interpolierende Tangentensteigungen für jeden Kontrollpunkt so zu wählen, dass alle Splinesegmente monoton bleiben. Wie bereits erwähnt benötigt die Methode zwei Durchläufe. 
 
 Seien die Kontrollpunkte gegeben durch $P_i(x_i,y_i)$ für $1\le i \le n$.
-Im ersten Durchlauf wird für den ersten bis vorletzten Kontrollpunkt, d.h. für $i=1,\dots,n-1$, die Steigung zum darauffolgenden Kontrollpunkt berechnet mit 
+Im ersten Durchlauf wird für den ersten bis vorletzten Kontrollpunkt, das heißt für $i=1,\dots,n-1$, die Steigung zum darauffolgenden Kontrollpunkt berechnet mit 
 $$delta_i=\frac{y_{i+1}-y_i}{x_{i+1}-x_i}$$
-Die vorläufige Tangentensteigung für alle Kontrollpunkte bis auf die Randknoten, d.h. für $i=2,\dots,n-1$, ist dann bestimmt als der Median der beiden Steigungen zum vorherigen und folgenden Kontrollpunkt.
+Die vorläufige Tangentensteigung für alle Kontrollpunkte bis auf die Randknoten, das heißt für $i=2,\dots,n-1$, ist dann bestimmt als der Median der beiden Steigungen zum vorherigen und folgenden Kontrollpunkt.
 $$m_i=\frac{delta_{i-1}+delta_i}{2}$$
-Wenn es ein Vorzeichenwechsel bei den Steigungen gibt, dann ist der Kontrollpunkt $P_i$ ein lokales Extremum. In diesem Fall muss die Steigung an der Stelle $x_i$ auf $0$ gesetzt werden, d.h.
+Wenn es ein Vorzeichenwechsel bei den Steigungen gibt, dann ist der Kontrollpunkt $P_i$ ein lokales Extremum. In diesem Fall muss die Steigung an der Stelle $x_i$ auf $0$ gesetzt werden, das heißt
 $m_i=0$, wenn $delta_i\cdot delta_{i-1} < 0$.
 Die Randwerte sind hierbei durch ihre einseitigen Differenzen bestimmt:
 $m_1=delta_1$, $m_{n}=delta_{n-1}$.
 
-Im zweiten Durchlauf werden die Tangentensteigungen hinreichend geprüft und korrigiert. Zunächst werden alle Sattelbereiche gefunden und die Steigungen auf $0$ gesetzt. Ein Sattelbereich ist bei einer Funktion dann vorhanden, wenn zwei aufeinanderfolgende Punkte $P_i$, $P_{i+1}$ den gleichen y-Wert haben $y_i=y_{i+1}$ für $i=1,\dots,n-1$. Da aber bereits die Sekantensteigungen berechnet worden sind, kann auch überprüft werden, ob die Sekantensteigung gleich $0$ ist, d.h
-$m_i=m_{i+1}=0$, wenn $delta_i=0$. Für alle restlichen Steigungen haben
-Fritsch und Carlson herausgefunden, dass die Splines dann monoton sind, wenn alle Tangenten in einem bestimmten Bereich der Alpha-Beta-Ebene liegen. 
-$\alpha_i =\frac{m_i}{delta_i}$, $\beta_i =\frac{m_{i+1}}{delta_i}$
+Im zweiten Durchlauf werden die Tangentensteigungen hinreichend geprüft und korrigiert. Zunächst werden alle Sattelbereiche gefunden und die Steigungen auf $0$ gesetzt. Ein Sattelbereich ist bei einer Funktion dann vorhanden, wenn zwei aufeinanderfolgende Punkte $P_i$, $P_{i+1}$ den gleichen y-Wert haben $y_i=y_{i+1}$ für $i=1,\dots,n-1$. Da aber bereits die Sekantensteigungen berechnet worden sind, kann auch überprüft werden, ob die Sekantensteigung gleich $0$ ist, das heißt $m_i=m_{i+1}=0$, wenn $delta_i=0$. Für alle restlichen Steigungen haben Fritsch und Carlson herausgefunden, dass die Splines dann monoton sind, wenn alle Tangenten in einem bestimmten Bereich der Alpha-Beta-Ebene liegen.
+Alpha und Beta sind hierbeit wie folgt definiert: 
+$$\alpha_i =\frac{m_i}{delta_i}, \beta_i =\frac{m_{i+1}}{delta_i}$$
 Eine robuste Wahl ist es, Alpha und Beta in einen Kreis mit Radius 3 zu setzen.
-$m_i=\tau_i\alpha_i delta_i$, $m_{i+1}=\tau_i\beta_i delta_i$ mit $\tau_i=\frac{3}{\sqrt{\alpha_i^2+\beta_i^2}}$, wenn $\alpha^2+\beta^2>9$. \cite{Fritschcarlson:1980}
+$$m_i=\tau_i\alpha_i delta_i, m_{i+1}=\tau_i\beta_i delta_i$$ mit $\tau_i=\frac{3}{\sqrt{\alpha_i^2+\beta_i^2}}$, wenn $\alpha^2+\beta^2>9$. \cite{Fritschcarlson:1980}
 
 In dem folgenden Listing \ref{Fritsch-Carlson} wird in vereinfachter Form beispielhaft der Fritsch-Carlson-Algorithmus in JavaScript implementiert.
 \begin{lstlisting}[caption=Fritsch-Carlson Methode,label=Fritsch-Carlson]
@@ -276,7 +275,7 @@ Das Säulendiagramm für die diskrete Wahrscheinlichkeitsverteilung soll dem Nut
     \caption{Darstellung einer diskreten Verteilung}
 \end{figure}
 
-Sei der Wertebereich definiert durch die Werte $a,a+1,a+2,\dots,b-2,b-1,b$ im Intervall $[a,b]$, wobei $a,b \in\mathbb{N}_0$, $x_0 \le x_n$, \todo{gehen hier nicht auch negative Zahlen (also $\mathbb{Z}$ statt $\mathbb{N}_0$?)} dann werden genau $b-a+1$ Klicks benötigt, wenn alle Säulen gesetzt werden sollen. Der Aufwand kann erheblich reduziert werden, indem im Optimalfall mit einem einzigen haltenden Klick und einer Bewegung der Maus alle Säulen gesetzt werden können.
+Sei der Wertebereich definiert durch die Werte $a,a+1,a+2,\dots,b-2,b-1,b$ im Intervall $[a,b]$, wobei $a,b \in\mathbb{Z}$, $x_0 \le x_n$, dann werden genau $|a-b|+1$ Klicks benötigt, wenn alle Säulen gesetzt werden sollen. Der Aufwand kann erheblich reduziert werden, indem im Optimalfall mit einem einzigen haltenden Klick und einer Bewegung der Maus alle Säulen gesetzt werden können.
 
 Ein Problem bei dieser Funktion ist, dass oft nicht alle Säulen auf die Zeigerposition gesetzt werden, weil das mouseover-Event nicht oft genug auslöst. Dies wird durch mehrere Faktoren negativ beeinflusst:
 \begin{itemize}
