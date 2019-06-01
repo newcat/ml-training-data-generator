@@ -26,7 +26,11 @@ Da keine dieser Applikationen in der Lage ist, die Anforderungen dieser Arbeit a
 
 Eine der Anforderungen ist die Benutzung einer grafischen Oberfläche zur Modellierung des Modells zur Datengenerierung. Dafür wurde entschieden, das \textit{\ac{DFP}} Konzept umzusetzen.
 
+\subsection{Dataflow Programming}
+
 Beim \ac{DFP} wird das Programm in einem gerichteten Graphen dargestellt. Jeder Knoten bildet eine Funktion ab und hat Ein- und Ausgabeschnittstellen. Über die Eingabeschnittstellen erhält die Funktion des Knotens die benötigten Parameter; das Resultat der Funktion wird über die Ausgabeschnittstellen anderen Knoten zur Verfügung gestellt. Die Schnittstellen von Knoten können über Kanten verbunden werden. Kanten symbolisieren einen Datenfluss von einer Aus- zu einer Eingabeschnittstelle \cite{dataflow}. Einer der Vorteile von \ac{DFP} ist, dass Abhängigkeiten von Operationen durch die grafische Programmierung direkt ersichtlich sind. Auch sind Programme, die mit \ac{DFP} erstellt wurden, parallelisierbar, solange die Knoten bei der Berechnung keine Seiteneffekte haben \cite{dataflow}.
+
+\subsection{Grafische Umsetzung von Dataflow Programming}
 
 Der Node-Editor ist die grafische Oberfläche, die es erlaubt, das \ac{DFP}-Programm zu bearbeiten. Technisch gesehen ist ein Node-Editor ein Editor für gerichtete Graphen. Es hat sich aber bei Anwendersoftware der Begriff \textit{Node-Editor} durchgesetzt \cite{nodeeditor:blender, nodeeditor:maya}. Deshalb werden in dieser Arbeit die Begriffe \textit{Node-Editor} und \textit{Graph-Editor} synonym verwendet.
 

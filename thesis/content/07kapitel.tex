@@ -163,7 +163,7 @@ Die näherungsweise Integration verläuft bei diskreten Wahrscheinlichkeitsverte
 Wählt man zwei aufeinanderfolgende Kontrollpunkte der diskreten Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch
 $$A_n=(x_{n+1}-x_n)*y_n$$
 
-\section{Web Worker}
+\section{Effiziente Datengenerierung}
 JavaScript ist im Browser single-threaded. Das bedeutet, dass die Webseite \enquote{einfriert}, wenn eine Berechnung lange benötigt. Es kann also keine Interaktion mit der Seite mehr vorgenommen werden \cite{googledev:webworkers}. Solche Interaktionen sind beispielsweise das Klicken auf Buttons oder das Scrollen der Seite.
 
 Für diese Arbeit muss jedoch eine große Anzahl von Datensätzen generiert werden. Dies soll möglichst schnell geschehen; gleichzeitig soll die Applikation trotzdem bedienbar bleiben und einen Fortschrittsbalken anzeigen.
@@ -202,6 +202,8 @@ Die Datengenerierung läuft nach folgendem Muster ab:
     \item Jeder Worker hat eine eigene Instanz eines BaklavaJS-Editors mit dem Engine-Plugin. Das in der Nachricht enthaltene Modell wird geladen
     \item In einer Schleife werden die Datensätze zwischen Anfangs- und Endindex generiert. Wenn mehr als 10.000 Datensätze generiert werden, werden die Zwischenergebnisse alle 10.000 Datensätze über eine Nachricht an den Hauptthread geschickt. Dadurch wird verhindert, dass der Hauptthread (und damit die gesamte Applikation) einfriert, wenn ein Worker am Ende beispielsweise 500.000 Datensätze an den Hauptthread schickt, welcher die Daten verarbeiten muss.
 \end{enumerate}
+
+Durch die parallele Datengenerierung in mehreren Workern kann allerdings die Anforderung bezüglich der Randbedingungen beim Generieren von Daten nicht umgesetzt werden. Stattdessen wurde der \textit{ConstraintNode} implementiert, mit dem es möglich ist, Randbedingungen für einen einzelnen Datensatz festzulegen. In einer möglichen zukünftigen Erweiterung des \ac{MLTDG} könnte allerdings eine Funktionalität implementiert werden, die das Generieren von Daten mit Randbedingungen erlaubt, dabei jedoch nur einen einzelnen Web Worker einsetzt.
 
 \section{Dateispeicherung}
 
