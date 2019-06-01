@@ -46,17 +46,25 @@ Die Knoten lassen sich in folgende Kategorien unterteilen:
 \section{Anpassbare Verteilung}
 \label{sec:anpassbareverteilung}
 
-Steht man vor der Aufgabe Daten zu generieren, die von Zufallswerten einer komplexen Wahrscheinlichkeitsverteilung abhängen, besteht das Problem, dass mit den standardmäßigen Verteilungen oft keine passende Wahrscheinlichkeitsverteilung gefunden werden kann. 
+Besteht die Aufgabe Daten zu generieren, die von Zufallswerten einer komplexen Wahrscheinlichkeitsverteilung abhängen, gibt es das Problem, dass mit standardmäßigen Verteilungen oft keine passende Wahrscheinlichkeitsverteilung gefunden werden kann. Beispielsweise könnte eine Wahrscheinlichkeitsverteilung mit folgenden Anforderungen verlangt sein:
+\begin{itemize}
+    \item Hochpunkte an den Stellen $1$, $4$ und $9$
+    \item Keine Generation von Werten zwischen $5$ und $7$
+\end{itemize}
+Solch eine Wahrscheinlichkeitsverteilung könnte nicht mit einer standardmäßigen Verteilung dargestellt werden. In diesem Fall soll der Benutzer in der Lage sein, schnell und einfach mit einer grafischen Oberfläche eine gewünschte Wahrscheinlichkeitsverteilung, wie in Abbildung \ref{fig:customnodeexample}, grafisch modellieren zu können.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.55\textwidth]{custom_node_example.png}
+    \caption{Beispielhafte Wahrscheinlichkeitsverteilung}
+    \label{fig:customnodeexample}
+\end{figure}
+Dadurch wird zum einen eine konzeptuelle Umgebung geschaffen, als auch der Aufwand erspart eine exakte Dichtefunktion der Wahrscheinlichkeitsverteilung zu entwerfen. Selbst wenn es keine exakte Dichtefunktion für die Wahrscheinlichkeitsverteilung gibt, könnte sie mit diesem Knoten näherungsweise modelliert werden. 
 
-In dem Fall soll der Benutzer in der Lage sein, schnell und einfach mit einer grafischen Oberfläche eine gewünschte Wahrscheinlichkeitsverteilung zu modellieren. Dadurch wird zum einen eine konzeptuelle Umgebung geschaffen, als auch der Aufwand erspart eine exakte Dichtefunktion der Wahrscheinlichkeitsverteilung zu entwerfen. Selbst wenn es keine exakte Dichtefunktion für die Wahrscheinlichkeitsverteilung gibt, könnte sie mit diesem Knoten näherungsweise modelliert werden.
+Da die grafische Modellierung einer Wahrscheinlichkeitsverteilung mit den anpassbaren Zufallsknoten im Vergleich zu den anderen Knoten deutlich höheren Implementierungsaufwand benötigt, wird auf deren Umsetzung näher eingegangen. Die folgenden Kapiteln behandeln die grafische Modellierung von stetigen und diskreten Wahrscheinlichkeitsverteilungen. Wie dann tatsächlich aus der  modellierten Wahrscheinlichkeitsverteilung eine Zufallszahl generiert werden kann, wird in Kapitel \ref{sec:anpassbareverteilungberechnung} (S. \pageref{sec:anpassbareverteilungberechnung}) erklärt.
 
-Da die anpassbaren Zufallsknoten im Vergleich zu anderen Knoten einen deutlich höheren Implementierungsaufwand haben, wird auf deren Umsetzung hier näher eingegangen.
+\subsection{Bibliothek zur Darstellung von Wahrscheinlichkeitsverteilungen}
 
-Die Gestaltung einer Oberfläche unterscheidet sich maßgeblich daran, ob es sich um eine stetige oder diskrete Wahrscheinlichkeitsverteilung handelt. Ein Verteilungsdiagramm für stetige Werte wird mit einer Kurve modelliert. Hingegen wird ein Säulendiagramm als Verteilungsdiagramm für kontinuierliche Werte verwendet. Die anpassbaren Zufallsknoten bestehen aus zwei Komponenten: 
-\begin{enumerate}
-    \item Grafische Modellierung der Wahrscheinlichkeitsverteilung
-    \item Erzeugung der Zufallszahl
-\end{enumerate}
+Je nachdem, ob eine stetige oder diskrete Wahrscheinlichkeitsverteilung visualisiert werden soll, unterscheidet sich auch die Diagrammart. Ein Verteilungsdiagramm für stetige Werte wird mit einer Kurve modelliert. Hingegen wird für diskrete Werte ein Säulendiagramm verwendet. 
 
 Für die grafische Oberfläche der beiden Knoten wird ein freier Zeichenraum benötigt, auf dem das Linien- oder Säulendiagramm gezeichnet werden kann. Zudem soll die Oberfläche Interaktionsmöglichkeiten zur Gestaltung der Verteilung geben. Da es bereits einige Implementierungen von Visualisierungsmöglichkeiten in JavaScript gibt, wird an dieser Stelle auf eine bereits existierende Lösung zurückgegriffen. Hierfür wird das JavaScript Framework Chart.js verwendet \cite{chartjs}. Dies hat folgende Gründe:
 \begin{itemize}
@@ -65,8 +73,6 @@ Für die grafische Oberfläche der beiden Knoten wird ein freier Zeichenraum ben
     \item HTML5 Canvas: Hohe Rendering-Leistung
     \item Responsive: Diagramme werden in einer skalierbaren Sidebar verwendet
 \end{itemize}
-
-In den folgenden Kapiteln soll auf die grafische Modellierung einer stetigen und diskreten Wahrscheinlichkeitsverteilung eingegangen werden. Wie aus der modellierten Wahrscheinlichkeitsfunktion eine Zufallszahl generiert werden kann, wird in Kapitel \ref{sec:anpassbareverteilungberechnung} (S. \pageref{sec:anpassbareverteilungberechnung}) behandelt.
 
 \subsection{Grafische Modellierung einer stetigen Wahrscheinlichkeitsverteilung}
 
@@ -83,14 +89,14 @@ Oft ist ein linearer Zusammenhang nicht realistisch genug, um eine Wahrscheinlic
 
 Es gibt mehrere Vorgehensweisen, um passende Splinefunktionen zu finden. 
 Kubische Splines interpolieren eine Menge von Kontrollpunkten mit Hilfe von
-stückweisen kubischen Polynomen. Die Verwendung von Polynomen niederer Ordnung ist für die Kurvenanpassung besonders attraktiv, da sie sehr performant sind und numerische Instabilitäten verhindern, die bei höhergradigen Kurven entstehen können. Diese Instabilitäten verursachen unpassendes Kurvenverhalten durch die Punkte, die in einer gemeinsamen Kurve verbunden werden. Höhergradige Funktionen sind oft zu aufwändig bei der Berechnung, um sie für Interpolationszwecke einzusetzen. Das wohl überzeugendste
-Argument der kubisch hermiteschen Interpolation ist ihre $C^2$-
-Kontinuität, die garantiert, dass sich die Splinefunktion kontinuierlich über die erste und zweite Ableitung aller Polynomsegmente hinweg fortsetzt.
-Kontinuität erzwingt einen glatte Transition über die ganze Kurve hinweg \cite{Wolberg1999}.
+stückweisen kubischen Polynomen. Die Verwendung von Polynomen niederer Ordnung ist für die Kurvenanpassung besonders attraktiv, da sie sehr performant sind und numerische Instabilitäten verhindern, die bei höhergradigen Kurven entstehen können. Diese Instabilitäten verursachen ein unpassendes Kurvenverhalten. Höhergradige Funktionen sind oft zu aufwändig bei der Berechnung, um sie für Interpolationszwecke einzusetzen. Das wohl überzeugendste
+Argument der kubisch hermiteschen Interpolation ist aber ihre $C^2$-
+Kontinuität, die garantiert, dass sich die Splinefunktion kontinuierlich über die erste und zweite Ableitung aller Polynomsegmente fortsetzt.
+Kontinuität erzwingt einen glatte Transition über die ganze Kurve hinweg. \cite{Wolberg1999}
 
 Die Splinefunktion soll so bestimmt werden können, dass die gewünschte Wahrscheinlichkeitsverteilung am einfachsten und intuitivsten erstellt werden kann. Die kurvenartige Struktur von Splines ermöglicht es zwar, realistische beziehungsweise glatte Kurven zu erstellen. Jedoch haben die meisten Splines eine Tendenz zu überschwingen. 
 
-Überschwingen ist die Bezeichnung für eine sprunghafte Änderung, wodurch eine Funktion über den eigentlich angezielten Wert hinausschießt und sich erst im weiteren Verlauf dem eigentlichen Wert annähert. Leider neigen kubisch hermitesche Splines zu diesem Überschwingen, weshalb ihre Nutzung in dieser Form für die Applikatoin ungünstig ist \cite{kruger:2007}.
+Überschwingen ist die Bezeichnung für eine sprunghafte Änderung, wodurch eine Funktion über den eigentlich angezielten Wert hinausschießt und sich erst im weiteren Verlauf dem eigentlichen Wert annähert. Leider neigen kubisch hermitesche Splines zu diesem Überschwingen, weshalb ihre Nutzung in dieser Form für die Applikatoin ungünstig ist. \cite{kruger:2007}
 
 \begin{figure}[H]
     \center
