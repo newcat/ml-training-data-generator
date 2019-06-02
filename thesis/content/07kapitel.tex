@@ -161,7 +161,7 @@ Anschaulich kann die beschriebene Methode in Abbildung \ref{fig:cdfnormex} betra
 
 Die näherungsweise Integration verläuft bei diskreten Wahrscheinlichkeitsverteilungen ähnlich. Der Unterschied besteht jedoch darin, dass aufeinanderfolgende Punkte nicht linear, sondern stufenweise verbunden sind. In diesem Fall kann der Flächeninhalt zwischen aufeinanderfolgenden Punkten bestimmt werden, indem der Flächeninhalt eines Rechtecks berechnet wird.
 Wählt man zwei aufeinanderfolgende Kontrollpunkte der diskreten Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch
-$$A_n=(x_{n+1}-x_n)*y_n$$
+$$A_n=(x_{n+1}-x_n) \cdot y_n$$
 
 \section{Effiziente Datengenerierung}
 JavaScript ist im Browser single-threaded. Das bedeutet, dass die Webseite \enquote{einfriert}, wenn eine Berechnung lange benötigt. Es kann also keine Interaktion mit der Seite mehr vorgenommen werden \cite{googledev:webworkers}. Solche Interaktionen sind beispielsweise das Klicken auf Buttons oder das Scrollen der Seite.
@@ -177,7 +177,7 @@ Die Kommunikation zwischen Hauptthread und Web Workern funktioniert über Nachri
 Um komplexe Datentypen zwischen Workern und dem Hauptthread zu übertragen, gibt es mehrere Möglichkeiten:
 \begin{itemize}
     \item \textbf{Serialisierung über JSON}: Über die Standardfunktionen \texttt{JSON.stringify()} und \texttt{JSON.parse()} können komplexe Datentypen serialisiert beziehungsweise deserialisiert werden. So kann beispielsweise ein Objekt im Worker serialisiert werden, der entstandene String über \texttt{postMessage()} an den Hauptthread übertragen werden und das Objekt dort deserialisiert werden. Mit dieser Methode können keine zyklischen Objekte (also Objekte, die eine Referenz auf sich selber enthalten) serialisiert werden \cite{mdn:json_stringify}; dies stellt aber im Kontext dieser Arbeit kein Problem dar.
-    \item \textbf{Structured Cloning}: Für die Übergabe von Objekten von und zu Workern wurde der Structured Cloning Algorithmus entwickelt. Dieser klont die Objekte und unterstützt dabei auch zyklische Referenzen \cite{mdn:structured_cloning}.
+    \item \textbf{Structured Clone}: Für die Übergabe von Objekten von und zu Workern wurde der Structured Clone Algorithmus entwickelt. Dieser klont die Objekte und unterstützt dabei auch zyklische Referenzen \cite{mdn:structured_cloning}.
     \item \textbf{Transferables}: Transferable Objects sind Objekte, die zwischen JavaScript-Kon\-texten transferiert werden können. Dabei werden die Objekte nicht kopiert. Stattdessen wird die Referenz auf das Objekt im Ursprungskontext zerstört und im Zielkontext angelegt \cite{googledev:transferables}. Dadurch wird weiterhin eine Threadsicherheit gewährleistet.
 \end{itemize}
 

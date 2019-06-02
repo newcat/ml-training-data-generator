@@ -21,7 +21,7 @@ Um herauszufinden, welche Knoten-Arten benötigt werden, wurden mehrere Beispiel
     \end{algorithmic}
 \end{algorithm}
 
-Die Knoten lassen sich in folgende Kategorien unterteilen:
+Dies wurde für mehrere Beispiele durchgeführt und daraus die folgenden Knoten abgeleitet:
 \begin{itemize}
     \item \textbf{Werteknoten} können benutzt werden, um den gleichen Wert an verschiedene andere Knoten weiterzugeben. Es gibt sie für die Datentypen \textit{Boolean}, \textit{Number} und \textit{String}. Zusätzlich gibt es den Index-Knoten. Dieser gibt den aktuellen Index innerhalb des Berechnungsprozesses aus. Wird ein Wert nur für einen Knoten verwendet, kann dieser in der Regel direkt an der Eingangsschnittstelle des entsprechenden Knotens eingestellt werden; ein Werteknoten muss dafür nicht verwendet werden.
     \item \textbf{Zufallsknoten}
@@ -49,18 +49,18 @@ Die Knoten lassen sich in folgende Kategorien unterteilen:
 Besteht die Aufgabe Daten zu generieren, die von Zufallswerten einer komplexen Wahrscheinlichkeitsverteilung abhängen, gibt es das Problem, dass mit standardmäßigen Verteilungen oft keine passende Wahrscheinlichkeitsverteilung gefunden werden kann. Beispielsweise könnte eine Wahrscheinlichkeitsverteilung mit folgenden Anforderungen verlangt sein:
 \begin{itemize}
     \item Hochpunkte an den Stellen $1$, $4$ und $9$
-    \item Keine Generation von Werten zwischen $5$ und $7$
+    \item Keine Generierung von Werten zwischen $5$ und $7$
 \end{itemize}
-Solch eine Wahrscheinlichkeitsverteilung könnte nicht mit einer standardmäßigen Verteilung dargestellt werden. In diesem Fall soll der Benutzer in der Lage sein, schnell und einfach mit einer grafischen Oberfläche eine gewünschte Wahrscheinlichkeitsverteilung, wie in Abbildung \ref{fig:customnodeexample}, grafisch modellieren zu können.
+Solch eine Wahrscheinlichkeitsverteilung kann nicht mit einer standardmäßigen Verteilung dargestellt werden. In diesem Fall soll der Benutzer in der Lage sein, schnell und einfach mit einer grafischen Oberfläche die gewünschte Wahrscheinlichkeitsverteilung, wie in Abbildung \ref{fig:customnodeexample}, grafisch modellieren zu können.
 \begin{figure}[H]
     \centering
     \includegraphics[width=.55\textwidth]{custom_node_example.png}
     \caption{Beispielhafte Wahrscheinlichkeitsverteilung}
     \label{fig:customnodeexample}
 \end{figure}
-Dadurch wird zum einen eine konzeptuelle Umgebung geschaffen, als auch der Aufwand erspart eine exakte Dichtefunktion der Wahrscheinlichkeitsverteilung zu entwerfen. Selbst wenn es keine exakte Dichtefunktion für die Wahrscheinlichkeitsverteilung gibt, könnte sie mit diesem Knoten näherungsweise modelliert werden. 
+Dadurch wird zum einen eine konzeptuelle Umgebung geschaffen, als auch der Aufwand erspart, eine exakte Dichtefunktion der Wahrscheinlichkeitsverteilung zu entwerfen. Selbst wenn es keine exakte Dichtefunktion für die Wahrscheinlichkeitsverteilung gibt, kann sie mit diesem Knoten näherungsweise modelliert werden. 
 
-Da die grafische Modellierung einer Wahrscheinlichkeitsverteilung mit den anpassbaren Zufallsknoten im Vergleich zu den anderen Knoten deutlich höheren Implementierungsaufwand benötigt, wird auf deren Umsetzung näher eingegangen. Die folgenden Kapiteln behandeln die grafische Modellierung von stetigen und diskreten Wahrscheinlichkeitsverteilungen. Wie dann tatsächlich aus der  modellierten Wahrscheinlichkeitsverteilung eine Zufallszahl generiert werden kann, wird in Kapitel \ref{sec:anpassbareverteilungberechnung} (S. \pageref{sec:anpassbareverteilungberechnung}) erklärt.
+Da die grafische Modellierung einer Wahrscheinlichkeitsverteilung mit den anpassbaren Zufallsknoten einen - im Vergleich zu den anderen Knoten - deutlich höheren Implementierungsaufwand benötigt, wird auf deren Umsetzung näher eingegangen. Die folgenden Kapitel behandeln die grafische Modellierung von stetigen und diskreten Wahrscheinlichkeitsverteilungen. Wie aus der modellierten Wahrscheinlichkeitsverteilung eine Zufallszahl generiert werden kann, wird in Kapitel \ref{sec:anpassbareverteilungberechnung} (S. \pageref{sec:anpassbareverteilungberechnung}) erklärt.
 
 \subsection{Bibliothek zur Darstellung von Wahrscheinlichkeitsverteilungen}
 
