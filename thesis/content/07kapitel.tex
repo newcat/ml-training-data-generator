@@ -70,9 +70,9 @@ Die Exponentialverteilung ist eine stetige Wahrscheinlichkeitsverteilung über d
     \item Zeitspanne zwischen zwei Anrufen
     \item Lebensdauer von Geräten
 \end{itemize}
-Die Verteilungsfunktion der Exponentialverteilung 
+Die Verteilungsfunktion der Exponentialverteilung \cite{Behrends2012}
 $$F(X)=1-e^{-\lambda x}$$
-berechnet die Auftrittswahrscheinlichkeit des nächsten Ereignisses im Intervall $[0;x]$. Die Dichtefunktion ist gegeben mit
+berechnet die Auftrittswahrscheinlichkeit des nächsten Ereignisses im Intervall $[0;x]$. Die Dichtefunktion ist gegeben durch \cite{Behrends2012} 
 $$f(x)= 
     \begin{cases}\displaystyle
     \lambda e^{-\lambda x} & x\geq 0 \\
@@ -91,7 +91,7 @@ Der Graph der Dichtefunktion mit $\lambda=0.5$ wird in der Abbildung \ref{fig:ex
     \label{fig:exponentialverteilung}
 \end{figure}
 
-Die Inverse ist definiert durch
+Die Inverse ist definiert durch \cite{Behrends2012} 
 $$x=F^{-1}(y)=-\frac{1}{\lambda}ln(1-y)$$
 
 Nur für Funktionen von denen die Inverse gebildet werden kann, kann die Inversionsmethode zur Erzeugung von Zufallszahlen für eine vorgegebene Verteilung eingesetzt werden. Eine weitere wichtige Wahrscheinlichkeitsverteilung ist die Normalverteilung, für die nicht unmittelbar eine Inverse ermittelt werden kann. 
@@ -102,11 +102,11 @@ Die Normalverteilung $\mathcal{N}(\mu,\sigma ^2)$ ist definiert durch die zwei P
     \item $\mu$: Erwartungswert
     \item $\sigma^2$: Varianz mit der Standardabweichung $\sqrt{\sigma^2}=\sigma$
 \end{itemize}
-Die Verteilungsfunktion der Normalverteilung ist gegeben durch
+Die Verteilungsfunktion der Normalverteilung ist gegeben durch \cite{Inversionsmethode} 
 $$\frac{1}{\sigma\sqrt{2\pi}} \int_{-\infty}^x e^{-\frac{1}{2} \left(\frac{t-\mu}{\sigma}\right)^2}$$
-Die Normalverteilung wird mit der Dichtefunktion
+Die Normalverteilung wird mit der Dichtefunktion \cite{Inversionsmethode} 
 $$f(x,\mu,\sigma^2)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}$$
-dargestellt \cite{Inversionsmethode}. Die folgende Abbildung \ref{fig:normalverteilung} stellt die Dichtefunktion der Normalverteilung $\mathcal{N}(0,1)$ dar.
+dargestellt. Die folgende Abbildung \ref{fig:normalverteilung} stellt die Dichtefunktion der Normalverteilung $\mathcal{N}(0,1)$ dar.
 
 \begin{figure}[H]
     \centering
@@ -186,11 +186,11 @@ An dieser Stelle wird die Inversionsmethode verwendet, um eine $U(0,1)$-verteilt
 
 Anschaulich kann die beschriebene Methode in Abbildung \ref{fig:cdfnormex} betrachtet werden. Durch die grünen Linien wird verdeutlicht, dass ein relativ großer Bereich auf der vertikalen Achse von ca. $0.1$ bis $0.6$ auf einen vergleichsweise kleineren Bereich auf der horizontalen Achse von ca. $4$ bis $6$ abgebildet wird. Die Auftrittswahrscheinlichkeit ist für die Werte $5$ und $9$ am größten.
 
-\subsubsection{Zufallszahlengenerierung für stetige Wahrscheinlichkeitsverteilungen}
+\subsubsection{Zufallszahlengenerierung für diskrete Wahrscheinlichkeitsverteilungen}
 
 Die näherungsweise Integration verläuft bei diskreten Wahrscheinlichkeitsverteilungen ähnlich. Der Unterschied besteht jedoch darin, dass aufeinanderfolgende Punkte nicht linear, sondern stufenweise verbunden sind. In diesem Fall kann der Flächeninhalt zwischen aufeinanderfolgenden Punkten bestimmt werden, indem der Flächeninhalt eines Rechtecks berechnet wird.
-Wählt man zwei aufeinanderfolgende Kontrollpunkte der diskreten Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch
-$$A_n=(x_{n+1}-x_n) \cdot y_n$$
+Wählt man zwei aufeinanderfolgende Kontrollpunkte der diskreten Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch $A_n=(x_{n+1}-x_n) \cdot y_n$.
+Da bei einer diskreten Wahrscheinlichkeitsverteilung der Abstand zwischen benachbarten diskreten Werten gleich $1$ ist, genügt es, die einzelnen y-Werte kumulativ aufzuaddieren, um die Verteilungsfunktion zu bestimmen.
 
 \section{Effiziente Datengenerierung}
 JavaScript ist im Browser single-threaded. Das bedeutet, dass die Webseite \enquote{einfriert}, wenn eine Berechnung lange benötigt. Es kann also keine Interaktion mit der Seite mehr vorgenommen werden \cite{googledev:webworkers}. Solche Interaktionen sind beispielsweise das Klicken auf Buttons oder das Scrollen der Seite.
