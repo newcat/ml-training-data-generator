@@ -15,17 +15,17 @@ Das Ziel ist es, eine Applikation zu entwickeln, die mittels einer grafischen Be
 
 Die Anforderungsanalyse hat einige Anforderungen ergeben, die in der zu entwickelnden Applikation umgesetzt werden sollen.
 
-Die erste Anforderung ist die Visualisierung des Modells mit Editierfunktionen und umfasst die Grundfunktionalität der Applikation. Die Applikation soll es ermöglichen, mithilfe einer grafischen Benutzeroberfläche ein Modell zu erstellen, auf dessen Basis Trainingsdaten generiert werden können.
+Die erste Anforderung ist die Visualisierung des Modells mit Editierfunktionen und umfasst die Grundfunktionalität der Applikation. Die Applikation soll es ermöglichen, mithilfe einer grafischen \mbox{Benutzeroberfläche} ein Modell zu erstellen, auf dessen Basis Trainingsdaten generiert werden können.
 
 Bei bestimmten Aufgaben, wie zum Beispiel binärer Klassifikation, werden Trainingsdaten benutzt, die sowohl Positiv- als auch Negativ-Beispiele beinhalten. Unter Umständen kann es sein, dass die Generierung eines Positiv-Beispiels sehr unwahrscheinlich ist; gleichzeitig sollen die generierten Datensätze aber eine Minimalanzahl von positiven Beispielen beinhalten. Für diesen Zweck soll es möglich sein, eine minimale oder maximale Menge von Positiv- beziehungsweise Negativ-Beispielen anzugeben.
 
-Da lernende Algorithmen teilweise enorm große Datenmengen benötigen, um ein Modell hinreichend trainieren zu können, muss ein großer Wert auf die Leistung der Datengenerierung gelegt werden. Es soll möglich sein, Daten mit mehreren Millionen Datensätzen zu generieren.
+Da lernende Algorithmen teilweise enorm große Datenmengen benötigen, um ein Modell hinreichend trainieren zu können, muss großer Wert auf die Leistung der Datengenerierung gelegt werden. Es soll möglich sein, Daten mit mehreren Millionen Datensätzen zu generieren.
 
-Aufgrund der besonderen Schwierigkeit, logische Zusammenhänge grafisch modellieren zu können, sind auch Usability-Tests von großer Bedeutung. Die Software soll mit einer kurzen Anleitung auch für Nutzer bedienbar sein, die sich in dem Kontext nicht gut auskennen.
+Aufgrund der besonderen Schwierigkeit, logische Zusammenhänge grafisch modellieren zu können, sind Usability-Tests von großer Bedeutung. Die Software soll mit einer kurzen Anleitung auch für Nutzer bedienbar sein, die sich in dem Kontext nicht gut auskennen.
 
-Eine weitere Anforderung ist die Möglichkeit, generierte Traningsdaten zu visualisieren. Dies ist vor allem deshalb von großer Bedeutung, weil durch eine Visualisierung das erstellte Modell validiert werden kann. Aus den Rohdaten ist es schwer auf modellierte Zusammenhänge, Korrelationen oder andere Abhängigkeiten zu schließen. Hingegen kann eine Darstellung, wie zum Beispiel ein Streudiagramm, Aufschluss über die Abhängigkeitsstruktur zweier Variablen geben.
+Eine weitere Anforderung ist die Möglichkeit, generierte Traningsdaten zu visualisieren. Dies ist vor allem deshalb besonders wichtig, weil durch eine Visualisierung das erstellte Modell validiert werden kann. Aus den Rohdaten ist es schwer auf modellierte Zusammenhänge, Korrelationen oder andere Abhängigkeiten zu schließen. Hingegen kann eine Darstellung, wie zum Beispiel ein Streudiagramm, Aufschluss über die Abhängigkeitsstruktur zweier Variablen geben.
 
-Da es möglich sein soll eine große Menge an Trainingsdaten zu generieren, stellt der Datenexport eine weitere entscheidende Anforderung dar. Die Trainingsdaten sollen in gängigen Formaten, wie zum Beispiel \ac{CSV} oder JSON, exportiert werden, damit auch andere Applikationen problemlos die exportierten Daten importieren können.
+Da es möglich sein soll, eine große Menge an Trainingsdaten zu generieren, stellt der Datenexport eine weitere entscheidende Anforderung dar. Die Trainingsdaten sollen in gängigen Formaten, wie zum Beispiel \ac{CSV} oder JSON, exportiert werden, damit auch andere Applikationen problemlos die exportierten Daten importieren können.
 
 Eine andere Anforderung bezüglich des Datenexports ist die Möglichkeit die generierten Daten in einem Format zu exportieren, das dedizierte \ac{ML}-Tools, wie beispielweise WEKA, unterstützen. Da es sich hierbei um eine Anforderung handelt, welche nicht die Grundfunktionaliät umfasst, wird sie mit vergleichsweise geringer Priorität eingestuft.
 

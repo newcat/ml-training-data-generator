@@ -11,7 +11,7 @@ Es gelten die Bedingungen:
     \item $\sum_{i=1}^{n}P(x_i)=1$ (Vollständigkeit)
 \end{itemize}
 
-Bei einer einfachen Zufallsstichprobe handelt es sich um die Auswahl einer Teilmenge einer statistischen Population, bei der jedes Element die gleiche Wahrscheinlichkeit $P(x)=\frac{1}{\lvert M \rvert}=\frac{1}{n}$ hat, ausgewählt zu werden. Zudem darf eine Ziehung aus einer Gesamtmenge nicht die nachfolgenden Ziehungen beeinflussen, weil sie unabhängig voneinander erfolgen müssen \cite{RandomSampling}. Übertragen auf das typische Urnenexperiment der Stochastik, kommt es bei einer einfachen Zufallsstichprobe zu einer Ziehung mit Zurücklegen.
+Bei einer einfachen Zufallsstichprobe handelt es sich um die Auswahl einer Teilmenge einer statistischen Population, bei der jedes Element die gleiche Wahrscheinlichkeit $P(x)=\frac{1}{\lvert M \rvert}=\frac{1}{n}$ hat, ausgewählt zu werden. Zudem darf eine Ziehung aus einer Gesamtmenge nicht die nachfolgenden Ziehungen beeinflussen, weil sie unabhängig voneinander erfolgen müssen \cite{RandomSampling}. Übertragen auf das typische Urnenexperiment der Stochastik kommt es bei einer einfachen Zufallsstichprobe zu einer Ziehung mit Zurücklegen.
 
 Für die Generierung von Trainingsdaten ist das Random Sampling von großer Bedeutung, weil nur durch Einbeziehung einer Zufallskomponente neue Datensätze generiert werden können. Genau genommen handelt es sich bei der gewählten Vorgehensweise des Graph-Editors nur um die Ziehung eines einzigen Elements. Der Grund hierfür liegt darin, dass nicht pro Feature in der $n$-zeiligen Ergebnismenge auch gleich $n$ Elemente auf einmal aus der Grundgesamtheit gezogen werden, sondern in jedem Durchgang ein Element mit einer bestimmten Wahrscheinlichkeit gezogen wird, welches dann in weitere Berechnungen von anderen Features einfließen kann. Die Knoten können sich so auf eine einelementige Ziehung beschränken, welche dann beliebig oft ausgeführt weden kann, je nachdem wie viele Datensätze generiert werden sollen.
 
@@ -34,7 +34,7 @@ Der entscheidende Parameter eines \ac{PRNG} ist der sogenannte Seed. Der Seed is
 
 Ein Algorithmus kann Pseudo-Zufallszahlen generieren, welche sich nur in einer bestimmten Anwendung nicht von echten Zufallszahlen unterscheiden lassen. Manche Generatoren sind deshalb für bestimmte Anwendungen gut geeignet und andere wiederum nicht. Müssen beispielsweise lange Sequenzen von Zufallszahlen generiert werden, ist ein linearer Kongruenzgenerator nicht zu empfehlen. Hingegen wäre er bei einer performanten Generierung von kurzen Sequenzen eher geeignet. Echte Zufallszahlen verhalten sich immer gleich und bieten hohe Güte. Zur Generierung von echten Zufallszahlen kommen physikalische Zufallszahlengeneratoren zum Einsatz, die die naturgemäße Zufälligkeit von physikalischen Prozessen nutzen. Beispiele für solche physikalischen Prozesse sind thermisches Rauschen eines Widerstands und radioaktive Zerfallsvorgänge \cite{prng}. Logischerweise ist dann die Benutzung eines Seeds und damit die Reproduzierbarkeit von physikalischen Zufallszahlengeneratoren nicht gegeben.
 
-Die Möglichkeit einen Seed verwenden zu können hat allerdings den großen Vorteil der Reproduzierbarkeit von Ergebnissen, weshalb die Verwendung von echten Zufallszahlen für den \ac{MLTDG} unpassend ist. Gerade bei der Erstellung von komplexen Zusammenhängen innerhalb der Applikation soll ein Neustart der Generierung nach kleinen Veränderungen nicht komplett neue Daten generieren. Dem Benutzer soll es möglich sein benutzerdefinierte Zufallsvariablen mit einem Seed zu versehen, um gleiche Ausgangswerte erhalten zu können.
+Die Möglichkeit einen Seed verwenden zu können hat allerdings den großen Vorteil der Reproduzierbarkeit von Ergebnissen, weshalb die Verwendung von echten Zufallszahlen für den \ac{MLTDG} unpassend ist. Gerade bei der Erstellung von komplexen Zusammenhängen innerhalb der Applikation soll ein Neustart der Generierung nach kleinen Veränderungen nicht komplett neue Daten generieren. Dem Benutzer soll es möglich sein, benutzerdefinierte Zufallsvariablen mit einem Seed zu versehen, um gleiche Ausgangswerte erhalten zu können.
 
 Vorteile von Seeds:
 \begin{itemize}
@@ -58,7 +58,7 @@ Die Inversionsmethode ist ein Algorithmus, der bei mehrfachem Aufruf eine Sequen
 
 Das Inversionsprinzip ist wie folgt definiert:\\
 Es sei $F$ eine Verteilungsfunktion und $U$ eine $U(0,1)$-verteilte Zufallsvariable.\\
-Dann gilt \cite{Inversionsmethode}: $Y = F^{-1}(U)$ hat die Verteilungsfunktion $F$, d. h.
+Dann gilt \cite{Inversionsmethode}: $Y = F^{-1}(U)$ hat die Verteilungsfunktion $F$, das heißt
 $$P(Y \le t)=F(t),t \in \mathbb{R}$$
 
 Das Hauptproblem ist damit die Bestimmung der Inversen einer Verteilungsfunktion. Da nicht jede Funktion umkehrbar ist, kann dieses Verfahren nur für bestimmte Wahrscheinlichkeitsfunktionen verwendet werden. Im Folgenden wird die Berechnung der Inversen für die im \ac{MLTDG} relevanten Verteilungen erläutert.
@@ -71,12 +71,24 @@ Die Exponentialverteilung ist eine stetige Wahrscheinlichkeitsverteilung über d
     \item Lebensdauer von Geräten
 \end{itemize}
 Die Verteilungsfunktion der Exponentialverteilung 
-$$F(X)=1-e^-\lambda x$$
-berechnet die Auftrittswahrscheinlichkeit des nächsten Ereignisses im Intervall $[0;x]$.\\
+$$F(X)=1-e^{-\lambda x}$$
+berechnet die Auftrittswahrscheinlichkeit des nächsten Ereignisses im Intervall $[0;x]$. Der Graph der Verteilungsfunktion mit $\lambda=0.5$ wird in der Abbildung \ref{fig:exponentialverteilung} dargestellt.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture} 
+        \begin{axis}[domain=0:10,samples=100] 
+          \addplot[black] {1-exp(-0.5*x)} ; 
+        \end{axis} 
+    \end{tikzpicture} 
+    \caption{Verteilungsfunktion der Exponentialverteilung mit $\lambda=0.5$}
+    \label{fig:exponentialverteilung}
+\end{figure}
+
 Die Inverse ist definiert durch
 $$x=F^{-1}(y)=-\frac{1}{\lambda}ln(1-y)$$
 
-Die Inversionsmethode gelingt nicht immer, weil nicht jede Funktion auch umkehrbar ist. Nur für Funktionen von denen die Inverse gebildet werden kann, kann die Inversionsmethode zur Erzeugung von Zufallszahlen für eine vorgegebene Verteilung eingesetzt werden. Eine weitere wichtige Verteilung ist die Normalverteilung, für nicht unmittelbar eine Inverse ermittelt werden kann. 
+Nur für Funktionen von denen die Inverse gebildet werden kann, kann die Inversionsmethode zur Erzeugung von Zufallszahlen für eine vorgegebene Verteilung eingesetzt werden. Eine weitere wichtige Verteilung ist die Normalverteilung, für nicht unmittelbar eine Inverse ermittelt werden kann. 
 
 Die Normalverteilung ist eine stetige Wahrscheinlichkeitsverteilung mit großer Bedeutung, weil sich viele Prozesse natur-, wirtschafts- und ingenieurswissenschaftlicher Herkunft entweder exakt oder näherungsweise mit ihr darstellen lassen.\\ 
 Die Normalverteilung $\mathcal{N}(\mu,\sigma ^2)$ ist definiert durch die zwei Parameter: 
@@ -88,7 +100,18 @@ Die Kurve der Normalverteilung wird mit der Dichtefunktion
 \medskip
 $$f(x,\mu,\sigma^2)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}$$
 \medskip
-dargestellt \cite{Inversionsmethode}.
+dargestellt \cite{Inversionsmethode}. Die folgende Abbildung \ref{fig:normalverteilung} stellt die Verteilungsfunktion der Normalverteilung $\mathcal{N}(0,1)$ dar.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture} 
+        \begin{axis}[domain=-5:5,samples=100] 
+          \addplot[black] {1/(1*sqrt(2*pi))*exp(-.5*((x-0)/1)^2)} ; 
+        \end{axis} 
+    \end{tikzpicture} 
+    \caption{Verteilungsfunktion der Normalverteilung $\mathcal{N}(0,1)$}
+    \label{fig:normalverteilung}
+\end{figure}
 
 Es wurden einige Algorithmen entwickelt, um näherungsweise normalverteilte Zufallszahlen zu generieren. Im Folgenden werden einige relevante Algorithmen zur Vollständigkeit aufgezählt, jedoch nicht näher auf sie eingegangen:
 \begin{itemize}
@@ -130,7 +153,7 @@ In jedem Fall aber kann der Flächeninhalt mit der Trapezformel näherungsweise 
 Wählt man zwei aufeinanderfolgende Punkte der stetigen Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch
 $$A_n=(x_{n+1}-x_n) \cdot \frac{y_n+y_{n+1}}{2}$$
 
-Wird der Flächheninhalt zwischen allen aufeinanderfolgenden Punkten berechnet und aufaddiert, ist das Ergebnis die Wahrscheinlichkeitsfunktion oder englisch \ac{CDF} \cite{denker:2008}. Dies wird in der folgenden Abbildung \ref{fig:cdf} visualisiert.
+Wird der Flächeninhalt zwischen allen aufeinanderfolgenden Punkten berechnet und aufaddiert, ist das Ergebnis die Wahrscheinlichkeitsfunktion oder englisch \ac{CDF} \cite{denker:2008}. Dies wird in der folgenden Abbildung \ref{fig:cdf} visualisiert.
 
 \begin{figure}[H]
     \centering
@@ -155,9 +178,9 @@ An dieser Stelle wird die Inversionsmethode verwendet, um eine $U(0,1)$-verteilt
     \caption{Anwendung der Inversionsmethode}\label{fig:cdfnormex}
 \end{figure}
 
-Anschaulich kann die beschriebene Methode in Abbildung \ref{fig:cdfnormex} betrachtet werden. Durch die grünen Linien wird verdeutlicht, dass ein relativ großer Bereich auf der vertikalen Achse von ca. $0.1$ bis $0.6$ auf einen vergleichsweise kleineren Bereich auf der horizontalen Achse von ca. $4$ bis $6$ abgebildet wird. Die Autrittswahrscheinlichkeit ist für die Werte $5$ und $9$ am größten.
+Anschaulich kann die beschriebene Methode in Abbildung \ref{fig:cdfnormex} betrachtet werden. Durch die grünen Linien wird verdeutlicht, dass ein relativ großer Bereich auf der vertikalen Achse von ca. $0.1$ bis $0.6$ auf einen vergleichsweise kleineren Bereich auf der horizontalen Achse von ca. $4$ bis $6$ abgebildet wird. Die Auftrittswahrscheinlichkeit ist für die Werte $5$ und $9$ am größten.
 
-\subsubsection{Zufallszahlengeneration für stetige Wahrscheinlichkeitsverteilungen}
+\subsubsection{Zufallszahlengenerierung für stetige Wahrscheinlichkeitsverteilungen}
 
 Die näherungsweise Integration verläuft bei diskreten Wahrscheinlichkeitsverteilungen ähnlich. Der Unterschied besteht jedoch darin, dass aufeinanderfolgende Punkte nicht linear, sondern stufenweise verbunden sind. In diesem Fall kann der Flächeninhalt zwischen aufeinanderfolgenden Punkten bestimmt werden, indem der Flächeninhalt eines Rechtecks berechnet wird.
 Wählt man zwei aufeinanderfolgende Kontrollpunkte der diskreten Wahrscheinlichkeitsverteilung $(x_n,y_n)$ und $(x_{n+1},y_{n+1})$, dann ist der Flächeninhalt $A_n$ definiert durch

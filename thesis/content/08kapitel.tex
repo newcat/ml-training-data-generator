@@ -4,9 +4,9 @@
 
 \section{Unit Tests}
 
-Unit Testing ist eine Technik, die bei der Softwareentwicklung angewendet wird, um sicherzustellen, dass kleine, logisch abtrennbare Komponenten wie entworfen funktionieren und die richtigen Ergebnisse liefern. Da das manuelle Testen der Komponenten zeit- und arbeitsintensiv ist, gibt es viele Werkzeuge, um Komponententests automatisch durchzuführen. In kollaborativer Entwicklung werden Komponenten separat entwickelt. Oft hängen bestimmte Funktionen der Software von anderen ab, wodurch Seiteneffekte schon bei kleinen Änderungen entstehen können. Durch die parallele Bereitstellung von Unit-Tests zum entwickelten Code, können negative Seiteneffekte erkannt und anschließend behoben werden \cite{Dalton2018}.
+Unit Testing ist eine Technik, die bei der Softwareentwicklung angewendet wird, um sicherzustellen, dass kleine, logisch abtrennbare Komponenten wie entworfen funktionieren und die richtigen Ergebnisse liefern. Da das manuelle Testen der Komponenten zeit- und arbeitsintensiv ist, gibt es viele Werkzeuge, um Komponententests automatisch durchzuführen. In kollaborativer Entwicklung werden Komponenten separat entwickelt. Oft hängen bestimmte Funktionen der Software von anderen ab, wodurch Seiteneffekte schon bei kleinen Änderungen entstehen können. Durch die parallele Bereitstellung von Unit-Tests zum entwickelten Code können negative Seiteneffekte erkannt und anschließend behoben werden \cite{Dalton2018}.
 
-Um schnell und einfach Unit-Tests schreiben zu können, wird das Testing-Framework Mocha im Zusammenspiel mit der Assertion-Bibliothek Chai verwendet. Mocha ist ein auf Node.js laufendes JavaScript-Testing-Framework, das die Erstellung von asynchronen Tests einfach macht. Mocha-Tests werden sequentiell ausgeführt und erlauben es Fehlerzustände auf die richtigen Testfälle zuzuordnen \cite{mocha}. Chai bietet Funktionen, mit denen das Ergebnis eines bestimmten Tests mit seinem erwarteten Wert verglichen werden kann. Zudem liefert Chai eine sehr lesbare Syntax, indem es sich an der englischen Sprache orientiert \cite{chai}.
+Um schnell und einfach Unit-Tests schreiben zu können, wird das Testing-Framework Mocha im Zusammenspiel mit der Assertion-Bibliothek Chai verwendet. Mocha ist ein auf Node.js laufendes JavaScript-Testing-Framework, das die Erstellung von asynchronen Tests einfach macht. Mocha-Tests werden sequentiell ausgeführt und erlauben es, Fehlerzustände den richtigen Testfällen zuzuordnen \cite{mocha}. Chai bietet Funktionen, mit denen das Ergebnis eines bestimmten Tests mit seinem erwarteten Wert verglichen werden kann. Zudem liefert Chai eine sehr lesbare Syntax, indem es sich an der englischen Sprache orientiert \cite{chai}.
 
 Durch eine hohe Anzahl an entwickelten Nodes im \ac{MLTDG} bieten sich optimale Komponenten für Unit-Tests an, um ihre Funktionalitäten zu testen. Im Folgenden wird beispielhaft ein Unit-Test für den $MathNode$ im \ac{MLTDG} mit Mocha und Chai erstellt.
 
@@ -17,7 +17,7 @@ import { expect } from "chai";
 import MathNode from "@/nodes/MathNode";
 \end{lstlisting}
 
-Der $MathNode$ kann verschiedenste mathematische Funktionen auf maximal zwei Werte anwenden. Mit insgesamt 18 Testfällen lohnt es sich die Tests in einer Schleife zu erstellen. Dafür wird zunächst ein Array erstellt, der für jeden Testfall Name, Parameter A, Parameter B und das erwartete Ergebnis speichert.
+Der $MathNode$ kann verschiedenste mathematische Funktionen auf maximal zwei Werte anwenden. Mit insgesamt 18 Testfällen lohnt es sich, die Tests in einer Schleife zu erstellen. Dafür wird zunächst ein Array erstellt, der für jeden Testfall Name, Parameter A, Parameter B und das erwartete Ergebnis speichert.
 
 \begin{lstlisting}[caption=Unit-Test: Testdefinition,label=unit2]
 const tests = [
