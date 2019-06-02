@@ -52,7 +52,7 @@ Es gibt einige JavaScript-Bibiliotheken, die \ac{PRNG}s bereits implementieren. 
 
 \subsection{Generierung von Zufallszahlen einer vorgegeben Wahrscheinlichkeitsverteilung}
 
-Oft unterliegen Zufallsvariablen keiner gleichverteilten, sondern einer anderen Wahrscheinlichkeitsverteilung, wie zum Beispiel die Normalverteilung oder Exponentialverteilung. In diesem Fall wird ein Verfahren benötigt, das aus einer gleichverteilten Zufallszahl eine Zufallszahl einer anderen Wahrscheinlichkeitsverteilung generiert.
+Oft unterliegen Zufallsvariablen keiner gleichverteilten, sondern einer anderen Wahrscheinlichkeitsverteilung, wie zum Beispiel der Normalverteilung oder Exponentialverteilung. In diesem Fall wird ein Verfahren benötigt, das aus einer gleichverteilten Zufallszahl eine Zufallszahl einer anderen Wahrscheinlichkeitsverteilung generiert.
 
 Die Inversionsmethode ist ein Algorithmus, der bei mehrfachem Aufruf eine Sequenz von Zufallszahlen $x_0, x_1, x_2$ generiert, die einem vorgegebenen stochastischen Modell entspringen. Der Algorithmus beschäftigt sich mit dem Problem, eine beliebige Verteilung auf $\mathbb{R}$ abzubilden. Neben der Verteilungsfunktion ist eine Voraussetzung für die Inversionsmethode ein vorhandener Zufallszahlengenerator, der gleichverteilte Zufallszahlen im Intervall $I=[0,1]$ generieren kann \cite{Inversionsmethode}. Hierfür kann der \ac{PRNG} der Bibliothek Chance.js aus dem letzten Kapitel herangezogen werden.
 
@@ -61,7 +61,7 @@ Es sei $F$ eine Verteilungsfunktion und $U$ eine $U(0,1)$-verteilte Zufallsvaria
 Dann gilt \cite{Inversionsmethode}: $Y = F^{-1}(U)$ hat die Verteilungsfunktion $F$, das heißt
 $$P(Y \le t)=F(t),t \in \mathbb{R}$$
 
-Das Hauptproblem ist damit die Bestimmung der Inversen einer Verteilungsfunktion. Da nicht jede Funktion umkehrbar ist, kann dieses Verfahren nur für bestimmte Wahrscheinlichkeitsfunktionen verwendet werden. Im Folgenden wird die Berechnung der Inversen für die im \ac{MLTDG} relevanten Verteilungen erläutert.
+Das Hauptproblem ist damit die Bestimmung der Inversen einer Verteilungsfunktion. Da nicht jede Funktion umkehrbar ist, kann dieses Verfahren nur für bestimmte Verteilungsfunktionen verwendet werden. Im Folgenden wird die Berechnung der Inversen für die im \ac{MLTDG} relevanten Verteilungen erläutert.
 
 Die Exponentialverteilung ist eine stetige Wahrscheinlichkeitsverteilung über der Menge der positiven reellen Zahlen. Sie wird häufig verwendet, um die Dauer von Zeitintervallen zu modellieren:
 \begin{itemize}
@@ -72,23 +72,29 @@ Die Exponentialverteilung ist eine stetige Wahrscheinlichkeitsverteilung über d
 \end{itemize}
 Die Verteilungsfunktion der Exponentialverteilung 
 $$F(X)=1-e^{-\lambda x}$$
-berechnet die Auftrittswahrscheinlichkeit des nächsten Ereignisses im Intervall $[0;x]$. Der Graph der Verteilungsfunktion mit $\lambda=0.5$ wird in der Abbildung \ref{fig:exponentialverteilung} dargestellt.
+berechnet die Auftrittswahrscheinlichkeit des nächsten Ereignisses im Intervall $[0;x]$. Die Dichtefunktion ist gegeben mit
+$$f(x)= 
+    \begin{cases}\displaystyle
+    \lambda e^{-\lambda x} & x\geq 0 \\
+    0 & x < 0
+    \end{cases}$$
+Der Graph der Dichtefunktion mit $\lambda=0.5$ wird in der Abbildung \ref{fig:exponentialverteilung} dargestellt.
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture} 
         \begin{axis}[domain=0:10,samples=100] 
-          \addplot[black] {1-exp(-0.5*x)} ; 
+          \addplot[black] {0.5*exp(-0.5*x)} ; 
         \end{axis} 
     \end{tikzpicture} 
-    \caption{Verteilungsfunktion der Exponentialverteilung mit $\lambda=0.5$}
+    \caption{Dichtefunktion der Exponentialverteilung mit $\lambda=0.5$}
     \label{fig:exponentialverteilung}
 \end{figure}
 
 Die Inverse ist definiert durch
 $$x=F^{-1}(y)=-\frac{1}{\lambda}ln(1-y)$$
 
-Nur für Funktionen von denen die Inverse gebildet werden kann, kann die Inversionsmethode zur Erzeugung von Zufallszahlen für eine vorgegebene Verteilung eingesetzt werden. Eine weitere wichtige Verteilung ist die Normalverteilung, für nicht unmittelbar eine Inverse ermittelt werden kann. 
+Nur für Funktionen von denen die Inverse gebildet werden kann, kann die Inversionsmethode zur Erzeugung von Zufallszahlen für eine vorgegebene Verteilung eingesetzt werden. Eine weitere wichtige Wahrscheinlichkeitsverteilung ist die Normalverteilung, für die nicht unmittelbar eine Inverse ermittelt werden kann. 
 
 Die Normalverteilung ist eine stetige Wahrscheinlichkeitsverteilung mit großer Bedeutung, weil sich viele Prozesse natur-, wirtschafts- und ingenieurswissenschaftlicher Herkunft entweder exakt oder näherungsweise mit ihr darstellen lassen.\\ 
 Die Normalverteilung $\mathcal{N}(\mu,\sigma ^2)$ ist definiert durch die zwei Parameter: 
@@ -96,11 +102,11 @@ Die Normalverteilung $\mathcal{N}(\mu,\sigma ^2)$ ist definiert durch die zwei P
     \item $\mu$: Erwartungswert
     \item $\sigma^2$: Varianz mit der Standardabweichung $\sqrt{\sigma^2}=\sigma$
 \end{itemize}
-Die Kurve der Normalverteilung wird mit der Dichtefunktion
-\medskip
+Die Verteilungsfunktion der Normalverteilung ist gegeben durch
+$$\frac{1}{\sigma\sqrt{2\pi}} \int_{-\infty}^x e^{-\frac{1}{2} \left(\frac{t-\mu}{\sigma}\right)^2}$$
+Die Normalverteilung wird mit der Dichtefunktion
 $$f(x,\mu,\sigma^2)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}$$
-\medskip
-dargestellt \cite{Inversionsmethode}. Die folgende Abbildung \ref{fig:normalverteilung} stellt die Verteilungsfunktion der Normalverteilung $\mathcal{N}(0,1)$ dar.
+dargestellt \cite{Inversionsmethode}. Die folgende Abbildung \ref{fig:normalverteilung} stellt die Dichtefunktion der Normalverteilung $\mathcal{N}(0,1)$ dar.
 
 \begin{figure}[H]
     \centering
@@ -109,7 +115,7 @@ dargestellt \cite{Inversionsmethode}. Die folgende Abbildung \ref{fig:normalvert
           \addplot[black] {1/(1*sqrt(2*pi))*exp(-.5*((x-0)/1)^2)} ; 
         \end{axis} 
     \end{tikzpicture} 
-    \caption{Verteilungsfunktion der Normalverteilung $\mathcal{N}(0,1)$}
+    \caption{Dichtefunktion der Normalverteilung $\mathcal{N}(0,1)$}
     \label{fig:normalverteilung}
 \end{figure}
 
@@ -131,7 +137,7 @@ In den folgenden zwei Kapiteln wird bei der Generierung von Zufallszahlen unters
 
 \subsubsection{Zufallszahlengeneration für stetige Wahrscheinlichkeitsverteilungen}
 
-Die Modellierung der Wahrscheinlichkeitsverteilung durch Splineinterpolation mit den anpassbaren Zufallsknoten ist in Kapitel \ref{sec:anpassbareverteilung} beschrieben. Ist eine Modellierung der Wahrscheinlichkeitsverteilung erstellt, besteht der nächste Schritt darin, die inverse kumulative Wahrscheinlichkeitsverteilung zu bestimmen. Da es, wenn überhaupt, nur mit großem Aufwand möglich ist die inverse kumulative Wahrscheinlichkeitsverteilung unmittelbar rechnerisch zu berechnen, wird stattdessen eine Approximation durchgeführt. 
+Die Modellierung der Wahrscheinlichkeitsverteilung durch Splineinterpolation mit den anpassbaren Zufallsknoten ist in Kapitel \ref{sec:anpassbareverteilung} beschrieben. Ist eine Modellierung der Wahrscheinlichkeitsverteilung erstellt, besteht der nächste Schritt darin, die inverse kumulative Verteilungsfunktion zu bestimmen. Da es, wenn überhaupt, nur mit großem Aufwand möglich ist die inverse kumulative Verteilungsfunktion unmittelbar rechnerisch zu berechnen, wird stattdessen eine Approximation durchgeführt. 
 
 Das Ergebnis der Modellierung einer stetigen Wahrscheinlichkeitsverteilung mit dem $CustomNode$ ist eine Menge von interpolierten Punkten, die die Dichtefunktion oder englisch \ac{PDF} beschreiben. 
 
