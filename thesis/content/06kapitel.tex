@@ -46,7 +46,7 @@ Dies wurde für mehrere Beispiele durchgeführt und daraus die folgenden Knoten 
 \section{Anpassbare Verteilung}
 \label{sec:anpassbareverteilung}
 
-Besteht die Aufgabe Daten zu generieren, die von Zufallswerten einer komplexen Wahrscheinlichkeitsverteilung abhängen, gibt es das Problem, dass mit standardmäßigen Verteilungen oft keine passende Wahrscheinlichkeitsverteilung gefunden werden kann. Beispielsweise könnte eine Wahrscheinlichkeitsverteilung mit folgenden Anforderungen verlangt sein:
+Besteht die Aufgabe darin, Daten zu generieren, die von Zufallswerten einer komplexen Wahrscheinlichkeitsverteilung abhängen, gibt es das Problem, dass mit standardmäßigen Verteilungen oft keine passende Wahrscheinlichkeitsverteilung gefunden werden kann. Beispielsweise könnte eine Wahrscheinlichkeitsverteilung mit folgenden Anforderungen verlangt sein:
 \begin{itemize}
     \item Hochpunkte an den Stellen $1$, $4$ und $9$
     \item Keine Generierung von Werten zwischen $5$ und $7$
@@ -96,7 +96,7 @@ Kontinuität erzwingt einen glatte Transition über die ganze Kurve hinweg. \cit
 
 Die Splinefunktion soll so bestimmt werden können, dass die gewünschte Wahrscheinlichkeitsverteilung am einfachsten und intuitivsten erstellt werden kann. Die kurvenartige Struktur von Splines ermöglicht es zwar, realistische beziehungsweise glatte Kurven zu erstellen. Jedoch haben die meisten Splines eine Tendenz zu überschwingen. 
 
-Überschwingen ist die Bezeichnung für eine sprunghafte Änderung, wodurch eine Funktion über den eigentlich angezielten Wert hinausschießt und sich erst im weiteren Verlauf dem eigentlichen Wert annähert. Leider neigen kubisch hermitesche Splines zu diesem Überschwingen, weshalb ihre Nutzung in dieser Form für die Applikatoin ungünstig ist. \cite{kruger:2007}
+Überschwingen ist die Bezeichnung für eine sprunghafte Änderung, wodurch eine Funktion über den eigentlich angezielten Wert hinausschießt und sich erst im weiteren Verlauf dem eigentlichen Wert annähert. Leider neigen kubisch hermitesche Splines zu diesem Überschwingen, weshalb ihre Nutzung in dieser Form für die Applikation ungünstig ist. \cite{kruger:2007}
 
 \begin{figure}[H]
     \center
@@ -193,14 +193,14 @@ In Abbildung \ref{fig:monotonespline} ist ein monotoner kubischer hermitescher S
 
 Eine sehr einfache Art Punkte monoton kubisch zu interpolieren erarbeiten Fritsch und Carlson in ihrem Paper von 1980. Sie stellen notwendige und ausreichende Bedingungen für die Monotonie der Spline-Polynome auf. Der Fritsch-Carlson-Algorithmus führt eine einfache erste Schätzung der Tangentensteigungen durch und übergibt dann erneut Datenpunkte, um eventuell überschwingende Tangenten in die monotone Region zu verschieben \cite{Fritschcarlson:1980}. Es gibt andere Algorithmen, wie zum Beispiel die Fritsch-Butland-Methode, die aufwändigere erste Schätzungen von Tangenten macht, sodass die Tangenten garantiert im monotonen Bereich liegen und kein zweiter Durchgang erforderlich ist \cite{Fritschbutland:1984}.
 
-Da sich die Fritsch-Carlson-Methode vergleichsweise schnell und einfach implementieren lässt, wird sie für die monotone kubische Interpolation verwendet. Die Fritsch-Carlson-Methode beschreibt einen Weg um interpolierende Tangentensteigungen für jeden Kontrollpunkt so zu wählen, dass alle Splinesegmente monoton bleiben. Wie bereits erwähnt benötigt die Methode zwei Durchläufe. 
+Da sich die Fritsch-Carlson-Methode vergleichsweise schnell und einfach implementieren lässt, wird sie für die monotone kubische Interpolation verwendet. Die Fritsch-Carlson-Methode beschreibt einen Weg, um interpolierende Tangentensteigungen für jeden Kontrollpunkt so zu wählen, dass alle Splinesegmente monoton bleiben. Wie bereits erwähnt benötigt die Methode zwei Durchläufe. 
 
 Seien die Kontrollpunkte gegeben durch $P_i(x_i,y_i)$ für $1\le i \le n$.
 Im ersten Durchlauf wird für den ersten bis vorletzten Kontrollpunkt, das heißt für $i=1,\dots,n-1$, die Steigung zum darauffolgenden Kontrollpunkt berechnet mit 
 $$delta_i=\frac{y_{i+1}-y_i}{x_{i+1}-x_i}$$
 Die vorläufige Tangentensteigung für alle Kontrollpunkte bis auf die Randknoten, das heißt für $i=2,\dots,n-1$, ist dann bestimmt als der Median der beiden Steigungen zum vorherigen und folgenden Kontrollpunkt.
 $$m_i=\frac{delta_{i-1}+delta_i}{2}$$
-Wenn es ein Vorzeichenwechsel bei den Steigungen gibt, dann ist der Kontrollpunkt $P_i$ ein lokales Extremum. In diesem Fall muss die Steigung an der Stelle $x_i$ auf $0$ gesetzt werden, das heißt
+Wenn es einen Vorzeichenwechsel bei den Steigungen gibt, dann ist der Kontrollpunkt $P_i$ ein lokales Extremum. In diesem Fall muss die Steigung an der Stelle $x_i$ auf $0$ gesetzt werden, das heißt
 $m_i=0$, wenn $delta_i\cdot delta_{i-1} < 0$.
 Die Randwerte sind hierbei durch ihre einseitigen Differenzen bestimmt:
 $m_1=delta_1$, $m_{n}=delta_{n-1}$.
@@ -281,7 +281,7 @@ Das Säulendiagramm für die diskrete Wahrscheinlichkeitsverteilung soll dem Nut
     \caption{Darstellung einer diskreten Verteilung}
 \end{figure}
 
-Sei der Wertebereich definiert durch die Werte $a,a+1,a+2,\dots,b-2,b-1,b$ im Intervall $[a,b]$, wobei $a,b \in\mathbb{Z}$, $x_0 \le x_n$, dann werden genau $|a-b|+1$ Klicks benötigt, wenn alle Säulen gesetzt werden sollen. Der Aufwand kann erheblich reduziert werden, indem im Optimalfall mit einem einzigen haltenden Klick und einer Bewegung der Maus alle Säulen gesetzt werden können.
+Sei der Wertebereich definiert durch die Werte $a,a+1,a+2,\dots,b-2,b-1,b$ im Intervall $[a,b]$, wobei $a,b \in\mathbb{Z}$, dann werden genau $|a-b|+1$ Klicks benötigt, wenn alle Säulen gesetzt werden sollen. Der Aufwand kann erheblich reduziert werden, indem im Optimalfall mit einem einzigen haltenden Klick und einer Bewegung der Maus alle Säulen gesetzt werden können.
 
 Ein Problem bei dieser Funktion ist, dass oft nicht alle Säulen auf die Zeigerposition gesetzt werden, weil das mouseover-Event nicht oft genug auslöst. Dies wird durch mehrere Faktoren negativ beeinflusst:
 \begin{itemize}
