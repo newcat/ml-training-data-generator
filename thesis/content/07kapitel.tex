@@ -168,7 +168,7 @@ JavaScript ist im Browser single-threaded. Das bedeutet, dass die Webseite \enqu
 
 Für diese Arbeit muss jedoch eine große Anzahl von Datensätzen generiert werden. Dies soll möglichst schnell geschehen; gleichzeitig soll die Applikation trotzdem bedienbar bleiben und einen Fortschrittsbalken anzeigen.
 
-Um diese Anforderungen umzusetzen, werden sogenannte \textit{Web Worker} verwendet. Web Worker werden in separaten Hintegrundthreads ausgeführt und blockieren dadurch nicht den Hauptthread \cite{mdn:webworkers}. Da JavaScript nicht multithreading-fähig ist, besitzen der Hauptthread und die Web Worker keinen geteilten Adressraum. Es können also keine Objektreferenzen aus dem Hauptthread im Web Worker oder andersherum verwendet werden \cite{mdn:webworkers}.
+Um diese Anforderungen umzusetzen, werden sogenannte \textit{Web Worker} verwendet. Web Worker werden in separaten Hintergrundthreads ausgeführt und blockieren dadurch nicht den Hauptthread \cite{mdn:webworkers}. Da JavaScript nicht multithreading-fähig ist, besitzen der Hauptthread und die Web Worker keinen geteilten Adressraum. Es können also keine Objektreferenzen aus dem Hauptthread im Web Worker oder andersherum verwendet werden \cite{mdn:webworkers}.
 
 \subsection{Übertragen von Daten zwischen Workern und Hauptthread}
 
@@ -192,14 +192,14 @@ Arrays sind in JavaScript nicht transferable. Das bedeutet, dass das generierte 
 Die Datengenerierung läuft nach folgendem Muster ab:
 
 \begin{enumerate}
-    \item Es werden so viele Web Worker gestartet, wie in den Einstellungen festgelegt wurden (standardmäßig 4)
+    \item Es werden so viele Web Worker gestartet, wie in den Einstellungen festgelegt wurden (standardmäßig 4).
     \item Die Anzahl der zu generierenden Daten wird auf die verschiedenen Worker aufgeteilt. Jeder Worker erhält eine Nachricht mit folgendem Inhalt:
     \begin{itemize}
         \item Modell (Graph), gespeichert von BaklavaJS
         \item Index des ersten zu berechnenden Datensatzes
         \item Index des letzten zu berechnenden Datensatzes
     \end{itemize}
-    \item Jeder Worker hat eine eigene Instanz eines BaklavaJS-Editors mit dem Engine-Plugin. Das in der Nachricht enthaltene Modell wird geladen
+    \item Jeder Worker hat eine eigene Instanz eines BaklavaJS-Editors mit dem Engine-Plugin. Das in der Nachricht enthaltene Modell wird geladen.
     \item In einer Schleife werden die Datensätze zwischen Anfangs- und Endindex generiert. Wenn mehr als 10.000 Datensätze generiert werden, werden die Zwischenergebnisse alle 10.000 Datensätze über eine Nachricht an den Hauptthread geschickt. Dadurch wird verhindert, dass der Hauptthread (und damit die gesamte Applikation) einfriert, wenn ein Worker am Ende beispielsweise 500.000 Datensätze an den Hauptthread schickt, welcher die Daten verarbeiten muss.
 \end{enumerate}
 
