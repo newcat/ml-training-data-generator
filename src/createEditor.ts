@@ -1,4 +1,5 @@
-import { Editor, NodeConstructor } from "@baklavajs/core";
+import { Editor } from "@baklavajs/core";
+import { NodeConstructor } from "@baklavajs/core/dist/types";
 import { InterfaceTypePlugin } from "@baklavajs/plugin-interface-types";
 
 import UniformNode from "./nodes/random/UniformNode";

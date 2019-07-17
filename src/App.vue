@@ -20,7 +20,7 @@ import { OptionPlugin } from "@baklavajs/plugin-options-vue";
 
 import createEditor from "@/createEditor";
 import { Calculator, IProgressEventData, ResultsType } from '@/calculationManager';
-import { IPlugin } from '@baklavajs/core';
+import { IPlugin } from '@baklavajs/core/dist/types';
 import { ViewPlugin } from '@baklavajs/plugin-renderer-vue';
 import { Engine } from "@baklavajs/plugin-engine";
 

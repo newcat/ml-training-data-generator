@@ -7,11 +7,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@baklavajs/core": "^1.0.8",
-    "@baklavajs/plugin-engine": "^1.0.13",
-    "@baklavajs/plugin-interface-types": "^1.0.10",
-    "@baklavajs/plugin-options-vue": "^1.0.12",
-    "@baklavajs/plugin-renderer-vue": "^1.0.10",
+    "@baklavajs/full": "^1.1.1",
     "@types/chance": "^1.0.2",
     "@types/chart.js": "^2.7.51",
     "@types/jquery": "^3.3.29",
