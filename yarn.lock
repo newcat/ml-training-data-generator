@@ -23,16 +23,16 @@
   resolved "https://registry.yarnpkg.com/@baklavajs/core/-/core-1.1.1.tgz#178844a3da42ad3f61e9d702d38d72592a0efa70"
   integrity sha512-TUNPpIAW1MetQenf7wRPKYn9Xdo9HvGKg1xvQ4UpOxbjR4x/NtY8KgIxH4yK8A21Rgc1+9UVCWoTCq1Wg+3aHw==
 
-"@baklavajs/full@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@baklavajs/full/-/full-1.1.1.tgz#3fd11eca9aefd4973142bbd596cedf092a6f9a01"
-  integrity sha512-ADQwgzascVHAG/7PcM0PKfkmyuPT8g0h6AykKmje7NqmaFiUdoKYH6SStExghKqpJcc58mXyuzqY26DVLRNjIw==
+"@baklavajs/full@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@baklavajs/full/-/full-1.1.3.tgz#7d96dc92f8b89c933f572ddaaef5252f0a6a037a"
+  integrity sha512-xfuXMiCKBcBJP14rUjwUmj+5e9xN1F+zXq1o7m96Py4Ha5+YmGvXHjnySkfVs0lTGKBIjXMVRuwDFq8/JO2CxQ==
   dependencies:
     "@baklavajs/core" "^1.1.1"
     "@baklavajs/plugin-engine" "^1.1.1"
     "@baklavajs/plugin-interface-types" "^1.1.1"
     "@baklavajs/plugin-options-vue" "^1.1.1"
-    "@baklavajs/plugin-renderer-vue" "^1.1.1"
+    "@baklavajs/plugin-renderer-vue" "^1.1.3"
 
 "@baklavajs/plugin-engine@^1.1.1":
   version "1.1.1"
@@ -49,10 +49,10 @@
   resolved "https://registry.yarnpkg.com/@baklavajs/plugin-options-vue/-/plugin-options-vue-1.1.1.tgz#c36d8e9201527dccc9e114beeead2c07941829de"
   integrity sha512-e3B/AHPqpc9nEiQo6Hy93/deBth5TunpycEbPTLLXVQw7s5/u5cf/VTgoq/4cgGcojdqtNzATdspJFzk2E889w==
 
-"@baklavajs/plugin-renderer-vue@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-renderer-vue/-/plugin-renderer-vue-1.1.1.tgz#67f80b7a31f6934cf348ab745455f08183f9d166"
-  integrity sha512-l6rmXEGwt7rR4uvS2fSELvrEQkByr8CmE/gq7D6f7cxWievWoa7zvucUVCV8kfV60evTMIMmnEMf2SyvaZvQxA==
+"@baklavajs/plugin-renderer-vue@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-renderer-vue/-/plugin-renderer-vue-1.1.3.tgz#2e68b374a3ce9beb6ba641c84dbc4dee308c714a"
+  integrity sha512-WGIx68HO3YJoHprfa7578lWmDsNAy3L2Ox9AhOxpqKpSNI48y7cPJcpasjxRduyUCYisbU+sH4d5VejLg0hcPQ==
 
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"
