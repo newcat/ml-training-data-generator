@@ -4,7 +4,7 @@ div.d-flex.flex-column(style="width:100%;height:100%;")
     
     settings.flex-fill(v-if="$route.name === 'settings'", v-model="settings")
     visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", :results="results")
-    preview.flex-fill(v-else-if="$route.name === 'preview'")
+    preview.flex-fill(v-else-if="$route.name === 'preview'", @error="onError")
     baklava-editor.flex-fill(v-else, :plugin="plugin")
 
     notification(header="Error", v-model="showErrorNotification") {{ errorMessage }}
@@ -20,7 +20,7 @@ import { OptionPlugin } from "@baklavajs/plugin-options-vue";
 
 import createEditor from "@/createEditor";
 import { Calculator, IProgressEventData, ResultsType } from '@/calculationManager';
-import { IPlugin } from '@baklavajs/core';
+import { IPlugin } from '@baklavajs/core/dist/types';
 import { ViewPlugin } from '@baklavajs/plugin-renderer-vue';
 import { Engine } from "@baklavajs/plugin-engine";
 
@@ -125,14 +125,18 @@ export default class extends Vue {
         try {
             this.results = await this.calculator.run(this.settings.batchCount);
         } catch (err) {
-            this.errorMessage = err;
-            this.showErrorNotification = true;
+            this.onError(err);
         }
         this.calculating = false;
     }
 
     onCalculationProgress(p: IProgressEventData) {
         this.progress = p.current * 100 / p.total;
+    }
+
+    onError(msg: string) {
+        this.errorMessage = msg;
+        this.showErrorNotification = true;
     }
 
     save() {

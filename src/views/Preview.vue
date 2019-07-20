@@ -33,8 +33,7 @@ export default class Preview extends Vue {
         try {
             this.previewData = await this.app.calculator.run(20);
         } catch (err) {
-            this.app.errorMessage = err;
-            this.app.showErrorNotification = true;
+            this.$emit("error", err);
         }
     }
 
