@@ -41,10 +41,23 @@ export default class Visualisation extends Vue {
         // get selected columns
         const x: string = this.xSelect.selected;
         const y: string = this.ySelect.selected;
+        // filter
+        let subList: ResultsType = [];
+        if (this.results.length > this.limit) {
+            const randList: number[] = [];
+            while (randList.length < this.limit) {
+                const r = Math.floor(Math.random() * this.results.length);
+                if (!randList.includes(r)) {
+                    randList.push(r);
+                    subList.push(this.results[r]);
+                }
+            }
+        } else {
+            subList = this.results;
+        }
+        return subList.map((r) => [ r[x], r[y] ] as [number, number]);
         // show only a subpart of numbers to prevent excessing load times
         // only axis type "number" is supported
-        const p = this.results.slice(0, this.limit).map((r) => [ r[x], r[y] ] as [number, number]);
-        return p;
     }
 
     @Watch("results", { immediate: true })
