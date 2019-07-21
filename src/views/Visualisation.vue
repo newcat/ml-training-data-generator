@@ -44,13 +44,10 @@ export default class Visualisation extends Vue {
         // filter
         let subList: ResultsType = [];
         if (this.results.length > this.limit) {
-            const randList: number[] = [];
-            while (randList.length < this.limit) {
-                const r = Math.floor(Math.random() * this.results.length);
-                if (!randList.includes(r)) {
-                    randList.push(r);
-                    subList.push(this.results[r]);
-                }
+            const copy = this.results.slice();
+            for (let i = 0; i < this.limit; i++) {
+                const r = Math.floor(Math.random() * copy.length);
+                subList.push(copy.splice(r, 1)[0]);
             }
         } else {
             subList = this.results;
