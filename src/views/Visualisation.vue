@@ -31,14 +31,19 @@ export default class Visualisation extends Vue {
 
     xSelect = { selected: "", items: [""] };
     ySelect = { selected: "", items: [""] };
+    limit = 1000;
 
     get points() {
+        // both axis have to be selected
         if (!this.xSelect.selected || !this.ySelect.selected) {
             return [];
         }
+        // get selected columns
         const x: string = this.xSelect.selected;
         const y: string = this.ySelect.selected;
-        const p = this.results.map((r) => [ r[x], r[y] ] as [number, number]);
+        // show only a subpart of numbers to prevent excessing load times
+        // only axis type "number" is supported
+        const p = this.results.slice(0, this.limit).map((r) => [ r[x], r[y] ] as [number, number]);
         return p;
     }
 
