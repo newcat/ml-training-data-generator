@@ -25,8 +25,8 @@ export default class DiscreteNode extends Node {
         }
         this.addOutputInterface("Output", { type: "number" });
         this.addInputInterface("Seed", "InputOption", "", { type: "string" });
-        this.addInputInterface("Min", "NumberOption", this.defaultMin, { type: "number" });
-        this.addInputInterface("Max", "NumberOption", this.defaultMax, { type: "number" });
+        this.addInputInterface("Min", "IntegerOption", this.defaultMin, { type: "number" });
+        this.addInputInterface("Max", "IntegerOption", this.defaultMax, { type: "number" });
         this.addOption("Discrete Distribution", "ButtonOption",
             { values: this.defaultValues }, "DiscreteRandomOption");
     }
