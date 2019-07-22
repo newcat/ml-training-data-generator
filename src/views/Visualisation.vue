@@ -52,7 +52,9 @@ export default class Visualisation extends Vue {
         } else {
             subList = this.results;
         }
-        return subList.map((r) => [ r[x], r[y] ] as [number, number]);
+        return subList
+            .filter((r) => typeof(r[x]) === "number" && typeof(r[y]) === "number")
+            .map((r) => [ r[x], r[y] ] as [number, number]);
         // show only a subpart of numbers to prevent excessing load times
         // only axis type "number" is supported
     }
@@ -63,7 +65,7 @@ export default class Visualisation extends Vue {
             return;
         }
         const columns = Object.keys(this.results[0])
-            .filter((k) => this.results.every((r) => typeof(r[k]) === "number"));
+            .filter((k) => typeof(this.results[0][k]) === "number");
         this.xSelect.items = columns;
         this.ySelect.items = columns;
     }
