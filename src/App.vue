@@ -9,7 +9,7 @@ div.d-flex.flex-column(style="width:100%;height:100%;")
 
     notification(header="Error", v-model="showErrorNotification") {{ errorMessage }}
 
-    progress-modal(:open="calculating", :progress="progress")
+    progress-modal(:open="calculating", :progress="progress", @cancel="cancelCalculation")
     
     input(ref="fileinput", type="file", accept="application/json", style="display: none;", @change="loadFile")
 </template>
@@ -26,6 +26,7 @@ import { Engine } from "@baklavajs/plugin-engine";
 
 import FunctionSidebarOption from "@/options/CodeOption.vue";
 import StringListOption from "@/options/StringListOption";
+import CustomButtonOption from "@/options/CustomButtonOption.vue";
 import CustomRandomOption from "@/nodes/random/custom/CustomOption.vue";
 import DiscreteRandomOption from "@/nodes/random/discrete/DiscreteOption.vue";
 
@@ -78,6 +79,7 @@ export default class extends Vue {
         this.plugin.registerOption("StringListOption", StringListOption);
         this.plugin.registerOption("CustomRandomOption", CustomRandomOption);
         this.plugin.registerOption("DiscreteRandomOption", DiscreteRandomOption);
+        this.plugin.registerOption("CustomButtonOption", CustomButtonOption);
 
         this.calculator.events.progress.addListener(this, (p) => this.onCalculationProgress(p));
     }
@@ -132,6 +134,10 @@ export default class extends Vue {
 
     onCalculationProgress(p: IProgressEventData) {
         this.progress = p.current * 100 / p.total;
+    }
+
+    cancelCalculation() {
+        this.calculator.cancel();
     }
 
     onError(msg: string) {

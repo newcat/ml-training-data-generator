@@ -52,6 +52,10 @@ export class Calculator {
         }
     }
 
+    public getWorkerCount() {
+        return this.workers.length;
+    }
+
     public run(batchSize: number): Promise<ResultsType> {
 
         this.calculationPromise = new WrappedPromise<ResultsType>();
@@ -104,6 +108,13 @@ export class Calculator {
 
         return this.calculationPromise.promise;
 
+    }
+
+    public cancel() {
+        const oldWorkerCount = this.getWorkerCount();
+        this.setWorkerCount(0);
+        this.setWorkerCount(oldWorkerCount);
+        this.calculationPromise!.reject(new Error("Cancelled by user"));
     }
 
     private handleWorkerMessage(worker: Worker, msg: MessageEvent) {

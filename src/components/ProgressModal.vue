@@ -1,5 +1,5 @@
 <template lang="pug">
-.modal.fade
+.modal.fade(:style="{ display: doDisplay ? 'block' : 'none' }", :class="{ show: open }")
     .modal-dialog.modal-dialog-centered
         .modal-content
             .modal-header
@@ -7,14 +7,17 @@
             .modal-body
                 .progress
                     .progress-bar(:style="{ width: progress + '%' }")
+            .modal-footer
+                button.btn.btn-outline-danger(@click="$emit('cancel')") Cancel
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
-import $ from "jquery";
 
 @Component
 export default class ProgressModal extends Vue {
+
+    doDisplay = false;
 
     @Prop()
     open!: boolean;
@@ -22,16 +25,14 @@ export default class ProgressModal extends Vue {
     @Prop()
     progress!: number;
 
-    mounted() {
-        ($(this.$el) as any).modal("hide");
-    }
-
     @Watch("open")
     onOpenChange() {
         if (this.open) {
-            ($(this.$el) as any).modal("show");
+            this.doDisplay = true;
         } else {
-            setTimeout(() => ($(this.$el) as any).modal("hide"), 500);
+            setTimeout(() => {
+                this.doDisplay = false;
+            }, 500);
         }
     }
 
