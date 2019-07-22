@@ -46,7 +46,6 @@ export default class BooleanNode extends Node {
                 result = useInt ? Math.round(val1) <= Math.round(val2) : val1 <= val2;
                 break;
         }
-
         if (invert) {
             result = !result;
         }
