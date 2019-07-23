@@ -82,6 +82,11 @@ export default class extends Vue {
         this.plugin.registerOption("CustomButtonOption", CustomButtonOption);
 
         this.calculator.events.progress.addListener(this, (p) => this.onCalculationProgress(p));
+
+        window.onbeforeunload = () => {
+            return "Please ensure you have saved everything.\nDo you want to leave the page?";
+        };
+
     }
 
     mounted() {

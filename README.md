@@ -1,12 +1,29 @@
-# ML Training Data Generator
+# typedoc-spa
 
-## ToDo
-- [ ] Error handling for calculation
-- [ ] Visualization scaling
-- [x] Data preview
-- [ ] Custom distribution performance
-- [x] Close modal
-- [x] Show how much data is loaded
-- [x] Settings: Add Worker Count
-- [x] Settings: CSV delimiter
-- [ ] Tests
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
+
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Run your tests
+```
+yarn run test
+```
+
+### Lints and fixes files
+```
+yarn run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
