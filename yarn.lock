@@ -18,41 +18,41 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@baklavajs/core@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@baklavajs/core/-/core-1.1.1.tgz#178844a3da42ad3f61e9d702d38d72592a0efa70"
-  integrity sha512-TUNPpIAW1MetQenf7wRPKYn9Xdo9HvGKg1xvQ4UpOxbjR4x/NtY8KgIxH4yK8A21Rgc1+9UVCWoTCq1Wg+3aHw==
-
-"@baklavajs/full@^1.1.3":
+"@baklavajs/core@^1.1.3":
   version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@baklavajs/full/-/full-1.1.3.tgz#7d96dc92f8b89c933f572ddaaef5252f0a6a037a"
-  integrity sha512-xfuXMiCKBcBJP14rUjwUmj+5e9xN1F+zXq1o7m96Py4Ha5+YmGvXHjnySkfVs0lTGKBIjXMVRuwDFq8/JO2CxQ==
+  resolved "https://registry.yarnpkg.com/@baklavajs/core/-/core-1.1.3.tgz#704356bcb1377ff05a76aebd0f27ae3211468ffe"
+  integrity sha512-/ku7k9fQOYdXuO6CBXE6LPJKAjTaHPQ3FsaO1xx+SelA5x0DZvUceyMUHNTLIFokqe+OyJIxmjGDpuOD5ZuHAg==
+
+"@baklavajs/full@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@baklavajs/full/-/full-1.1.5.tgz#f4deb12917dc48b05cbe926bdfc4b9966b5eca2d"
+  integrity sha512-ztBFdxDpcbM2+OipyOHOtloeDFoJeu6Dg9lXBckgxsyvmF8cxNb52GYkWGQgwleOj9LxPBkqZ83eAc9tSSwARQ==
   dependencies:
-    "@baklavajs/core" "^1.1.1"
-    "@baklavajs/plugin-engine" "^1.1.1"
-    "@baklavajs/plugin-interface-types" "^1.1.1"
-    "@baklavajs/plugin-options-vue" "^1.1.1"
-    "@baklavajs/plugin-renderer-vue" "^1.1.3"
+    "@baklavajs/core" "^1.1.3"
+    "@baklavajs/plugin-engine" "^1.1.3"
+    "@baklavajs/plugin-interface-types" "^1.1.3"
+    "@baklavajs/plugin-options-vue" "^1.1.2"
+    "@baklavajs/plugin-renderer-vue" "^1.1.5"
 
-"@baklavajs/plugin-engine@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-engine/-/plugin-engine-1.1.1.tgz#5a51f7ebbd11c745d75c90dc23e5be40e5c38d4d"
-  integrity sha512-0jc3DzLOFNM6nw6b+J0zRufXmk1uASIPDcXSetiozqnzCCNpMeXUq3if2ATLbIywFAmWgxZ/Q0S4WnhEMHUxBQ==
-
-"@baklavajs/plugin-interface-types@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-interface-types/-/plugin-interface-types-1.1.1.tgz#6c17c7e5f33284295dbd1d29bdb5a53e134a9b8e"
-  integrity sha512-LIWlvxipS+rs90cC4ZAq+5WHkUr8o8Iiy+RposfmYafPnAWuhQSGbs+5l0o3lWQrBf7p20S6hn50o65IqwnqPw==
-
-"@baklavajs/plugin-options-vue@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-options-vue/-/plugin-options-vue-1.1.1.tgz#c36d8e9201527dccc9e114beeead2c07941829de"
-  integrity sha512-e3B/AHPqpc9nEiQo6Hy93/deBth5TunpycEbPTLLXVQw7s5/u5cf/VTgoq/4cgGcojdqtNzATdspJFzk2E889w==
-
-"@baklavajs/plugin-renderer-vue@^1.1.3":
+"@baklavajs/plugin-engine@^1.1.3":
   version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-renderer-vue/-/plugin-renderer-vue-1.1.3.tgz#2e68b374a3ce9beb6ba641c84dbc4dee308c714a"
-  integrity sha512-WGIx68HO3YJoHprfa7578lWmDsNAy3L2Ox9AhOxpqKpSNI48y7cPJcpasjxRduyUCYisbU+sH4d5VejLg0hcPQ==
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-engine/-/plugin-engine-1.1.3.tgz#f77bcbbebd037515b2e9297321be630274a67ed0"
+  integrity sha512-rOru2BLK3VlL6X6w9tEPFtVJ/+eWrf1KPQ4gN9rH69zFRtnIp1E3E0/mqW6K4dLtUXfvTJESoCSvNyUcAdq0Ag==
+
+"@baklavajs/plugin-interface-types@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-interface-types/-/plugin-interface-types-1.1.3.tgz#3c12ef5a19731cdae27f9331d17a095c1cd2fe05"
+  integrity sha512-Ybr7bbmg9FFDg3HPkyE7hYfCyrX2kH0BHx7kpyKlU+WNrdSt2qP9Q4WgHH9s+ED3bVGEtzhKw+ryqcpOnmXH+A==
+
+"@baklavajs/plugin-options-vue@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-options-vue/-/plugin-options-vue-1.1.2.tgz#ff3bca9395024df907377f9d82250a36a9e4a9a8"
+  integrity sha512-8wziUpbExXoWoCefDmQ40r1a8dE7Ru0rj9SRHRUdKrnfd4jUB58K7ta39VE7g5KYbEcG2rxm8ffe51VKw/Jz8g==
+
+"@baklavajs/plugin-renderer-vue@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@baklavajs/plugin-renderer-vue/-/plugin-renderer-vue-1.1.5.tgz#0194676d7bf3608f4b45cabe443a7ec25a5f8209"
+  integrity sha512-ckwsgV+LO8teMzUXQowB1mbvnemNQ8HG7YCUIYy/D3rcUi+1Cl6+OaWajJ6fScOz8a2f5E83xr85q1rar2kBrA==
 
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"

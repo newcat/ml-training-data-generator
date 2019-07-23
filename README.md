@@ -1,5 +1,7 @@
 # typedoc-spa
 
+Before running one of the commands below, ensure that node.js and Yarn are installed.
+
 ## Project setup
 ```
 yarn install
