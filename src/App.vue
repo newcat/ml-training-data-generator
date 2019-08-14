@@ -1,9 +1,9 @@
 <template lang="pug">
 div.d-flex.flex-column(style="width:100%;height:100%;")
-    navbar.flex-shrink(@action="onAction", :loadedRows="results.length")
+    navbar.flex-shrink(@action="onAction", :loadedRows="loadedRows")
     
     settings.flex-fill(v-if="$route.name === 'settings'", v-model="settings")
-    visualisation.flex-fill(v-else-if="$route.name === 'visualisation'", :results="results")
+    visualisation.flex-fill(v-else-if="$route.name === 'visualisation'")
     preview.flex-fill(v-else-if="$route.name === 'preview'", @error="onError")
     baklava-editor.flex-fill(v-else, :plugin="plugin")
 
@@ -54,7 +54,10 @@ export default class extends Vue {
 
     calculating = false;
     progress = 0;
-    results: ResultsType = [];
+    loadedRows = 0;
+
+    // Not initializing here, as we don't want change detection on this
+    results?: ResultsType;
 
     settings = {
         batchCount: 100,
@@ -131,6 +134,7 @@ export default class extends Vue {
         this.progress = 0;
         try {
             this.results = await this.calculator.run(this.settings.batchCount);
+            this.loadedRows = this.results.length;
         } catch (err) {
             this.onError(err);
         }
@@ -176,7 +180,7 @@ export default class extends Vue {
     }
 
     export() {
-        if (this.results.length === 0) {
+        if (!this.results || this.results.length === 0) {
             this.errorMessage = "No rows loaded. Please calculate first";
             this.showErrorNotification = true;
             return;

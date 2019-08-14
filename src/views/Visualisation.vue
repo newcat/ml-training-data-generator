@@ -26,14 +26,18 @@ import App from "@/App.vue";
 })
 export default class Visualisation extends Vue {
 
-    @Prop()
-    results!: ResultsType;
-
     xSelect = { selected: "", items: [""] };
     ySelect = { selected: "", items: [""] };
     limit = 1000;
+    points: Array<[number, number]> = [];
 
-    get points() {
+    getResults() {
+        return (this.$parent as any).results || [];
+    }
+
+    @Watch("xSelect")
+    @Watch("ySelect")
+    updatePoints() {
         // both axis have to be selected
         if (!this.xSelect.selected || !this.ySelect.selected) {
             return [];
@@ -43,29 +47,28 @@ export default class Visualisation extends Vue {
         const y: string = this.ySelect.selected;
         // filter
         let subList: ResultsType = [];
-        if (this.results.length > this.limit) {
-            const copy = this.results.slice();
+        if (this.getResults().length > this.limit) {
+            const copy = this.getResults().slice();
             for (let i = 0; i < this.limit; i++) {
                 const r = Math.floor(Math.random() * copy.length);
                 subList.push(copy.splice(r, 1)[0]);
             }
         } else {
-            subList = this.results;
+            subList = this.getResults();
         }
-        return subList
+        this.points = subList
             .filter((r) => typeof(r[x]) === "number" && typeof(r[y]) === "number")
             .map((r) => [ r[x], r[y] ] as [number, number]);
         // show only a subpart of numbers to prevent excessing load times
         // only axis type "number" is supported
     }
 
-    @Watch("results", { immediate: true })
-    onResultsChanged() {
-        if (this.results.length === 0) {
+    mounted() {
+        if (this.getResults().length === 0) {
             return;
         }
-        const columns = Object.keys(this.results[0])
-            .filter((k) => typeof(this.results[0][k]) === "number");
+        const columns = Object.keys(this.getResults()[0])
+            .filter((k) => typeof(this.getResults()[0][k]) === "number");
         this.xSelect.items = columns;
         this.ySelect.items = columns;
     }

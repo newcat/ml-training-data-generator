@@ -22,7 +22,7 @@ export class Calculator {
     private jobsDone = 0;
     private workersActive = 0;
     private totalJobs = 0;
-    private results: ResultsType = [];
+    private results?: ResultsType;
     private calculationPromise?: WrappedPromise<ResultsType>;
 
     public events = {
@@ -130,12 +130,12 @@ export class Calculator {
 
     private onData(data: Array<Record<string, any>>) {
         if (data.length === 0) { return; }
-        data.forEach((d) => this.results.push(d));
+        data.forEach((d) => this.results!.push(d));
         this.jobsDone += data.length;
         this.events.progress.emit({ current: this.jobsDone, total: this.totalJobs });
         if (this.jobsDone >= this.totalJobs) {
             if (this.calculationPromise) {
-                this.calculationPromise.resolve(this.results);
+                this.calculationPromise.resolve(this.results!);
             }
             this.results = [];
         }
